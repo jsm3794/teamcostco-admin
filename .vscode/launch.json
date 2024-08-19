@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-TeamcostcoApplication<teamcostco>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.ezentwix.teamcostco.TeamcostcoApplication",
+            "projectName": "teamcostco",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
