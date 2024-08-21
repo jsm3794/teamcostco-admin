@@ -3,8 +3,8 @@
 header {
     display: flex;
     flex-direction: column;
-    width: calc(100% - 200px - 2px);
-    gap: 2px;
+    width: calc(100% - 200px);
+    border-bottom: 1px solid rgba(225, 225, 245, 0.5);
 }
 
 .top-header {
@@ -12,13 +12,14 @@ header {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 20px;
+    padding: 10px 10px;
     background-color: #fff;
+    border-bottom: 1px solid rgb(225, 225, 245);
 }
 
 .under-header {
     display: flex;
-    padding: 10px;
+    padding: 10px 20px;
     flex-direction: row;
     word-spacing: 5px;
     background-color: #fff;
