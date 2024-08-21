@@ -1,1 +1,58 @@
 /* navigationbar 부분 디자인을 기술할 js 파일입니다. */
+
+#logo {
+    line-height: 100px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.aside-bar {
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    height: 100%;
+    background-color: #fff;
+}
+
+.aside-bar ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.aside-bar ul > li {
+    padding: 0;
+    margin: 15px;
+}
+
+.aside-bar ul > li button {
+    background: transparent;
+    border: none;
+    color: black;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    text-align: center;
+}
+
+.aside-bar ul > li button:hover {
+    background-color: skyblue;
+}
+
+.aside-bar ul > li button.active {
+    background-color: #007bff;
+    color: white;
+}
+
+.aside-container {
+
+    background-color: white;
+}
+.material-symbols-outlined {
+    margin-right: 10px;
+}
