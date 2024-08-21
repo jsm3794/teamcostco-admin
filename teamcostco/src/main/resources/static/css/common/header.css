@@ -3,8 +3,8 @@
 header {
     display: flex;
     flex-direction: column;
-    width: calc(100% - 200px - 1px);
-    gap: 1px;
+    width: calc(100% - 200px - 2px);
+    gap: 2px;
 }
 
 .top-header {
