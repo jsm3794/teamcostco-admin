@@ -3,8 +3,8 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="Products">
-    <select id="getAll" resultType="products">
+<mapper namespace="Product">
+    <select id="getAll" resultType="product">
         SELECT
             product_id, product_name, product_code, category_large,
             category_medium, category_small, category_detail, purchase_price,

@@ -5,11 +5,15 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import com.ezentwix.teamcostco.dto.ProductDTO;
+import com.ezentwix.teamcostco.service.products.ProductService;
+
 import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
 public class DashBoardService {
+    private final ProductService productsService;
 
     public void configureDashboardData(Model model) {
         model.addAttribute("uri", "dashboard/dashboard");
@@ -17,6 +21,10 @@ public class DashBoardService {
 
         model.addAttribute("cssFiles",
                 List.of("/css/dashboard/styles.css"));
+
+
+        List<ProductDTO> list = productsService.list();
+        System.out.println(list);
         // model.addAttribute("jsFiles", null);
     }
 }
