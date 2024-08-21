@@ -12,6 +12,8 @@ public class DashBoardController {
 
     @GetMapping("/")
     public String showDashboard() {
+
+        
         return "dashboard/dashboard";
     }
 }
