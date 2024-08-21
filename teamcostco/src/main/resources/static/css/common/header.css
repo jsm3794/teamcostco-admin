@@ -14,7 +14,6 @@ body {
     align-items: center;
     margin-left: 200px;
     padding: 15px 20px;
-    /* background-color: #F8F9FA; */
     border-bottom: 1px solid #E0E0E0;
 }
 .header-left h1 {
@@ -40,6 +39,9 @@ body {
     padding: 8px 12px;
     cursor: pointer;
     border-radius: 4px;
+    display: inline-block; 
+    width: auto; 
+    white-space: nowrap; 
 }
 .dropdown-content {
     display: none;
@@ -98,11 +100,7 @@ body {
     border-radius: 50%;
     cursor: pointer;
 }
-/* header {
-    width: 100%;
-    background-color: #FFF;
-    padding: 20px;
-}   */
+
 #under-header {
     display: flex;
     padding: 10px;
