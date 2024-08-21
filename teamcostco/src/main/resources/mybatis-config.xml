@@ -3,5 +3,6 @@
 <configuration>
     <typeAliases>
        <!-- <typeAlias type="com.ezentwix.teamcostco.dto.TestDTO" alias="com.ezentwix.teamcostco.dto.TestDTO" />-->
+       <typeAlias type="com.ezentwix.teamcostco.dto.ProductsDTO" alias="products" />
     </typeAliases>
 </configuration>
