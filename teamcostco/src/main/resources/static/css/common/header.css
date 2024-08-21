@@ -38,9 +38,15 @@ body {
     padding: 8px 12px;
     cursor: pointer;
     border-radius: 4px;
+<<<<<<< HEAD
     display: inline-block;
     width: auto;
     white-space: nowrap;
+=======
+    display: inline-block; 
+    width: auto; 
+    white-space: nowrap; 
+>>>>>>> 51627e89bc2965c3abf829b99609b229b5b30f48
 }
 .dropdown-content {
     display: none;
@@ -99,6 +105,10 @@ body {
     border-radius: 50%;
     cursor: pointer;
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 51627e89bc2965c3abf829b99609b229b5b30f48
 #under-header {
     display: flex;
     padding: 10px;
