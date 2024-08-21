@@ -11,7 +11,6 @@
     top: 0;
     left: 0;
 }
-
 nav ul {
     list-style-type: none;
     width: 200px;
@@ -20,17 +19,14 @@ nav ul {
     margin: 0;
     background-color: aliceblue;
 }
-
 #logo {
     text-align: left;
     margin-left: 60px;
 }
-
 nav li {
     text-align: center;
     margin-bottom: 10px;
 }
-
 button {
     background: transparent;
     border: none;
@@ -45,12 +41,11 @@ button {
     transition: background-color 0.3s;
     text-align: center;
 }
-
 nav button:hover {
     background-color: skyblue;
 }
 nav button.active {
-    background-color: #007bff;
+    background-color: #007BFF;
     color: white;
 }
 .material-symbols-outlined {

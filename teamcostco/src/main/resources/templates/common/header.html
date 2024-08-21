@@ -1,7 +1,7 @@
 <header class="header">
     <div class="top-header">
         <div class="header-left">
-            <h1>Report Analytics</h1>
+            <h1 id="header-title">Main</h1>
             <nav class="breadcrumb">
             </nav>
         </div>
@@ -15,14 +15,13 @@
                 </div>
             </div>
             <div class="notification-icon" id="notification-icon">
-                <i class="fa-solid fa-bell"></i>
+                <span class="material-symbols-outlined">notifications_unread</span>
                 <div class="notifications">
                     <p>알림 1</p>
                     <p>알림 2</p>
                     <p>알림 3</p>
                 </div>
             </div>
-            <!---->
             <div class="profile">
                 <img src="profile.jpg" alt="user_profile" class="profile-pic">
             </div>
@@ -30,9 +29,10 @@
     </div>
     <div id="under-header">
         <a th:href="@{/}">Home</a>
-        <div>/</div>
+        <div>&nbsp;/&nbsp;</div>
         <div id="current-page" th:text="${page_title} ?: _">
             <strong>page_title</strong>
         </div>
     </div>
+    <span class="material-symbols-outlined" id="bell">notifications</span>
 </header>
