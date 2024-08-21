@@ -7,6 +7,16 @@ body {
     margin: 0;
     font-family: Arial, sans-serif;
 }
+
+.header {
+    grid-column: 2 / 3;
+    grid-row: 1 / 2;
+    display: flex;
+    padding: auto;
+    flex-direction: column;
+    
+}
+
 .top-header {
     display: flex;
     justify-content: space-between;
@@ -16,6 +26,7 @@ body {
     border-bottom: 1px solid #E0E0E0;
 }
 .header-left h1 {
+    padding: 10px;
     margin: 0;
     font-size: 24px;
     color: #333;
@@ -38,15 +49,9 @@ body {
     padding: 8px 12px;
     cursor: pointer;
     border-radius: 4px;
-<<<<<<< HEAD
     display: inline-block;
     width: auto;
     white-space: nowrap;
-=======
-    display: inline-block; 
-    width: auto; 
-    white-space: nowrap; 
->>>>>>> 51627e89bc2965c3abf829b99609b229b5b30f48
 }
 .dropdown-content {
     display: none;
@@ -105,18 +110,22 @@ body {
     border-radius: 50%;
     cursor: pointer;
 }
-<<<<<<< HEAD
-=======
 
->>>>>>> 51627e89bc2965c3abf829b99609b229b5b30f48
 #under-header {
     display: flex;
+    align-items: center;
     padding: 10px;
-    margin-left: 200px;
-    flex-direction: row;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     word-spacing: 5px;
 }
+
 #current-page {
     font-weight: bold;
+}
+.fa-bell {
+    color: #546FF0;
+}
+#bell {
+    visibility: hidden;
+
 }

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>페이지</title>
+    <link rel="stylesheet" th:href="@{/css/common/main-container.css}">
     <link rel="stylesheet" th:href="@{/css/common/navigationbar.css}">
     <link rel="stylesheet" th:href="@{/css/common/header.css}">
     <link rel="stylesheet"
@@ -13,9 +14,13 @@
     </script>
 </head>
 <body>
-    <div th:replace="~{common/header::header}"></div>
-    <div th:replace="~{common/navigationbar::nav}"></div>
+
+    <div class="main-container">
+        <div th:replace="~{common/header::header}"></div>
+        <div th:replace="~{common/navigationbar::nav}"></div>
+    </div>
     <script th:src="@{/js/common/navigationbar.js}"></script>
     <script th:src="@{/js/common/header.js}"></script>
+    
 </body>
 </html>

@@ -1,6 +1,6 @@
 /* navigationbar 부분 디자인을 기술할 js 파일입니다. */
 
-#aside-bar {
+/* #aside-bar {
     display: flex;
     flex-direction: column;
     justify-content: space-around;;
@@ -10,15 +10,33 @@
     position: fixed;
     top: 0;
     left: 0;
+} */
+
+#aside-bar {
+    grid-row: 1 / 3;
+    grid-column: 1 / 2;
+    padding: 20px;
+    height: 100vh;
+    background-color: aliceblue;
 }
-nav ul {
+
+/* nav ul {
     list-style-type: none;
     width: 200px;
     height: 100vh;
     padding: 0;
     margin: 0;
     background-color: aliceblue;
+} */
+
+nav ul {
+    list-style-type: none;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+   
 }
+
 #logo {
     text-align: left;
     margin-left: 60px;
