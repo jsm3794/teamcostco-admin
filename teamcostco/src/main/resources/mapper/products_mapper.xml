@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Products">
+    <select id="getAll" resultType="products">
+        SELECT 
+            product_id, product_name, product_code, category1,
+            category2, category3, category4, purchase_price,
+            selling_price, brand, appropriate_qty, storage_qty,
+            display_qty, create_date, update_date
+        FROM
+            products
+    </select>
+</mapper>
