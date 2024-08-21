@@ -16,7 +16,7 @@ public class IndexController {
     @GetMapping("/")
     public String showIndex(Model model) {
         // DashBoard를 메인으로 둡니다.
-        dashBoardService.populateDashboardData(model);
+        dashBoardService.configureDashboardData(model);
         return "index";
     }
 }

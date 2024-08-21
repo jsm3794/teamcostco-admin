@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Navigation Bar</title>
+    <title th:text="${(pageTitle ?: 'No-Title')}"></title>
     <link rel="stylesheet" th:href="@{/css/common/styles.css}">
     <link rel="stylesheet" th:href="@{/css/common/header.css}">
     <link rel="stylesheet" th:href="@{/css/common/navigationbar.css}">

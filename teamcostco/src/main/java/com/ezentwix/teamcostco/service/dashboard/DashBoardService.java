@@ -11,7 +11,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class DashBoardService {
 
-    public void populateDashboardData(Model model) {
+    public void configureDashboardData(Model model) {
         model.addAttribute("uri", "dashboard/dashboard");
         model.addAttribute("pageTitle", "대시보드");
 
