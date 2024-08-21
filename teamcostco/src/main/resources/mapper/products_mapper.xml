@@ -8,7 +8,7 @@
         SELECT 
             product_id, product_name, product_code, category1,
             category2, category3, category4, purchase_price,
-            selling_price, brand, appropriate_qty, storage_qty,
+            selling_price, brand, min_required_qty, storage_qty,
             display_qty, create_date, update_date
         FROM
             products
