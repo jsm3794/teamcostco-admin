@@ -1,6 +1,5 @@
 package com.ezentwix.teamcostco.service.dashboard;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -18,5 +17,6 @@ public class DashBoardService {
 
         model.addAttribute("cssFiles",
                 List.of("/css/dashboard/styles.css"));
+        // model.addAttribute("jsFiles", null);
     }
 }
