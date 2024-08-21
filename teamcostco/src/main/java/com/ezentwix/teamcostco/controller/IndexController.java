@@ -1,4 +1,4 @@
-package com.ezentwix.teamcostco.controller.dashboard;
+package com.ezentwix.teamcostco.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,12 +10,12 @@ import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequiredArgsConstructor
-public class DashBoardController {
+public class IndexController {
     private final DashBoardService dashBoardService;
 
-    @GetMapping("/dashboard")
-    public String showDashboard(Model model) {
-        // dashboard 페이지에서 사용할 데이터를 추가합니다
+    @GetMapping("/")
+    public String showIndex(Model model) {
+        // DashBoard를 메인으로 둡니다.
         dashBoardService.configureDashboardData(model);
         return "index";
     }
