@@ -17,7 +17,8 @@
     grid-column: 1 / 2;
     padding: 20px;
     height: 100vh;
-    background-color: aliceblue;
+    background-color: rgb(255, 255, 255);
+    border-right: 1px solid #d6d6d6;
 }
 
 /* nav ul {
