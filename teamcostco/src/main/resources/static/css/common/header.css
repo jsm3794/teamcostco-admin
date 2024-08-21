@@ -1,39 +1,50 @@
 /* header 부분 디자인을 기술할 css 파일입니다. */
 
-* {
-    box-sizing: border-box;
+header {
+    display: flex;
+    flex-direction: column;
+    width: calc(100% - 200px - 1px);
+    gap: 1px;
 }
 
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-}
 .top-header {
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    margin-left: 200px;
     padding: 15px 20px;
-    /* background-color: #F8F9FA; */
-    border-bottom: 1px solid #E0E0E0;
+    background-color: #fff;
 }
+
+.under-header {
+    display: flex;
+    padding: 10px;
+    flex-direction: row;
+    word-spacing: 5px;
+    background-color: #fff;
+}
+
 .header-left h1 {
     margin: 0;
     font-size: 24px;
     color: #333;
 }
+
 .breadcrumb {
     font-size: 14px;
     color: #666;
 }
+
 .header-right {
     display: flex;
     align-items: center;
 }
+
 .shop-dropdown {
     position: relative;
     margin-right: 20px;
 }
+
 .dropdown-btn {
     background: #E0E0E0;
     border: none;
@@ -41,76 +52,87 @@ body {
     cursor: pointer;
     border-radius: 4px;
 }
+
 .dropdown-content {
     display: none;
     position: absolute;
     background-color: #F9F9F9;
-    box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
     min-width: 160px;
     z-index: 1;
     margin-top: 10px;
     border-radius: 4px;
 }
+
 .dropdown-content a {
     color: black;
     padding: 12px 16px;
     text-decoration: none;
     display: block;
 }
+
 .dropdown-content a:hover {
     background-color: #F1F1F1;
 }
+
 .shop-dropdown:hover .dropdown-content {
     display: block;
 }
+
 .notification-icon {
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
     position: relative;
     font-size: 24px;
     cursor: pointer;
-    margin-right: 20px;
 }
+
 .notifications {
     display: none;
     position: absolute;
     right: 0;
     top: 30px;
     background-color: #F9F9F9;
-    box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
     min-width: 200px;
     z-index: 1;
     border-radius: 4px;
     padding: 10px;
 }
+
 .notifications p {
     margin: 0;
     padding: 8px 12px;
     border-bottom: 1px solid #E0E0E0;
 }
+
 .notifications p:last-child {
     border-bottom: none;
 }
+
 .notification-icon:hover .notifications {
     display: block;
 }
-.profile-pic {
+
+.profile {
     width: 40px;
     height: 40px;
+}
+
+.profile-pic {
+    width: auto;
+    height: 100%;
     border-radius: 50%;
     cursor: pointer;
 }
-/* header {
-    width: 100%;
-    background-color: #FFF;
-    padding: 20px;
-}   */
-#under-header {
-    display: flex;
-    padding: 10px;
-    margin-left: 200px;
-    flex-direction: row;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    word-spacing: 5px;
-}
+
 .fa-bell {
     color: #546FF0;
+}
+
+.path-separator {
+    padding: 0 5px;
 }

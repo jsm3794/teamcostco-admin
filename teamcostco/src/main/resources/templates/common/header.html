@@ -1,7 +1,7 @@
-<header class="header">
+<header>
     <div class="top-header">
         <div class="header-left">
-            <h1>Report Analytics</h1>
+            <h1>대시보드</h1>
             <nav class="breadcrumb">
             </nav>
         </div>
@@ -15,7 +15,9 @@
                 </div>
             </div>
             <div class="notification-icon" id="notification-icon">
-                <i class="fa-solid fa-bell"></i>
+                <span class="material-symbols-outlined">
+                    notifications
+                </span>
                 <div class="notifications">
                     <p>알림 1</p>
                     <p>알림 2</p>
@@ -24,15 +26,16 @@
             </div>
             <!---->
             <div class="profile">
-                <img src="profile.jpg" alt="user_profile" class="profile-pic">
+                <img src="/images/common/profile-default.svg" alt="user_profile" class="profile-pic">
             </div>
         </div>
     </div>
-    <div id="under-header">
-        <a th:href="@{/}">Home</a>
-        <div>/</div>
-        <div id="current-page" th:text="${page_title} ?: _">
-            <strong>page_title</strong>
+    <div class="under-header">
+        <div th:href="@{/}">홈</div>
+        <div class="path-separator">/</div>
+        <div id="current-page"
+            th:text="${#strings.capitalize(#strings.substring(uri, #strings.indexOf(uri, '/') + 1))}">
+            notfound
         </div>
     </div>
 </header>
