@@ -21,10 +21,6 @@ public class DashBoardService {
 
         model.addAttribute("cssFiles",
                 List.of("/css/dashboard/styles.css"));
-
-
-        List<ProductDTO> list = productsService.list();
-        System.out.println(list);
         // model.addAttribute("jsFiles", null);
     }
 }
