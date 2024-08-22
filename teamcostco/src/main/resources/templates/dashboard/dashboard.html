@@ -46,7 +46,7 @@
                 <td th:text="${product.selling_price}"></td>
                 <td th:text="${product.brand}"></td>
                 <td th:text="${product.total_qty}"></td>
-                <td th:text="${#temporals.format(product.update_date, 'yyyy-MM-dd')}"></td>
+                <td th:text="${#dates.format(product.update_date, 'yyyy-MM-dd')}"></td>
             </tr>
         </tbody>
     </table>

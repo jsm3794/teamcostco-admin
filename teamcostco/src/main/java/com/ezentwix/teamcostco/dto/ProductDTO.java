@@ -1,6 +1,7 @@
 package com.ezentwix.teamcostco.dto;
 
-import java.security.Timestamp;
+import java.util.Date;
+
 
 import lombok.Data;
 
@@ -20,6 +21,6 @@ public class ProductDTO {
     private Integer storage_qty;
     private Integer display_qty;
     private Integer total_qty;
-    private Timestamp create_date;
-    private Timestamp update_date;
+    private Date create_date;
+    private Date update_date;
 }
