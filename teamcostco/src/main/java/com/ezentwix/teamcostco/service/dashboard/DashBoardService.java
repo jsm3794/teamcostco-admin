@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
-import com.ezentwix.teamcostco.dto.ProductDTO;
 import com.ezentwix.teamcostco.service.products.ProductService;
 
 import lombok.RequiredArgsConstructor;
@@ -21,6 +20,8 @@ public class DashBoardService {
 
         model.addAttribute("cssFiles",
                 List.of("/css/dashboard/styles.css"));
+
         // model.addAttribute("jsFiles", null);
     }
+
 }
