@@ -1,3 +1,57 @@
 <div class="content-box">
-
-</div>
+    <div id="serachTitle">Inventory items</div>
+    <div class="search-buttons-container">
+        <input id="searchInput" type="text" placeholder="Search">
+        <div class="dropdown date-dropdown">
+            <button class="dropdown-btn" onclick="toggleDropdown('dateDropdown')">
+                <span class="icon">:날짜:</span> Date
+            </button>
+            <div id="dateDropdown" class="dropdown-content calendar-dropdown">
+                <input type="date" id="datePicker">
+            </div>
+        </div>
+        <div class="dropdown filter-dropdown">
+            <button class="dropdown-btn" onclick="toggleDropdown('filterDropdown')">
+                <span class="icon">:돋보기:</span> Filter
+            </button>
+            <div id="filterDropdown" class="dropdown-content">
+                <label><input type="checkbox" name="filter" value="Option 1"> Option 1</label>
+                <label><input type="checkbox" name="filter" value="Option 2"> Option 2</label>
+                <label><input type="checkbox" name="filter" value="Option 3"> Option 3</label>
+                <label><input type="checkbox" name="filter" value="Option 4"> Option 4</label>
+            </div>
+        </div>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th><input type="checkbox" id="selectAll" onclick="selectAllRows()"> All</th>
+                <th>product_name</th>
+                <th>category_large</th>
+                <th>product_code</th>
+                <th>purchase_price</th>
+                <th>selling_price</th>
+                <th>brand</th>
+                <th>total_qty</th>
+                <th>update_date</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="product : ${products}">
+                <td><input type="checkbox" class="row-checkbox"></td>
+                <td th:text="${product.product_name}"></td>
+                <td th:text="${product.category_large}"></td>
+                <td th:text="${product.product_code}"></td>
+                <td th:text="${product.purchase_price}"></td>
+                <td th:text="${product.selling_price}"></td>
+                <td th:text="${product.brand}"></td>
+                <td th:text="${product.total_qty}"></td>
+                <td th:text="${#temporals.format(product.update_date, 'yyyy-MM-dd')}"></td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="pagination">
+        <button id="prevBtn" class="nav-btn">Previous</button>
+        <button id="nextBtn" class="nav-btn">Next</button>
+        <div id="page">Page {현재 페이지} of {마지막 페이지}</div>
+    </div>

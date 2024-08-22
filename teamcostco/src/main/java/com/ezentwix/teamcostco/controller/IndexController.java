@@ -19,7 +19,7 @@ public class IndexController {
     public String showIndex(Model model) {
         // DashBoard를 메인으로 둡니다.
         dashBoardService.configureDashboardData(model);
-        model.addAttribute("products", productService.list());
+        
 
         return "index";
     }

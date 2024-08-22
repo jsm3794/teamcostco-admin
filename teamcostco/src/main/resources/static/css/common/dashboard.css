@@ -1,89 +1,137 @@
-
-#title {
-    font-size: 20px;
-    padding-left: 10px;
-    font-weight: bold;
-    color: #4e4e4e;
-}
-
-/* 검색창 */
-.search {
-    position: relative;
-    width: 300px;
-    grid-column: 2 / 3; /* 두 번째 열에 위치 */
-    grid-row: 2 / 3;    /* 두 번째 행에 위치 */
-    padding: 10px;      /* 여백 추가 */
-}
-
-input {
-    width: 100%;
-    border: 1px solid #bbb;
-    border-radius: 8px;
-    padding: 10px 12px 10px 40px;
-    font-size: 14px;
+* {
     box-sizing: border-box;
 }
-
-#searchImg {
-    position: absolute;
-    width: 17px;
-    top: 50%;
-    left: 20px;
-    transform: translateY(-50%);
-    margin: 0;
-}
-
-
-
-/* 테이블 */
-
-/* 
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f9;
     margin: 0;
-    padding: 20px;
+    padding: 0;
+    overflow-x: hidden; /* 가로 스크롤바 숨기기 */
+    min-width: 800px; /* 최소 너비 설정 */
+}
+.content-box {
+    width: 87%; /* 너비를 87%로 설정 */
+    margin: 0 auto; /* 중앙 정렬 */
+    padding: 10px; /* 패딩 추가 */
+    box-sizing: border-box; /* 패딩을 너비에 포함 */
+}
+#serachTitle {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+/* Search Input과 버튼을 포함한 컨테이너 스타일 */
+.search-buttons-container {
     display: flex;
-    justify-content: center;
+    justify-content: flex-end; /* 버튼들이 오른쪽에 위치 */
     align-items: center;
-    height: 100vh;
+    margin-bottom: 10px;
+    position: relative;
+    flex-wrap: wrap;
+    width: 100%; /* 컨테이너 너비를 100%로 설정 */
+    gap: 5px; /* 버튼 간 간격 조정 */
 }
-
-table {
-    width: 80%;
-    border-collapse: collapse;
-    margin: 25px 0;
-    font-size: 18px;
-    text-align: left;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+#searchInput {
+    width: 200px; /* 너비를 줄임 */
+    height: 35px; /* 높이 조정 */
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: auto; /* 검색 창을 왼쪽에 위치 */
+}
+/* Dropdown 버튼과 내용 스타일 */
+.dropdown {
+    margin-left: 10px; /* 버튼 간 간격 조정 */
+}
+.dropdown-btn {
     background-color: white;
-    border-radius: 8px;
-    overflow: hidden;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px 15px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
 }
-
-th, td {
-    padding: 12px 15px;
+/* Dropdown 메뉴 스타일 */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    padding: 10px;
+    box-sizing: border-box;
 }
-
-th {
-    background-color: #546FF0;
-    color: #ffffff;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
+.dropdown-content label {
+    display: block;
+    padding: 5px 0;
 }
-
-tr {
-    border-bottom: 1px solid #dddddd;
+.dropdown-content input[type="checkbox"] {
+    margin-right: 10px;
 }
-
-tr:nth-of-type(even) {
-    background-color: #f3f3f3;
+.calendar-dropdown {
+    width: 200px;
 }
-
-tr:last-of-type {
-    border-bottom: 2px solid #546FF0;
+input[type="date"] {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }
-
-tr:hover {
-    background-color: #f1f1f1;
-} */
+/* 테이블 스타일 */
+.table {
+    table-layout: fixed;
+    border-collapse: collapse;
+    border: 1px solid #C0C0C0;
+    width: 100%; /* 테이블 너비를 100%로 설정 */
+    max-width: 100vw; /* 페이지 너비에 맞게 조정 */
+    overflow-x: auto; /* 페이지 줄어들 때 스크롤 활성화 */
+    margin-left: 0; /* 테이블을 왼쪽에 맞추기 위해 왼쪽 마진 제거 */
+}
+.table thead {
+    background: #F7F7F7; /* 밝은 회색으로 변경 */
+    color: #333;
+}
+.table th, .table td {
+    padding: 8px; /* 패딩 조정 */
+    text-align: center;
+    border-bottom: 1px solid #ccc; /* 행 구분을 위한 회색 줄 */
+    width: 70px; /* 열 너비를 줄임 */
+}
+/* 체크박스 스타일 */
+.table th input[type="checkbox"] {
+    margin: 0;
+}
+/* Navigation 버튼 스타일 */
+.nav-btn {
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px 15px;
+    cursor: pointer;
+    display: inline-block;
+}
+/* 페이지 정보 위치 및 스타일 */
+.pagination {
+    display: flex;
+    justify-content: space-between; /* 버튼과 페이지 정보 양쪽으로 이동 */
+    align-items: center;
+    margin-top: 10px;
+    gap: 5px; /* 버튼과 페이지 정보 간격 조정 */
+    width: 100%; /* 너비를 100%로 설정 */
+}
+.pagination .nav-btn {
+    margin-left: 0; /* 버튼을 왼쪽으로 이동 */
+}
+#prevBtn {
+    margin-right: 10px; /* 이전 버튼과 다음 버튼 간격 조정 */
+}
+#nextBtn {
+    margin-left: 0; /* 다음 버튼을 이전 버튼 바로 오른쪽에 위치 */
+}
+#page {
+    font-size: 0.875em; /* 글자 크기 줄이기 */
+    margin-left: auto; /* 페이지 정보를 오른쪽으로 이동 */
+}
