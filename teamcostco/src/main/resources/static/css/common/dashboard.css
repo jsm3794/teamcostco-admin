@@ -11,6 +11,7 @@ body {
 }
 
 .content-box {
+    
     width: 87%; /* 너비를 87%로 설정 */
     margin: 0 auto; /* 중앙 정렬 */
     padding: 10px; /* 패딩 추가 */
