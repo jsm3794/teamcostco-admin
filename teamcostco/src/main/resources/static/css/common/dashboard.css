@@ -1,8 +1,7 @@
-/* 모든 요소의 박스 모델을 border-box로 설정 */
+* 모든 요소의 박스 모델을 border-box로 설정 */
 * {
     box-sizing: border-box;
 }
-
 /* 기본 body 스타일 설정 */
 body {
     font-family: Arial, sans-serif;
@@ -11,37 +10,32 @@ body {
     overflow-x: hidden; /* 가로 스크롤바 숨기기 */
     min-width: 800px; /* 최소 너비 설정 */
 }
-
 /* 콘텐츠 박스 스타일 */
 .content-box {
     width: 100%;
     margin: 0 auto;
     padding: 10px;
 }
-
 /* 검색 제목 스타일 */
 #serachTitle {
     font-size: 24px;
     margin-bottom: 10px;
 }
-
 /* 검색 입력창과 버튼을 포함한 컨테이너 스타일 */
 .search-buttons-container {
     display: flex;
-    justify-content: space-between; 
+    justify-content: space-between;
     align-items: center;
     margin-bottom: 10px;
     gap: 5px; /* 버튼 간 간격 조정 */
     width: 100%;
     flex-wrap: wrap; /* 버튼이 공간 부족 시 줄바꿈 */
 }
-
 /* 검색 입력창과 버튼을 감싸는 컨테이너 스타일 */
 .search-wrapper {
     display: flex;
     align-items: center;
 }
-
 /* 검색 입력창 스타일 */
 #searchInput {
     width: 200px;
@@ -51,12 +45,10 @@ body {
     border-radius: 5px;
     margin-right: 5px;
 }
-
 #searchInput:focus {
-    border-color: #007bff; /* 포커스 시 파란색 테두리 */
+    border-color: #007BFF; /* 포커스 시 파란색 테두리 */
     outline: none; /* 기본 포커스 아웃라인 제거 */
 }
-
 /* 검색 버튼 스타일 */
 #searchBtn {
     background-color: rgb(251, 255, 255);
@@ -65,7 +57,6 @@ body {
     padding: 7px 10px;
     cursor: pointer;
 }
-
 /* 날짜 필터 적용 버튼*/
 #applyDateFilter, #applyFilterBtn {
     background-color: rgb(251, 255, 255);
@@ -77,7 +68,6 @@ body {
     margin-top: 10px;
     margin-left: 100px;
 }
-
 /* 날짜 필터 적용 버튼*/
 #applyFilterBtn {
     background-color: rgb(251, 255, 255);
@@ -88,21 +78,17 @@ body {
     font-size: 0.875em; /* 폰트 크기 통일 */
     margin-left: 40px;
 }
-
 /* 날짜 및 필터 버튼 컨테이너 스타일 */
 .date-dropdown, .filter-dropdown {
     display: flex;
     align-items: center;
 }
-
 .date-dropdown {
     margin-left: auto; /* 오른쪽 끝으로 배치 */
 }
-
 .filter-dropdown {
     margin-left: 5px; /* 날짜 버튼과 필터 버튼 사이 간격 */
 }
-
 /* 드롭다운 버튼과 내용 스타일 */
 .dropdown-btn, .nav-btn {
     background-color: white;
@@ -114,7 +100,6 @@ body {
     align-items: center;
     gap: 5px;
 }
-
 /* 드롭다운 내용 스타일 */
 .dropdown-content {
     display: none; /* 기본적으로 숨김 */
@@ -128,22 +113,18 @@ body {
     padding: 10px;
     box-sizing: border-box;
 }
-
 /* 드롭다운 내용 내 라벨과 체크박스 스타일 */
 .dropdown-content label {
     display: block;
     padding: 5px 0;
 }
-
 .dropdown-content input[type="checkbox"] {
     margin-right: 10px;
 }
-
 /* 캘린더 드롭다운 스타일 */
 .calendar-dropdown {
     width: 200px;
 }
-
 /* 날짜 입력창 스타일 */
 input[type="date"] {
     width: 100%;
@@ -151,42 +132,35 @@ input[type="date"] {
     border: 1px solid #ccc;
     border-radius: 5px;
 }
-
 /* 테이블 스타일 */
 .table {
-    table-layout: flex;
+    table-layout: fixed;
     border-collapse: collapse;
     border: 1px solid #C0C0C0;
     width: 100%;
 }
-
 /* 테이블 헤더 스타일 */
 .table thead {
     background: #F7F7F7;
     color: #333;
 }
-
 /* 테이블 셀 스타일 */
 .table th, .table td {
     padding: 8px;
     text-align: center;
     border-bottom: 1px solid #ccc;
 }
-
 .table tbody tr {
     cursor: pointer; /* 클릭 가능한 커서로 변경 */
 }
-
 /* 클릭 시 배경색 변경 */
 .table tbody tr:hover {
-    background-color: #f0f0f0;
+    background-color: #F0F0F0;
 }
-
 /* 체크박스 스타일 */
 .table th input[type="checkbox"] {
     margin: 0;
 }
-
 /* 네비게이션 버튼 스타일 */
 .nav-btn {
     background-color: white;
@@ -195,7 +169,6 @@ input[type="date"] {
     padding: 10px 15px;
     cursor: pointer;
 }
-
 /* 페이지 정보 및 네비게이션 버튼 스타일 */
 .pagination {
     display: flex;
@@ -205,87 +178,56 @@ input[type="date"] {
     gap: 5px;
     width: 100%;
 }
-
 #prevBtn {
     margin-right: 10px;
 }
-
 #nextBtn {
     margin-left: 0;
 }
-
 #page {
     font-size: 0.875em;
     margin-left: auto;
 }
-
 /* 제품 이미지 및 이름 컨테이너 스타일 */
 .product-name-container {
     display: flex;
     align-items: center;
     gap: 10px;
 }
-
 .product-image {
     width: 50px;
     height: auto;
 }
-
-<<<<<<< HEAD
-=======
-
 /* 테이블 위 박스 3개 */
-
->>>>>>> fd1f0ab123320960f112ee66b8b6cbd103812f75
 .info-boxes {
     display: flex;
     justify-content: space-between;
     margin-bottom: 20px;
     gap: 20px;
 }
-<<<<<<< HEAD
-
 .info-box {
     flex: 1;
-    background-color: #f0f0f0;
-=======
-.info-box {
-    flex: 1;
-    background-color: #ffffff;
->>>>>>> fd1f0ab123320960f112ee66b8b6cbd103812f75
+    background-color: #FFFFFF;
     border: 1px solid #ddd;
     border-radius: 5px;
     padding: 20px;
     text-align: center;
     min-height: 100px;
+    font-weight: bold;
+    text-align: left;
+    font-size: 25px;
 }
-
-<<<<<<< HEAD
-@media (max-width: 768px) {
-    .info-boxes {
-        flex-direction: column;
-    }
-    
-    .info-box {
-        width: 100%;
-    }
-}
-=======
 .categories {
     color: #3781F0;
 }
-
 .total-product {
     color: #E5A558;
 }
-
 .low-stock {
     color: #C95757;
 }
-
 .total-text {
     color: #646464;
     font-size: 20px;
+    margin-top: 15px;
 }
-
->>>>>>> fd1f0ab123320960f112ee66b8b6cbd103812f75

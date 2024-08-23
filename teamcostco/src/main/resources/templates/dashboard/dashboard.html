@@ -4,7 +4,7 @@
             Categories
         </div>
         <div class="total-text">
-            Total
+            Total (<span id="categoryCount">0</span> items)
         </div>
     </div>
     <div class="info-box">
@@ -12,7 +12,7 @@
             Total Product
         </div>
         <div class="total-text">
-            Total
+            Total <span id="totalQtySum">0</span>
         </div>
     </div>
     <div class="info-box">
@@ -20,19 +20,18 @@
             Low Stock
         </div>
         <div class="total-text">
-            Total
+            Total (<span id="lowStockCount">0</span> items)
         </div>
     </div>
 </div>
-
 <div class="content-box">
     <div id="serachTitle">Inventory items</div>
     <div class="search-buttons-container">
-        <input id="searchInput" type="text" placeholder="🔍 Search" >
+        <input id="searchInput" type="text" placeholder=":돋보기: Search" >
         <button id="searchBtn">검색</button>
         <div class="dropdown date-dropdown">
             <button class="dropdown-btn" onclick="toggleDropdown('dateDropdown')">
-                <span class="icon">📅</span> Date
+                <span class="icon">:날짜:</span> Date
             </button>
             <div id="dateDropdown" class="dropdown-content calendar-dropdown">
                 <label for="startDate">시작 날짜:</label>
@@ -44,7 +43,7 @@
         </div>
         <div class="dropdown filter-dropdown">
             <button class="dropdown-btn" onclick="toggleDropdown('filterDropdown')">
-                <span class="icon">🔍</span> Filter
+                <span class="icon">:돋보기:</span> Filter
             </button>
             <div id="filterDropdown" class="dropdown-content">
                 <label><input type="checkbox" name="filter" value="Option 1"> 대분류</label>
