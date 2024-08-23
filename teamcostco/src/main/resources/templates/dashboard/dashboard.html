@@ -38,7 +38,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr th:each="product : ${products}">
+            <tr th:each="product : ${products}" onclick="console.log('상세페이지로 이동하는 기능 추가하기')">
                 <td><input type="checkbox" class="row-checkbox"></td>
                 <td>
                     <div class="product-name-container">

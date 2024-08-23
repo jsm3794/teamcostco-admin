@@ -145,6 +145,15 @@ input[type="date"] {
     border-bottom: 1px solid #ccc;
 }
 
+.table tbody tr {
+    cursor: pointer; /* 클릭 가능한 커서로 변경 */
+}
+
+/* 클릭 시 배경색 변경 */
+.table tbody tr:hover {
+    background-color: #f0f0f0;
+}
+
 /* 체크박스 스타일 */
 .table th input[type="checkbox"] {
     margin: 0;

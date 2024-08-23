@@ -1,3 +1,4 @@
+// 드롭다운 토글 함수
 function toggleDropdown(id) {
     var dropdowns = document.querySelectorAll('.dropdown-content');
     dropdowns.forEach(dropdown => {
@@ -8,6 +9,8 @@ function toggleDropdown(id) {
     var dropdown = document.getElementById(id);
     dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
 }
+
+// 클릭 외부에서 드롭다운 숨기기
 window.onclick = function (event) {
     if (!event.target.matches('.dropdown-btn')) {
         var dropdowns = document.querySelectorAll('.dropdown-content');
@@ -16,6 +19,8 @@ window.onclick = function (event) {
         });
     }
 }
+
+// 모든 행 선택 함수
 function selectAllRows() {
     var selectAllCheckbox = document.getElementById('selectAll');
     var rowCheckboxes = document.querySelectorAll('.row-checkbox');
@@ -23,3 +28,13 @@ function selectAllRows() {
         checkbox.checked = selectAllCheckbox.checked;
     });
 }
+
+/* 
+
+아직 구현 안됨
+// 세부 페이지로 리다이렉션하는 함수
+function redirectToDetailsPage(productId) {
+    window.location.href = '/products/' + productId; // Spring Boot에서 세부 페이지 URL 설정
+}
+
+*/
