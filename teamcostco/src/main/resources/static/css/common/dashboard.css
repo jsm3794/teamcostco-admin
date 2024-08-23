@@ -131,7 +131,7 @@ input[type="date"] {
 
 /* 테이블 스타일 */
 .table {
-    table-layout: fixed;
+    table-layout: flex;
     border-collapse: collapse;
     border: 1px solid #C0C0C0;
     width: 100%;
@@ -206,4 +206,31 @@ input[type="date"] {
 .product-image {
     width: 50px;
     height: auto;
+}
+
+.info-boxes {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    gap: 20px;
+}
+
+.info-box {
+    flex: 1;
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 20px;
+    text-align: center;
+    min-height: 100px;
+}
+
+@media (max-width: 768px) {
+    .info-boxes {
+        flex-direction: column;
+    }
+    
+    .info-box {
+        width: 100%;
+    }
 }

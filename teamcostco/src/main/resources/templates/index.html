@@ -29,6 +29,13 @@
         <div th:replace="~{common/header::header}"></div>
         <main>
             <h1 class="page-title" th:text="${pageTitle}"></h1>
+
+            <div class="info-boxes">
+                <div class="info-box">정보 1</div>
+                <div class="info-box">정보 2</div>
+                <div class="info-box">정보 3</div>
+            </div>
+
             <div th:replace="~{${uri}}"></div>
         </main>
     </div>
