@@ -1,3 +1,30 @@
+<div class="info-boxes">
+    <div class="info-box">
+        <div class="categories">
+            Categories
+        </div>
+        <div class="total-text">
+            Total
+        </div>
+    </div>
+    <div class="info-box">
+        <div class="total-product">
+            Total Product
+        </div>
+        <div class="total-text">
+            Total
+        </div>
+    </div>
+    <div class="info-box">
+        <div class="low-stock">
+            Low Stock
+        </div>
+        <div class="total-text">
+            Total
+        </div>
+    </div>
+</div>
+
 <div class="content-box">
     <div id="serachTitle">Inventory items</div>
     <div class="search-buttons-container">
@@ -8,7 +35,11 @@
                 <span class="icon">📅</span> Date
             </button>
             <div id="dateDropdown" class="dropdown-content calendar-dropdown">
-                <input type="date" id="datePicker">
+                <label for="startDate">시작 날짜:</label>
+                <input type="date" id="startDate">
+                <label for="endDate">종료 날짜:</label>
+                <input type="date" id="endDate">
+                <button id="applyDateFilter" onclick="applyDateFilter()">필터 적용</button> <!-- 필터 적용 버튼 추가 -->
             </div>
         </div>
         <div class="dropdown filter-dropdown">
@@ -20,6 +51,7 @@
                 <label><input type="checkbox" name="filter" value="Option 2"> 중분류</label>
                 <label><input type="checkbox" name="filter" value="Option 3"> 소분류</label>
                 <label><input type="checkbox" name="filter" value="Option 4"> 세분류</label>
+                <button id="applyFilterBtn" onclick="applyFilter()">필터 적용</button> <!-- 필터 적용 버튼 추가 -->
             </div>
         </div>
     </div>

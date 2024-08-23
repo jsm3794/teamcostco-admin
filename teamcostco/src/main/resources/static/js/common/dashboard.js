@@ -9,27 +9,39 @@ document.getElementById('searchInput').addEventListener('input', function() {
 });
 
 
+// 날짜 필터 적용 함수
+function applyDateFilter() {
+  // 내용 작성하기
+}
+
+// 필터 적용 함수
+function applyFilter() {
+   // 내용 작성하기
+}
+
+
 // 드롭다운 토글 함수
 function toggleDropdown(id) {
     var dropdowns = document.querySelectorAll('.dropdown-content');
     dropdowns.forEach(dropdown => {
         if (dropdown.id !== id) {
-            dropdown.style.display = 'none';
+            dropdown.style.display = 'none'; // 현재 열려있는 다른 드롭다운을 닫음
         }
     });
     var dropdown = document.getElementById(id);
-    dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+    dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block'; // 클릭한 드롭다운을 토글
 }
 
 // 클릭 외부에서 드롭다운 숨기기
 window.onclick = function (event) {
-    if (!event.target.matches('.dropdown-btn')) {
+    // 드롭다운 버튼이나 드롭다운 내용이 아닌 곳을 클릭했을 때만 드롭다운을 숨김
+    if (!event.target.matches('.dropdown-btn') && !event.target.closest('.dropdown-content')) {
         var dropdowns = document.querySelectorAll('.dropdown-content');
         dropdowns.forEach(dropdown => {
             dropdown.style.display = 'none';
         });
     }
-}
+};
 
 // 모든 행 선택 함수
 function selectAllRows() {

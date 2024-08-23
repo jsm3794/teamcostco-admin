@@ -66,6 +66,29 @@ body {
     cursor: pointer;
 }
 
+/* 날짜 필터 적용 버튼*/
+#applyDateFilter, #applyFilterBtn {
+    background-color: rgb(251, 255, 255);
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 7px 10px;
+    cursor: pointer;
+    font-size: 0.875em; /* 폰트 크기 통일 */
+    margin-top: 10px;
+    margin-left: 100px;
+}
+
+/* 날짜 필터 적용 버튼*/
+#applyFilterBtn {
+    background-color: rgb(251, 255, 255);
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 7px 10px;
+    cursor: pointer;
+    font-size: 0.875em; /* 폰트 크기 통일 */
+    margin-left: 40px;
+}
+
 /* 날짜 및 필터 버튼 컨테이너 스타일 */
 .date-dropdown, .filter-dropdown {
     display: flex;
@@ -208,16 +231,28 @@ input[type="date"] {
     height: auto;
 }
 
+<<<<<<< HEAD
+=======
+
+/* 테이블 위 박스 3개 */
+
+>>>>>>> fd1f0ab123320960f112ee66b8b6cbd103812f75
 .info-boxes {
     display: flex;
     justify-content: space-between;
     margin-bottom: 20px;
     gap: 20px;
 }
+<<<<<<< HEAD
 
 .info-box {
     flex: 1;
     background-color: #f0f0f0;
+=======
+.info-box {
+    flex: 1;
+    background-color: #ffffff;
+>>>>>>> fd1f0ab123320960f112ee66b8b6cbd103812f75
     border: 1px solid #ddd;
     border-radius: 5px;
     padding: 20px;
@@ -225,6 +260,7 @@ input[type="date"] {
     min-height: 100px;
 }
 
+<<<<<<< HEAD
 @media (max-width: 768px) {
     .info-boxes {
         flex-direction: column;
@@ -234,3 +270,22 @@ input[type="date"] {
         width: 100%;
     }
 }
+=======
+.categories {
+    color: #3781F0;
+}
+
+.total-product {
+    color: #E5A558;
+}
+
+.low-stock {
+    color: #C95757;
+}
+
+.total-text {
+    color: #646464;
+    font-size: 20px;
+}
+
+>>>>>>> fd1f0ab123320960f112ee66b8b6cbd103812f75
