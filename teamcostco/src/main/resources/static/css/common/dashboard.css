@@ -52,6 +52,11 @@ body {
     margin-right: 5px;
 }
 
+#searchInput:focus {
+    border-color: #007bff; /* 포커스 시 파란색 테두리 */
+    outline: none; /* 기본 포커스 아웃라인 제거 */
+}
+
 /* 검색 버튼 스타일 */
 #searchBtn {
     background-color: rgb(251, 255, 255);

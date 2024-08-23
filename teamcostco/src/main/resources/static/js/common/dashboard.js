@@ -1,3 +1,14 @@
+// 검색 입력창에서 실시간 검색 기능 추가
+document.getElementById('searchInput').addEventListener('input', function() {
+    var searchTerm = this.value.toLowerCase();
+    var rows = document.querySelectorAll('.table tbody tr');
+    rows.forEach(row => {
+        var text = row.innerText.toLowerCase();
+        row.style.display = text.includes(searchTerm) ? '' : 'none';
+    });
+});
+
+
 // 드롭다운 토글 함수
 function toggleDropdown(id) {
     var dropdowns = document.querySelectorAll('.dropdown-content');
