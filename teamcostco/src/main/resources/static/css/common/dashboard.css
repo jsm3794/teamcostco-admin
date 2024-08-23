@@ -230,3 +230,40 @@ input[type="date"] {
     width: 50px;
     height: auto;
 }
+
+
+/* 테이블 위 박스 3개 */
+
+.info-boxes {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    gap: 20px;
+}
+.info-box {
+    flex: 1;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 20px;
+    text-align: center;
+    min-height: 100px;
+}
+
+.categories {
+    color: #3781F0;
+}
+
+.total-product {
+    color: #E5A558;
+}
+
+.low-stock {
+    color: #C95757;
+}
+
+.total-text {
+    color: #646464;
+    font-size: 20px;
+}
+
