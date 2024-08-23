@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.3.2</version>
+		<version>3.3.3</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.ezentwix</groupId>
@@ -81,12 +81,16 @@
 			<version>3.0.3</version>
 			<scope>test</scope>
 		</dependency>
-
+		<dependency>
+        	<groupId>org.springframework.boot</groupId>
+       		<artifactId>spring-boot-starter-webflux</artifactId>
+    	</dependency>
 		<dependency>
 			<groupId>org.bgee.log4jdbc-log4j2</groupId>
 			<artifactId>log4jdbc-log4j2-jdbc4.1</artifactId>
 			<version>1.16</version>
 		</dependency>
+		
 	</dependencies>
 
 	<build>
