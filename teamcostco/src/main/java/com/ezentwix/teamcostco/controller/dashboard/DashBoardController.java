@@ -15,8 +15,7 @@ public class DashBoardController {
 
     @GetMapping("/dashboard")
     public String showDashboard(Model model) {
-        // dashboard 페이지에서 사용할 데이터를 추가합니다
-        dashBoardService.configureDashboardData(model);
+        dashBoardService.configureModel(model);
         return "index";
     }
 }
