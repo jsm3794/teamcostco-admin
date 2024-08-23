@@ -24,11 +24,11 @@
 
 <body>
     <div class="container">
-        <div th:replace="common/navigationbar::nav"></div>
-        <div th:replace="common/header::header"></div>
+        <div th:replace="~{common/navigationbar::nav}"></div>
+        <div th:replace="~{common/header::header}"></div>
         <main>
             <h1 class="page-title" th:text="${pageTitle}"></h1>
-            <div th:replace="${uri}"></div>
+            <div th:replace="~{${uri}}"></div>
         </main>
     </div>
     <script th:src="@{/js/common/navigationbar.js}"></script>
