@@ -66,6 +66,29 @@ body {
     cursor: pointer;
 }
 
+/* 날짜 필터 적용 버튼*/
+#applyDateFilter, #applyFilterBtn {
+    background-color: rgb(251, 255, 255);
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 7px 10px;
+    cursor: pointer;
+    font-size: 0.875em; /* 폰트 크기 통일 */
+    margin-top: 10px;
+    margin-left: 100px;
+}
+
+/* 날짜 필터 적용 버튼*/
+#applyFilterBtn {
+    background-color: rgb(251, 255, 255);
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 7px 10px;
+    cursor: pointer;
+    font-size: 0.875em; /* 폰트 크기 통일 */
+    margin-left: 40px;
+}
+
 /* 날짜 및 필터 버튼 컨테이너 스타일 */
 .date-dropdown, .filter-dropdown {
     display: flex;

@@ -9,6 +9,17 @@ document.getElementById('searchInput').addEventListener('input', function() {
 });
 
 
+// 날짜 필터 적용 함수
+function applyDateFilter() {
+  // 내용 작성하기
+}
+
+// 필터 적용 함수
+function applyFilter() {
+   // 내용 작성하기
+}
+
+
 // 드롭다운 토글 함수
 function toggleDropdown(id) {
     var dropdowns = document.querySelectorAll('.dropdown-content');
