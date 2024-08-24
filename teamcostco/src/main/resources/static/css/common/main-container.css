@@ -9,7 +9,7 @@
 .main-content {
     grid-column: 2 / 3; /* 두 번째 열에 위치 */
     grid-row: 2 / 3; /* 두 번째 행에 위치 */
-    padding: 20px; /* 여백 설정 */
-    background-color: #fafafa; /* 배경색 설정 (원하는 색으로 변경 가능) */
-    overflow: auto; /* 스크롤이 필요할 경우 추가 */
+    padding: 20px; 
+    background-color: #fafafa; 
+    overflow: auto;
 }

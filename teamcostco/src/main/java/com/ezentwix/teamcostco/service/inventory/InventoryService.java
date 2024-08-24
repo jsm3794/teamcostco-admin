@@ -1,4 +1,4 @@
-package com.ezentwix.teamcostco.service.dashboard;
+package com.ezentwix.teamcostco.service.inventory;
 
 import java.util.List;
 
@@ -10,16 +10,16 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class DashBoardService implements PageMetadataProvider {
+public class InventoryService implements PageMetadataProvider {
 
     @Override
     public String getUri() {
-        return "dashboard/dashboard";
+        return "inventory/inventory";
     }
 
     @Override
     public String getPageTitle() {
-        return "대시보드";
+        return "인벤토리";
     }
 
     // 아래 두 메서드(getCssFiles, getJsFiles)는
@@ -27,12 +27,12 @@ public class DashBoardService implements PageMetadataProvider {
 
     @Override
     public List<String> getCssFiles() {
-        return List.of("/css/contents/dashboard.css");
+        return List.of("/css/contents/inventory.css");
     }
     
     @Override
     public List<String> getJsFiles() {
-        return null;
+        return List.of("/js/contents/inventory.js");
     }
 
 }

@@ -1,6 +1,5 @@
 package com.ezentwix.teamcostco.repository;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -12,18 +11,12 @@ import lombok.RequiredArgsConstructor;
 
 @Repository
 @RequiredArgsConstructor
-public class AuthRepository {
+public class EmployeeRepository {
     private final SqlSessionTemplate sql;
 
-    public EmployeeDTO login(String id, String pw) {
-        Map<String, String> params = new HashMap<>();
-        params.put("id", id);
-        params.put("pw", pw);
-
-        // SQL 쿼리 실행
-        EmployeeDTO emp = sql.selectOne("Employees.get", params);
-
-        return emp;
+    public EmployeeDTO getByIdAndPw(String id, String pw) {
+        Map<String, String> params = Map.of("id", id, "pw", pw);
+        return sql.selectOne("Employees.get", params);
     }
 
 }

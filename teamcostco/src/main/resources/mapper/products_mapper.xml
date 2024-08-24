@@ -9,8 +9,10 @@
             product_id, product_name, product_code, category_large,
             category_medium, category_small, category_detail, purchase_price,
             selling_price, brand, min_required_qty, storage_qty,
-            display_qty, create_date, update_date
+            display_qty, create_date, update_date, (display_qty + storage_qty) AS total_qty
         FROM
             products
+        ORDER BY 
+            product_id DESC
     </select>
 </mapper>
