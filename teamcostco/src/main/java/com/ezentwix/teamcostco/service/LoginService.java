@@ -1,8 +1,8 @@
-package com.ezentwix.teamcostco.service.login;
+package com.ezentwix.teamcostco.service;
 
 import org.springframework.stereotype.Service;
 
-import com.ezentwix.teamcostco.dto.EmployeeDTO;
+import com.ezentwix.teamcostco.dto.employee.EmployeeDTO;
 import com.ezentwix.teamcostco.repository.EmployeeRepository;
 
 import lombok.RequiredArgsConstructor;

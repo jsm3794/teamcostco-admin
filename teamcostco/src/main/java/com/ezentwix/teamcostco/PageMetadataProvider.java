@@ -1,4 +1,4 @@
-package com.ezentwix.teamcostco.service;
+package com.ezentwix.teamcostco;
 
 import java.util.List;
 

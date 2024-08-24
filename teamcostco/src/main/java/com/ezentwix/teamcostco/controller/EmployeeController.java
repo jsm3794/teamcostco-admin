@@ -1,10 +1,10 @@
-package com.ezentwix.teamcostco.controller.employee;
+package com.ezentwix.teamcostco.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import com.ezentwix.teamcostco.service.employee.EmployeeService;
+import com.ezentwix.teamcostco.service.EmployeeService;
 
 import lombok.RequiredArgsConstructor;
 

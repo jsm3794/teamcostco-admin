@@ -1,22 +1,19 @@
 package com.ezentwix.teamcostco.repository;
 
-import java.util.List;
-
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.ezentwix.teamcostco.dto.product.ProductDTO;
+import com.ezentwix.teamcostco.dto.category.CategoryDTO;
 
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Repository
-public class ProductRepository {
-    
+public class LargeCategoryRepository {
+
     private final SqlSessionTemplate sql;
 
-    public List<ProductDTO> getAll() {
-        return sql.selectList("Product.getAll");
+    public void saveLargeCategories(CategoryDTO categoryDTO) {
+        sql.insert("Category.savelargeCategory", categoryDTO);
     }
-
 }

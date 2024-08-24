@@ -5,7 +5,7 @@ import java.util.Map;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.ezentwix.teamcostco.dto.EmployeeDTO;
+import com.ezentwix.teamcostco.dto.employee.EmployeeDTO;
 
 import lombok.RequiredArgsConstructor;
 

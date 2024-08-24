@@ -3,7 +3,8 @@
 <configuration>
     <typeAliases>
        <!-- <typeAlias type="com.ezentwix.teamcostco.dto.TestDTO" alias="com.ezentwix.teamcostco.dto.TestDTO" />-->
-       <typeAlias type="com.ezentwix.teamcostco.dto.ProductDTO" alias="product" />
-       <typeAlias type="com.ezentwix.teamcostco.dto.EmployeeDTO" alias="emp" />
+       <typeAlias type="com.ezentwix.teamcostco.dto.product.ProductDTO" alias="product" />
+        <typeAlias type="com.ezentwix.teamcostco.dto.category.CategoryDTO" alias="category" />
+        <typeAlias type="com.ezentwix.teamcostco.dto.employee.EmployeeDTO" alias="emp" />
     </typeAliases>
 </configuration>

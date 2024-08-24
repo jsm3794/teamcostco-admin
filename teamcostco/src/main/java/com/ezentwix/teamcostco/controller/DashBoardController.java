@@ -1,10 +1,10 @@
-package com.ezentwix.teamcostco.controller.dashboard;
+package com.ezentwix.teamcostco.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import com.ezentwix.teamcostco.service.dashboard.DashBoardService;
+import com.ezentwix.teamcostco.service.DashBoardService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -18,4 +18,6 @@ public class DashBoardController {
         dashBoardService.configureModel(model);
         return "index";
     }
+
+    
 }

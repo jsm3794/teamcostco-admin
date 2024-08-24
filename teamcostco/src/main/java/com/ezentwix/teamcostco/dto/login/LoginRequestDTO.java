@@ -1,4 +1,4 @@
-package com.ezentwix.teamcostco.dto;
+package com.ezentwix.teamcostco.dto.login;
 
 import lombok.Data;
 

@@ -1,10 +1,10 @@
-package com.ezentwix.teamcostco.service.employee;
+package com.ezentwix.teamcostco.service;
 
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.ezentwix.teamcostco.service.PageMetadataProvider;
+import com.ezentwix.teamcostco.PageMetadataProvider;
 
 @Service
 public class EmployeeService implements PageMetadataProvider{

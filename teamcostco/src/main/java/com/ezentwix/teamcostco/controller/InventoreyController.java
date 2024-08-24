@@ -1,11 +1,11 @@
-package com.ezentwix.teamcostco.controller.inventory;
+package com.ezentwix.teamcostco.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import com.ezentwix.teamcostco.service.inventory.InventoryService;
-import com.ezentwix.teamcostco.service.product.ProductService;
+import com.ezentwix.teamcostco.service.InventoryService;
+import com.ezentwix.teamcostco.service.ProductService;
 
 import lombok.RequiredArgsConstructor;
 

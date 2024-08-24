@@ -1,10 +1,10 @@
-package com.ezentwix.teamcostco.service.inventory;
+package com.ezentwix.teamcostco.service;
 
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.ezentwix.teamcostco.service.PageMetadataProvider;
+import com.ezentwix.teamcostco.PageMetadataProvider;
 
 import lombok.RequiredArgsConstructor;
 

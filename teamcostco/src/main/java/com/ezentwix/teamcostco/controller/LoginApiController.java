@@ -1,4 +1,4 @@
-package com.ezentwix.teamcostco.controller.login;
+package com.ezentwix.teamcostco.controller;
 
 import java.util.Map;
 
@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ezentwix.teamcostco.dto.EmployeeDTO;
-import com.ezentwix.teamcostco.service.login.LoginService;
+import com.ezentwix.teamcostco.dto.employee.EmployeeDTO;
+import com.ezentwix.teamcostco.service.LoginService;
 
 import lombok.RequiredArgsConstructor;
 

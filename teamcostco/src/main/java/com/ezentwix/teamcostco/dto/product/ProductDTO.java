@@ -1,4 +1,4 @@
-package com.ezentwix.teamcostco.dto;
+package com.ezentwix.teamcostco.dto.product;
 
 import java.util.Date;
 
