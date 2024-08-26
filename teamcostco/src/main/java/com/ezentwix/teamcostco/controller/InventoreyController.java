@@ -1,6 +1,5 @@
 package com.ezentwix.teamcostco.controller;
 
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -41,13 +40,4 @@ public class InventoreyController {
         return productService.eachProductCount();
     }
 
-    // 상세 정보 페이지를 위한 매핑 추가
-    @GetMapping("/inventory/{productId}")
-    public String getProductDetails(@PathVariable Integer productId, Model model) {
-        ProductDTO product = productService.getProductById(productId);
-        model.addAttribute("product", product);
-        model.addAttribute("pageTitle", "상품 상세정보"); // 페이지 제목 설정
-        // 필요에 따라 다른 데이터도 추가 가능
-        return "inventory/detail";
-    }
 }

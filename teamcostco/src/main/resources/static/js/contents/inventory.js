@@ -124,5 +124,5 @@ $(document).ready(function() {
 
 // 세부 페이지로 리다이렉션하는 함수
 function redirectToDetailsPage(productId) {
-    window.location.href = '/inventory/' + productId; // Spring Boot에서 세부 페이지 URL 설정
+    window.location.href = '/detail/' + productId; // Spring Boot에서 세부 페이지 URL 설정
 }
