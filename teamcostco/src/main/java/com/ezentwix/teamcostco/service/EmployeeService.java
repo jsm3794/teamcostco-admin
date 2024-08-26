@@ -5,9 +5,19 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.ezentwix.teamcostco.PageMetadataProvider;
+import com.ezentwix.teamcostco.dto.employee.EmployeeDTO;
+import com.ezentwix.teamcostco.repository.EmployeeRepository;
+
+import lombok.RequiredArgsConstructor;
 
 @Service
+@RequiredArgsConstructor
 public class EmployeeService implements PageMetadataProvider{
+    private final EmployeeRepository employeeRepository;
+
+    public List<EmployeeDTO> getEmpList(){
+        return employeeRepository.getEmpList();
+    }
 
     @Override
     public String getUri() {
@@ -22,7 +32,7 @@ public class EmployeeService implements PageMetadataProvider{
     
     @Override
     public List<String> getCssFiles() {
-        return null;
+        return List.of("/css/contents/employee.css");
     }
     
     @Override

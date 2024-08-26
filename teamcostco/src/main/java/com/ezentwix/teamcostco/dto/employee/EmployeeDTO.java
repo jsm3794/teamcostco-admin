@@ -1,6 +1,6 @@
 package com.ezentwix.teamcostco.dto.employee;
 
-import java.security.Timestamp;
+import java.util.Date;
 
 import lombok.Data;
 
@@ -13,6 +13,6 @@ public class EmployeeDTO {
     private String login_id;
     private String login_pw;
     private String job_title;
-    private Timestamp hire_date;
-    private Timestamp join_date;
+    private Date hire_date;
+    private Date join_date;
 }
