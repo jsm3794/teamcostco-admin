@@ -2,7 +2,6 @@ package com.ezentwix.teamcostco.dto.product;
 
 import java.util.Date;
 
-
 import lombok.Data;
 
 @Data
