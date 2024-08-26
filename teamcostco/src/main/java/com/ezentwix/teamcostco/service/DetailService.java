@@ -26,6 +26,6 @@ public class DetailService implements PageMetadataProvider {
 
     @Override
     public List<String> getJsFiles() {
-        return List.of("/js/contents/inventory.js");
+        return List.of("/js/contents/detail.js");
     }
 }

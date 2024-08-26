@@ -1,15 +1,56 @@
 <div class="content-box">
-    <h1>Product Detail Page</h1>
-
-    <h3>상세정보 페이지</h3>
-    <div>
-        <p>Product Name: <span th:text="${product.product_name}"></span></p>
-        <p>Category: <span th:text="${product.category_large}"></span></p>
-        <p>Product Code: <span th:text="${product.product_code}"></span></p>
-        <p>Purchase Price: <span th:text="${product.purchase_price}"></span></p>
-        <p>Selling Price: <span th:text="${product.selling_price}"></span></p>
-        <p>Brand: <span th:text="${product.brand}"></span></p>
-        <p>Total Quantity: <span th:text="${product.total_qty}"></span></p>
-        <p>Last Updated: <span th:text="${#dates.format(product.update_date, 'yyyy-MM-dd')}"></span></p>
+    <div class="container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Product Name</th>
+                    <td class="editable"><span th:text="${product.product_name}"></span></td>
+                    <th>Product Code</th>
+                    <td><span th:text="${product.product_code}"></span></td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th>Category Large</th>
+                    <td class="editable"><span th:text="${product.category_large}"></span></td>
+                    <th>Category Medium</th>
+                    <td class="editable"><span th:text="${product.category_medium}"></span></td>
+                </tr>
+                <tr>
+                    <th>Category Small</th>
+                    <td class="editable"><span th:text="${product.category_small}"></span></td>
+                    <th>Category Detail</th>
+                    <td class="editable"><span th:text="${product.category_detail}"></span></td>
+                </tr>
+                <tr>
+                    <th>Purchase price</th>
+                    <td class="editable"><span th:text="${product.purchase_price}"></span></td>
+                    <th>Selling Price</th>
+                    <td class="editable"><span th:text="${product.selling_price}"></span></td>
+                </tr>
+                <tr>
+                    <th>Brand</th>
+                    <td class="editable"><span th:text="${product.brand}"></span></td>
+                    <th>Min Required Qty</th>
+                    <td><span th:text="${product.min_required_qty}"></span></td>
+                </tr>
+                <tr>
+                    <th>Display Qty</th>
+                    <td><span th:text="${product.display_qty}"></span></td>
+                    <th>Storage Qty</th>
+                    <td><span th:text="${product.storage_qty}"></span></td>
+                </tr>
+                <tr>
+                    <th>Create Date</th>
+                    <td><span th:text="${#dates.format(product.create_date, 'yyyy-MM-dd')}"></span></td>
+                    <th>Update Date</th>
+                    <td><span th:text="${#dates.format(product.update_date, 'yyyy-MM-dd')}"></span></td>
+                </tr>
+            </tbody>
+        </table>
     </div>
+    
+    <button class="modi-btn" onclick="toggleEditMode()">정보 수정하기</button>
+
+    <button class="save-btn" onclick="saveChanges()" style="display:none;">저장하기</button>
 </div>
