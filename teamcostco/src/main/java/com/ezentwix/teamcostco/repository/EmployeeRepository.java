@@ -23,4 +23,8 @@ public class EmployeeRepository {
     public List<EmployeeDTO> getEmpList(){
         return sql.selectList("Employees.getEmpList");
     }
+
+    public EmployeeDTO getEmp(Integer emp_id){
+        return sql.selectOne("Employees.getEmp", emp_id);
+    }
 }

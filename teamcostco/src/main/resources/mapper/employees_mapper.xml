@@ -18,4 +18,15 @@
         emp_id DESC
   </select>
 
+  <select id="getEmp" parameterType="Integer" resultType="emp">
+    SELECT
+      emp_id, emp_name, emp_email, phone_number, job_title, hire_date, join_date
+    FROM
+      employees
+    WHERE
+      emp_id = #{emp_id}
+    ORDER BY
+      emp_id DESC
+  </select>
+
 </mapper>
