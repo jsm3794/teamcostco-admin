@@ -1,21 +1,25 @@
 :root {
-    --background-sub-color: rgb(245, 245, 255);
     --background-color: #FFFFFF;
+    --background-sub-color: #f5f5ff;
     --text-color: #000000;
-    --border-line: 1px solid rgb(225, 225, 245);
+    --border-line: 1px solid #e1e1f5;
+    --table-th-background-color: #eee;
+    --table-shadow: 0 0 1px 1px #e1e1f5;
 }
 
 [data-theme='dark'] {
-    --background-sub-color: rgb(40, 40, 40);
-    --background-color: rgb(20, 20, 20);
+    --background-sub-color: #282828;
+    --background-color: #141414;
     --text-color: #FFFFFF;
-    --border-line: 1px solid rgb(70, 70, 70);
+    --border-line: 1px solid #464646;
+    --table-th-background-color: #333;
+    --table-shadow: 0 0 1px 1px #464646;
 }
 
 #theme-toggle {
     background-color: var(--background-color);
     color: var(--text-color);
-    border:none;
+    border: none;
     border-top: var(--border-line);
     width: 199px;
     height: 30px;

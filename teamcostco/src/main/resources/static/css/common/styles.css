@@ -1,3 +1,26 @@
+@font-face {
+    font-family: 'Material Symbols Outlined';
+    font-style: normal;
+    font-weight: 200;
+    src: url('/fonts/Material_Symbols_Outlined.woff2') format('woff2');
+  }
+  
+  .material-symbols-outlined {
+    font-family: 'Material Symbols Outlined';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -webkit-font-feature-settings: 'liga';
+    -webkit-font-smoothing: antialiased;
+  }
+
 * {
     box-sizing: border-box;
     font-family: 'Malgun Gothic', sans-serif;
@@ -34,8 +57,28 @@ main {
 
 .content-box {
     display: inline-block;
-    padding: 10px;
+    padding: 15px;
     border-radius: 5px;
     background-color: var(--background-color);
     border: var(--border-line);
+}
+
+table {
+    width: 100px;
+    height: 100px;
+    border-collapse: collapse;
+    border-radius: 3px;
+    border-style: hidden;
+    box-shadow: var(--table-shadow);
+    overflow: hidden;
+}
+
+table tbody>tr>td {
+    border: var(--border-line) !important;
+    background-color: var(--table-td-background-color) !important;
+}
+
+table thead th {
+    background-color: var(--table-th-background-color) !important;
+    border: var(--border-line) !important;
 }
