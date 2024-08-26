@@ -18,7 +18,8 @@
                     재고
                 </button>
             </li>
-            <li><button type="button" class="nav-item" data-target="#productorder">
+            <li><button type="button" class="nav-item" th:classappend="${rootName == 'productorder' ? ' active' : ''}"
+                    data-target="#productorder">
                     <span class="material-symbols-outlined">share_location</span>
                     상품발주
                 </button>
@@ -33,7 +34,8 @@
                     실시간 분석
                 </button>
             </li> -->
-            <li><button type="button" class="nav-item" data-target="#employee">
+            <li><button type="button" class="nav-item" th:classappend="${rootName == 'employee' ? ' active' : ''}"
+                    data-target="#employee">
                     <span class="material-symbols-outlined">person</span>
                     직원관리
                 </button>

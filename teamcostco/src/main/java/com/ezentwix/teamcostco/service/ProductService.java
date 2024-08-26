@@ -35,4 +35,9 @@ public class ProductService {
         productSummary.setLowProducts(productRepository.getLowProducts());
         return productSummary;
     }
+
+     // 제품 ID로 제품을 가져오는 메서드 추가
+     public ProductDTO getProductById(Integer productId) {
+        return productRepository.findById(productId);
+    }
 }

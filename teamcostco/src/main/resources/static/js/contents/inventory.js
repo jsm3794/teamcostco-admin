@@ -121,10 +121,8 @@ $(document).ready(function() {
         $('#nextBtn').attr('disabled', true);
     }
 });
-/*
-아직 구현 안됨
+
 // 세부 페이지로 리다이렉션하는 함수
 function redirectToDetailsPage(productId) {
-    window.location.href = '/products/' + productId; // Spring Boot에서 세부 페이지 URL 설정
+    window.location.href = '/inventory/' + productId; // Spring Boot에서 세부 페이지 URL 설정
 }
-*/ (편집됨) 

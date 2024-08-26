@@ -69,4 +69,7 @@
             min_required_qty > display_qty + storage_qty
         ]]>
     </select>
+     <select id="findById" parameterType="Integer" resultType="product">
+        SELECT * FROM products WHERE product_id = #{productId}
+    </select>
 </mapper>

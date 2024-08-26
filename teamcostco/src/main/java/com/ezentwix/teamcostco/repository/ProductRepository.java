@@ -13,7 +13,7 @@ public class ProductRepository {
     public List<ProductDTO> getAll() {
         return sql.selectList("Product.getAll");
     }
-    //
+    
     public List<ProductDTO> findAllProducts(int start, int end) {
         Map<String, Integer> params = new HashMap<>();
         params.put("start", start);
@@ -28,5 +28,10 @@ public class ProductRepository {
     }
     public Integer getLowProducts() {
         return sql.selectOne("Product.getLowProducts");
+    }
+
+     // 제품 ID로 제품을 가져오는 메서드 추가
+     public ProductDTO findById(Integer productId) {
+        return sql.selectOne("Product.findById", productId);
     }
 }

@@ -1,0 +1,15 @@
+<div class="content-box">
+    <h1>Product Detail Page</h1>
+
+    <h3>상세정보 페이지</h3>
+    <div>
+        <p>Product Name: <span th:text="${product.product_name}"></span></p>
+        <p>Category: <span th:text="${product.category_large}"></span></p>
+        <p>Product Code: <span th:text="${product.product_code}"></span></p>
+        <p>Purchase Price: <span th:text="${product.purchase_price}"></span></p>
+        <p>Selling Price: <span th:text="${product.selling_price}"></span></p>
+        <p>Brand: <span th:text="${product.brand}"></span></p>
+        <p>Total Quantity: <span th:text="${product.total_qty}"></span></p>
+        <p>Last Updated: <span th:text="${#dates.format(product.update_date, 'yyyy-MM-dd')}"></span></p>
+    </div>
+</div>
