@@ -27,11 +27,11 @@
 <div class="content-box">
     <div id="serachTitle">Inventory items</div>
     <div class="search-buttons-container">
-        <input id="searchInput" type="text" placeholder=":돋보기: Search" >
+        <input id="searchInput" type="text" placeholder="&#x1F50E Search" >
         <button id="searchBtn">검색</button>
         <div class="dropdown date-dropdown">
             <button class="dropdown-btn" onclick="toggleDropdown('dateDropdown')">
-                <span class="icon">:날짜:</span> Date
+                <span class="icon">&#x1F4C5</span> Date
             </button>
             <div id="dateDropdown" class="dropdown-content calendar-dropdown">
                 <label for="startDate">시작 날짜:</label>
@@ -43,7 +43,7 @@
         </div>
         <div class="dropdown filter-dropdown">
             <button class="dropdown-btn" onclick="toggleDropdown('filterDropdown')">
-                <span class="icon">:돋보기:</span> Filter
+                <span class="icon">&#x1F50E</span> Filter
             </button>
             <div id="filterDropdown" class="dropdown-content">
                 <label><input type="checkbox" name="filter" value="Option 1"> 대분류</label>
@@ -90,5 +90,14 @@
     <div class="pagination">
         <button id="prevBtn" class="nav-btn">Previous</button>
         <button id="nextBtn" class="nav-btn">Next</button>
-        <div id="page">Page {현재 페이지} of {마지막 페이지}</div>
+        <div id="page" th:data-page="${currentPage}" th:data-totalPages="${totalPages}" th:text="|${currentPage + 1} of ${totalPages}|"></div>
     </div>
+
+
+
+
+
+
+
+
+
