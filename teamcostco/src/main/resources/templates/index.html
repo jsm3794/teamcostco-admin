@@ -8,6 +8,7 @@
     <link rel="stylesheet" th:href="@{/css/common/styles.css}">
     <link rel="stylesheet" th:href="@{/css/common/header.css}">
     <link rel="stylesheet" th:href="@{/css/common/navigationbar.css}">
+    <link rel="stylesheet" th:href="@{/css/common/theme.css}">
     <!--<link rel="stylesheet" th:href="@{/css/common/fonts.css}">-->
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -33,6 +34,7 @@
     </div>
     <script th:src="@{/js/common/navigationbar.js}"></script>
     <script th:src="@{/js/common/header.js}"></script>
+    <script th:src="@{/js/common/theme.js}"></script>
     <th:block th:if="${jsFiles != null}">
         <th:block th:each="jsFile : ${jsFiles}">
             <script th:src="@{${jsFile}}"></script>

@@ -1,0 +1,25 @@
+:root {
+    --background-sub-color: rgb(245, 245, 255);
+    --background-color: #FFFFFF;
+    --text-color: #000000;
+    --border-line: 1px solid rgb(225, 225, 245);
+}
+
+[data-theme='dark'] {
+    --background-sub-color: rgb(40, 40, 40);
+    --background-color: rgb(20, 20, 20);
+    --text-color: #FFFFFF;
+    --border-line: 1px solid rgb(70, 70, 70);
+}
+
+#theme-toggle {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    border:none;
+    border-top: var(--border-line);
+    width: 199px;
+    height: 30px;
+    padding-left: 15px;
+    text-align: center;
+    cursor: pointer;
+}

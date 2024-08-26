@@ -1,6 +1,7 @@
 * {
     box-sizing: border-box;
     font-family: 'Malgun Gothic', sans-serif;
+    color: var(--text-color);
 }
 
 html,
@@ -8,7 +9,7 @@ body {
     height: 100%;
     padding: 0;
     margin: 0;
-    background-color: rgb(244, 245, 250);
+    background-color: var(--background-sub-color);
 }
 
 .container {
@@ -35,6 +36,6 @@ main {
     display: inline-block;
     padding: 10px;
     border-radius: 5px;
-    background-color: white;
-    border: 1px solid rgb(225, 225, 235);
+    background-color: var(--background-color);
+    border: var(--border-line);
 }

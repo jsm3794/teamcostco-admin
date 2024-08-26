@@ -11,8 +11,8 @@
     flex-direction: column;
     width: 200px;
     height: 100%;
-    background-color: #fff;
-    border-right: 1px solid rgb(225, 225, 245);
+    background-color: var(--background-color);
+    border-right: var(--border-line);
 }
 
 .aside-bar ul {
@@ -29,7 +29,6 @@
 .aside-bar ul > li button {
     background: transparent;
     border: none;
-    color: black;
     display: flex;
     align-items: center;
     justify-content: left;
@@ -51,8 +50,8 @@
 }
 
 .aside-container {
-
-    background-color: white;
+    height: 100%;
+    background-color: var(--background-color);
 }
 .material-symbols-outlined {
     margin-right: 10px;
