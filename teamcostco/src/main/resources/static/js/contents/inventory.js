@@ -45,25 +45,31 @@ function selectAllRows() {
     });
 }
 
-const categoryCount = $("#categoryCount");
-const totalQtySum = $("#totalQtySum");
-const lowStockCount = $("#lowStockCount");
-
-const fetchProductSummary = () => {
-    $.ajax({
-        url: '/productsummary',
-        type: 'GET',
-        dataType: 'json',
-        success: function (data) {
-            categoryCount.text(data.totalCategories);
-            totalQtySum.text(data.totalProductsQty);
-            lowStockCount.text(data.lowProducts);
-        },
-        error: function (error) {
-            console.error('Error fetching product summary:', error);
-        }
-    });
+window.initializePage = function() {
+    if (window.location.pathname === '/inventory') {
+        initializeInventory();
+    }
+    // 다른 페이지에 대한 초기화 로직도 여기에 추가할 수 있습니다.
 };
+
+function initializeInventory() {
+    fetchProductSummary();
+    // 기타 인벤토리 페이지 초기화 로직
+}
+
+function fetchProductSummary() {
+    fetch('/productsummary')
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById("categoryCount").textContent = data.totalCategories;
+            document.getElementById("totalQtySum").textContent = data.totalProductsQty;
+            document.getElementById("lowStockCount").textContent = data.lowProducts;
+        })
+        .catch(error => console.error('Error fetching product summary:', error));
+}
+
+// 10분마다 데이터 갱신
+setInterval(fetchProductSummary, 600000);
 
 // 개수 표시 div 클릭시 상세창
 $(".info-box").click((e) => {

@@ -3,48 +3,55 @@ document.addEventListener('DOMContentLoaded', () => {
     const headerTitle = document.getElementById('header-title');
     const current_page = document.getElementById("current-page");
 
+    function handleNavigation(e) {
+        e.preventDefault();
+
+        let target = this.getAttribute('data-target');
+        if (target.startsWith('#')) {
+            target = target.slice(1);
+        }
+
+        let newUrl = `/${target}`;
+
+        // 항상 페이지를 새로고침하여 리다이렉트
+        window.location.href = newUrl;
+    }
+
     navItems.forEach(item => {
-        item.addEventListener('click', function(e) {
-            e.preventDefault();
-
-            let target = this.getAttribute('data-target');
-            if (target.startsWith('#')) {
-                target = target.slice(1);
-            }
-
-            let newUrl = `/${target}`;
-
-            // 현재 페이지와 새 페이지가 동일한 경우 리다이렉트 발생
-            if (window.location.pathname === newUrl) {
-                location.href = newUrl;
-                return;
-            }
-
-            // 네비게이션 업데이트
-            navItems.forEach(navItem => navItem.classList.remove('active'));
-            this.classList.add('active');
-
-            // headerTitle이 존재하는 경우에만 textContent를 설정
-            if (headerTitle) {
-                headerTitle.textContent = target.charAt(0).toUpperCase() + target.slice(1);
-            }
-
-            // 현재 페이지 텍스트 업데이트
-            if (current_page) {
-                current_page.innerText = target;
-            }
-
-            // 페이지 로딩
-            if (window.location.pathname.includes('/detail') || window.location.pathname !== '/') {
-                window.history.pushState({}, '', newUrl);
-                loadContent(newUrl);
-            } else {
-                location.href = newUrl;
-            }
-
-
-        });
+        item.addEventListener('click', handleNavigation);
     });
+
+    // 초기 페이지 로드 시 현재 페이지에 맞는 네비게이션 항목 활성화
+    updateActiveNavItem();
+});
+
+function updateActiveNavItem() {
+    const currentPath = window.location.pathname.split('/')[1] || 'dashboard';
+    const navItems = document.querySelectorAll('.nav-item');
+    const headerTitle = document.getElementById('header-title');
+    const current_page = document.getElementById("current-page");
+
+    navItems.forEach(item => {
+        const itemTarget = item.getAttribute('data-target').replace('#', '');
+        if (itemTarget === currentPath) {
+            item.classList.add('active');
+            if (headerTitle) {
+                headerTitle.textContent = itemTarget.charAt(0).toUpperCase() + itemTarget.slice(1);
+            }
+            if (current_page) {
+                current_page.innerText = itemTarget;
+            }
+        } else {
+            item.classList.remove('active');
+        }
+    });
+}
+
+window.addEventListener('load', () => {
+    updateActiveNavItem();
+    if (typeof window.initializePage === 'function') {
+        window.initializePage();
+    }
 });
 
 
@@ -62,8 +69,6 @@ function loadContent(url) {
             // CSS 파일 업데이트
             updateCSSFiles(doc);
 
-            
-
         })
         .catch(error => console.error('Error:', error));
 }
@@ -79,15 +84,5 @@ function updateCSSFiles(newDocument) {
         newLink.href = link.href;
         newLink.setAttribute('data-dynamic', 'true');
         document.head.appendChild(newLink);
-    });
-}
-
-function initializeInfoBoxes() {
-
-    const infoBoxes = document.querySelectorAll('.info-box');
-    infoBoxes.forEach(box => {
-        console.log('Info-box initialized:', box);
-
-
     });
 }
