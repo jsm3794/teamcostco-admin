@@ -42,6 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+
 function loadContent(url) {
     fetch(url)
         .then(response => response.text())
@@ -54,4 +55,39 @@ function loadContent(url) {
             }
         })
         .catch(error => console.error('Error:', error));
+}
+
+
+function loadContent(url) {
+    fetch(url)
+        .then(response => response.text())
+        .then(html => {
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(html, 'text/html');
+            const mainContent = doc.querySelector('main');
+            if (mainContent) {
+                document.querySelector('main').innerHTML = mainContent.innerHTML;
+            }
+            
+            // CSS 파일 업데이트
+            updateCSSFiles(doc);
+        })
+        .catch(error => console.error('Error:', error));
+}
+
+
+function updateCSSFiles(newDocument) {
+    // 기존 동적 CSS 파일 제거
+    const existingDynamicLinks = document.querySelectorAll('link[data-dynamic="true"]');
+    existingDynamicLinks.forEach(link => link.remove());
+
+    // 새 CSS 파일 추가
+    const newCSSLinks = newDocument.querySelectorAll('link[rel="stylesheet"]:not([href^="/css/common/"])');
+    newCSSLinks.forEach(link => {
+        const newLink = document.createElement('link');
+        newLink.rel = 'stylesheet';
+        newLink.href = link.href;
+        newLink.setAttribute('data-dynamic', 'true');
+        document.head.appendChild(newLink);
+    });
 }
