@@ -44,33 +44,11 @@ function selectAllRows() {
         checkbox.checked = selectAllCheckbox.checked;
     });
 }
-// document.addEventListener("DOMContentLoaded", function() {
-//     var rows = document.querySelectorAll('.table tbody tr');
-//     var totalQtySum = 0;
-//     var lowStockCount = 0;
-//     var headerCells = document.querySelectorAll('.table thead th');
-//     var columnCount = headerCells.length + 1;
-//     rows.forEach(function(row) {
-//         var totalQtyCell = row.querySelector('td:nth-child(8)'); // **** nth-child
-//         if (totalQtyCell) {
-//             var totalQty = parseInt(totalQtyCell.innerText.trim());
-//             // total_qty 합계 계산
-//             if (!isNaN(totalQty)) {
-//                 totalQtySum += totalQty;
-//                 if (totalQty <= 50) {
-//                     lowStockCount++;
-//                 }
-//             }
-//         }
-//     });
-//     // 계산된 값을 페이지에 표시
-//     document.getElementById('categoryCount').innerText = columnCount; // 열의 개수를 표시
-//     document.getElementById('totalQtySum').innerText = totalQtySum; // total_qty의 합계를 표시
-//     document.getElementById('lowStockCount').innerText = lowStockCount; // 50개 이하 품목의 개수를 표시
-// });
+
 const categoryCount = $("#categoryCount");
 const totalQtySum = $("#totalQtySum");
 const lowStockCount = $("#lowStockCount");
+
 const fetchProductSummary = () => {
     $.ajax({
         url: '/productsummary',
@@ -86,6 +64,7 @@ const fetchProductSummary = () => {
         }
     });
 };
+
 // 개수 표시 div 클릭시 상세창
 $(".info-box").click((e) => {
     console.log("상세보기창 만들수도");
