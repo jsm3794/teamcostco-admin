@@ -108,16 +108,16 @@ $(document).ready(function() {
     });
     // 다음 버튼 클릭 핸들러
     $('#nextBtn').click(function() {
-        if (currentPage < totalPages - 1) { // 현재 페이지가 마지막 페이지가 아닐 경우에만 이동
+        if (currentPage < totalPages) { // 현재 페이지가 마지막 페이지가 아닐 경우에만 이동
             location.href = '/inventory?page=' + (currentPage + 1);
         }
     });
     // 첫 페이지일 경우 이전 버튼 비활성화
-    if (currentPage === 0) {
+    if (currentPage === 1) {
         $('#prevBtn').attr('disabled', true);
     }
     // 마지막 페이지일 경우 다음 버튼 비활성화
-    if (currentPage === totalPages - 1) {
+    if (currentPage === totalPages) {
         $('#nextBtn').attr('disabled', true);
     }
 });

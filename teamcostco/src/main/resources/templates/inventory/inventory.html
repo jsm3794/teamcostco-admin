@@ -69,7 +69,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr th:each="product : ${products}" th:onclick="'redirectToDetailsPage(' + ${product.product_id} + ')'">
+            <tr th:each="product : ${items}" th:onclick="'redirectToDetailsPage(' + ${product.product_id} + ')'">
                 <td><input type="checkbox" class="row-checkbox"></td>
                 <td>
                     <div class="product-name-container">
@@ -90,7 +90,7 @@
     <div class="pagination">
         <button id="prevBtn" class="nav-btn">Previous</button>
         <button id="nextBtn" class="nav-btn">Next</button>
-        <div id="page" th:data-page="${currentPage}" th:data-totalPages="${totalPages}" th:text="|${currentPage + 1} of ${totalPages}|"></div>
+        <div id="page" th:data-page="${currentPage}" th:data-totalPages="${totalPages}" th:text="|${currentPage} of ${totalPages}|"></div>
     </div>
 
 
