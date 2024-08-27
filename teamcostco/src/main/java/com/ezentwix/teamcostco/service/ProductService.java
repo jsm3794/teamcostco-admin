@@ -6,28 +6,31 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import com.ezentwix.teamcostco.dto.product.ProductDTO;
 import com.ezentwix.teamcostco.dto.product.ProductSummaryDTO;
+import com.ezentwix.teamcostco.pagination.PagingModule;
+import com.ezentwix.teamcostco.pagination.PagingRepositoryInterface;
 import com.ezentwix.teamcostco.repository.ProductRepository;
 
 import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @Service
-public class ProductService {
+public class ProductService extends PagingModule<ProductDTO> {
     private final ProductRepository productRepository;
+
+    // 페이징 관련
+    @Override
+    protected PagingRepositoryInterface<ProductDTO> getPagingRepository() {
+        return productRepository;
+    }
+    
     public List<ProductDTO> list() {
         return productRepository.getAll();
     }
-    //
-    public Page<ProductDTO> getPagedProducts(int page, int size) {
-        int start = page * size;
-        int end = start + size;
-        List<ProductDTO> products = productRepository.findAllProducts(start, end);
-        int total = productRepository.getTotalProductsQty();
-        Pageable pageable = PageRequest.of(page, size);
-        return new PageImpl<>(products, pageable, total);
-    }
+
+
     public ProductSummaryDTO eachProductCount() {
         ProductSummaryDTO productSummary = new ProductSummaryDTO();
         productSummary.setTotalCategories(productRepository.getTotalCategories());
@@ -40,4 +43,5 @@ public class ProductService {
      public ProductDTO getProductById(Integer productId) {
         return productRepository.findById(productId);
     }
+    
 }

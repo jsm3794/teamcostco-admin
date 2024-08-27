@@ -23,7 +23,7 @@ public abstract class PagingModule<T> {
         int start = (page - 1) * size + 1;
         int end = page * size;
 
-        // 공통된 페이징 쿼리 실행 (데이터가 List<Map<String,Object>>로 나옵니다)
+        // 공통된 페이징 쿼리 실행 
         List<T> items = getPagingRepository().findTableItems(start, end);
 
         // 총 개수 조회
@@ -50,7 +50,7 @@ public abstract class PagingModule<T> {
 
         // Model에 현재 페이지 번호를 추가 (0부터 시작합니다)
         // 현재 페이지를 표시하거나 페이지 네비게이션에서 활성화된 페이지를 보여줄 때 사용됩니다.
-        model.addAttribute("currentPage", productPage.getNumber());
+        model.addAttribute("currentPage", productPage.getNumber() + 1);
 
         // Model에 총 페이지 수를 추가
         // 페이지 네비게이션을 만들 때 총 페이지 수가 필요할 수 있습니다.

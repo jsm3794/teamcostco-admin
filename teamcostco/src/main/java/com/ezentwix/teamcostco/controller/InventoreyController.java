@@ -21,16 +21,11 @@ public class InventoreyController {
     private final ProductService productService;
 
     @GetMapping("/inventory")
-    public String showInventory(@RequestParam(value = "page", defaultValue = "0") int page,
+    public String showInventory(@RequestParam(value = "page", defaultValue = "1") int page,
             @RequestParam(value = "size", defaultValue = "3") int size,
             Model model) {
         inventoryService.configureModel(model);
-        // model.addAttribute("products", productService.list());
-        Page<ProductDTO> productPage = productService.getPagedProducts(page, size);
-        model.addAttribute("products", productPage.getContent());
-        model.addAttribute("totalPages", productPage.getTotalPages());
-        model.addAttribute("currentPage", productPage.getNumber());
-        model.addAttribute("totalItems", productPage.getTotalElements());
+        productService.configurePagingModel(model, page, size);
         return "index";
     }
 
