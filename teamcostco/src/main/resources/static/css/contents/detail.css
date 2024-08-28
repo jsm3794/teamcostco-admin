@@ -1,111 +1,59 @@
-/* 기본 컨테이너 스타일 */
-.container {
-    background-color: #fff;
-    border-radius: 8px;
-    /* box-shadow: 0 4px 10px rgba(53, 50, 50, 0.1);  */
-    overflow: hidden;
-    /* 자식 요소가 넘칠 경우 숨김 */
-}
-
-/* 테이블 스타일 */
-table {
+.content-box {
     width: 100%;
-    border-collapse: collapse;
-    /* 테두리 겹침 제거 */
 }
 
 /* 테이블 헤더 및 셀 스타일 */
 th,
 td {
-    padding: 12px;
-    border: 1px solid #c0c0c0;
     text-align: center;
-    font-size: 13px;
-    vertical-align: middle;
-    /* 세로 정렬을 중앙으로 설정 */
+    height: 50px;
+    padding: 20px;
 }
 
-/* 테이블 헤더 스타일 */
 th {
-    background-color: #7ba08f;
-    color: white;
-    width: 150px;
+    background-color: var(--table-th-background-color);
 }
 
-/* 일반 셀 스타일 */
-td {
-    transition: background-color 0.3s ease, border 0.3s ease;
-    /* 배경색 및 테두리 전환 효과 */
-    width: 400px;
+table tbody tr:hover {
+    background-color: transparent !important;
 }
 
-/* 변경된 셀의 배경색 */
-td.changed {
-    background-color: #d4edda;
-}
-
-/* 입력 박스 스타일 */
-input[type="text"],
-input[type="number"] {
+input {
+    width: 100%;
+    height: 100%;
     border: none;
-    /* 테두리 제거 */
-    padding: 8px;
-    /* 패딩을 조정하여 셀 높이와 맞추기 */
-    box-sizing: border-box;
-    /* 패딩과 테두리가 박스 크기에 포함되도록 설정 */
-    font-size: 13px;
-    /* 폰트 크기 조정 */
-    line-height: 1.5;
-    /* 입력 박스의 줄 높이 조정 */
-}
-
-/* 수정 가능한 입력 박스 스타일 */
-input.editable {
-    background-color: #ffffff;
-    /* 배경색 설정 */
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-/* 수정 불가능한 입력 박스 스타일 */
-input.readonly {
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    cursor: not-allowed;
-    /* 커서 모양 변경 */
-    color: #5a5d5f;
-    /* 텍스트 색상 변경 */
-}
-
-/* 버튼 스타일 */
-.modi-btn,
-.save-btn {
-    background-color: white;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 10px 15px;
-    cursor: pointer;
-    margin-top: 10px;
-    transition: background-color 0.3s ease;
-    /* 배경색 전환 효과 */
-}
-
-/* 저장 버튼 위치 조정 */
-.save-btn {
-    margin-left: 90%;
-    margin-bottom: 10px;
+    outline: none;
 }
 
 /* 날짜 필드 스타일 */
 .date-field {
-    display: inline-block;
-    padding: 8px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    background-color: #ffffff;
+    display: flex;
+    align-items: center;
+    border: none;
     color: #5a5d5f;
     text-align: left;
     font-size: 13px;
-    line-height: 1.5;
-    width: 160px;
+    width: 100%;
+    height: 100%;
+    padding-left:3px;
+}
+
+/* 변경된 셀의 배경색 */
+td.changed {
+    color: red !important;
+}
+
+.btn-area{
+    display:flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+/* 버튼 스타일 */
+.modi-btn,
+.save-btn {
+    width: 150px;
+    padding: 10px 15px;
+    cursor: pointer;
+    margin-top: 10px;
+    margin-left: auto;
 }

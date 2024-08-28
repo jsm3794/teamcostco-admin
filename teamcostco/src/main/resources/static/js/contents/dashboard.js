@@ -1,6 +1,7 @@
 // 박스 1 차트
 const chart1 = document.getElementById('chart1').getContext('2d');
-const mychart1 = new Chart(chart1, {
+
+const myChart1 = new Chart(chart1, {
     type: 'line',
     data: {
         labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
@@ -27,6 +28,7 @@ const mychart1 = new Chart(chart1, {
         }]
     },
     options: {
+        maintainAspectRatio: false,
         scales: {
             y: {
                 beginAtZero: true
@@ -107,12 +109,6 @@ const myChart2 = new Chart(chart2, {
         }]
     },
     options: {
-        responsive: false,
-        plugins: {
-            legend: {
-                position: 'right'  // 라벨을 오른쪽에 배치
-            }
-        },
         scales: {
             y: {
                 beginAtZero: true
@@ -125,7 +121,7 @@ const myChart2 = new Chart(chart2, {
 
 // 박스 3 차트
 const chart3 = document.getElementById('chart3').getContext('2d');
-const mychart3 = new Chart(chart3, {
+const myChart3 = new Chart(chart3, {
     type: 'bar',
     data: {
         labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple'],
@@ -208,6 +204,7 @@ const mychart3 = new Chart(chart3, {
         ]
     },
     options: {
+        maintainAspectRatio: false,
         scales: {
             y: {
                 beginAtZero: true
@@ -245,7 +242,7 @@ const myChart4 = new Chart(chart4, {
         }]
     },
     options: {
-        indexAxis: 'y',
+        indexAxis:'y',
         scales: {
             x: {
                 beginAtZero: true

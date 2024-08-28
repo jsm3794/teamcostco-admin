@@ -2,76 +2,45 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="Product">
-    <select id="getAll" resultType="product">
+
+<mapper namespace="Products">
+
+    <sql id="getAll">
         SELECT
             product_id, product_name, product_code, category_large,
             category_medium, category_small, category_detail, purchase_price,
             selling_price, brand, min_required_qty, storage_qty,
             display_qty, create_date, update_date, (display_qty + storage_qty) AS total_qty
-        FROM
-            products
-        ORDER BY
-            product_id DESC
-    </select>
-    <!---->
-    <select id="findAllProducts" parameterType="java.util.HashMap" resultType="product">
-    SELECT
-        *
-    FROM
-        (
-            SELECT
-                a.*,
-                ROWNUM rnum
-            FROM
-                (
-                    SELECT
-                        product_id, product_name, product_code, category_large,
-                        category_medium, category_small, category_detail, purchase_price,
-                        selling_price, brand, min_required_qty, storage_qty,
-                        display_qty, create_date, update_date,
-                        ( display_qty + storage_qty ) AS total_qty
-                    FROM
-                        products
-                    ORDER BY
-                        product_id DESC
-                ) a
-         WHERE
-                <![CDATA[ROWNUM <= #{end}]]>
-        )
-    WHERE
-        <![CDATA[rnum > #{start}]]>
-    </select>
-    <select id="getTotalCategories" resultType="Integer">
-        SELECT
-            COUNT(*) AS total_categories
+        FROM products
+        ORDER BY product_id DESC
+    </sql>
+
+    <sql id="findById">
+        SELECT * FROM products WHERE product_id = #{productId}
+    </sql>
+
+    <sql id="getLowProducts">
+        SELECT COUNT(*) AS low_products
+        FROM products
+        WHERE min_required_qty <![CDATA[>]]> display_qty + storage_qty
+    </sql>
+
+    <sql id="getTotalProductsQty">
+        SELECT COUNT(*) AS total_products_qty
+        FROM products
+    </sql>
+
+    <sql id="getTotalCategories">
+        SELECT COUNT(*) AS total_categories
         FROM (
             SELECT DISTINCT
                 category_large, category_medium,
                 category_small, category_detail
-            FROM
-                products
+            FROM products
         )
-    </select>
-    <select id="getTotalProductsQty" resultType="Integer">
-       SELECT 
-            SUM(display_qty + storage_qty) AS total_qty
-        FROM products
-    </select>
-    <select id="getLowProducts" resultType="Integer">
-        <![CDATA[
-        SELECT
-            COUNT(*) AS low_products
-        FROM
-            products
-        WHERE
-            min_required_qty > display_qty + storage_qty
-        ]]>
-    </select>
-     <select id="findById" parameterType="Integer" resultType="product">
-        SELECT * FROM products WHERE product_id = #{productId}
-    </select>
-    <update id="updateProduct" parameterType="product">
+    </sql>
+
+    <sql id="updateProduct">
         UPDATE products
         SET
             product_name = #{product_name},
@@ -84,5 +53,30 @@
             brand = #{brand}
         WHERE
             product_id = #{product_id}
+    </sql>
+
+    <update id="updateProduct" parameterType="product">
+        <include refid="updateProduct"></include>
     </update>
+
+    <select id="getTotalCategories" resultType="Integer">
+        <include refid="getTotalCategories"/>
+    </select>
+
+    <select id="getTotalProductsQty" resultType="Integer">
+        <include refid="getTotalProductsQty"/>
+     </select>
+
+    <select id="getLowProducts" resultType="Integer">
+        <include refid="getLowProducts"/>
+    </select>
+
+    <select id="getAll" resultType="product">
+        <include refid="getAll"/>
+    </select>
+
+    <select id="findById" parameterType="Integer" resultType="product">
+       <include refid="findById"/>
+    </select>
+
 </mapper>

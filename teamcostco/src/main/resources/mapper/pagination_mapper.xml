@@ -1,86 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper
-  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-"https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="Page">
-<!--
-    페이징 기능을 넣을 테이블의 select 쿼리문 작성 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-    사용법 : <spl id=?>
-                select쿼리문
-            </sql>
--->
+<mapper namespace="pagination">
 
-<sql id="products">
-    SELECT
-            product_id, product_name, product_code, category_large,
-            category_medium, category_small, category_detail, purchase_price,
-            selling_price, brand, min_required_qty, storage_qty,
-            display_qty, create_date, update_date, (display_qty + storage_qty) AS total_qty
-        FROM
-            products
-        ORDER BY
-            product_id DESC
-</sql>
+    <!-- 페이지네이션을 사용할 쿼리 등록 -->
+    <sql id="dynamicQuery">
+        <choose>
+            <when test="queryId == 'Employees.getEmpList'">
+                <include refid="Employees.getEmpList"/>
+            </when>
+            <when test="queryId == 'Employees.getEmpListByFilter'">
+                <include refid="Employees.getEmpListByFilter"/>
+            </when>
+            <when test="queryId == 'Products.getAll'">
+                <include refid="Products.getAll"/>
+            </when>
+        </choose>
+    </sql>
 
-
-<sql id="employees">
-    SELECT * FROM employees ORDER BY emp_id DESC
-</sql>
-
-<select id="findTableItems" resultType="product">
-    SELECT
-        *
-    FROM
-        (
-            SELECT
-                ROWNUM AS rn,
-                each_table.*
-            FROM
-                (
-                    <include refid="products"/>
-            
-                ) each_table
-        )
-    WHERE
-        rn BETWEEN #{start} AND #{end}
-</select>
-
-<!--검색-->
-<select id="searchTableItems" parameterType="String" resultType="product">
-     SELECT
-        *
-    FROM
-        (
-            SELECT
-                ROWNUM AS rn,
-                each_table.*
-            FROM
-                (
-                       SELECT
-            product_id, product_name, product_code, category_large,
-            category_medium, category_small, category_detail, purchase_price,
-            selling_price, brand, min_required_qty, storage_qty,
-            display_qty, create_date, update_date, (display_qty + storage_qty) AS total_qty
-        FROM
-            products
-        WHERE 
-            product_name LIKE '%' || #{product_name} || '%'
-        ORDER BY
-            product_id DESC
-            
-                ) each_table
-        )
-    WHERE
-        rn BETWEEN #{start} AND #{end}
-</select>
-
-
-    <!-- 각 테이블의 아이템 총 개수 조회 -->
-    <select id="countTableItems" resultType="Integer">
-        SELECT 
-            COUNT(*)
-        FROM 
-            products
+    <!-- 페이지네이션 쿼리 -->
+    <select id="selectPage" parameterType="map" resultType="map">
+        SELECT * FROM (
+            SELECT a.*, ROWNUM rnum
+            FROM (
+                <include refid="dynamicQuery" />
+            ) a
+            WHERE ROWNUM <![CDATA[<=]]> #{offset} + #{limit}
+        ) WHERE rnum <![CDATA[>]]> #{offset}
     </select>
+
+    <select id="count" parameterType="map" resultType="int">
+        SELECT COUNT(*) FROM (
+            <include refid="dynamicQuery" />
+        )
+    </select>
+
 </mapper>

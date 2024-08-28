@@ -1,47 +1,53 @@
 package com.ezentwix.teamcostco.service;
 
 import java.util.List;
+import java.util.Map;
 
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.ezentwix.teamcostco.dto.product.ProductDTO;
 import com.ezentwix.teamcostco.dto.product.ProductSummaryDTO;
-import com.ezentwix.teamcostco.pagination.PagingModule;
-import com.ezentwix.teamcostco.pagination.PagingRepositoryInterface;
+import com.ezentwix.teamcostco.pagination.PaginationRepository;
+import com.ezentwix.teamcostco.pagination.PaginationResult;
 import com.ezentwix.teamcostco.repository.ProductRepository;
 
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Service
-public class ProductService extends PagingModule<ProductDTO> {
+public class ProductService {
+    private final PaginationRepository paginationRepository;
     private final ProductRepository productRepository;
 
-    // 페이징 관련
-    @Override
-    protected PagingRepositoryInterface<ProductDTO> getPagingRepository() {
-        return productRepository;
-    }
-
     public List<ProductDTO> list() {
+
         return productRepository.getAll();
     }
 
-    public ProductSummaryDTO eachProductCount() {
-        ProductSummaryDTO productSummary = new ProductSummaryDTO();
-        productSummary.setTotalCategories(productRepository.getTotalCategories());
-        productSummary.setTotalProductsQty(productRepository.getTotalProductsQty());
-        productSummary.setLowProducts(productRepository.getLowProducts());
-        return productSummary;
+    public PaginationResult<ProductDTO> getPage(Integer page, Integer limit, Map<String, Object> params) {
+        return paginationRepository.getPage(
+                "Products.getAll",
+                PageRequest.of(page, limit),
+                params,
+                ProductDTO.class);
     }
 
-    // 제품 ID로 제품을 가져오는 메서드 추가
-    public ProductDTO getProductById(Integer productId) {
+    public ProductSummaryDTO eachProductCount(){
+        ProductSummaryDTO psDTO = new ProductSummaryDTO();
+
+        psDTO.setLowProducts(productRepository.getLowProducts());
+        psDTO.setTotalCategories(productRepository.getTotalCategories());
+        psDTO.setTotalProductsQty(productRepository.getTotalProductsQty());
+
+        return psDTO;
+    }
+
+    public ProductDTO getProductById(Integer productId){
         return productRepository.findById(productId);
     }
 
-    // 제품 업데이트 메서드 추가
-    public void updateProduct(ProductDTO productDTO) {
+    public void updateProduct(ProductDTO productDTO){
         productRepository.updateProduct(productDTO);
     }
 }

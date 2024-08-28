@@ -2,10 +2,10 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "https://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
     <typeAliases>
-       <!-- <typeAlias type="com.ezentwix.teamcostco.dto.TestDTO" alias="com.ezentwix.teamcostco.dto.TestDTO" />-->
-       <typeAlias type="com.ezentwix.teamcostco.dto.product.ProductDTO" alias="product" />
+        <typeAlias type="com.ezentwix.teamcostco.dto.product.ProductDTO" alias="product" />
         <typeAlias type="com.ezentwix.teamcostco.dto.category.CategoryDTO" alias="category" />
         <typeAlias type="com.ezentwix.teamcostco.dto.employee.EmployeeDTO" alias="emp" />
         <typeAlias type="com.ezentwix.teamcostco.dto.sales.SalesDataDTO" alias="sales" />
+        <typeAlias type="com.ezentwix.teamcostco.dto.product.OrderRequestDTO" alias="orderrequest" />
     </typeAliases>
 </configuration>
