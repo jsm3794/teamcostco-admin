@@ -1,44 +1,48 @@
+/* info-boxes 컨테이너와 박스 스타일 */
 .info-boxes {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
     margin-bottom: 20px;
-    gap: 20px;
+    box-sizing: border-box;
 }
+
 .info-box {
-    flex: 1;
     background-color: #FFFFFF;
     border: 1px solid #ddd;
     border-radius: 5px;
-    padding: 20px;
-    text-align: center;
-    min-height: 100px;
+    padding: 10px;
     font-weight: bold;
     text-align: left;
     font-size: 25px;
+    box-sizing: border-box;
 }
+
+/* 각 박스에 대한 색상 설정 */
 .categories {
     color: #3781F0;
 }
+
 .total-product {
     color: #E5A558;
 }
+
 .low-stock {
     color: #C95757;
 }
+
 .total-text {
     color: #646464;
     font-size: 20px;
     margin-top: 15px;
 }
 
-
-
-
-
+/* grid-container와 박스 스타일 */
 .grid-container {
     display: grid;
-    grid-template-columns: repeat(2, 70% 30%);
+    grid-template-columns: 70% 29%;
     gap: 10px;
+    box-sizing: border-box;
 }
 
 .box {
@@ -46,31 +50,29 @@
     border-radius: 5px;
     background-color: white;
     border: 1px solid rgb(225, 225, 235);
+    box-sizing: border-box;
 }
 
 /* 레이아웃 지정 */
 .box1 {
     grid-column: 1 / 2;
     grid-row: 1 / 2;
-    height: 200px;
+    height: 250px;
 }
 
 .box2 {
     grid-column: 2 / 3;
-    grid-row: 1 / 2;
+    height: 250px;
 }
 
 .box3 {
     grid-column: 1 / 2;
-    grid-row: 2 / 5; 
+    grid-row: 2 / 5;
+    height: 370px;
 }
 
 .box4 {
     grid-column: 2 / 3;
     grid-row: 2 / 3;
-}
-
-.box5 {
-    grid-column: 2 / 3;
-    grid-row: 3 / 4;
+    height: 370px;
 }
