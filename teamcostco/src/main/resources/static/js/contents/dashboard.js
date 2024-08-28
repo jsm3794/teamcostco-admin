@@ -35,6 +35,51 @@ const mychart1 = new Chart(chart1, {
     }
 });
 
+function updateChart(period) {
+    fetch(`/sales-data?period=${period}`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.length === 0) {
+                // 데이터가 없을 경우 처리
+                mychart1.data.labels = [];
+                mychart1.data.datasets[0].data = [];
+                mychart1.update();
+                console.log("No data available for the selected period");
+                return;
+            }
+
+            mychart1.data.labels = data.map(item => new Date(item.salesDate));
+            mychart1.data.datasets[0].data = data.map(item => item.totalPrice);
+            mychart1.options.scales.x = {
+                type: 'time',
+                time: {
+                    parser: 'yyyy-MM-dd',
+                    unit: period === 'year' ? 'month' : 'day',
+                    displayFormats: {
+                        day: 'yyyy-MM-dd',
+                        month: 'yyyy-MM'
+                    }
+                },
+                title: {
+                    display: true,
+                    text: '날짜'
+                }
+            };
+            mychart1.update();
+        })
+        .catch(error => console.error('Error fetching sales data:', error));
+}
+
+// 차트 초기화 후 기본 데이터 로드
+document.addEventListener('DOMContentLoaded', () => {
+    updateChart('week');
+});
+
+// 버튼에 이벤트 리스너 추가
+document.getElementById('weekBtn').addEventListener('click', () => updateChart('week'));
+document.getElementById('monthBtn').addEventListener('click', () => updateChart('month'));
+document.getElementById('yearBtn').addEventListener('click', () => updateChart('year'));
+
 // 박스 2 차트
 const chart2 = document.getElementById('chart2').getContext('2d');
 const myChart2 = new Chart(chart2, {
