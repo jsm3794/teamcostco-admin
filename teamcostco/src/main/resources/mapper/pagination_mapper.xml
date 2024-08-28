@@ -13,7 +13,7 @@
                 <include refid="Employees.getEmpListByFilter"/>
             </when>
             <when test="queryId == 'Products.getAll'">
-                <include refid="Employees.getEmpList"/>
+                <include refid="Products.getAll"/>
             </when>
         </choose>
     </sql>

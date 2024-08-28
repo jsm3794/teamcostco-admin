@@ -29,10 +29,12 @@ public class DashBoardService implements PageMetadataProvider {
     public List<String> getCssFiles() {
         return List.of("/css/contents/dashboard.css");
     }
-    
+
     @Override
     public List<String> getJsFiles() {
-        return null;
+        return List.of(
+                "https://cdn.jsdelivr.net/npm/chart.js",
+                "/js/contents/dashboard.js");
     }
 
 }

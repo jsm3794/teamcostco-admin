@@ -7,19 +7,76 @@
 
     <sql id="getAll">
         SELECT
-        product_id, product_name, product_code, category_large,
-        category_medium, category_small, category_detail, purchase_price,
-        selling_price, brand, min_required_qty, storage_qty,
-        display_qty, create_date, update_date, (display_qty + storage_qty) AS total_qty
-    FROM
-        products
-    ORDER BY 
-        product_id DESC
-
+            product_id, product_name, product_code, category_large,
+            category_medium, category_small, category_detail, purchase_price,
+            selling_price, brand, min_required_qty, storage_qty,
+            display_qty, create_date, update_date, (display_qty + storage_qty) AS total_qty
+        FROM products
+        ORDER BY product_id DESC
     </sql>
+
+    <sql id="findById">
+        SELECT * FROM products WHERE product_id = #{productId}
+    </sql>
+
+    <sql id="getLowProducts">
+        SELECT COUNT(*) AS low_products
+        FROM products
+        WHERE min_required_qty <![CDATA[>]]> display_qty + storage_qty
+    </sql>
+
+    <sql id="getTotalProductsQty">
+        SELECT COUNT(*) AS total_products_qty
+        FROM products
+    </sql>
+
+    <sql id="getTotalCategories">
+        SELECT COUNT(*) AS total_categories
+        FROM (
+            SELECT DISTINCT
+                category_large, category_medium,
+                category_small, category_detail
+            FROM products
+        )
+    </sql>
+
+    <sql id="updateProduct">
+        UPDATE products
+        SET
+            product_name = #{product_name},
+            category_large = #{category_large},
+            category_medium = #{category_medium},
+            category_small = #{category_small},
+            category_detail = #{category_detail},
+            purchase_price = #{purchase_price}, 
+            selling_price = #{selling_price},   
+            brand = #{brand}
+        WHERE
+            product_id = #{product_id}
+    </sql>
+
+    <update id="updateProduct" parameterType="product">
+        <include refid="updateProduct"></include>
+    </update>
+
+    <select id="getTotalCategories" resultType="Integer">
+        <include refid="getTotalCategories"/>
+    </select>
+
+    <select id="getTotalProductsQty" resultType="Integer">
+        <include refid="getTotalProductsQty"/>
+     </select>
+
+    <select id="getLowProducts" resultType="Integer">
+        <include refid="getLowProducts"/>
+    </select>
 
     <select id="getAll" resultType="product">
         <include refid="getAll"/>
+    </select>
+
+    <select id="findById" parameterType="Integer" resultType="product">
+       <include refid="findById"/>
     </select>
 
 </mapper>

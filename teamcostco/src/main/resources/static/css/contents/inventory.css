@@ -2,20 +2,11 @@
 * {
     box-sizing: border-box;
 }
-/* 기본 body 스타일 설정 */
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden; /* 가로 스크롤바 숨기기 */
-    min-width: 800px; /* 최소 너비 설정 */
+
+.content-box{
+    width:100%;
 }
-/* 콘텐츠 박스 스타일 */
-.content-box {
-    width: 100%;
-    margin: 0 auto;
-    padding: 10px;
-}
+
 /* 검색 제목 스타일 */
 #serachTitle {
     font-size: 24px;
@@ -41,7 +32,6 @@ body {
     width: 200px;
     height: 35px;
     padding: 5px;
-    border: 1px solid #ccc;
     border-radius: 5px;
     margin-right: 5px;
 }
@@ -51,16 +41,12 @@ body {
 }
 /* 검색 버튼 스타일 */
 #searchBtn {
-    background-color: rgb(251, 255, 255);
-    border: 1px solid #ccc;
     border-radius: 5px;
     padding: 7px 10px;
     cursor: pointer;
 }
 /* 날짜 필터 적용 버튼*/
 #applyDateFilter, #applyFilterBtn {
-    background-color: rgb(251, 255, 255);
-    border: 1px solid #ccc;
     border-radius: 5px;
     padding: 7px 10px;
     cursor: pointer;
@@ -70,8 +56,6 @@ body {
 }
 /* 날짜 필터 적용 버튼*/
 #applyFilterBtn {
-    background-color: rgb(251, 255, 255);
-    border: 1px solid #ccc;
     border-radius: 5px;
     padding: 7px 10px;
     cursor: pointer;
@@ -91,8 +75,6 @@ body {
 }
 /* 드롭다운 버튼과 내용 스타일 */
 .dropdown-btn, .nav-btn {
-    background-color: white;
-    border: 1px solid #ccc;
     border-radius: 5px;
     padding: 10px 15px;
     cursor: pointer;
@@ -104,14 +86,11 @@ body {
 .dropdown-content {
     display: none; /* 기본적으로 숨김 */
     position: absolute;
-    background-color: white;
-    border: 1px solid #ccc;
     border-radius: 5px;
     min-width: 160px;
     box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
     z-index: 1;
     padding: 10px;
-    box-sizing: border-box;
 }
 /* 드롭다운 내용 내 라벨과 체크박스 스타일 */
 .dropdown-content label {
@@ -132,18 +111,7 @@ input[type="date"] {
     border: 1px solid #ccc;
     border-radius: 5px;
 }
-/* 테이블 스타일 */
-.table {
-    table-layout: fixed;
-    border-collapse: collapse;
-    border: 1px solid #C0C0C0;
-    width: 100%;
-}
-/* 테이블 헤더 스타일 */
-.table thead {
-    background: #F7F7F7;
-    color: #333;
-}
+
 /* 테이블 셀 스타일 */
 .table th, .table td {
     padding: 8px;
@@ -153,18 +121,13 @@ input[type="date"] {
 .table tbody tr {
     cursor: pointer; /* 클릭 가능한 커서로 변경 */
 }
-/* 클릭 시 배경색 변경 */
-.table tbody tr:hover {
-    background-color: #F0F0F0;
-}
+
 /* 체크박스 스타일 */
 .table th input[type="checkbox"] {
     margin: 0;
 }
 /* 네비게이션 버튼 스타일 */
 .nav-btn {
-    background-color: white;
-    border: 1px solid #ccc;
     border-radius: 5px;
     padding: 10px 15px;
     cursor: pointer;
@@ -207,8 +170,7 @@ input[type="date"] {
 }
 .info-box {
     flex: 1;
-    background-color: #FFFFFF;
-    border: 1px solid #ddd;
+    background-color: transparent !important;
     border-radius: 5px;
     padding: 20px;
     text-align: center;
@@ -219,15 +181,17 @@ input[type="date"] {
 }
 .categories {
     color: #3781F0;
+    font-weight: bold;
 }
 .total-product {
     color: #E5A558;
+    font-weight: bold;
 }
 .low-stock {
     color: #C95757;
+    font-weight: bold;
 }
 .total-text {
-    color: #646464;
     font-size: 20px;
     margin-top: 15px;
 }

@@ -1,5 +1,5 @@
 <div class="info-boxes">
-    <div class="info-box">
+    <div class="content-box">
         <div class="categories">
             Categories
         </div>
@@ -7,7 +7,7 @@
             Total (<span id="categoryCount">0</span> items)
         </div>
     </div>
-    <div class="info-box">
+    <div class="content-box">
         <div class="total-product">
             Total Product
         </div>
@@ -15,7 +15,7 @@
             Total <span id="totalQtySum">0</span>
         </div>
     </div>
-    <div class="info-box">
+    <div class="content-box">
         <div class="low-stock">
             Low Stock
         </div>
@@ -27,11 +27,11 @@
 <div class="content-box">
     <div id="serachTitle">Inventory items</div>
     <div class="search-buttons-container">
-        <input id="searchInput" type="text" placeholder=":돋보기: Search" >
+        <input id="searchInput" type="text" placeholder="&#x1F50E Search" >
         <button id="searchBtn">검색</button>
         <div class="dropdown date-dropdown">
             <button class="dropdown-btn" onclick="toggleDropdown('dateDropdown')">
-                <span class="icon">:날짜:</span> Date
+                <span class="icon">&#x1F4C5</span> Date
             </button>
             <div id="dateDropdown" class="dropdown-content calendar-dropdown">
                 <label for="startDate">시작 날짜:</label>
@@ -43,7 +43,7 @@
         </div>
         <div class="dropdown filter-dropdown">
             <button class="dropdown-btn" onclick="toggleDropdown('filterDropdown')">
-                <span class="icon">:돋보기:</span> Filter
+                <span class="icon">&#x1F50E</span> Filter
             </button>
             <div id="filterDropdown" class="dropdown-content">
                 <label><input type="checkbox" name="filter" value="Option 1"> 대분류</label>
@@ -57,23 +57,22 @@
     <table class="table">
         <thead>
             <tr>
-                <th><input type="checkbox" id="selectAll" onclick="selectAllRows()"> All</th>
-                <th>product_name</th>
-                <th>category_large</th>
-                <th>product_code</th>
-                <th>purchase_price</th>
-                <th>selling_price</th>
-                <th>brand</th>
-                <th>total_qty</th>
-                <th>update_date</th>
+                <th><input type="checkbox" id="selectAll" onclick="selectAllRows()"></th>
+                <th>상품명</th>
+                <th>대분류</th>
+                <th>상품코드</th>
+                <th>매입가격</th>
+                <th>판매가격</th>
+                <th>브랜드</th>
+                <th>총수량</th>
             </tr>
         </thead>
         <tbody>
-            <tr th:each="product : ${products}" onclick="console.log('상세페이지로 이동하는 기능 추가하기')">
+            <tr th:each="product : ${items}" th:onclick="'redirectToDetailsPage(' + ${product.product_id} + ')'">
                 <td><input type="checkbox" class="row-checkbox"></td>
                 <td>
                     <div class="product-name-container">
-                        <img src="/path/to/your/image.jpg" alt="Product Image" class="product-image">
+                        <img src="/path/to/your/image.jpg" class="product-image">
                         <span th:text="${product.product_name}"></span>
                     </div>
                 </td>
@@ -83,12 +82,20 @@
                 <td th:text="${product.selling_price}"></td>
                 <td th:text="${product.brand}"></td>
                 <td th:text="${product.total_qty}"></td>
-                <td th:text="${#dates.format(product.update_date, 'yyyy-MM-dd')}"></td>
             </tr>
         </tbody>
     </table>
     <div class="pagination">
         <button id="prevBtn" class="nav-btn">Previous</button>
         <button id="nextBtn" class="nav-btn">Next</button>
-        <div id="page">Page {현재 페이지} of {마지막 페이지}</div>
+        <div id="page" th:data-page="${currentPage}" th:data-totalPages="${totalPages}" th:text="|${currentPage} of ${totalPages}|"></div>
     </div>
+
+
+
+
+
+
+
+
+

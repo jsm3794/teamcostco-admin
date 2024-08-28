@@ -1,5 +1,5 @@
 // 검색 입력창에서 실시간 검색 기능 추가
-document.getElementById('searchInput').addEventListener('input', function() {
+document.getElementById('searchInput').addEventListener('input', function () {
     var searchTerm = this.value.toLowerCase();
     var rows = document.querySelectorAll('.table tbody tr');
     rows.forEach(row => {
@@ -9,11 +9,11 @@ document.getElementById('searchInput').addEventListener('input', function() {
 });
 // 날짜 필터 적용 함수
 function applyDateFilter() {
-  // 내용 작성하기
+    // 내용 작성하기
 }
 // 필터 적용 함수
 function applyFilter() {
-   // 내용 작성하기
+    // 내용 작성하기
 }
 // 드롭다운 토글 함수
 function toggleDropdown(id) {
@@ -45,36 +45,69 @@ function selectAllRows() {
     });
 }
 
-document.addEventListener("DOMContentLoaded", function() {
-    var rows = document.querySelectorAll('.table tbody tr');
-    var totalQtySum = 0;
-    var lowStockCount = 0; 
+window.initializePage = function() {
+    if (window.location.pathname === '/inventory') {
+        initializeInventory();
+    }
+    // 다른 페이지에 대한 초기화 로직도 여기에 추가할 수 있습니다.
+};
 
-    var headerCells = document.querySelectorAll('.table thead th');
-    var columnCount = headerCells.length + 1;
+function initializeInventory() {
+    fetchProductSummary();
+    // 기타 인벤토리 페이지 초기화 로직
+}
 
-    rows.forEach(function(row) {
-        var totalQtyCell = row.querySelector('td:nth-child(8)'); // **** nth-child
-        if (totalQtyCell) {
-            var totalQty = parseInt(totalQtyCell.innerText.trim()); 
-            // total_qty 합계 계산
-            if (!isNaN(totalQty)) {
-                totalQtySum += totalQty;
-                if (totalQty <= 50) {
-                    lowStockCount++;
-                }
-            }
+function fetchProductSummary() {
+    fetch('/productsummary')
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById("categoryCount").textContent = data.totalCategories;
+            document.getElementById("totalQtySum").textContent = data.totalProductsQty;
+            document.getElementById("lowStockCount").textContent = data.lowProducts;
+        })
+        .catch(error => console.error('Error fetching product summary:', error));
+}
+
+// 10분마다 데이터 갱신
+setInterval(fetchProductSummary, 600000);
+
+// 개수 표시 div 클릭시 상세창
+$(".info-box").click((e) => {
+    console.log("상세보기창 만들수도");
+});
+// 개수 최초 데이터 로드
+fetchProductSummary();
+// 10분마다 개수 데이터 갱신 (밀리초 단위)
+setInterval(fetchProductSummary, 600000);
+// pagination
+$(document).ready(function() {
+    // 현재 페이지와 총 페이지 수를 HTML 속성에서 가져옵니다.
+    let currentPage = parseInt($('#page').data('page')); // 현재 페이지 (0부터 시작)
+    const totalPages = parseInt($('#page').data('totalpages'));// 타임리프로부터 총 페이지 수 전달
+    console.log(`현재페이지: ${currentPage}, 총 페이지: ${totalPages}`);
+    // 이전 버튼 클릭 핸들러
+    $('#prevBtn').click(function() {
+        if (currentPage > 0) { // 현재 페이지가 첫 페이지가 아닐 경우에만 이동
+            location.href = '/inventory?page=' + (currentPage - 1);
         }
     });
-    // 계산된 값을 페이지에 표시
-    document.getElementById('categoryCount').innerText = columnCount; // 열의 개수를 표시
-    document.getElementById('totalQtySum').innerText = totalQtySum; // total_qty의 합계를 표시
-    document.getElementById('lowStockCount').innerText = lowStockCount; // 50개 이하 품목의 개수를 표시
+    // 다음 버튼 클릭 핸들러
+    $('#nextBtn').click(function() {
+        if (currentPage < totalPages) { // 현재 페이지가 마지막 페이지가 아닐 경우에만 이동
+            location.href = '/inventory?page=' + (currentPage + 1);
+        }
+    });
+    // 첫 페이지일 경우 이전 버튼 비활성화
+    if (currentPage === 1) {
+        $('#prevBtn').attr('disabled', true);
+    }
+    // 마지막 페이지일 경우 다음 버튼 비활성화
+    if (currentPage === totalPages) {
+        $('#nextBtn').attr('disabled', true);
+    }
 });
-/*
-아직 구현 안됨
+
 // 세부 페이지로 리다이렉션하는 함수
 function redirectToDetailsPage(productId) {
-    window.location.href = '/products/' + productId; // Spring Boot에서 세부 페이지 URL 설정
+    window.location.href = '/detail/' + productId; // Spring Boot에서 세부 페이지 URL 설정
 }
-*/
