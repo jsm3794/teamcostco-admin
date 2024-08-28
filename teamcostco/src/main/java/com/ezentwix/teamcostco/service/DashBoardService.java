@@ -32,7 +32,7 @@ public class DashBoardService implements PageMetadataProvider {
     
     @Override
     public List<String> getJsFiles() {
-        return null;
+        return List.of("/js/contents/dashboard.js");
     }
 
 }

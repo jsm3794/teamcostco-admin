@@ -1,3 +1,76 @@
-h1{
-    color:blue;
+.info-boxes {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    gap: 20px;
+}
+.info-box {
+    flex: 1;
+    background-color: #FFFFFF;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 20px;
+    text-align: center;
+    min-height: 100px;
+    font-weight: bold;
+    text-align: left;
+    font-size: 25px;
+}
+.categories {
+    color: #3781F0;
+}
+.total-product {
+    color: #E5A558;
+}
+.low-stock {
+    color: #C95757;
+}
+.total-text {
+    color: #646464;
+    font-size: 20px;
+    margin-top: 15px;
+}
+
+
+
+
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(2, 70% 30%);
+    gap: 10px;
+}
+
+.box {
+    padding: 10px;
+    border-radius: 5px;
+    background-color: white;
+    border: 1px solid rgb(225, 225, 235);
+}
+
+/* 레이아웃 지정 */
+.box1 {
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+    height: 200px;
+}
+
+.box2 {
+    grid-column: 2 / 3;
+    grid-row: 1 / 2;
+}
+
+.box3 {
+    grid-column: 1 / 2;
+    grid-row: 2 / 5; 
+}
+
+.box4 {
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+}
+
+.box5 {
+    grid-column: 2 / 3;
+    grid-row: 3 / 4;
 }
