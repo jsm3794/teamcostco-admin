@@ -42,7 +42,7 @@ public class DetailController {
         try {
             productService.updateProduct(productDTO);
             response.put("status", "success");
-            response.put("message", "정상적으로 수정되었습니다..");
+            response.put("message", "정상적으로 수정되었습니다.");
         } catch (Exception e) {
             response.put("status", "error");
             response.put("message", "수정 실패. 다시 시도해 주세요.");
