@@ -1,32 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper
-  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-"https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="Employees">
-    <select id="getEmpByIdAndPw" parameterType="map" resultType="emp">
-        SELECT * FROM employees
-        WHERE login_id = #{id} AND login_pw = #{pw}
-    </select>
 
-    <select id="getEmpList" parameterType="map" resultType="emp">
-      SELECT
-        emp_id, emp_name, emp_email, phone_number, job_title, hire_date, join_date
-      FROM
-        employees
-      ORDER BY
-        emp_id DESC
+  <sql id="getByIdAndPw">
+    SELECT * FROM employees WHERE login_id = #{id} AND login_pw = #{pw}
+  </sql>
+
+  <sql id="getEmpList">
+    SELECT emp_id, emp_name, emp_email, phone_number, job_title, hire_date, join_date
+    FROM employees
+    ORDER BY emp_id ASC
+  </sql>
+
+  <sql id="getEmpListByFilter">
+    SELECT emp_id, emp_name, emp_email, phone_number, job_title, hire_date, join_date
+    FROM employees
+    <where>
+        <if test="emp_name != null and emp_name != ''">
+            emp_name LIKE #{emp_name}
+        </if>
+        <if test="phone_number != null and phone_number != ''">
+            AND phone_number LIKE #{phone_number}
+        </if>
+        <if test="emp_email != null and emp_email != ''">
+            AND emp_email LIKE #{emp_email}
+        </if>
+        <if test="job_title != null and job_title != ''">
+            AND job_title LIKE #{job_title}
+        </if>
+    </where>
+    ORDER BY emp_id ASC
+  </sql>
+
+  <sql id="getEmp">
+    SELECT emp_id, emp_name, emp_email, phone_number, job_title, hire_date, join_date
+    FROM employees WHERE emp_id = #{emp_id}
+  </sql>
+  
+  <select id="getEmpList" resultType="emp">
+    <include refid="getEmpList"/>
   </select>
 
-  <select id="getEmp" parameterType="Integer" resultType="emp">
-    SELECT
-      emp_id, emp_name, emp_email, phone_number, job_title, hire_date, join_date
-    FROM
-      employees
-    WHERE
-      emp_id = #{emp_id}
-    ORDER BY
-      emp_id DESC
+  <select id="getByIdAndPw" resultType="emp" parameterType="map">
+    <include refid="getByIdAndPw"/>
+  </select>
+
+  <select id="getEmp" resultType="emp" parameterType="Integer">
+    <include refid="getByIdAndPw"/>
   </select>
 
 </mapper>

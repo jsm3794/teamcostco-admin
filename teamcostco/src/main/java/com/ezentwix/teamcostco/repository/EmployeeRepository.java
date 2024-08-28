@@ -1,7 +1,7 @@
 package com.ezentwix.teamcostco.repository;
 
-import java.util.Map;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
@@ -17,14 +17,14 @@ public class EmployeeRepository {
 
     public EmployeeDTO getByIdAndPw(String id, String pw) {
         Map<String, String> params = Map.of("id", id, "pw", pw);
-        return sql.selectOne("Employees.getEmpByIdAndPw", params);
+        return sql.selectOne("Employees.getByIdAndPw", params);
     }
 
-    public List<EmployeeDTO> getEmpList(){
+    public List<EmployeeDTO> getEmpList() {
         return sql.selectList("Employees.getEmpList");
     }
 
-    public EmployeeDTO getEmp(Integer emp_id){
+    public EmployeeDTO getEmp(Integer emp_id) {
         return sql.selectOne("Employees.getEmp", emp_id);
     }
 }

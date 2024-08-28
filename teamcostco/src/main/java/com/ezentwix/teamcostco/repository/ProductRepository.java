@@ -16,7 +16,6 @@ public class ProductRepository {
     private final SqlSessionTemplate sql;
 
     public List<ProductDTO> getAll() {
-        return sql.selectList("Product.getAll");
+        return sql.selectList("Products.getAll");
     }
-
 }

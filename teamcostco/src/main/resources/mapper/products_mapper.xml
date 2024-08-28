@@ -3,16 +3,23 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="Product">
-    <select id="getAll" resultType="product">
+<mapper namespace="Products">
+
+    <sql id="getAll">
         SELECT
-            product_id, product_name, product_code, category_large,
-            category_medium, category_small, category_detail, purchase_price,
-            selling_price, brand, min_required_qty, storage_qty,
-            display_qty, create_date, update_date, (display_qty + storage_qty) AS total_qty
-        FROM
-            products
-        ORDER BY 
-            product_id DESC
+        product_id, product_name, product_code, category_large,
+        category_medium, category_small, category_detail, purchase_price,
+        selling_price, brand, min_required_qty, storage_qty,
+        display_qty, create_date, update_date, (display_qty + storage_qty) AS total_qty
+    FROM
+        products
+    ORDER BY 
+        product_id DESC
+
+    </sql>
+
+    <select id="getAll" resultType="product">
+        <include refid="getAll"/>
     </select>
+
 </mapper>
