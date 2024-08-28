@@ -54,10 +54,9 @@
         )
     </select>
     <select id="getTotalProductsQty" resultType="Integer">
-       SELECT
-            COUNT(*) AS total_products_qty
-        FROM
-            products
+       SELECT 
+            SUM(display_qty + storage_qty) AS total_qty
+        FROM products
     </select>
     <select id="getLowProducts" resultType="Integer">
         <![CDATA[
