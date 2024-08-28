@@ -5,17 +5,18 @@ import java.util.List;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.ezentwix.teamcostco.dto.product.ProductDTO;
+import com.ezentwix.teamcostco.dto.product.OrderRequestDTO;
 
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Repository
-public class ProductRepository {
+public class OrderRequestRepository {
     
     private final SqlSessionTemplate sql;
 
-    public List<ProductDTO> getAll() {
-        return sql.selectList("Products.getAll");
+    public List<OrderRequestDTO> getAll() {
+        return sql.selectList("OrderRequest.getAllWithProductName");
     }
+
 }

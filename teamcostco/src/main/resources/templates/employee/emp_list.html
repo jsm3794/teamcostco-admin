@@ -1,0 +1,45 @@
+<div class="content-box">
+
+    <a id="search-btn">검색하기</a>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>번호</th>
+                <th>이름</th>
+                <th>이메일</th>
+                <th>연락처</th>
+                <th>직책</th>
+                <th>고용일자</th>
+                <th>가입일자</th>
+            </tr>
+            <tr>
+                <th><input type="text" id="filter-emp-id"></th>
+                <th><input type="text" id="filter-emp-name"></th>
+                <th><input type="text" id="filter-emp-email"></th>
+                <th><input type="text" id="filter-phone"></th>
+                <th>
+                    <select id="filter-job-title-dropdown">
+                        <option value="all">전체</option>
+                        <option value="">1</option>
+                        <option value="">2</option>
+                        <option value="">3</option>
+                    </select>
+                </th>
+                <th><input type="text" id="filter-hire-date"></th>
+                <th><input type="text" id="filter-join-date"></th>
+            </tr>
+        </thead>
+        <tbody id="employee-table-body">
+            <tr th:each="emp : ${empList}">
+                <td th:text="${emp.emp_id}" th:class="emp-id"></td>
+                <td th:text="${emp.emp_name}"></td>
+                <td th:text="${emp.emp_email}"></td>
+                <td th:text="${emp.phone_number}"></td>
+                <td th:text="${emp.job_title}"></td>
+                <td th:text="${#dates.format(emp.hire_date, 'yy/MM/dd')}"></td>
+                <td th:text="${#dates.format(emp.join_date, 'yy/MM/dd')}"></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

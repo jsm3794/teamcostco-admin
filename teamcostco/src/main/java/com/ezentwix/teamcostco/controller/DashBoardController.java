@@ -1,10 +1,10 @@
-package com.ezentwix.teamcostco.controller.dashboard;
+package com.ezentwix.teamcostco.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import com.ezentwix.teamcostco.service.dashboard.DashBoardService;
+import com.ezentwix.teamcostco.service.DashBoardService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -15,8 +15,9 @@ public class DashBoardController {
 
     @GetMapping("/dashboard")
     public String showDashboard(Model model) {
-        // dashboard 페이지에서 사용할 데이터를 추가합니다
-        dashBoardService.configureDashboardData(model);
+        dashBoardService.configureModel(model);
         return "index";
     }
+
+    
 }

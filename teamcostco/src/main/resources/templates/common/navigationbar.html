@@ -4,42 +4,50 @@
             <span>TeamCostco</span>
         </div>
 
+        <div th:if="${rootName}"></div>
         <ul>
-            <li><button type="button" class="nav-item" data-target="#dashboard">
+            <li><div type="div" class="nav-item" th:classappend="${rootName == 'dashboard' ? ' active' : ''}"
+                    data-target="#dashboard">
                     <span class="material-symbols-outlined">grid_view</span>
                     대시보드
-                </button>
+                </div>
             </li>
-            <li><button type="button" class="nav-item" data-target="#inventory">
+            <li><div type="div" class="nav-item" th:classappend="${rootName == 'inventory' ? ' active' : ''}"
+                    data-target="#inventory">
                     <span class="material-symbols-outlined">inventory_2</span>
                     재고
-                </button>
+                </div>
             </li>
-            <li><button type="button" class="nav-item" data-target="#tracking">
+            <li><div type="div" class="nav-item" data-target="#productorder">
                     <span class="material-symbols-outlined">share_location</span>
-                    추적
-                </button>
+                    상품발주
+                </div>
             </li>
-            <li><button type="button" class="nav-item" data-target="#orders">
+             <li><div type="div" class="nav-item" data-target="#orderrequest">
                     <span class="material-symbols-outlined">shopping_bag</span>
-                    주문
-                </button>
+                    발주목록
+                </div>
             </li>
-            <li><button type="button" class="nav-item" data-target="#analytics">
+            <!--
+            <li><div type="div" class="nav-item" data-target="#analytics">
                     <span class="material-symbols-outlined">bar_chart</span>
                     실시간 분석
-                </button>
-            </li>
-            <li><button type="button" class="nav-item" data-target="#users">
+                </div>
+            </li> -->
+            <li><div type="div" class="nav-item" data-target="#emp_list">
                     <span class="material-symbols-outlined">person</span>
-                    유저정보
-                </button>
+                    직원관리
+                </div>
             </li>
-            <li><button type="button" class="nav-item" data-target="#settings">
+            <!-- <li><div type="div" class="nav-item" data-target="#settings">
                     <span class="material-symbols-outlined">settings</span>
                     설정
-                </button>
-            </li>
+                </div>
+            </li> -->
         </ul>
+
+    </div>
+    <div id="theme-toggle">
+        <span id="mode_icon" class="material-symbols-outlined">dark_mode</span>
     </div>
 </nav>

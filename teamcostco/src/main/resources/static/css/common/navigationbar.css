@@ -1,7 +1,7 @@
 /* navigationbar 부분 디자인을 기술할 css 파일입니다. */
 
 #logo {
-    line-height: 100px;
+    line-height: 120px;
     text-align: center;
     font-weight: bold;
 }
@@ -11,8 +11,8 @@
     flex-direction: column;
     width: 200px;
     height: 100%;
-    background-color: #fff;
-    border-right: 1px solid rgb(225, 225, 245);
+    background-color: var(--background-color);
+    border-right: var(--border-line);
 }
 
 .aside-bar ul {
@@ -21,39 +21,42 @@
     margin: 0;
 }
 
-.aside-bar ul > li {
+.aside-bar ul>li {
     padding: 0;
-    margin: 15px;
+    margin: 10px;
 }
 
-.aside-bar ul > li button {
+.aside-bar ul>li .nav-item {
     background: transparent;
+    font-size:14px;
     border: none;
-    color: black;
     display: flex;
     align-items: center;
     justify-content: left;
     width: 100%;
     padding: 10px;
-    border-radius: 5px;
+    border-radius: 3px;
     cursor: pointer;
-    transition: background-color 0.3s;
     text-align: center;
 }
 
-.aside-bar ul > li button:hover {
-    background-color: skyblue;
+.aside-bar ul>li .nav-item:hover {
+    background-color: var(--nav-item-hover-background-color);
 }
 
-.aside-bar ul > li button.active {
-    background-color: #007bff;
-    color: white;
+.aside-bar ul>li .nav-item.active {
+    background-color: var(--nav-item-hover-active-background-color);
 }
 
 .aside-container {
-
-    background-color: white;
+    height: 100%;
+    background-color: var(--background-color);
 }
+
+.active, .active>* {
+    color: #fff;
+}
+
 .material-symbols-outlined {
     margin-right: 10px;
 }

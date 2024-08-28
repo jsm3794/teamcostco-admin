@@ -6,17 +6,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const current_page = document.getElementById("current-page");
     navItems.forEach(item => {
         item.addEventListener('click', function() {
-            navItems.forEach(navItem => navItem.classList.remove('active'));
-            this.classList.add('active');
+            // navItems.forEach(navItem => navItem.classList.remove('active'));
+            // this.classList.add('active');
             let target = this.getAttribute('data-target');
             if (target.startsWith('#')) {
                 target = target.slice(1);
             }
-            target = target.charAt(0).toUpperCase() + target.slice(1);
-            console.log('Navigating to:', target);
-            console.log('Navigating to:', this.getAttribute('data-target'));
-            headerTitle.textContent = `${target}`;
-            current_page.innerText = this.getAttribute('data-target');
+            // target = target.charAt(0).toUpperCase() + target.slice(1);
+            // console.log('Navigating to:', target);
+            // console.log('Navigating to:', this.getAttribute('data-target'));
+            // headerTitle.textContent = `${target}`;
+            // current_page.innerText = this.getAttribute('data-target');
+            location.href = target;
         });
     });
 });

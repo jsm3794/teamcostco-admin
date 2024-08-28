@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="pagination">
+
+    <!-- 페이지네이션을 사용할 쿼리 등록 -->
+    <sql id="dynamicQuery">
+        <choose>
+            <when test="queryId == 'Employees.getEmpList'">
+                <include refid="Employees.getEmpList"/>
+            </when>
+            <when test="queryId == 'Employees.getEmpListByFilter'">
+                <include refid="Employees.getEmpListByFilter"/>
+            </when>
+            <when test="queryId == 'Products.getAll'">
+                <include refid="Employees.getEmpList"/>
+            </when>
+        </choose>
+    </sql>
+
+    <!-- 페이지네이션 쿼리 -->
+    <select id="selectPage" parameterType="map" resultType="map">
+        SELECT * FROM (
+            SELECT a.*, ROWNUM rnum
+            FROM (
+                <include refid="dynamicQuery" />
+            ) a
+            WHERE ROWNUM <![CDATA[<=]]> #{offset} + #{limit}
+        ) WHERE rnum <![CDATA[>]]> #{offset}
+    </select>
+
+    <select id="count" parameterType="map" resultType="int">
+        SELECT COUNT(*) FROM (
+            <include refid="dynamicQuery" />
+        )
+    </select>
+
+</mapper>
