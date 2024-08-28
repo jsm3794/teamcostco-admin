@@ -11,7 +11,6 @@ public class EmployeeDTO {
     private String emp_email;
     private String phone_number;
     private String login_id;
-    private String login_pw;
     private String job_title;
     private Date hire_date;
     private Date join_date;

@@ -20,7 +20,15 @@ public class EmployeeRepository {
         return sql.selectOne("Employees.getEmpByIdAndPw", params);
     }
 
-    public List<EmployeeDTO> getEmpList(){
-        return sql.selectList("Employees.getEmpList");
+    public List<EmployeeDTO> getEmpList(Map<String, Object> params) {
+        return sql.selectList("Employees.getEmpList", params);
+    }
+
+    public List<String> getAllJobTitles() {
+        return sql.selectList("Employees.getAllJobTitles");
+    }
+
+    public int countEmp() {
+        return sql.selectOne("Employees.countEmp");
     }
 }

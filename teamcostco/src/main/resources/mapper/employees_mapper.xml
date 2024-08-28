@@ -4,18 +4,22 @@
 "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="Employees">
-    <select id="getEmpByIdAndPw" parameterType="map" resultType="emp">
-        SELECT * FROM employees
-        WHERE login_id = #{id} AND login_pw = #{pw}
-    </select>
 
     <select id="getEmpList" parameterType="map" resultType="emp">
-      SELECT
-        emp_id, emp_name, emp_email, phone_number, job_title, hire_date, join_date
-      FROM
-        employees
-      ORDER BY
-        emp_id DESC
-  </select>
+      SELECT * FROM (
+        SELECT
+          emp_id, emp_name, emp_email, phone_number, job_title, hire_date, join_date,
+          ROW_NUMBER() OVER (ORDER BY emp_id ASC) AS rn
+        FROM
+          employees
+      ) WHERE rn BETWEEN #{offset} + 1 AND #{offset} + #{limit}
+    </select>
 
+    <select id="countEmp" resultType="int">
+      SELECT COUNT(*) FROM employees
+    </select>
+
+    <select id="getAllJobTitles" resultType="String">
+      SELECT job_title FROM employees
+    </select>
 </mapper>

@@ -1,93 +1,95 @@
-#search-options-panel {
-    display: none;
-    padding: 15px;
-    border: 1px solid dodgerblue;
-    border-radius: 15px;
-    margin-top: 10px;
-    background-color: #ffffff;
-    position: absolute;
-    margin-left: 1rem;
+.content-box {
+    width: 100%;
 }
 
-#toggle-search-options, #search-btn {
-    background-color: #ffffff;
-    border-color: dodgerblue;
-    color: black;
-    font-weight: bold;
-    font-size: 14px;
-    margin-left: 1rem;
-}
-
-.form-group {
+/* 페이지 네이션 스타일 */
+.pagination {
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    margin-bottom: 15px;
+    margin-top: 10px;
+    margin-bottom: 30px;
+    gap: 5px;
+    width: 100%;
 }
 
-.form-group > label {
-    flex-basis: 150px;
-    margin-right: 10px;
-    text-align: right;
+.page-info {
+    margin-right: 2rem;
 }
 
-.form-group input {
-    flex-grow: 1;
-    padding: 5px;
-    font-size: 14px;
+.page-link.disabled {
+    pointer-events: none;
+    opacity: 0.5;
+    cursor: not-allowed;
 }
 
-#apply-filters {
-    background-color: white;
-    border-color: dodgerblue;
-    color: black;
-    font-weight: bold;
+.page-link , #search-btn {
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background: #F7F7F7;
+    color: #333;
+    cursor: pointer;
+    text-decoration: none;
 }
 
-#title-emp {
+.page-link:hover , #search-btn:hover {
+    background-color: #C0C0C0;
+}
+
+.page-link:visited {
+    color: #333;
+}
+
+/* 필터 스타일 */
+#filter-emp-id {
+    width: 2rem;
+}
+
+#filter-emp-name , #filter-job-title {
+    width: 4rem;
+}
+
+#filter-hire-date , #filter-join-date {
+    width: 6rem;
+}
+
+/* 테이블 스타일 */
+.table {
+    table-layout: fixed;
+    border-collapse: collapse;
+    border: 1px solid #C0C0C0;
+    width: 100%;
+}
+
+/* 테이블 헤더 스타일 */
+.table thead {
+    background: #F7F7F7;
+    color: #333;
+}
+#emp-id {
+    width: 5rem;
+}
+#emp-name {
+    width: 5rem;
+}
+
+/* 필터 스타일 */
+#filter-job-title-dropdown option {
     text-align: center;
-    font-weight: bold;
-    font-size: 24px;
 }
 
-#search-word-box {
-    width: 50%;
-    height: 100px;
-    margin: 1rem 1rem;
-    border: solid 1px dodgerblue;
-    padding: 10px;
-    border-radius: 15px;
-    font-weight: bold;
+/* 테이블 셀 스타일 */
+.table th, .table td {
+    padding: 8px;
+    text-align: center;
+    border-bottom: 1px solid #ccc;
 }
 
-#table {
-    margin: 1rem 1rem;
-    border: solid 1px dodgerblue;
-    border-radius: 15px;
-    padding: 10px;
-    border-collapse: separate;
-    box-sizing: border-box;
-    font-weight: bold;
+.table tbody tr {
+    cursor: pointer; /* 클릭 가능한 커서로 변경 */
 }
-
-#table td, #table th {
-    padding: 10px;
-    border-right: solid 1px dodgerblue;
-    border-bottom: solid 1px dodgerblue;
-}
-
-#table td:last-child, #table th:last-child {
-    border-right: none;
-}
-
-#table tr:last-child td {
-    border-bottom: none;
-}
-
-#table tr:last-child th {
-    border-bottom: none;
-}
-
-.page-item {
-    display: inline-block;
-    margin: 10px;
+/* 클릭 시 배경색 변경 */
+.table tbody tr:hover {
+    background-color: #F0F0F0;
 }
