@@ -1,34 +1,8 @@
-<div class="container">
-    <button id="search_btn" class="btn btn-primary">조회하기</button>
-    <button id="toggle_search_options" class="btn btn-primary">상세 조회</button>
+<div class="content-box">
 
-    <div id="search_options_panel">
-        <h5>검색 옵션</h5>
-        <div class="form-group">
-            <label for="option1">직책</label>
-            <input type="text" id="option1" name="option1">
-        </div>
-        <div class="form-group">
-            <label for="option2">이름</label>
-            <input type="text" id="option2" name="option2">
-        </div>
-        <div class="form-group">
-            <label for="option3">이메일</label>
-            <input type="text" id="option3" name="option3">
-        </div>
-        <div class="form-group">
-            <label for="option3">ID</label>
-            <input type="text" id="option4" name="option4">
-        </div>
-        <div class="form-group">
-            <label for="option3">이메일</label>
-            <input type="text" id="option5" name="option5">
-        </div>
-        <button id="apply_filters" class="btn btn-success">적용</button>
-    </div>
+    <a id="search-btn">검색하기</a>
 
-
-    <table id="table_">
+    <table class="table">
         <thead>
             <tr>
                 <th>번호</th>
@@ -39,22 +13,33 @@
                 <th>고용일자</th>
                 <th>가입일자</th>
             </tr>
+            <tr>
+                <th><input type="text" id="filter-emp-id"></th>
+                <th><input type="text" id="filter-emp-name"></th>
+                <th><input type="text" id="filter-emp-email"></th>
+                <th><input type="text" id="filter-phone"></th>
+                <th>
+                    <select id="filter-job-title-dropdown">
+                        <option value="all">전체</option>
+                        <option value="">1</option>
+                        <option value="">2</option>
+                        <option value="">3</option>
+                    </select>
+                </th>
+                <th><input type="text" id="filter-hire-date"></th>
+                <th><input type="text" id="filter-join-date"></th>
+            </tr>
         </thead>
         <tbody id="employee-table-body">
-            <tr th:each="emp:${empList}">
-                <td th:text="${emp.emp_id}"></td>
+            <tr th:each="emp : ${empList}">
+                <td th:text="${emp.emp_id}" th:class="emp-id"></td>
                 <td th:text="${emp.emp_name}"></td>
                 <td th:text="${emp.emp_email}"></td>
                 <td th:text="${emp.phone_number}"></td>
                 <td th:text="${emp.job_title}"></td>
-                <td th:text="${#dates.format(emp.hire_date, 'yy-MM-dd')}"></td>
-                <td th:text="${#dates.format(emp.join_date, 'yy-MM-dd HH:mm:ss')}"></td>
+                <td th:text="${#dates.format(emp.hire_date, 'yy/MM/dd')}"></td>
+                <td th:text="${#dates.format(emp.join_date, 'yy/MM/dd')}"></td>
             </tr>
         </tbody>
     </table>
-
-    <nav aria-label="Page navigation">
-        <ul class="pagination" id="pagination">
-        </ul>
-    </nav>
 </div>

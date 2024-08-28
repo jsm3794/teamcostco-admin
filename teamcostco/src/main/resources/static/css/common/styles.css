@@ -3,9 +3,9 @@
     font-style: normal;
     font-weight: 200;
     src: url('/fonts/Material_Symbols_Outlined.woff2') format('woff2');
-  }
-  
-  .material-symbols-outlined {
+}
+
+.material-symbols-outlined {
     font-family: 'Material Symbols Outlined';
     font-weight: normal;
     font-style: normal;
@@ -19,12 +19,12 @@
     direction: ltr;
     -webkit-font-feature-settings: 'liga';
     -webkit-font-smoothing: antialiased;
-  }
+}
 
 * {
     box-sizing: border-box;
     font-family: 'Malgun Gothic', sans-serif;
-    color: var(--text-color);
+    transition: 0.08s;
 }
 
 html,
@@ -32,7 +32,6 @@ body {
     height: 100%;
     padding: 0;
     margin: 0;
-    background-color: var(--background-sub-color);
 }
 
 .container {
@@ -46,7 +45,8 @@ main {
     width: calc(100% - 200px);
     flex: 1;
     padding: 20px;
-    overflow-y: scroll;
+    overflow-y: auto;
+    background-color: var(--background-sub-color);
 }
 
 .page-title {
@@ -61,6 +61,7 @@ main {
     border-radius: 5px;
     background-color: var(--background-color);
     border: var(--border-line);
+    overflow-x: auto;
 }
 
 table {
@@ -73,12 +74,50 @@ table {
     overflow: hidden;
 }
 
+table td,
+table th {
+    padding: 5px;
+    font-size: 14px;
+}
+
 table tbody>tr>td {
     border: var(--border-line) !important;
     background-color: var(--table-td-background-color) !important;
+    text-align: center;
 }
 
 table thead th {
     background-color: var(--table-th-background-color) !important;
+    color: var(--text-color) !important;
     border: var(--border-line) !important;
+    padding:10px;
+}
+
+input, select {
+    padding: 3px;
+    border: var(--border-line);
+    background-color: var(--background-color);
+    color: var(--text-color);
+    border-radius: 3px;
+}
+
+button {
+    border-radius: 3px;
+    border: var(--border-line) !important;
+    background-color: var(--button-background-color) !important;
+    color: var(--button-text-color);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: var(--text-color);
+}
+
+div {
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+table tbody tr:hover {
+    background-color: var(--hover-background-color);
+    color: var(--text-color);
 }

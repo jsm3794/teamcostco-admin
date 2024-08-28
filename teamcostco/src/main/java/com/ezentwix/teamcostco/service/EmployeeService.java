@@ -1,5 +1,7 @@
 package com.ezentwix.teamcostco.service;
 
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -58,7 +60,11 @@ public class EmployeeService implements PageMetadataProvider {
 
     @Override
     public List<String> getJsFiles() {
-        return null;
+        return List.of(
+            "https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js", // Bootstrap JS 추가
+            "/js/contents/employee.js"  // 기존의 JS 파일
+        );
     }
 
+    
 }

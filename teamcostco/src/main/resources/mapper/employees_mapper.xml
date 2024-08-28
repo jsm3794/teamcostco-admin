@@ -50,4 +50,7 @@
     <include refid="getByIdAndPw"/>
   </select>
 
+    <select id="getAllJobTitles" resultType="String">
+      SELECT job_title FROM employees
+    </select>
 </mapper>
