@@ -72,4 +72,18 @@
      <select id="findById" parameterType="Integer" resultType="product">
         SELECT * FROM products WHERE product_id = #{productId}
     </select>
+    <update id="updateProduct" parameterType="product">
+        UPDATE products
+        SET
+            product_name = #{product_name},
+            category_large = #{category_large},
+            category_medium = #{category_medium},
+            category_small = #{category_small},
+            category_detail = #{category_detail},
+            purchase_price = #{purchase_price}, 
+            selling_price = #{selling_price},   
+            brand = #{brand}
+        WHERE
+            product_id = #{product_id}
+    </update>
 </mapper>

@@ -1,39 +1,85 @@
+/* 기본 컨테이너 스타일 */
 .container {
     background-color: #fff;
     border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(53, 50, 50, 0.1);
+    /* box-shadow: 0 4px 10px rgba(53, 50, 50, 0.1);  */
     overflow: hidden;
+    /* 자식 요소가 넘칠 경우 숨김 */
 }
 
+/* 테이블 스타일 */
 table {
     width: 100%;
     border-collapse: collapse;
+    /* 테두리 겹침 제거 */
 }
 
-th, td {
+/* 테이블 헤더 및 셀 스타일 */
+th,
+td {
     padding: 12px;
     border: 1px solid #c0c0c0;
     text-align: center;
+    font-size: 13px;
+    vertical-align: middle;
+    /* 세로 정렬을 중앙으로 설정 */
 }
 
+/* 테이블 헤더 스타일 */
 th {
     background-color: #7ba08f;
     color: white;
     width: 150px;
-    font-size: 13px;
 }
 
+/* 일반 셀 스타일 */
 td {
     transition: background-color 0.3s ease, border 0.3s ease;
+    /* 배경색 및 테두리 전환 효과 */
     width: 400px;
-    font-size: 13px;
 }
 
+/* 변경된 셀의 배경색 */
 td.changed {
-    background-color: #d4edda; 
+    background-color: #d4edda;
 }
 
-.modi-btn, .save-btn {
+/* 입력 박스 스타일 */
+input[type="text"],
+input[type="number"] {
+    border: none;
+    /* 테두리 제거 */
+    padding: 8px;
+    /* 패딩을 조정하여 셀 높이와 맞추기 */
+    box-sizing: border-box;
+    /* 패딩과 테두리가 박스 크기에 포함되도록 설정 */
+    font-size: 13px;
+    /* 폰트 크기 조정 */
+    line-height: 1.5;
+    /* 입력 박스의 줄 높이 조정 */
+}
+
+/* 수정 가능한 입력 박스 스타일 */
+input.editable {
+    background-color: #ffffff;
+    /* 배경색 설정 */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* 수정 불가능한 입력 박스 스타일 */
+input.readonly {
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    cursor: not-allowed;
+    /* 커서 모양 변경 */
+    color: #5a5d5f;
+    /* 텍스트 색상 변경 */
+}
+
+/* 버튼 스타일 */
+.modi-btn,
+.save-btn {
     background-color: white;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -41,38 +87,25 @@ td.changed {
     cursor: pointer;
     margin-top: 10px;
     transition: background-color 0.3s ease;
+    /* 배경색 전환 효과 */
 }
 
-.modi-btn.active {
-    background-color: #007BFF;
-    color: white;
-}
-
-.modi-btn:hover {
-    background-color: #f0f0f0;
-}
-
-.modi-btn.active:hover {
-    background-color: #0056b3;
-}
-
-.modi-btn {
-    margin-left: 89%;
-}
-
+/* 저장 버튼 위치 조정 */
 .save-btn {
-    margin-left: 92%;
+    margin-left: 90%;
+    margin-bottom: 10px;
 }
 
-.editable:hover {
-    background-color: #cefcc4; /* 원하는 색상으로 변경 */
-    transition: background-color 0.3s; /* 부드러운 전환 효과 */
-}
-
-.editable {
-    pointer-events: none; /* 수정 모드가 아닐 때 포인터 이벤트 비활성화 */
-}
-
-.editable.active {
-    pointer-events: auto; /* 수정 모드일 때 포인터 이벤트 활성화 */
+/* 날짜 필드 스타일 */
+.date-field {
+    display: inline-block;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: #ffffff;
+    color: #5a5d5f;
+    text-align: left;
+    font-size: 13px;
+    line-height: 1.5;
+    width: 160px;
 }
