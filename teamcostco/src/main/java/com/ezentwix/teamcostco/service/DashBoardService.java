@@ -34,6 +34,8 @@ public class DashBoardService implements PageMetadataProvider {
     public List<String> getJsFiles() {
         return List.of(
                 "https://cdn.jsdelivr.net/npm/chart.js",
+                "https://cdn.jsdelivr.net/npm/date-fns@2.29.3/index.min.js",
+                "https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns",
                 "/js/contents/dashboard.js");
     }
 

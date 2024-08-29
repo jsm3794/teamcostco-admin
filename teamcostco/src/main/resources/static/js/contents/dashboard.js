@@ -43,16 +43,16 @@ function updateChart(period) {
         .then(data => {
             if (data.length === 0) {
                 // 데이터가 없을 경우 처리
-                mychart1.data.labels = [];
-                mychart1.data.datasets[0].data = [];
-                mychart1.update();
+                myChart1.data.labels = [];
+                myChart1.data.datasets[0].data = [];
+                myChart1.update();
                 console.log("No data available for the selected period");
                 return;
             }
 
-            mychart1.data.labels = data.map(item => new Date(item.salesDate));
-            mychart1.data.datasets[0].data = data.map(item => item.totalPrice);
-            mychart1.options.scales.x = {
+            myChart1.data.labels = data.map(item => new Date(item.salesDate));
+            myChart1.data.datasets[0].data = data.map(item => item.totalPrice);
+            myChart1.options.scales.x = {
                 type: 'time',
                 time: {
                     parser: 'yyyy-MM-dd',
@@ -67,7 +67,7 @@ function updateChart(period) {
                     text: '날짜'
                 }
             };
-            mychart1.update();
+            myChart1.update();
         })
         .catch(error => console.error('Error fetching sales data:', error));
 }
