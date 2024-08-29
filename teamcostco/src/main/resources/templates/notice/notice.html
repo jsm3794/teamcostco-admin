@@ -1,0 +1,32 @@
+<div class="content-box">
+    <div class="button-container">
+        <form action="/notice" method="get">
+            <input type="text" name="query" placeholder="검색어를 입력하세요" required>
+            <input type="hidden" name="display" value="10">
+            <input type="hidden" name="start" value="1">
+            <button class="btn" type="submit">검색</button>
+        </form>
+        <button class="btn" id="write-btn">글 작성</button>
+    </div>
+    <table id="results">
+        <thead>
+            <tr>
+                <th>번호</th>
+                <th>말머리</th>
+                <th>제목</th>
+                <th>글쓴이</th>
+                <th>작성일자</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="notice : ${notices}">
+                <td th:text="${notice.notice_id}"></td>
+                <td th:text="공지"></td>
+                <td th:text="${notice.title}"></td>
+                <td th:text="${notice.job_title}"></td>
+                <td th:text="${#dates.format(notice.create_date, 'yy-MM-dd HH:mm')}"></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<script src="/js/contents/notice.js"></script>
