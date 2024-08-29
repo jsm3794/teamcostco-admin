@@ -7,6 +7,9 @@
     <title th:text="${(pageTitle ?: 'No-Title')}"></title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script th:src="@{/js/common/theme.js}"></script>
+    <th:block th:if="${pageDetail != null}">
+        <script th:src="@{/js/component/pagination_nav.js}"></script>
+    </th:block>
     <link rel="preload" href="/fonts/Material_Symbols_Outlined.woff2" as="font" type="font/woff2" crossorigin="anonymous">
     <link rel="stylesheet" th:href="@{/css/common/styles.css}">
     <link rel="stylesheet" th:href="@{/css/common/header.css}">
@@ -20,6 +23,9 @@
         <th:block th:each="cssFile : ${cssFiles}">
             <link rel="stylesheet" th:href="@{${cssFile}}" />
         </th:block>
+    </th:block>
+    <th:block th:if="${pageDetail != null}">
+        <link rel="stylesheet" th:href="@{/css/component/pagination_nav.css}">
     </th:block>
 </head>
 

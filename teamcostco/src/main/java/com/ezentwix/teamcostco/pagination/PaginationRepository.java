@@ -14,8 +14,12 @@ import org.modelmapper.Converter;
 import org.modelmapper.spi.MappingContext;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
+
+import lombok.extern.slf4j.Slf4j;
+
 import org.mybatis.spring.SqlSessionTemplate;
 
+@Slf4j
 @Repository
 public class PaginationRepository {
     private final SqlSessionTemplate sessionTemplate;
@@ -60,6 +64,7 @@ public class PaginationRepository {
         int page = pageable.getPageNumber() - 1;
         int offset = Math.max(0, pageable.getPageSize() * page);
         int limit = pageable.getPageSize();
+        log.info("offset : {}", offset);
 
         Map<String, Object> params = new HashMap<>();
         params.put("offset", offset);
@@ -73,7 +78,14 @@ public class PaginationRepository {
         int count = sessionTemplate.selectOne("pagination.count", params);
 
         int totalPages = (int) Math.ceil((double) count / limit);
+        int currentPage = pageable.getPageNumber();
+        int showPageNum = 5;
+        int startPageNumber = (page / showPageNum) * showPageNum + 1;
 
+        // 현재 페이지의 마지막 페이지 번호
+        int endPageNumber = Math.max(Math.min(startPageNumber + showPageNum - 1, totalPages), 1);
+        log.info("전체 페이지 수 : {}", totalPages);
+        log.info("***** 현재 페이지의 시작 페이지 번호({}), 마지막({}) *****", startPageNumber, endPageNumber);
         List<Map<String, Object>> rawData;
         if (page < totalPages && page >= 0) {
             rawData = sessionTemplate.selectList("pagination.selectPage", params);
@@ -84,24 +96,16 @@ public class PaginationRepository {
         // 쿼리 결과를 실제 사용할 DTO 객체로 변환
         // MAP 결과가 DTO 구조와 일치하지 않아 데이터 바인딩 등에 문제가 발생
 
-        System.out.println(rawData);
         List<T> data = rawData.stream()
-                .peek(map -> {
-                    // Log each key-value pair with its type and full class name
-                    System.out.println("Raw map:");
-                    map.forEach((key, value) -> {
-                        System.out.println("Key: " + key + ", Value: " + value
-                                + " (Type: " + (value != null ? value.getClass().getName() : "null") + ")");
-                    });
-                })
+
                 .map(map -> {
                     T dto = modelMapper.map(map, dtoClass);
-                    System.out.println("Mapped DTO: " + dto); // Log DTO after mapping
                     return dto;
                 })
                 .collect(Collectors.toList());
 
-        PaginationResult<T> result = new PaginationResult<>(data, count);
+        PaginationResult<T> result = new PaginationResult<>(data, count, startPageNumber, endPageNumber, currentPage,
+                totalPages);
 
         return result;
     }

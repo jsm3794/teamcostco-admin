@@ -33,6 +33,7 @@ public class InventoreyController {
         PaginationResult<ProductDTO> result = productService.getPage(page, size, Map.of());
         model.addAttribute("items", result.getData());
         model.addAttribute("count", result.getCount());
+        model.addAttribute("pageDetail", result.getPageDetails());
         return "index";
     }
 

@@ -1,0 +1,33 @@
+<nav id="pagination_nav">
+
+    
+    <div id="page" class="page-state" th:data-page="${pageDetail.currentPage}" th:data-totalPages="${pageDetail.totalPages}"
+        th:text="|페이지 ${pageDetail.currentPage} / ${pageDetail.totalPages}|">
+    </div>
+
+    <div class="pagination" id="pagination">
+        <button id="firstPage" class="material-symbols-outlined">
+            keyboard_double_arrow_left
+        </button>
+        <button id="prevBtn" class="material-symbols-outlined">
+            keyboard_arrow_left
+        </button>
+
+
+        <ul id="pagination_items">
+            <li th:each="pageNum : ${#numbers.sequence(pageDetail.startPage, pageDetail.endPage)}"
+                th:class="page-item"
+                th:text="${pageNum}"
+                th:data-pageNum="${pageNum}"
+                th:classappend="${pageNum.toString() == (param.page != null ? param.page[0] : '1') ? ' current' : ''}">
+            </li>
+        </ul>
+
+        <button id="nextBtn" class="material-symbols-outlined">
+            keyboard_arrow_right
+        </button>
+        <button id="lastPage" class="material-symbols-outlined">
+            keyboard_double_arrow_right
+        </button>
+    </div>
+</nav>

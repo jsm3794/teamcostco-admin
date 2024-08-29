@@ -132,25 +132,7 @@ input[type="date"] {
     padding: 10px 15px;
     cursor: pointer;
 }
-/* 페이지 정보 및 네비게이션 버튼 스타일 */
-.pagination {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 10px;
-    gap: 5px;
-    width: 100%;
-}
-#prevBtn {
-    margin-right: 10px;
-}
-#nextBtn {
-    margin-left: 0;
-}
-#page {
-    font-size: 0.875em;
-    margin-left: auto;
-}
+
 /* 제품 이미지 및 이름 컨테이너 스타일 */
 .product-name-container {
     display: flex;

@@ -1,8 +1,9 @@
 <div class="content-box">
+  <div th:replace="~{component/pagination_nav::nav}"></div>
     <form action="/productorder" method="get">
         <input type="text" name="query" placeholder="검색어를 입력하세요" required>
         <input type="hidden" name="display" value="10">
-        <input type="hidden" name="start" value="1">
+        <input type="hidden" name="page" th:value="${param.page == null ? 1 : param.page[0]}">
         <button type="submit">검색</button>
     </form>
     <table id="results">
