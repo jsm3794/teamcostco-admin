@@ -1,10 +1,14 @@
 package com.ezentwix.teamcostco.controller;
 
+import java.util.Map;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.ezentwix.teamcostco.dto.employee.EmployeeDTO;
+import com.ezentwix.teamcostco.pagination.PaginationResult;
 import com.ezentwix.teamcostco.service.EmployeeDetailService;
 import com.ezentwix.teamcostco.service.EmployeeService;
 
@@ -19,9 +23,15 @@ public class EmployeeController {
     private final EmployeeDetailService employeeDetailService;
 
     @GetMapping("/emp_list")
-    public String showEmployee(Model model) {
+    public String showEmployee(Model model, @RequestParam(defaultValue = "1") int page) {
         employeeService.configureModel(model);
-        model.addAttribute("empList", employeeService.getEmpList());
+
+        //model.addAttribute("empList", employeeService.getEmpList());
+        PaginationResult<EmployeeDTO> result = employeeService.getPage(page, 10);
+        model.addAttribute("empList", result.getData());
+        model.addAttribute("startPageNumber", result.getStartPageNumber());
+        model.addAttribute("endPageNumber", result.getEndPageNumber());
+        model.addAttribute("totalPages", result.getTotalPages());
         return "index";
     }
 

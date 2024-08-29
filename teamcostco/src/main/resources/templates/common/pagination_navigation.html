@@ -1,0 +1,15 @@
+<nav aria-label="Page navigation">
+    
+    <div class="pagination" id="pagination">
+        <div id="firstPage">&laquo;</div>
+        <div id="prevBtn">Previous</div>
+        <ul type="none" th:each="pageNum : ${#numbers.sequence(startPageNumber,endPageNumber)}">
+            <li class="page-item" th:text="${pageNum}" th:data-pageNum="${pageNum}"></li>
+        </ul>
+        <div id="nextBtn">Next</div>
+        <div id="lastPage">&raquo;</div>
+        <div id="page" th:data-page="${startPageNumber}" th:data-totalPages="${endPageNumber}" th:text="|Page ${startPageNumber} of ${totalPages}|"></div>
+    </div>
+   
+    
+</nav>
