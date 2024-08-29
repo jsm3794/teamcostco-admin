@@ -2,7 +2,7 @@
 
     <a id="search-btn">검색하기</a>
     <div th:replace="~{component/pagination_nav::nav}"></div>
-    <table class="table">
+    <table id="results">
         <thead>
             <tr>
                 <th>번호</th>
@@ -12,22 +12,7 @@
                 <th>직책</th>
                 <th>고용일자</th>
                 <th>가입일자</th>
-            </tr>
-            <tr>
-                <th><input type="text" id="filter-emp-id"></th>
-                <th><input type="text" id="filter-emp-name"></th>
-                <th><input type="text" id="filter-emp-email"></th>
-                <th><input type="text" id="filter-phone"></th>
-                <th>
-                    <select id="filter-job-title-dropdown">
-                        <option value="all">전체</option>
-                        <option value="">1</option>
-                        <option value="">2</option>
-                        <option value="">3</option>
-                    </select>
-                </th>
-                <th><input type="text" id="filter-hire-date"></th>
-                <th><input type="text" id="filter-join-date"></th>
+                <th></th>
             </tr>
         </thead>
         <tbody id="employee-table-body">

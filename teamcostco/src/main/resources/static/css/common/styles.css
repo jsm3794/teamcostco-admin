@@ -34,6 +34,10 @@ body {
     margin: 0;
 }
 
+tbody {
+    height: 100%;
+}
+
 .container {
     display: flex;
     flex-direction: column;
@@ -42,11 +46,11 @@ body {
 }
 
 main {
+    background-color: var(--background-sub-color);
     width: calc(100% - 200px);
     flex: 1;
     padding: 20px;
     overflow-y: auto;
-    background-color: var(--background-sub-color);
 }
 
 .page-title {
@@ -56,45 +60,91 @@ main {
 }
 
 .content-box {
-    display: inline-block;
+    display: flex;
+    flex-direction: column;
     padding: 15px;
     border-radius: 5px;
     background-color: var(--background-color);
     border: var(--border-line);
-    overflow-x: auto;
+    height: 100%;
 }
 
 table {
+    display: flex;
+    flex-direction: column;
+    width: calc(100% + 30px) !important;
+    margin: 0 -15px -15px -15px;
     width: 100%;
-    height: 100%;
-    margin-bottom: 2px;
     border-collapse: collapse;
-    border-radius: 3px;
     border-style: hidden;
-    box-shadow: var(--table-shadow);
-    overflow: hidden;
+    flex: 1 1 auto;
+    min-height: 0;
+}
+
+thead {
+    display: block;
+}
+
+tbody {
+    overflow-y: scroll;
+
+}
+
+table tr {
+    display: flex;
+    flex-direction: row;
 }
 
 table td,
 table th {
-    padding: 5px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    padding: 10px;
     font-size: 14px;
 }
 
-table tbody>tr>td {
-    border: var(--border-line) !important;
-    background-color: var(--table-td-background-color) !important;
-    text-align: center;
+table>thead>tr>th:last-child{
+    padding:0;
 }
 
-table thead th {
+table>tbody>tr>td {
+    border-right: var(--border-line);
+    background-color: var(--table-td-background-color) !important;
+    justify-content: center;
+    overflow: hidden;
+}
+
+
+table>thead>tr>th {
     background-color: var(--table-th-background-color) !important;
     color: var(--text-color) !important;
-    border: var(--border-line) !important;
-    padding:10px;
+    border-right: var(--border-line);
+    justify-content: center;
 }
 
-input, select {
+table>tbody>tr{
+    border-bottom: var(--border-line);
+}
+table>tbody>tr:last-child {
+    border-bottom: none !important;
+}
+
+table>thead>tr>th:last-child{
+    border-right: none !important;
+}
+
+table>thead>tr>th:first-child{
+    border-left: none;
+}
+
+table>thead>tr>th:last-child{
+    border-right: none;
+}
+
+
+input,
+select {
     padding: 3px;
     border: var(--border-line);
     background-color: var(--background-color);
@@ -109,7 +159,12 @@ button {
     color: var(--button-text-color);
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     color: var(--text-color);
 }
 
@@ -121,11 +176,55 @@ table tbody tr:hover {
     background-color: var(--hover-background-color);
 }
 
-.readonly, [readonly]  {
+.readonly,
+[readonly] {
     cursor: not-allowed;
     color: #5a5d5f;
-    -webkit-user-select:none;
-    -moz-user-select:none;
-    -ms-user-select:none;
-    user-select:none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+#search_area {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-radius: 3px;
+    border: var(--border-line);
+    padding-right: 5px;
+}
+
+#search_input {
+    width: 100%;
+    height: 100%;
+    border: none;
+    padding: 5px;
+    outline: none;
+}
+
+#search_btn {
+    cursor: pointer;
+    user-select: none;
+}
+
+#filter_area {
+    width: 90px;
+    height: 30px;
+    border-radius: 3px;
+}
+
+#filter_btn {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+#filter_icon {
+    font-size: 16px;
+    margin-right: 5px;
 }

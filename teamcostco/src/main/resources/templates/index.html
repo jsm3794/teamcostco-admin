@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title th:text="${(pageTitle ?: 'No-Title')}"></title>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script th:src="@{/js/common/theme.js}"></script>
     <th:block th:if="${pageDetail != null}">
         <script th:src="@{/js/component/pagination_nav.js}"></script>
@@ -34,12 +34,12 @@
         <div th:replace="~{common/navigationbar::nav}"></div>
         <div th:replace="~{common/header::header}"></div>
         <main>
-            <h1 class="page-title" th:text="${pageTitle}"></h1>
             <div th:replace="~{${uri}}"></div>
         </main>
     </div>
     <script th:src="@{/js/common/navigationbar.js}"></script>
     <script th:src="@{/js/common/header.js}"></script>
+    <script th:src="@{/js/common/main.js}"></script>
     <th:block th:if="${jsFiles != null}">
         <th:block th:each="jsFile : ${jsFiles}">
             <script th:src="@{${jsFile}}"></script>
