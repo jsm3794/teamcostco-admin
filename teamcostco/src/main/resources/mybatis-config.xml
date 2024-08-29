@@ -5,6 +5,7 @@
         <typeAlias type="com.ezentwix.teamcostco.dto.product.ProductDTO" alias="product" />
         <typeAlias type="com.ezentwix.teamcostco.dto.category.CategoryDTO" alias="category" />
         <typeAlias type="com.ezentwix.teamcostco.dto.employee.EmployeeDTO" alias="emp" />
+        <typeAlias type="com.ezentwix.teamcostco.dto.sales.SalesDataDTO" alias="sales" />
         <typeAlias type="com.ezentwix.teamcostco.dto.product.OrderRequestDTO" alias="orderrequest" />
     </typeAliases>
 </configuration>

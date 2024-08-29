@@ -145,11 +145,13 @@ input[type="date"] {
 }
 /* 테이블 위 박스 3개 */
 .info-boxes {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
-    gap: 20px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
 }
+
 .info-box {
     flex: 1;
     background-color: transparent !important;
@@ -159,20 +161,25 @@ input[type="date"] {
     min-height: 100px;
     font-weight: bold;
     text-align: left;
-    font-size: 25px;
+    font-size: 20px;
 }
+
+/* 각 박스에 대한 색상 설정 */
 .categories {
     color: #3781F0;
     font-weight: bold;
 }
+
 .total-product {
     color: #E5A558;
     font-weight: bold;
 }
+
 .low-stock {
     color: #C95757;
     font-weight: bold;
 }
+
 .total-text {
     font-size: 20px;
     margin-top: 15px;

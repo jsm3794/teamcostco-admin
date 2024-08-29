@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Sales">
+    <select id="salesByDate" resultType="sales">
+        SELECT TRUNC(sales_date) as salesDate, SUM(total_price) as totalPrice
+        FROM sales_prac
+        WHERE sales_date BETWEEN TO_DATE(#{startDate}, 'YYYY-MM-DD') AND TO_DATE(#{endDate}, 'YYYY-MM-DD')
+        GROUP BY TRUNC(sales_date)
+        ORDER BY TRUNC(sales_date)
+    </select>
+</mapper>
