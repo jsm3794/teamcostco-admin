@@ -12,7 +12,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class NoticeController {
     private final NoticeService noticeService;
-    
+
     @GetMapping("/notice")
     public String showNotice(Model model) {
         noticeService.configureModel(model);
@@ -20,5 +20,4 @@ public class NoticeController {
 
         return "index";
     }
-
 }

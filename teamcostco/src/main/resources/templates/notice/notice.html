@@ -19,12 +19,13 @@
             </tr>
         </thead>
         <tbody>
-            <tr th:each="notice : ${notices}">
+            <tr th:each="notice : ${notices}" 
+                th:onclick="'window.location.href=\'http://localhost:9999/board?notice_id=' + ${notice.notice_id} + '\''">
                 <td th:text="${notice.notice_id}"></td>
                 <td th:text="공지"></td>
                 <td th:text="${notice.title}"></td>
                 <td th:text="${notice.job_title}"></td>
-                <td th:text="${#dates.format(notice.create_date, 'yy-MM-dd HH:mm')}"></td>
+                <td th:text="${#dates.format(notice.update_date, 'yy-MM-dd HH:mm')}"></td>
             </tr>
         </tbody>
     </table>

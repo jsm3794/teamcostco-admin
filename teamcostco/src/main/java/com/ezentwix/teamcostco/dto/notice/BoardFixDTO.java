@@ -1,12 +1,11 @@
 package com.ezentwix.teamcostco.dto.notice;
 
+import lombok.Data;
 import java.util.Date;
 
-import lombok.Data;
-
 @Data
-public class NoticeDTO {
-
+public class BoardFixDTO {
+    
     private Integer notice_id;
     private String title;
     private String content;

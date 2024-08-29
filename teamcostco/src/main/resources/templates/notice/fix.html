@@ -1,0 +1,28 @@
+<base href="/">
+<div class="content-box">
+    <div class="form-container">
+        <form action="/fix" method="post" id="notice-form">
+            <div class="form-row">
+                <label for="title">제목:</label>
+                <input type="text" id="title" name="title" th:value="${boardfix.title}">
+            </div>
+            <div class="form-row">
+                <label for="content">내용:</label>
+                <textarea id="content" name="content" th:text="${boardfix.content}"></textarea>
+            </div>
+            <div class="form-row">
+                <label for="job_title">작성자:</label>
+                <input type="text" id="job_title" name="job_title" th:value="${boardfix.job_title}" readonly>
+            </div>
+            
+            <div class="form-row">
+                <label for="create_date">작성일:</label>
+                <input type="date" id="create_date" th:value="${#dates.format(boardfix.create_date, 'yyyy-MM-dd')}" readonly>
+            </div>
+            
+            <input type="hidden" name="notice_id" th:value="${boardfix.notice_id}">
+            <input id="alert" type="submit" value="수정하기" class="btn">
+        </form>
+    </div>
+</div>
+<script src="/js/contents/fix.js"></script>

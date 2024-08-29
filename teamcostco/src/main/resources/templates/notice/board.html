@@ -1,0 +1,30 @@
+<div class="content-box">
+    <div class="button-container">
+        <form action="/board" method="get" id="notice-form">
+            <div class="form-row">
+                <label for="title">제목:</label>
+                <input type="text" id="title" name="title" th:value="${board.title}" readonly>
+            </div>
+            
+            <div class="form-row">
+                <label for="content">내용:</label>
+                <textarea id="content" name="content" th:text="${board.content}" readonly></textarea>
+            </div>
+            
+            <div class="form-row">
+                <label for="job_title">작성자:</label>
+                <input type="text" id="job_title" name="job_title" th:value="${board.job_title}" readonly>
+            </div>
+            
+            <div class="form-row">
+                <label for="update_date">작성일:</label>
+                <input type="date" id="update_date" th:value="${#dates.format(board.update_date, 'yyyy-MM-dd')}" readonly>
+            </div>
+            
+        </form>
+    </div>
+    <div class="button-container">
+        <button class="btn" th:onclick="'window.location.href=\'http://localhost:9999/notice\''">목록</button>
+        <button id="fix-button" class="btn" th:onclick="'window.location.href=\'http://localhost:9999/fix/' + ${board.notice_id} + '\''">수정</button>
+    </div>
+</div>

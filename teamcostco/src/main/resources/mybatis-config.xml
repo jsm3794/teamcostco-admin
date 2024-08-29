@@ -10,5 +10,7 @@
         <typeAlias type="com.ezentwix.teamcostco.dto.product.ProductDefectiveDTO" alias="productdefective" />
         <typeAlias type="com.ezentwix.teamcostco.dto.notice.NoticeDTO" alias="notice" />
         <typeAlias type="com.ezentwix.teamcostco.dto.notice.WritingDTO" alias="writing" />
+        <typeAlias type="com.ezentwix.teamcostco.dto.notice.BoardDTO" alias="board" />
+        <typeAlias type="com.ezentwix.teamcostco.dto.notice.BoardFixDTO" alias="boardfix" />
     </typeAliases>
 </configuration>
