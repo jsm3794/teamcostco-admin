@@ -1,42 +1,40 @@
+let currentTheme = getCookie("theme") || "light";
+
 document.addEventListener('DOMContentLoaded', () => {
     const toggleButton = document.getElementById('theme-toggle');
-    let currentTheme = getCookie("theme") || "light";
+    const icon = document.querySelector('#mode_icon');
+    icon.textContent = getCookie('theme') === 'dark' ? 'light_mode' : 'dark_mode';
+    
+    const charts = [
+        typeof myChart1 !== 'undefined' ? myChart1 : null,
+        typeof myChart2 !== 'undefined' ? myChart2 : null,
+        typeof myChart3 !== 'undefined' ? myChart3 : null,
+        typeof myChart4 !== 'undefined' ? myChart4 : null
+    ];
 
     function toggleTheme() {
-        currentTheme = getCookie("theme") || "light";
-
-        // 새 테마 결정
-        const newTheme = currentTheme === "light" ? "dark" : "light";
-        // 아이콘 요소 가져오기
-        const icon = toggleButton.querySelector('#mode_icon');
-
-        // 쿠키에 새 테마 저장
+        const newTheme = getCookie("theme") === "light" ? "dark" : "light";
+        console.log(newTheme);
         setCookie("theme", newTheme, 7);
-
         if (icon) {
-            // 문서에 새 테마 적용
             document.documentElement.setAttribute("data-theme", newTheme);
-            applyThemeToCharts(myChart1, newTheme);
-            applyThemeToCharts(myChart2, newTheme);
-            applyThemeToCharts(myChart3, newTheme);
-            applyThemeToCharts(myChart4, newTheme);
-            applyTheme();
-            // 아이콘 텍스트 변경
-            icon.textContent = newTheme === 'dark' ? 'dark_mode' : 'light_mode';
-
+            icon.textContent = getCookie('theme') === 'dark' ? 'light_mode' : 'dark_mode';
+            setChartTheme(newTheme);
         } else {
             console.error('아이콘 요소를 찾을 수 없습니다.');
         }
     }
 
-    // 클릭 시 테마 전환
-    toggleButton.addEventListener('click', toggleTheme);
+    function setChartTheme(theme) {
+        charts.forEach(chart => {
+            if (chart) {
+                applyThemeToCharts(chart, theme);
+            }
+        });
+    }
 
-    
-    applyThemeToCharts(myChart1, currentTheme);
-    applyThemeToCharts(myChart2, currentTheme);
-    applyThemeToCharts(myChart3, currentTheme);
-    applyThemeToCharts(myChart4, currentTheme);
+
+    toggleButton.addEventListener('click', toggleTheme);
 });
 
 function applyThemeToCharts(chart, newTheme) {
@@ -66,7 +64,7 @@ function applyThemeToCharts(chart, newTheme) {
             if (chart.options.scales.y && chart.options.scales.y.grid) {
                 chart.options.scales.y.grid.color = gridColor;
             }
-            
+
             // x축 라벨 색상 설정
             if (chart.options.scales.x && chart.options.scales.x.ticks) {
                 chart.options.scales.x.ticks.color = textColor;
@@ -113,5 +111,4 @@ function applyTheme() {
     }
 }
 
-// 페이지 로드 시 테마 적용
 applyTheme();

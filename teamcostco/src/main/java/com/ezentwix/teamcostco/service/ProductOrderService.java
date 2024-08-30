@@ -32,7 +32,7 @@ public class ProductOrderService implements PageMetadataProvider {
             return new PaginationResult<>(List.of(), 0, 1, 1, 1, 1);
         }
 
-        String url = String.format("https://openapi.naver.com/v1/search/shop.json?query=%s&size=%d&start=%d",
+        String url = String.format("https://openapi.naver.com/v1/search/shop.json?query=%s&display=%d&start=%d",
                 query, size, (page - 1) * size + 1);
 
         try {
@@ -53,9 +53,9 @@ public class ProductOrderService implements PageMetadataProvider {
 
             List<NaverProductDTO> items = response.getItems();
             int count = response.getTotal();
-            int totalPages = (int) Math.ceil((double) count / size);
+            int totalPages = (int) Math.min(Math.ceil((double) count / size), 100);
             int showPageNum = 5;
-            int startPage = ((page-1) / showPageNum) * showPageNum + 1;
+            int startPage = ((page - 1) / showPageNum) * showPageNum + 1;
             int endPage = Math.min(startPage + showPageNum - 1, totalPages);
 
             return new PaginationResult<>(items, count, startPage, endPage, page, totalPages);
@@ -76,7 +76,14 @@ public class ProductOrderService implements PageMetadataProvider {
     }
 
     @Override
+    public List<String> getJsFiles() {
+        return List.of(
+                "/js/contents/productorder.js");
+    }
+
+    @Override
     public List<String> getCssFiles() {
-        return List.of("/css/contents/productorder.css");
+        return List.of(
+                "/css/contents/productorder.css");
     }
 }

@@ -61,6 +61,10 @@ public class PaginationRepository {
     public <T> PaginationResult<T> getPage(String queryId, Pageable pageable, Map<String, Object> additionalParams,
             Class<T> dtoClass) {
 
+        if (pageable == null || pageable.getPageSize() <= 0) {
+            return new PaginationResult<>(List.of(), 0, 1, 1, 1, 1);
+        }
+
         int page = pageable.getPageNumber() - 1;
         int offset = Math.max(0, pageable.getPageSize() * page);
         int limit = pageable.getPageSize();

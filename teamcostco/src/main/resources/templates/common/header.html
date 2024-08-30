@@ -1,7 +1,7 @@
 <header>
     <div class="top-header">
         <div class="header-left">
-            <h1>대시보드</h1>
+            <h1 th:text="${pageTitle}"></h1>
             <nav class="breadcrumb">
             </nav>
         </div>
@@ -30,14 +30,6 @@
                     <img src="/images/profile-default.svg" alt="user_profile" class="profile-pic">
                 </a>
             </div>
-        </div>
-    </div>
-    <div class="under-header">
-        <div th:href="@{/}">홈</div>
-        <div class="path-separator">/</div>
-        <div id="current-page"
-            th:text="${#strings.capitalize(#strings.substring(uri, #strings.indexOf(uri, '/') + 1))}">
-            notfound
         </div>
     </div>
 </header>

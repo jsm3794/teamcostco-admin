@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
-    margin-bottom: 10px;
+    width:100%;
 }
 
 #pagination_items {
@@ -35,6 +35,7 @@
     gap:5px;
 }
 
+
 .page-item {
     display: flex;
     flex-direction: row;
@@ -57,4 +58,5 @@
 
 .current {
     border: var(--border-line);
+    font-weight: bold;
 }

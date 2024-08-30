@@ -1,19 +1,23 @@
 <div class="content-box">
-  <div th:replace="~{component/pagination_nav::nav}"></div>
   <form action="/productorder" method="get">
-    <input type="text" name="query" placeholder="검색어를 입력하세요" required>
-    <input type="hidden" name="display" value="10">
+    <div class="flex-row-box space-between">
+      <div class="flex-row-box">
+        <div th:replace="~{/component/search_input::div}"></div>
+        <div th:replace="~{/component/filter::div}"></div>
+      </div>
+      <div th:replace="~{component/pagination_nav::nav}"></div>
+    </div>
+    <input type="hidden" name="size" value="10">
     <input type="hidden" name="page" th:value="${param.page == null ? 1 : param.page[0]}">
-    <button type="submit">검색</button>
   </form>
   <table id="results">
     <thead>
       <tr>
-        <th>이미지</th>
-        <th>제목</th>
-        <th>가격</th>
-        <th>판매처</th>
-        <th>링크</th>
+        <th width="10%">이미지</th>
+        <th width="40%">제목</th>
+        <th width="10%">가격</th>
+        <th width="20%">판매처</th>
+        <th width="20%">링크</th>
         <th></th>
       </tr>
     </thead>

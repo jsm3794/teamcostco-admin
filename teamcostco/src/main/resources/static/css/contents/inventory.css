@@ -7,44 +7,6 @@
     width:100%;
 }
 
-/* 검색 제목 스타일 */
-#serachTitle {
-    font-size: 24px;
-    margin-bottom: 10px;
-}
-/* 검색 입력창과 버튼을 포함한 컨테이너 스타일 */
-.search-buttons-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
-    gap: 5px; /* 버튼 간 간격 조정 */
-    width: 100%;
-    flex-wrap: wrap; /* 버튼이 공간 부족 시 줄바꿈 */
-}
-/* 검색 입력창과 버튼을 감싸는 컨테이너 스타일 */
-.search-wrapper {
-    display: flex;
-    align-items: center;
-}
-/* 검색 입력창 스타일 */
-#searchInput {
-    width: 200px;
-    height: 35px;
-    padding: 5px;
-    border-radius: 5px;
-    margin-right: 5px;
-}
-#searchInput:focus {
-    border-color: #007BFF; /* 포커스 시 파란색 테두리 */
-    outline: none; /* 기본 포커스 아웃라인 제거 */
-}
-/* 검색 버튼 스타일 */
-#searchBtn {
-    border-radius: 5px;
-    padding: 7px 10px;
-    cursor: pointer;
-}
 /* 날짜 필터 적용 버튼*/
 #applyDateFilter, #applyFilterBtn {
     border-radius: 5px;
@@ -62,48 +24,8 @@
     font-size: 0.875em; /* 폰트 크기 통일 */
     margin-left: 40px;
 }
-/* 날짜 및 필터 버튼 컨테이너 스타일 */
-.date-dropdown, .filter-dropdown {
-    display: flex;
-    align-items: center;
-}
-.date-dropdown {
-    margin-left: auto; /* 오른쪽 끝으로 배치 */
-}
-.filter-dropdown {
-    margin-left: 5px; /* 날짜 버튼과 필터 버튼 사이 간격 */
-}
-/* 드롭다운 버튼과 내용 스타일 */
-.dropdown-btn, .nav-btn {
-    border-radius: 5px;
-    padding: 10px 15px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-}
-/* 드롭다운 내용 스타일 */
-.dropdown-content {
-    display: none; /* 기본적으로 숨김 */
-    position: absolute;
-    border-radius: 5px;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
-    z-index: 1;
-    padding: 10px;
-}
-/* 드롭다운 내용 내 라벨과 체크박스 스타일 */
-.dropdown-content label {
-    display: block;
-    padding: 5px 0;
-}
-.dropdown-content input[type="checkbox"] {
-    margin-right: 10px;
-}
-/* 캘린더 드롭다운 스타일 */
-.calendar-dropdown {
-    width: 200px;
-}
+
+
 /* 날짜 입력창 스타일 */
 input[type="date"] {
     width: 100%;
@@ -112,20 +34,6 @@ input[type="date"] {
     border-radius: 5px;
 }
 
-/* 테이블 셀 스타일 */
-.table th, .table td {
-    padding: 8px;
-    text-align: center;
-    border-bottom: 1px solid #ccc;
-}
-.table tbody tr {
-    cursor: pointer; /* 클릭 가능한 커서로 변경 */
-}
-
-/* 체크박스 스타일 */
-.table th input[type="checkbox"] {
-    margin: 0;
-}
 /* 네비게이션 버튼 스타일 */
 .nav-btn {
     border-radius: 5px;

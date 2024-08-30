@@ -12,11 +12,10 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @Repository
 public class OrderRequestRepository {
-    
+
     private final SqlSessionTemplate sql;
 
     public List<OrderRequestDTO> getAll() {
         return sql.selectList("OrderRequest.getAllWithProductName");
     }
-
 }

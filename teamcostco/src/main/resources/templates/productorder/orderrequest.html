@@ -1,21 +1,27 @@
 <div class="content-box">
     <form action="/orderrequest" method="get">
-        <input type="text" name="query" placeholder="검색어를 입력하세요" required>
+        <div class="flex-row-box space-between">
+            <div class="flex-row-box">
+                <div th:replace="~{/component/search_input::div}"></div>
+                <div th:replace="~{/component/filter::div}"></div>
+            </div>
+            <div th:replace="~{/component/pagination_nav::nav}"></div>
+        </div>
         <input type="hidden" name="display" value="10">
         <input type="hidden" name="start" value="1">
-        <button type="submit">검색</button>
     </form>
     <table id="results">
         <thead>
             <tr>
-                <th>선택</th>
-                <th>ID</th>
-                <th>상품명</th>
-                <th>발주수량</th>
-                <th>입고수량</th>
-                <th>불량수량</th>
-                <th>발주직원</th>
-                <th>요청일자</th>
+                <th width="10%">선택</th>
+                <th width="10%">ID</th>
+                <th width="20%">상품명</th>
+                <th width="10%">발주수량</th>
+                <th width="10%">입고수량</th>
+                <th width="10%">불량수량</th>
+                <th width="20%">발주직원</th>
+                <th width="20%">요청일자</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>

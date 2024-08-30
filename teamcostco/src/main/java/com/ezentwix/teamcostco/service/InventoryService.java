@@ -28,8 +28,9 @@ public class InventoryService implements PageMetadataProvider {
     @Override
     public List<String> getCssFiles() {
         return List.of("/css/contents/inventory.css");
+
     }
-    
+
     @Override
     public List<String> getJsFiles() {
         return List.of("/js/contents/inventory.js");

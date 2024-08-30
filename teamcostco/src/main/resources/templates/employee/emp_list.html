@@ -1,7 +1,12 @@
 <div class="content-box">
 
-    <a id="search-btn">검색하기</a>
-    <div th:replace="~{component/pagination_nav::nav}"></div>
+    <div class="flex-row-box space-between">
+        <div class="flex-row-box">
+            <div th:replace="~{/component/search_input::div}"></div>
+            <div th:replace="~{/component/filter::div}"></div>
+        </div>
+        <div th:replace="~{component/pagination_nav::nav}"></div>
+    </div>
     <table id="results">
         <thead>
             <tr>

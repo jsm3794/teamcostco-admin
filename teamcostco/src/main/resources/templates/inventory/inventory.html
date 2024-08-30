@@ -25,48 +25,26 @@
     </div>
 </div>
 <div class="content-box">
-    <div id="serachTitle">Inventory items</div>
-    <div th:replace="~{component/pagination_nav::nav}"></div>
-    <div class="search-buttons-container">
-        <div th:replace="~{component/search_input::div}"></div>
-        <div th:replace="~{component/filter::div}"></div>
-        <div class="dropdown date-dropdown">
-            <button class="dropdown-btn" onclick="toggleDropdown('dateDropdown')">
-                <span class="icon">&#x1F4C5</span> Date
-            </button>
-            <div id="dateDropdown" class="dropdown-content calendar-dropdown">
-                <label for="startDate">시작 날짜:</label>
-                <input type="date" id="startDate">
-                <label for="endDate">종료 날짜:</label>
-                <input type="date" id="endDate">
-                <button id="applyDateFilter" onclick="applyDateFilter()">필터 적용</button> <!-- 필터 적용 버튼 추가 -->
-            </div>
+    <div class="flex-row-box space-between">
+        <div class="flex-row-box">
+            <div th:replace="~{/component/search_input::div}"></div>
+            <div th:replace="~{/component/filter::div}"></div>
         </div>
-        <div class="dropdown filter-dropdown">
-            <button class="dropdown-btn" onclick="toggleDropdown('filterDropdown')">
-                <span class="icon">&#x1F50E</span> Filter
-            </button>
-            <div id="filterDropdown" class="dropdown-content">
-                <label><input type="checkbox" name="filter" value="Option 1"> 대분류</label>
-                <label><input type="checkbox" name="filter" value="Option 2"> 중분류</label>
-                <label><input type="checkbox" name="filter" value="Option 3"> 소분류</label>
-                <label><input type="checkbox" name="filter" value="Option 4"> 세분류</label>
-                <button id="applyFilterBtn" onclick="applyFilter()">필터 적용</button> <!-- 필터 적용 버튼 추가 -->
-            </div>
-        </div>
+        <div th:replace="~{component/pagination_nav::nav}"></div>
     </div>
-    <table class="table">
 
+    <table id="results">
         <thead>
             <tr>
-                <th><input type="checkbox" id="selectAll" onclick="selectAllRows()"></th>
-                <th>상품명</th>
-                <th>대분류</th>
-                <th>상품코드</th>
-                <th>매입가격</th>
-                <th>판매가격</th>
-                <th>브랜드</th>
-                <th>총수량</th>
+                <th width="5%"><input type="checkbox" id="selectAll" onclick="selectAllRows()"></th>
+                <th width="35%">상품명</th>
+                <th width="10%">대분류</th>
+                <th width="10%">상품코드</th>
+                <th width="10%">매입가격</th>
+                <th width="10%">판매가격</th>
+                <th width="10%">브랜드</th>
+                <th width="10%">총수량</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>

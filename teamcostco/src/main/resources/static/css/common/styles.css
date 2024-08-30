@@ -5,6 +5,18 @@
     src: url('/fonts/Material_Symbols_Outlined.woff2') format('woff2');
 }
 
+/* 스크롤 바 전체에 대한 스타일 지정 */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+    background-color: var(--scrollbar-background-color);
+}
+
+/* 스크롤 바의 색상 지정 */
+::-webkit-scrollbar-thumb {
+    background-color: var(--scrollbar-thumb-color);
+}
+
 .material-symbols-outlined {
     font-family: 'Material Symbols Outlined';
     font-weight: normal;
@@ -24,7 +36,6 @@
 * {
     box-sizing: border-box;
     font-family: 'Malgun Gothic', sans-serif;
-    transition: 0.08s;
 }
 
 html,
@@ -33,6 +44,7 @@ body {
     padding: 0;
     margin: 0;
 }
+
 
 tbody {
     height: 100%;
@@ -67,6 +79,7 @@ main {
     background-color: var(--background-color);
     border: var(--border-line);
     height: 100%;
+    gap: 15px;
 }
 
 table {
@@ -87,7 +100,6 @@ thead {
 
 tbody {
     overflow-y: scroll;
-
 }
 
 table tr {
@@ -104,8 +116,10 @@ table th {
     font-size: 14px;
 }
 
-table>thead>tr>th:last-child{
-    padding:0;
+table>thead>tr>th:last-child {
+    width: 10px !important;
+    padding: 0 !important;
+    border-right: none;
 }
 
 table>tbody>tr>td {
@@ -115,7 +129,6 @@ table>tbody>tr>td {
     overflow: hidden;
 }
 
-
 table>thead>tr>th {
     background-color: var(--table-th-background-color) !important;
     color: var(--text-color) !important;
@@ -123,23 +136,32 @@ table>thead>tr>th {
     justify-content: center;
 }
 
-table>tbody>tr{
+table>tbody>tr {
     border-bottom: var(--border-line);
 }
-table>tbody>tr:last-child {
-    border-bottom: none !important;
-}
 
-table>thead>tr>th:last-child{
-    border-right: none !important;
-}
 
-table>thead>tr>th:first-child{
+table>thead>tr>th:first-child {
     border-left: none;
 }
 
-table>thead>tr>th:last-child{
-    border-right: none;
+.table-hidden {
+    opacity: 0;
+}
+
+.table-visible {
+    opacity: 1;
+    animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
 }
 
 
@@ -172,6 +194,10 @@ div {
     color: var(--text-color);
 }
 
+table>thead>tr>th:nth-last-child(2) {
+    border-right: none;
+}
+
 table tbody tr:hover {
     background-color: var(--hover-background-color);
 }
@@ -190,6 +216,7 @@ table tbody tr:hover {
     display: flex;
     flex-direction: row;
     align-items: center;
+    flex: 1;
     border-radius: 3px;
     border: var(--border-line);
     padding-right: 5px;
@@ -209,7 +236,7 @@ table tbody tr:hover {
 }
 
 #filter_area {
-    width: 90px;
+    width: 95px;
     height: 30px;
     border-radius: 3px;
 }
@@ -227,4 +254,16 @@ table tbody tr:hover {
 #filter_icon {
     font-size: 16px;
     margin-right: 5px;
+}
+
+.flex-row-box {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    width: 100%;
+}
+
+.flex-row-box.space-between {
+    justify-content: space-between;
 }

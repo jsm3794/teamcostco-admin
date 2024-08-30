@@ -1,6 +1,7 @@
 // 박스 1 차트
 const chart1 = document.getElementById('chart1').getContext('2d');
 
+
 const myChart1 = new Chart(chart1, {
     type: 'line',
     data: {
