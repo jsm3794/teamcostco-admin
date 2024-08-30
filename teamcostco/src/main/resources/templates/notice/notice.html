@@ -1,0 +1,37 @@
+<div class="content-box">
+
+    <form action="/notice" method="get">
+        <div class="flex-row-box space-between">
+            <div class="flex-row-box">
+                <div th:replace="~{/component/search_input::div}"></div>
+                <div th:replace="~{/component/filter::div}"></div>
+            </div>
+            <div th:replace="~{component/pagination_nav::nav}"></div>
+        </div>
+    </form>
+
+    <button class="btn" id="write-btn">글 작성</button>
+    <table id="results">
+        <thead>
+            <tr>
+                <th width="10%">번호</th>
+                <th width="10%">말머리</th>
+                <th width="45%">제목</th>
+                <th width="15%">글쓴이</th>
+                <th width="20%">작성일자</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="notice : ${notices}"
+                th:onclick="'window.location.href=\'http://localhost:9999/board?notice_id=' + ${notice.notice_id} + '\''">
+                <td th:text="${notice.notice_id}"></td>
+                <td th:text="공지"></td>
+                <td th:text="${notice.title}"></td>
+                <td th:text="${notice.job_title}"></td>
+                <td th:text="${#dates.format(notice.update_date, 'yy-MM-dd HH:mm')}"></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<script src="/js/contents/notice.js"></script>

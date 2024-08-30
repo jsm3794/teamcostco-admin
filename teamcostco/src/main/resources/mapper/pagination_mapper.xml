@@ -15,6 +15,9 @@
             <when test="queryId == 'Products.getAll'">
                 <include refid="Products.getAll"/>
             </when>
+            <when test="queryId == 'Notice.getAll'">
+                <include refid="Notice.getAll"></include>
+            </when>
         </choose>
     </sql>
 

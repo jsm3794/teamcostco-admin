@@ -1,0 +1,15 @@
+<base href="/">
+<div class="content-box">
+
+    <form action="/fix" method="post" id="notice-form">
+        <input type="text" id="job_title" name="job_title" th:value="${boardfix.job_title}" readonly>
+        <input type="text" id="title" name="title" th:value="${boardfix.title}">
+        <textarea id="content" name="content" th:text="${boardfix.content}"></textarea>
+        <input type="hidden" name="notice_id" th:value="${boardfix.notice_id}">
+        <input id="alert" type="submit" value="수정하기" class="btn">
+    </form>
+
+</div>
+<script src="https://cdn.tiny.cloud/1/f43n80pak829erjzkenxl0hxm0cr0w1g4rlhrggk8fk92t29/tinymce/7/tinymce.min.js"
+    referrerpolicy="origin"></script>
+<script src="/js/contents/fix.js"></script>

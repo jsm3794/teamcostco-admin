@@ -1,0 +1,16 @@
+.content-box {
+    width: 100%;
+}
+
+#write-btn {
+    padding:5px 0;
+    cursor: pointer;
+}
+
+#results > tbody > tr > td:nth-child(3){
+    justify-content: flex-start;
+}
+
+#results > tbody > tr {
+    cursor: pointer;
+}

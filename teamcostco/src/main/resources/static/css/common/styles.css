@@ -92,6 +92,7 @@ table {
     border-style: hidden;
     flex: 1 1 auto;
     min-height: 0;
+    background-color: var(--table-background-color);
 }
 
 thead {
@@ -176,8 +177,8 @@ select {
 
 button {
     border-radius: 3px;
-    border: var(--border-line) !important;
-    background-color: var(--button-background-color) !important;
+    border: var(--border-line);
+    background-color: var(--button-background-color);
     color: var(--button-text-color);
 }
 
