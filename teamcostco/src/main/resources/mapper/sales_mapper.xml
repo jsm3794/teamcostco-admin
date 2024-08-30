@@ -8,4 +8,16 @@
         GROUP BY TRUNC(sales_date)
         ORDER BY TRUNC(sales_date)
     </select>
+
+    <select id="totalSalesByPeriod" resultType="totalSales">
+         SELECT
+            trunc(sales_date) AS sales_date,
+            SUM(sales_qty) AS total_sales
+        FROM
+            sales_prac
+        GROUP BY
+            trunc(sales_date)
+        ORDER BY
+            trunc(sales_date)
+    </select>
 </mapper>

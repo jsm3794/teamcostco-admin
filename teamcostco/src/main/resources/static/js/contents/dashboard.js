@@ -124,96 +124,158 @@ const chart3 = document.getElementById('chart3').getContext('2d');
 const myChart3 = new Chart(chart3, {
     type: 'bar',
     data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple'],
-        datasets: [{
-            label: '# of Votes',
-            data: [12, 19, 7, 5, 9],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(255, 99, 132, 0.2)',
-            ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(255, 99, 132, 1)',
-                'rgba(255, 99, 132, 1)',
-                'rgba(255, 99, 132, 1)',
-                'rgba(255, 99, 132, 1)',
-            ],
-            borderWidth: 1
-        },
-        {
-            label: '# of Votes',
-            data: [3, 21, 2, -3, 1],
-            backgroundColor: [
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-            ],
-            borderColor: [
-                'rgba(255, 206, 86, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(255, 206, 86, 1)',
-            ],
-            borderWidth: 1
-        },
-        {
-            label: '# of Votes',
-            data: [19, 14, 3, 1, 2],
-            backgroundColor: [
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-            ],
-            borderColor: [
-                'rgba(54, 162, 235, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(54, 162, 235, 1)',
-            ],
-            borderWidth: 1
-        },
-        {
-            label: '# of Votes',
-            data: [12, 19, 3, 5, -1],
-            backgroundColor: [
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(75, 192, 192, 0.2)'
-            ],
-            borderColor: [
-                'rgba(75, 192, 192, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(75, 192, 192, 1)',
-            ],
-            borderWidth: 1
-        }
+        labels: [],  // 차트의 X축 레이블
+        datasets: [
+            {
+                label: 'Total Sales',
+                data: [],  // Total Sales 데이터
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 99, 132, 1)',
+                ],
+                borderWidth: 1
+            },
+            {
+                label: 'Total Products',
+                data: [],  
+                backgroundColor: [
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                ],
+                borderColor: [
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(255, 206, 86, 1)',
+                ],
+                borderWidth: 1
+            }
         ]
     },
     options: {
         maintainAspectRatio: false,
         scales: {
+            x: {
+                type: 'time',
+                time: {
+                    unit: 'day',  // 기본 단위는 일
+                    tooltipFormat: 'yyyy-MM-dd',
+                    displayFormats: {
+                        day: 'yyyy-MM-dd',
+                        month: 'yyyy-MM',
+                        year: 'yyyy'
+                    }
+                }
+            },
             y: {
-                beginAtZero: true
+                beginAtZero: true,
             }
         }
     }
 });
 
+// 차트 업데이트 함수
+function updateChart3(period) {
+    $.ajax({
+        url: '/totalsales',
+        method: 'GET',
+        dataType: 'json',
+        success: function(salesData) {
+            if (salesData.length === 0) {
+                myChart3.data.labels = [];
+                myChart3.data.datasets[0].data = [];
+                myChart3.update();
+                console.log("No data available for the selected period");
+                return;
+            }
 
+            let labels = [];
+            let totalSales = [];
+            
+            salesData.forEach(item => {
+                let date = new Date(item.sales_date);
+                labels.push(date);
+                totalSales.push(item.total_sales);
+            });
+
+            // 기간에 따른 집계 처리
+            if (period === 'month') {
+                labels = aggregateByPeriod(labels, 'month');
+            } else if (period === 'year') {
+                labels = aggregateByPeriod(labels, 'year');
+            }
+
+            // Total Products 데이터 가져오기
+            $.ajax({
+                url: '/totalproductsbyupdate',
+                method: 'GET',
+                dataType: 'json',
+                success: function(productData) {
+                    const totalProducts = Array.isArray(productData) ? productData : Array(labels.length).fill(productData);
+
+                    // 차트 데이터 업데이트
+                    myChart3.data.labels = labels;
+                    myChart3.data.datasets[0].data = totalSales;
+                    myChart3.data.datasets[1].data = totalProducts;
+
+                    // x축 단위 업데이트
+                    myChart3.options.scales.x.time.unit = period === 'month' ? 'month' : period === 'year' ? 'year' : 'day';
+                    
+                    // 차트 업데이트
+                    myChart3.update();
+                },
+                error: function(error) {
+                    console.error('Error fetching total products data:', error);
+                }
+            });
+        },
+        error: function(error) {
+            console.error('Error fetching sales data:', error);
+        }
+    });
+}
+
+// 기간별 데이터 집계 함수
+function aggregateByPeriod(dates, period) {
+    const aggregatedData = {};
+    const format = period === 'month' ? 'YYYY-MM' : 'YYYY';
+    
+    dates.forEach(date => {
+        const key = moment(date).format(format);
+        if (!aggregatedData[key]) {
+            aggregatedData[key] = 0;
+        }
+        aggregatedData[key] += 1; // Adjust based on your aggregation logic
+    });
+
+    return Object.keys(aggregatedData).map(key => moment(key, format).toDate());
+}
+
+// 버튼 클릭 이벤트 처리
+$('#monthSalesBtn').click(() => updateChart3('month'));
+
+$('#yearSalesBtn').click(() => updateChart3('year'));
+
+$('#totalSalesBtn').click(() => updateChart3('day'));
+
+// 초기 로드 시 월 단위 데이터로 차트 설정
+$(document).ready(function() {
+    updateChart3('month');
+});
 
 // 박스 4 차트
 const chart4 = document.getElementById('chart4').getContext('2d');

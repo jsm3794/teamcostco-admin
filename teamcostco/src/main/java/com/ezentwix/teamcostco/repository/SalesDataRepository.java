@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.ezentwix.teamcostco.dto.sales.SalesDataDTO;
+import com.ezentwix.teamcostco.dto.sales.TotalSalesDTO;
 
 import lombok.RequiredArgsConstructor;
 
@@ -23,6 +24,10 @@ public class SalesDataRepository {
         params.put("startDate", startDate);
         params.put("endDate", endDate);
         return sql.selectList("Sales.salesByDate", params);
+    }
+
+    public List<TotalSalesDTO> getTotalSalesByPeriod() {
+        return sql.selectList("Sales.totalSalesByPeriod");
     }
 
 }

@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.ezentwix.teamcostco.dto.sales.SalesDataDTO;
+import com.ezentwix.teamcostco.dto.sales.TotalSalesDTO;
 import com.ezentwix.teamcostco.repository.SalesDataRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -38,5 +39,9 @@ public class SalesDataService {
 
         return salesDataRepository.getSalesByDate(startDate.toString(), endDate.toString());
 
+    }
+
+    public List<TotalSalesDTO> getTotalSalesByPeriod() {
+        return salesDataRepository.getTotalSalesByPeriod();
     }
 }

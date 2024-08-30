@@ -36,7 +36,8 @@ public class DashBoardService implements PageMetadataProvider {
                 "https://cdn.jsdelivr.net/npm/chart.js",
                 "https://cdn.jsdelivr.net/npm/date-fns@2.29.3/index.min.js",
                 "https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns",
-                "/js/contents/dashboard.js");
+                "/js/contents/dashboard.js",
+                "https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js");
     }
 
 }

@@ -43,6 +43,10 @@ public class ProductService {
         return psDTO;
     }
 
+    public Integer getTotalProductsByUpdateDate() {
+        return productRepository.getTotalProductsByUpdateDate();
+    }
+
     public ProductDTO getProductById(Integer productId){
         return productRepository.findById(productId);
     }

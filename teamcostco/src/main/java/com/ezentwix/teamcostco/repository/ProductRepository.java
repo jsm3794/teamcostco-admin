@@ -30,6 +30,11 @@ public class ProductRepository {
         return sql.selectOne("Products.getLowProducts");
     }
 
+    // 날짜별 총수량
+    public Integer getTotalProductsByUpdateDate() {
+        return sql.selectOne("Products.getTotalProductsByUpdateDate");
+    }
+
     // 제품 ID로 제품을 가져오는 메서드 추가
     public ProductDTO findById(Integer productId) {
         return sql.selectOne("Products.findById", productId);
@@ -38,4 +43,5 @@ public class ProductRepository {
     public void updateProduct(ProductDTO productDTO) {
         sql.update("Products.updateProduct", productDTO);
     }
+
 }
