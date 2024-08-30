@@ -10,7 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.thymeleaf.expression.Arrays;
+
 
 import com.ezentwix.teamcostco.dto.sales.SalesDataDTO;
 import com.ezentwix.teamcostco.dto.sales.TotalSalesDTO;
@@ -40,7 +40,7 @@ public class SalesDataController {
         }
     }
 
-    @GetMapping("/totalsales")
+    @GetMapping("/totalsales" )
     public List<TotalSalesDTO> getTotalSalesByPeriod() {
 
         return salesDataService.getTotalSalesByPeriod();

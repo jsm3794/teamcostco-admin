@@ -1,11 +1,11 @@
 package com.ezentwix.teamcostco.dto.sales;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import lombok.Data;
 
 @Data
 public class TotalSalesDTO {
-    private Date sales_date;
+    private LocalDate sales_date;
     private Integer total_sales;
 }

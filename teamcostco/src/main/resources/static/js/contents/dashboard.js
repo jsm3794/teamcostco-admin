@@ -188,7 +188,26 @@ const myChart3 = new Chart(chart3, {
     }
 });
 
-// 차트 업데이트 함수
+function aggregateByPeriod(salesData, period) {
+    const aggregatedData = {};
+    const format = (period === 'month') ? 'YYYY-MM' : 'YYYY';
+
+    // 날짜별로 total_sales를 합산
+    salesData.forEach(item => {
+        const key = moment(item.sales_date).format(format);
+        if (!aggregatedData[key]) {
+            aggregatedData[key] = 0;
+        }
+        aggregatedData[key] += item.total_sales;  // 같은 기간의 판매량을 합산
+    });
+
+    // 집계된 데이터를 배열 형태로 반환
+    const labels = Object.keys(aggregatedData);
+    const totalSales = Object.values(aggregatedData);
+
+    return { labels, totalSales };
+}
+
 function updateChart3(period) {
     $.ajax({
         url: '/totalsales',
@@ -203,28 +222,26 @@ function updateChart3(period) {
                 return;
             }
 
-            let labels = [];
-            let totalSales = [];
-            
-            salesData.forEach(item => {
-                let date = new Date(item.sales_date);
-                labels.push(date);
-                totalSales.push(item.total_sales);
-            });
+            let labels, totalSales;
 
-            // 기간에 따른 집계 처리
-            if (period === 'month') {
-                labels = aggregateByPeriod(labels, 'month');
-            } else if (period === 'year') {
-                labels = aggregateByPeriod(labels, 'year');
+            // 일단위 데이터를 월별 또는 년별로 집계
+            if (period === 'month' || period === 'year') {
+                const aggregated = aggregateByPeriod(salesData, period);
+                labels = aggregated.labels;
+                totalSales = aggregated.totalSales;
+            } else {
+                // 일 단위 데이터를 그대로 사용
+                labels = salesData.map(item => moment(item.sales_date).format('YYYY-MM-DD'));
+                totalSales = salesData.map(item => item.total_sales);
             }
 
-            // Total Products 데이터 가져오기
+            // 총 상품 데이터 가져오기
             $.ajax({
                 url: '/totalproductsbyupdate',
                 method: 'GET',
                 dataType: 'json',
                 success: function(productData) {
+                    // 총 상품 수량이 배열로 들어오지 않은 경우 처리
                     const totalProducts = Array.isArray(productData) ? productData : Array(labels.length).fill(productData);
 
                     // 차트 데이터 업데이트
@@ -234,7 +251,7 @@ function updateChart3(period) {
 
                     // x축 단위 업데이트
                     myChart3.options.scales.x.time.unit = period === 'month' ? 'month' : period === 'year' ? 'year' : 'day';
-                    
+
                     // 차트 업데이트
                     myChart3.update();
                 },
@@ -249,33 +266,23 @@ function updateChart3(period) {
     });
 }
 
-// 기간별 데이터 집계 함수
-function aggregateByPeriod(dates, period) {
-    const aggregatedData = {};
-    const format = period === 'month' ? 'YYYY-MM' : 'YYYY';
-    
-    dates.forEach(date => {
-        const key = moment(date).format(format);
-        if (!aggregatedData[key]) {
-            aggregatedData[key] = 0;
-        }
-        aggregatedData[key] += 1; // Adjust based on your aggregation logic
+$(document).ready(function() {
+    $('#monthSalesBtn').on('click', function() {
+        updateChart3('month');
     });
 
-    return Object.keys(aggregatedData).map(key => moment(key, format).toDate());
-}
+    $('#yearSalesBtn').on('click', function() {
+        updateChart3('year');
+    });
 
-// 버튼 클릭 이벤트 처리
-$('#monthSalesBtn').click(() => updateChart3('month'));
+    $('#totalSalesBtn').on('click', function() {
+        updateChart3('day');
+    });
 
-$('#yearSalesBtn').click(() => updateChart3('year'));
-
-$('#totalSalesBtn').click(() => updateChart3('day'));
-
-// 초기 로드 시 월 단위 데이터로 차트 설정
-$(document).ready(function() {
+    // 기본적으로 월단위
     updateChart3('month');
 });
+
 
 // 박스 4 차트
 const chart4 = document.getElementById('chart4').getContext('2d');
