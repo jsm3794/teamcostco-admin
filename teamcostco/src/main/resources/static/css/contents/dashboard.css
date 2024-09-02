@@ -1,5 +1,4 @@
-
-/* info-boxes 컨테이너와 박스 스타일 */
+/* 테이블 위 박스 3개 */
 .info-boxes {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -10,40 +9,43 @@
 
 .info-box {
     flex: 1;
-    background-color: #FFFFFF;
-    border: 1px solid #ddd;
+    background-color: transparent !important;
     border-radius: 5px;
     padding: 20px;
     text-align: center;
     min-height: 100px;
     font-weight: bold;
     text-align: left;
-    font-size: 20px;
 }
 
 /* 각 박스에 대한 색상 설정 */
 .categories {
     color: #3781F0;
+    font-weight: bold;
+    font-size: 20px;
 }
 
 .total-product {
     color: #E5A558;
+    font-weight: bold;
+    font-size: 20px;
 }
 
 .low-stock {
     color: #C95757;
+    font-weight: bold;
+    font-size: 20px;
 }
 
 .total-text {
-    color: #646464;
-    font-size: 17px;
-    margin-top: 10px;
+    font-size: 20px;
+    margin-top: 15px;
 }
 
 /* grid-container와 박스 스타일 */
 .grid-container {
     display: grid;
-    grid-template-columns: 70% 29%;
+    grid-template-columns: 70% 29.4%;
     gap: 10px;
     box-sizing: border-box;
 }

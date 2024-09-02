@@ -74,7 +74,7 @@
     margin-left: 5px; /* 날짜 버튼과 필터 버튼 사이 간격 */
 }
 /* 드롭다운 버튼과 내용 스타일 */
-.dropdown-btn, .nav-btn {
+.dropdown-btn-inventory, .nav-btn {
     border-radius: 5px;
     padding: 10px 15px;
     cursor: pointer;
@@ -161,23 +161,25 @@ input[type="date"] {
     min-height: 100px;
     font-weight: bold;
     text-align: left;
-    font-size: 20px;
 }
 
 /* 각 박스에 대한 색상 설정 */
 .categories {
     color: #3781F0;
     font-weight: bold;
+    font-size: 20px;
 }
 
 .total-product {
     color: #E5A558;
     font-weight: bold;
+    font-size: 20px;
 }
 
 .low-stock {
     color: #C95757;
     font-weight: bold;
+    font-size: 20px;
 }
 
 .total-text {
