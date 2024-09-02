@@ -14,9 +14,7 @@ public class WritingRepository {
     private final SqlSessionTemplate sql;
     
     public WritingDTO add(WritingDTO writingDTO) {
-        
         sql.insert("Writing.add", writingDTO);
-
         return writingDTO;
     }
 }

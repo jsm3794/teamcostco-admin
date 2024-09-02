@@ -1,0 +1,25 @@
+{
+  "filter-list": [
+    {
+      "filter-name": "재고상태",
+      "tag": "input",
+      "type": "select",
+      "data": [
+        {
+          "value": 1,
+          "text": "여유"
+        },
+        {
+          "value": 2,
+          "text": "부족"
+        }
+      ]
+    },
+    {
+      "filter-name": "매입날짜",
+      "tag": "input",
+      "type": "date",
+      "data": []
+    }
+  ]
+}
