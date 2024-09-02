@@ -6,7 +6,7 @@ const myChart1 = new Chart(chart1, {
     data: {
         labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
         datasets: [{
-            label: '# of Votes',
+            label: 'sales amount',
             data: [12, 19, 3, 5, 2, 3],
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
@@ -30,12 +30,46 @@ const myChart1 = new Chart(chart1, {
     options: {
         maintainAspectRatio: false,
         scales: {
+            x: {
+                type: 'time',
+                time: {
+                    parser: 'yyyy-MM-dd',
+                    unit: 'day',
+                    displayFormats: {
+                        day: 'yyyy-MM-dd',
+                        month: 'yyyy-MM'
+                    }
+                },
+                title: {
+                    display: true,
+                    text: '날짜'
+                }
+            },
             y: {
                 beginAtZero: true
+            }
+        },
+        plugins: {
+            tooltip: {
+                callbacks: {
+                    label: function(context) {
+                        let label = context.dataset.label || '';
+                        if (label) {
+                            label += ': ';
+                        }
+                        label += context.formattedValue;
+                        return label;
+                    },
+                    title: function(context) {
+                        const date = context[0].parsed.x; 
+                        return moment(date).format('YYYY-MM-DD'); 
+                    }
+                }
             }
         }
     }
 });
+
 
 function updateChart(period) {
     fetch(`/sales-data?period=${period}`)

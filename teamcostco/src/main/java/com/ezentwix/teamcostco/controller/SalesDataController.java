@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-
 import com.ezentwix.teamcostco.dto.sales.SalesDataDTO;
 import com.ezentwix.teamcostco.dto.sales.SalesQtyPracDTO;
 import com.ezentwix.teamcostco.dto.sales.TotalSalesDTO;
@@ -30,7 +29,7 @@ public class SalesDataController {
             List<Map<String, Object>> formattedData = salesData.stream()
                 .map(data -> {
                     Map<String, Object> item = new HashMap<>();
-                    item.put("salesDate", data.getFormattedSalesDate());
+                    item.put("salesDate", data.getSalesDate());
                     item.put("totalPrice", data.getTotalPrice());
                     return item;
                 })
