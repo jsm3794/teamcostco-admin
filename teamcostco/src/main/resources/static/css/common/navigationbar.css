@@ -59,3 +59,29 @@
 .active, .active>* {
     color: #fff;
 }
+
+.aside-bar {
+    /* 기존 사이드바 스타일 */
+    position: relative;
+}
+
+.aside-footer {
+    margin-top: auto; /* 사이드바 하단에 위치하도록 설정 */
+    padding: 10px;
+    background-color: var(--background-color); /* 배경색 설정 */
+    text-align: center;
+    font-size: 12px;
+}
+
+.aside-footer p {
+    margin: 5px 0;
+}
+
+.aside-footer a {
+    color: var(--text-color); /* 링크 색상 설정 */
+    text-decoration: none; 
+}
+
+.aside-footer a:hover {
+    text-decoration: underline;
+}
