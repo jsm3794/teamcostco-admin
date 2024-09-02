@@ -117,6 +117,40 @@ const myChart2 = new Chart(chart2, {
     }
 });
 
+const updateChart2 = () => {
+    $.ajax({
+        url: "/weeklyTopProducts",
+        method: "GET",
+        dataType: 'json',
+        success: function(TopProducts) {
+            
+            const chartData = myChart2.data;
+
+            // 라벨 이름 -> 팔린 상품명
+            TopProducts.forEach((product, index) => {
+                chartData.labels[index] = product.sold_product_name;
+                //console.log(product.sold_product_name);
+            });
+
+            // 팔린 개수 할당
+            // console.dir(chartData.datasets[0].data);
+
+            if (chartData.datasets.length > 0) {
+                chartData.datasets[0].data = TopProducts.map(product => product.sold_qty);
+            }
+
+            // 차트 업데이트
+            myChart2.update();
+
+        },
+        error: function(error) {
+            console.error('Error fetching weeklyTopProducts data:', error);
+        }
+    })
+};
+
+updateChart2();
+
 
 
 // 박스 3 차트

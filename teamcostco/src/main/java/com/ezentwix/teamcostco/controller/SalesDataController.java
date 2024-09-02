@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 import com.ezentwix.teamcostco.dto.sales.SalesDataDTO;
+import com.ezentwix.teamcostco.dto.sales.SalesQtyPracDTO;
 import com.ezentwix.teamcostco.dto.sales.TotalSalesDTO;
 import com.ezentwix.teamcostco.service.SalesDataService;
 
@@ -45,5 +46,11 @@ public class SalesDataController {
 
         return salesDataService.getTotalSalesByPeriod();
     }
+
+    @GetMapping("/weeklyTopProducts")
+    public List<SalesQtyPracDTO> selectWeeklyTopProducts() {
+        return salesDataService.selectWeeklyTopProducts();
+    }
+    
     
 }

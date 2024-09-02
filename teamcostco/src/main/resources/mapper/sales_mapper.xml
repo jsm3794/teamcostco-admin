@@ -20,4 +20,10 @@
         ORDER BY
             trunc(sales_date)
     </select>
+
+    <!--일주일 동안 많이 팔린 상품 임시-->
+    <select id="selectWeeklyTopProducts" resultType="salesQtyPrac">
+        SELECT sold_product_name, sold_qty, sold_date FROM sales_qty_prac
+        WHERE trunc(sysdate, 'month') = trunc(sold_date, 'month')
+    </select>
 </mapper>
