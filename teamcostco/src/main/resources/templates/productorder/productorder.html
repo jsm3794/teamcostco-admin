@@ -1,14 +1,11 @@
 <div class="content-box">
-  <form action="/productorder" method="get">
+  <form action="/productorder" method="get" id="productorderForm">
     <div class="flex-row-box space-between">
       <div class="flex-row-box">
-        <div th:replace="~{/component/search_input::div}"></div>
-        <div th:replace="~{/component/filter::div}"></div>
+        <div th:replace="~{/component/search_input::div(id='productorderForm')}"></div>
       </div>
       <div th:replace="~{component/pagination_nav::nav}"></div>
     </div>
-    <input type="hidden" name="size" value="10">
-    <input type="hidden" name="page" th:value="${param.page == null ? 1 : param.page[0]}">
   </form>
   <table id="results">
     <thead>

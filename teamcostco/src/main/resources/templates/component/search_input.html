@@ -1,5 +1,5 @@
 <div id="search_area">
-    <input id="search_input" name="query" type="text" placeholder="검색" required>
+    <input id="search_input" name="query" type="text" placeholder="검색" th:for="${id}" th:value="${param.query}">
     <span id="search_btn" class="material-symbols-outlined">
         search
     </span>

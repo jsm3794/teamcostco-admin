@@ -33,7 +33,6 @@ public class ProductOrderController {
 
         model.addAttribute("items", result.getData());
         model.addAttribute("pageDetail", result.getPageDetails());
-        System.out.println(result.getPageDetails());
 
         // 결과 뷰 반환
         return "index";

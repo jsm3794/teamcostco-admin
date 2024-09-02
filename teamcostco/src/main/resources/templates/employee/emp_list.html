@@ -1,22 +1,24 @@
 <div class="content-box">
 
-    <div class="flex-row-box space-between">
-        <div class="flex-row-box">
-            <div th:replace="~{/component/search_input::div}"></div>
-            <div th:replace="~{/component/filter::div}"></div>
+    <form action="/emp_list" method="GET" id="employeeForm">
+        <div class="flex-row-box space-between">
+            <div th:replace="~{/component/search_input::div(id='employeeForm')}"></div>
+            <div th:replace="~{/component/filter::div(id='employeeForm')}"></div>
+            <div th:replace="~{/component/pagination_nav::nav}"></div>
         </div>
-        <div th:replace="~{component/pagination_nav::nav}"></div>
-    </div>
+        <div id="active-filters"></div>
+    </form>
+
     <table id="results">
         <thead>
             <tr>
-                <th>번호</th>
-                <th>이름</th>
-                <th>이메일</th>
-                <th>연락처</th>
-                <th>직책</th>
-                <th>고용일자</th>
-                <th>가입일자</th>
+                <th width="5%">번호</th>
+                <th width="10%">이름</th>
+                <th width="30%">이메일</th>
+                <th width="20%">연락처</th>
+                <th width="15%">직책</th>
+                <th width="10%">고용일자</th>
+                <th width="10%">가입일자</th>
                 <th></th>
             </tr>
         </thead>

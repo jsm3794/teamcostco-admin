@@ -1,1 +1,1 @@
-setTableColumnWidths($('#results')[0], ['5%','10%','30%','20%','15%','10%','10%']);
+initFilter('employee');

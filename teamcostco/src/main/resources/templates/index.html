@@ -10,6 +10,7 @@
     <link rel="stylesheet" th:href="@{/css/common/navigationbar.css}">
     <link rel="stylesheet" th:href="@{/css/common/theme.css}">
     <link rel="stylesheet" th:href="@{/css/component/filter.css}">
+    <link rel="stylesheet" th:href="@{/css/component/search.css}">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script th:src="@{/js/common/theme.js}"></script>
     <th:block th:if="${pageDetail != null}">
@@ -42,6 +43,7 @@
     <script th:src="@{/js/common/navigationbar.js}"></script>
     <script th:src="@{/js/common/header.js}"></script>
     <script th:src="@{/js/common/main.js}"></script>
+    <script th:src="@{/js/component/search.js}"></script>
     <script th:src="@{/js/component/filter.js}"></script>
     <th:block th:if="${jsFiles != null}">
         <th:block th:each="jsFile : ${jsFiles}">

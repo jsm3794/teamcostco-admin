@@ -1,65 +1,242 @@
-/**
- * 입력 그룹을 동적으로 추가하는 함수
- * @param {string} type - 입력 요소의 타입 ('text', 'checkbox', 'date', 'select' 등)
- * @param {string} title - label에 표시될 제목
- * @param {string} name - 생성될 입력 요소의 name 속성
- * @param {string} id - 생성될 입력 요소의 id 속성
- * @param {Array<{name: string, text: string}>} [options] - select 요소의 경우, 목록으로 표시할 옵션 (name 및 text)
- * @param {string} [formId] - 요소를 추가할 form의 ID (값이 없으면 filter_options에 추가)
- */
-function addInputGroup(type, title, name, id, options = [], formId = null) {
-    // 입력 그룹을 담을 div 생성
-    var inputGroup = $('<div>', { class: 'input-group' });
+const filter_apply = $('#filter_apply');
+const filterOptions = $('#filter_options');
+const filterBtn = $('#filter_btn');
+let filter_list = [];
 
-    // label 생성
-    var label = $('<label>').text(title + ': ');
-
-    let input;
-
-    switch (type) {
-        case 'select':
-            input = $('<select>', { name: name, id: id });
-            options.forEach(option => {
-                $('<option>', { value: option.name }).text(option.text).appendTo(input);
-            });
-            break;
-        case 'checkbox':
-            input = $('<input>', { type: 'checkbox', name: name, id: id });
-            break;
-        case 'date':
-            input = $('<input>', { type: 'date', name: name, id: id });
-            break;
-        default:
-            input = $('<input>', { type: type || 'text', name: name, id: id, placeholder: 'Enter ' + title });
-    }
-
-    // inputGroup에 label과 input 추가
-    inputGroup.append(label).append(input);
-
-    // formId가 주어진 경우, 해당 form에 추가
-    if (formId) {
-        $('#' + formId).append(inputGroup);
-    } else {
-        // formId가 없으면, 기본 div에 추가 (예: filterOptions)
-        $('#filter_items').append(inputGroup);
-    }
+function addFilterList(filterDTO) {
+    filter_list.push(filterDTO);
 }
 
-// 예시: 다양한 타입의 input 요소 추가
-addInputGroup('text', 'Name', 'name', 'name');
-addInputGroup('checkbox', 'Subscribe', 'subscribe', 'subscribe');
-addInputGroup('date', 'Date of Birth', 'dob', 'dob');
-addInputGroup('select', 'Country', 'country', 'country', [
-    { name: 'us', text: 'United States' },
-    { name: 'ca', text: 'Canada' },
-    { name: 'mx', text: 'Mexico' }
-]);
+function clearFilterList() {
+    filter_list = [];
+}
 
-var filterOptions = $('#filter_options');
-var filterBtn = $('#filter_btn');
+function removeFilter(filterDTO) {
+    const filterItems = $(`#${filterDTO.id}`);
+    filterItems.val('');
+
+    filter_list = filter_list.filter(filter => filter.id !== filterDTO.id);
+    setFilter();
+    displayFilterList();
+}
+
+
+function displayFilterList() {
+    var container = $('#active-filters');
+    container.empty(); // Clear existing content
+
+    filter_list.forEach(filterDTO => {
+        // Create a div for each filter
+        var filterBlock = $('<div>', { class: 'filter-block' });
+
+        // Create a span for the filter title and value
+        var filterText = $('<span>', { class: 'filter-text' })
+            .text(`${filterDTO.filter_title}: ${filterDTO.value}`);
+
+        // Create a button for removing the filter
+        var removeButton = $('<button>', { class: 'remove-filter' })
+            .text('X')
+            .on('click', function () {
+                removeFilter(filterDTO);
+            });
+
+        // Append the text and button to the filter block
+        filterBlock.append(filterText).append(removeButton);
+
+        // Append the filter block to the container
+        container.append(filterBlock);
+    });
+}
+
+filter_apply.on('click', (e) => {
+    e.preventDefault();
+    setFilter();
+    toggleFilter();
+});
+
+function setFilter() {
+    var target = $('#filter_items');
+
+    clearFilterList();
+
+    target.find('input, select').each(function () {
+        var element = $(this);
+        var value = element.val();
+        if (value.trim() !== '') {
+            // If value is not empty, set id as name
+            element.attr('name', element.attr('id'));
+            addFilterList(createFilterDTOFromElement(element));
+        } else {
+            // If value is empty, remove name attribute
+            element.removeAttr('name');
+        }
+    });
+
+    displayFilterList();
+}
+
+
+function addInputGroup(filterDTO) {
+    var inputGroup = $('<div>', { class: 'input-group' });
+
+    var label = $('<label>', { for: filterDTO.name }).text(filterDTO.filter_title);
+
+    // Check if the filter is of type 'date'
+    if (filterDTO.type === 'date') {
+        // Create start date input
+        var startDateElement = $('<input>', {
+            type: 'date',
+            id: filterDTO.name + '_start',
+            value: getParamValue(filterDTO.name + '_start'),
+            'data-title': filterDTO.filter_title + '(시작)'
+        });
+
+        // Create end date input
+        var endDateElement = $('<input>', {
+            type: 'date',
+            id: filterDTO.name + '_end',
+            value: getParamValue(filterDTO.name + '_end'),
+            'data-title': filterDTO.filter_title + '(종료)'
+        });
+
+        var box1 = $('<div>', {class:'flex-row-box'});
+        var box2 = $('<div>', {class:'flex-row-box'});
+
+        inputGroup.append(label);
+        box1.append($('<label>').text('시작일'));
+        box1.append(startDateElement);
+        box2.append($('<label>').text('종료일'));
+        box2.append(endDateElement);
+
+        inputGroup.append(box1);
+        inputGroup.append(box2);
+
+    } else {
+        // Create a single input or select element for other types
+        var element = $('<' + filterDTO.tag + '>', {
+            type: filterDTO.type,
+            id: filterDTO.name,
+            value: getParamValue(filterDTO.name)
+        });
+
+        element.attr('data-title', filterDTO.filter_title);
+
+        if (filterDTO.tag === 'select') {
+            let dataArray = Array.from(filterDTO.data.entries());
+
+            let sortedDataArray = dataArray.sort(([key1], [key2]) => {
+                if (key1 === '') return -1;  // Make '' (전체) come first
+                if (key2 === '') return 1;
+                return 0;
+            });
+
+            sortedDataArray.forEach(([key, value]) => {
+                var option = $('<option>', { value: key }).text(value);
+                if (key === getParamValue(filterDTO.name)) {
+                    option.attr('selected', 'selected');
+                }
+                element.append(option);
+            });
+        }
+
+        inputGroup.append(label).append(element);
+    }
+
+    $('#filter_items').append(inputGroup);
+}
+
+function getParamValue(param) {
+    var params = new URLSearchParams(window.location.search);
+    var paramValue;
+    params.forEach((value, key) => {
+        if (key == param)
+            paramValue = value;
+    });
+    return paramValue || '';
+}
+
+
 
 // 필터 버튼 클릭 시 동작 정의
 filterBtn.on('click', () => {
+    toggleFilter();
+});
+
+function toggleFilter() {
     filterOptions.toggleClass('hidden');
     filterBtn.toggleClass('hidden');
+}
+
+
+
+function fetchFilterData(filtertype) {
+    return $.ajax({
+        url: '/api/filter', // API endpoint
+        method: 'GET',
+        data: {
+            filtertype: filtertype // Query parameter
+        },
+        dataType: 'json' // Expect JSON response
+    });
+}
+
+
+function createFilterDTOFromElement(element) {
+    return {
+        id: element.attr('id'),
+        name: element.attr('name'),
+        value: element.val() || '10',
+        filter_title: element.data('title') || '', // Or any other attribute you want to include
+        tag: element.prop('tagName').toLowerCase() // 'input' or 'select'
+    };
+}
+
+
+function createFilterDTO(filterTitle, tag, type, name, placeholder, data) {
+    return {
+        filter_title: filterTitle,
+        tag: tag,
+        type: type,
+        name: name,
+        placeholder: placeholder,
+        data: new Map(Object.entries(data))  // Convert object to Map
+    };
+}
+
+function initFilter(filterType) {
+
+    fetchFilterData(filterType)
+        .done(function (response) {
+
+            // FilterDTO 객체 생성
+            response.forEach(filter => {
+
+                const filterDTO = createFilterDTO(
+                    filter.filter_title || 'Default Title',
+                    filter.tag || 'Default Tag',
+                    filter.type || 'Default Type',
+                    filter.name || 'Default Name',
+                    filter.placeholder || 'Default Placeholder',
+                    filter.data || {}
+                );
+
+                addInputGroup(filterDTO);
+
+            });
+
+            setFilter();
+
+        })
+        .fail(function (jqXHR, textStatus, errorThrown) {
+            $('#result').text('Error: ' + textStatus + ' - ' + errorThrown);
+        });
+}
+
+$(document).on('mousedown', function (event) {
+    // 클릭된 요소가 필터 화면이나 필터 버튼이 아닌 경우 필터 화면을 숨깁니다.
+    if (!filterOptions.is(event.target) && filterOptions.has(event.target).length === 0 &&
+        !filterBtn.is(event.target) && filterBtn.has(event.target).length === 0) {
+        filterOptions.addClass('hidden');
+        filterBtn.addClass('hidden');
+    }
 });

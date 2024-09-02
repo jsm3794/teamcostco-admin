@@ -13,3 +13,5 @@ function selectAllRows() {
 function redirectToDetailsPage(productId) {
     window.location.href = '/detail/' + productId; // Spring Boot에서 세부 페이지 URL 설정
 }
+
+initFilter('inventory');

@@ -1,8 +1,11 @@
 <nav id="pagination_nav">
-
-    
-    <div id="page" class="page-state" th:data-page="${pageDetail.currentPage}" th:data-totalPages="${pageDetail.totalPages}"
-        th:text="|페이지 ${pageDetail.currentPage} / ${pageDetail.totalPages}|">
+    <input type="hidden" name="page" th:value="${param.page == null ? 1 : param.page[0]}">
+    <div class="list-size-filter">
+        <label for="list_size">항목수</label>
+        <input type="number" id="list_size" name="size" th:value="${param.size ?: 10}">
+    </div>
+    <div id="page" class="page-state" th:data-page="${pageDetail.currentPage}"
+        th:data-totalPages="${pageDetail.totalPages}" th:text="|${pageDetail.currentPage} / ${pageDetail.totalPages}|">
     </div>
 
     <div class="pagination" id="pagination">
@@ -15,10 +18,8 @@
 
 
         <ul id="pagination_items">
-            <li th:each="pageNum : ${#numbers.sequence(pageDetail.startPage, pageDetail.endPage)}"
-                th:class="page-item"
-                th:text="${pageNum}"
-                th:data-pageNum="${pageNum}"
+            <li th:each="pageNum : ${#numbers.sequence(pageDetail.startPage, pageDetail.endPage)}" th:class="page-item"
+                th:text="${pageNum}" th:data-pageNum="${pageNum}"
                 th:classappend="${pageNum.toString() == (param.page != null ? param.page[0] : '1') ? ' current' : ''}">
             </li>
         </ul>

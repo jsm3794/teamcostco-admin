@@ -53,7 +53,8 @@ public class ProductOrderService implements PageMetadataProvider {
 
             List<NaverProductDTO> items = response.getItems();
             int count = response.getTotal();
-            int totalPages = (int) Math.min(Math.ceil((double) count / size), 100);
+
+            int totalPages = Math.min((int) Math.ceil((double) count / size), 100);
             int showPageNum = 5;
             int startPage = ((page - 1) / showPageNum) * showPageNum + 1;
             int endPage = Math.min(startPage + showPageNum - 1, totalPages);
@@ -61,7 +62,7 @@ public class ProductOrderService implements PageMetadataProvider {
             return new PaginationResult<>(items, count, startPage, endPage, page, totalPages);
 
         } catch (WebClientResponseException e) {
-            throw new RuntimeException("Failed to fetch products from Naver API", e);
+            return new PaginationResult<>(List.of(), 0, 1, 1, 1, 1);
         }
     }
 

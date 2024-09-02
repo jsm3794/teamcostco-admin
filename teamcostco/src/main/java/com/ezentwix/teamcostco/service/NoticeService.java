@@ -14,16 +14,15 @@ import com.ezentwix.teamcostco.repository.NoticeRepository;
 
 import lombok.RequiredArgsConstructor;
 
-
 @RequiredArgsConstructor
 @Service
-public class NoticeService implements PageMetadataProvider{
+public class NoticeService implements PageMetadataProvider {
     private final PaginationRepository paginationRepository;
-   
+
     private final NoticeRepository noticeRepository;
 
-    public PaginationResult<NoticeDTO> getPage(String query, int page, int size, Map<String, Object> params){
-        return  paginationRepository.getPage("Notice.getAll", PageRequest.of(page, size), params, NoticeDTO.class);
+    public PaginationResult<NoticeDTO> getPage(String query, int page, int size, Map<String, Object> params) {
+        return paginationRepository.getPage("Notice.getAll", PageRequest.of(page, size), params, NoticeDTO.class);
     }
 
     public List<NoticeDTO> getAll() {
@@ -33,6 +32,11 @@ public class NoticeService implements PageMetadataProvider{
     @Override
     public List<String> getCssFiles() {
         return List.of("/css/contents/notice.css");
+    }
+
+    @Override
+    public List<String> getJsFiles() {
+        return List.of("/js/contents/notice.js");
     }
 
     @Override

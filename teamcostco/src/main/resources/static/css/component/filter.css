@@ -6,6 +6,66 @@
     --filter-text-color: black;
 }
 
+#active-filters {
+    display:flex;
+    flex-direction: row;
+    gap:10px;
+    width:100%;
+    margin-top:10px;
+    padding-top:10px;
+    margin-bottom:10px;
+    border-top:var(--border-line);
+    max-height: 30px;
+}
+
+.filter-block {
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border:var(--border-line);
+    border-radius: 3px;
+    padding:5px;
+    height: 30px;
+    gap:10px;
+    font-size:12px;
+    background-color: var(--button-background-color);
+}
+
+.remove-filter{
+    font-weight: bold;
+    border:none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+#filter_apply {
+    cursor: pointer;
+}
+
+#filter_area {
+    width: 100px;
+    height: 30px;
+    border-radius: 3px;
+}
+
+
+#filter_btn {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 95px;
+    height: 100%;
+    cursor: pointer;
+}
+
+#filter_icon {
+    font-size: 16px;
+    margin-right: 5px;
+}
+
+
 #filter_options {
     position: absolute;
     width: auto;
@@ -15,14 +75,20 @@
     border: var(--border-line);
     padding: 10px;
     background-color: var(--filter-background-color);
+    width: 100%;
+    box-shadow: 3px 3px 5px rgba(0,0,0,0.2);
+}
+
+.input-group > label {
+    font-weight: bold;
 }
 
 #filter_items {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    gap: 30px;
     margin-bottom: 30px;
+    gap:10px;
 }
 
 #filter_btn::after {
@@ -37,6 +103,11 @@
     border-left: var(--border-line);
 }
 
+
+#filter_apply{
+    background-color: var(--filter-apply-button-background-color) !important;
+    color: var(--filter-apply-button-text-color) !important;
+}
 #filter_options.hidden {
     display: none;
 }
@@ -57,12 +128,36 @@
     background-color: var(--button-background-color) !important;
 }
 
+.flex-row-box{
+    align-items: center;
+    justify-content: center;
+    font-size:12px;
+}
+
+#filter_items input {
+    height: 30px;
+    min-width:150px;
+}
+
+#filter_items select {
+    height: 30px;
+    min-width:150px;
+}
+
+
 .input-group {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     padding: 15px;
-    gap: 15px;
+    gap:5px;
+    border: var(--border-line);
+    background-color: var(--filter-group-background-color);
+}
+
+[type='date']{
+    padding:0;
+    height: 30px;
 }
 
 #filter_submit_area {

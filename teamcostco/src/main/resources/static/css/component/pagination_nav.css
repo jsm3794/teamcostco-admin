@@ -5,6 +5,18 @@
     width:100%;
 }
 
+.list-size-filter{
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    gap:10px;
+    margin-right: 10px;
+    white-space: nowrap;
+}
+#list_size{
+    width:50px;
+}
+
 #pagination_items {
     display: flex;
     flex-direction: row;

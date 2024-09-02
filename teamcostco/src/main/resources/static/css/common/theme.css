@@ -14,6 +14,10 @@
     --scrollbar-background-color: #eef;
     --scrollbar-thumb-color: #ccd;
     --table-background-color:#ffffff;
+    --filter-apply-button-background-color: #99f;
+    --filter-apply-button-text-color: #fff;
+    --input-background-color:#fcfcff;
+    --filter-group-background-color:#fcfcff;
 }
 
 
@@ -33,6 +37,10 @@
     --scrollbar-background-color: #333;
     --scrollbar-thumb-color: #555;
     --table-background-color:#222;
+    --filter-apply-button-background-color: #333;
+    --filter-apply-button-text-color: #fff;
+    --input-background-color:#444;
+    --filter-group-background-color:#777;
 }
 
 #theme-toggle {

@@ -13,6 +13,8 @@
     height: 100%;
     background-color: var(--background-color);
     border-right: var(--border-line);
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .aside-bar ul {
@@ -50,8 +52,8 @@
 }
 
 .aside-container {
-    height: 100%;
     background-color: var(--background-color);
+    flex:1;
 }
 
 .active, .active>* {

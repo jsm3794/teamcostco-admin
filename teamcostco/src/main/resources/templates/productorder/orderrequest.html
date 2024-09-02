@@ -1,14 +1,11 @@
 <div class="content-box">
-    <form action="/orderrequest" method="get">
+    <form action="/orderrequest" method="get" id="orderrequestForm">
         <div class="flex-row-box space-between">
-            <div class="flex-row-box">
-                <div th:replace="~{/component/search_input::div}"></div>
-                <div th:replace="~{/component/filter::div}"></div>
-            </div>
+            <div th:replace="~{/component/search_input::div(id='orderrequestForm')}"></div>
+            <div th:replace="~{/component/filter::div(id='orderrequestForm')}"></div>
             <div th:replace="~{/component/pagination_nav::nav}"></div>
         </div>
-        <input type="hidden" name="display" value="10">
-        <input type="hidden" name="start" value="1">
+        <div id="active-filters"></div>
     </form>
     <table id="results">
         <thead>

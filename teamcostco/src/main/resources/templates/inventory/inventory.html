@@ -25,14 +25,15 @@
     </div>
 </div>
 <div class="content-box">
-    <div class="flex-row-box space-between">
-        <div class="flex-row-box">
-            <div th:replace="~{/component/search_input::div}"></div>
-            <div th:replace="~{/component/filter::div}"></div>
-        </div>
-        <div th:replace="~{component/pagination_nav::nav}"></div>
-    </div>
 
+    <form action="/inventory" method="get" id="inventoryForm">
+        <div class="flex-row-box space-between">
+            <div th:replace="~{/component/search_input::div(id='inventoryForm')}"></div>
+            <div th:replace="~{/component/filter::div(id='inventoryForm')}"></div>
+            <div th:replace="~{/component/pagination_nav::nav}"></div>
+        </div>
+        <div id="active-filters"></div>
+    </form>
     <table id="results">
         <thead>
             <tr>

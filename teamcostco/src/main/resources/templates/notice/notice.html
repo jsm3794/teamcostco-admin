@@ -1,13 +1,14 @@
 <div class="content-box">
 
-    <form action="/notice" method="get">
+    <form action="/notice" method="GET" id="noticeForm">
         <div class="flex-row-box space-between">
-            <div class="flex-row-box">
-                <div th:replace="~{/component/search_input::div}"></div>
-                <div th:replace="~{/component/filter::div}"></div>
-            </div>
-            <div th:replace="~{component/pagination_nav::nav}"></div>
+            <div th:replace="~{/component/search_input::div(id='noticeForm')}"></div>
+            <div th:replace="~{/component/filter::div(id='noticeForm')}"></div>
+            <div th:replace="~{/component/pagination_nav::nav}"></div>
         </div>
+        <div id="active-filters"></div>
+        <input type="hidden" name="display" value="10">
+        <input type="hidden" name="start" value="1">
     </form>
 
     <button class="btn" id="write-btn">글 작성</button>
@@ -34,4 +35,3 @@
         </tbody>
     </table>
 </div>
-<script src="/js/contents/notice.js"></script>
