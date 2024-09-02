@@ -4,27 +4,9 @@ const chart1 = document.getElementById('chart1').getContext('2d');
 const myChart1 = new Chart(chart1, {
     type: 'line',
     data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
         datasets: [{
             label: 'sales amount',
-            data: [12, 19, 3, 5, 2, 3],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 1
+            borderWidth: 2
         }]
     },
     options: {
@@ -40,10 +22,6 @@ const myChart1 = new Chart(chart1, {
                         month: 'yyyy-MM'
                     }
                 },
-                title: {
-                    display: true,
-                    text: '날짜'
-                }
             },
             y: {
                 beginAtZero: true
@@ -52,7 +30,7 @@ const myChart1 = new Chart(chart1, {
         plugins: {
             tooltip: {
                 callbacks: {
-                    label: function(context) {
+                    label: function (context) {
                         let label = context.dataset.label || '';
                         if (label) {
                             label += ': ';
@@ -60,10 +38,19 @@ const myChart1 = new Chart(chart1, {
                         label += context.formattedValue;
                         return label;
                     },
-                    title: function(context) {
-                        const date = context[0].parsed.x; 
-                        return moment(date).format('YYYY-MM-DD'); 
+                    title: function (context) {
+                        const date = context[0].parsed.x;
+                        return moment(date).format('YYYY-MM-DD');
+
                     }
+                }
+            },
+            legend: {
+                position: 'top',         // 라벨을 오른쪽에 배치
+                labels: {
+                    boxWidth: 60,         // 라벨 박스의 너비
+                    boxHeight: 12,        // 라벨 박스의 높이
+                    padding: 10          // 라벨 간격
                 }
             }
         }
@@ -98,7 +85,7 @@ function updateChart(period) {
                 },
                 title: {
                     display: true,
-                    text: '날짜'
+                    // text: '날짜'
                 }
             };
             myChart1.update();
@@ -121,10 +108,8 @@ const chart2 = document.getElementById('chart2').getContext('2d');
 const myChart2 = new Chart(chart2, {
     type: 'doughnut',
     data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple'],
         datasets: [{
             label: '# of Votes',
-            data: [12, 19, 3, 5, 2],
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(54, 162, 235, 0.2)',
@@ -143,6 +128,17 @@ const myChart2 = new Chart(chart2, {
         }]
     },
     options: {
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                position: 'right',         // 라벨을 오른쪽에 배치
+                labels: {
+                    boxWidth: 12,         // 라벨 박스의 너비
+                    boxHeight: 12,        // 라벨 박스의 높이
+                    padding: 10          // 라벨 간격
+                }
+            }
+        },
         scales: {
             y: {
                 beginAtZero: true
@@ -156,8 +152,8 @@ const updateChart2 = () => {
         url: "/weeklyTopProducts",
         method: "GET",
         dataType: 'json',
-        success: function(TopProducts) {
-            
+        success: function (TopProducts) {
+
             const chartData = myChart2.data;
 
             // 라벨 이름 -> 팔린 상품명
@@ -177,7 +173,7 @@ const updateChart2 = () => {
             myChart2.update();
 
         },
-        error: function(error) {
+        error: function (error) {
             console.error('Error fetching weeklyTopProducts data:', error);
         }
     })
@@ -215,7 +211,7 @@ const myChart3 = new Chart(chart3, {
             },
             {
                 label: 'Total Products',
-                data: [],  
+                data: [],
                 backgroundColor: [
                     'rgba(255, 206, 86, 0.2)',
                     'rgba(255, 206, 86, 0.2)',
@@ -236,6 +232,16 @@ const myChart3 = new Chart(chart3, {
     },
     options: {
         maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                position: 'right',         // 라벨을 오른쪽에 배치
+                labels: {
+                    boxWidth: 12,         // 라벨 박스의 너비
+                    boxHeight: 50,        // 라벨 박스의 높이
+                    padding: 30          // 라벨 간격
+                }
+            }
+        },
         scales: {
             x: {
                 type: 'time',
@@ -281,7 +287,7 @@ function updateChart3(period) {
         url: '/totalsales',
         method: 'GET',
         dataType: 'json',
-        success: function(salesData) {
+        success: function (salesData) {
             if (salesData.length === 0) {
                 myChart3.data.labels = [];
                 myChart3.data.datasets[0].data = [];
@@ -308,7 +314,7 @@ function updateChart3(period) {
                 url: '/totalproductsbyupdate',
                 method: 'GET',
                 dataType: 'json',
-                success: function(productData) {
+                success: function (productData) {
                     // 총 상품 수량이 배열로 들어오지 않은 경우 처리
                     const totalProducts = Array.isArray(productData) ? productData : Array(labels.length).fill(productData);
 
@@ -323,27 +329,27 @@ function updateChart3(period) {
                     // 차트 업데이트
                     myChart3.update();
                 },
-                error: function(error) {
+                error: function (error) {
                     console.error('Error fetching total products data:', error);
                 }
             });
         },
-        error: function(error) {
+        error: function (error) {
             console.error('Error fetching sales data:', error);
         }
     });
 }
 
-$(document).ready(function() {
-    $('#monthSalesBtn').on('click', function() {
+$(document).ready(function () {
+    $('#monthSalesBtn').on('click', function () {
         updateChart3('month');
     });
 
-    $('#yearSalesBtn').on('click', function() {
+    $('#yearSalesBtn').on('click', function () {
         updateChart3('year');
     });
 
-    $('#totalSalesBtn').on('click', function() {
+    $('#totalSalesBtn').on('click', function () {
         updateChart3('day');
     });
 
@@ -351,35 +357,44 @@ $(document).ready(function() {
     updateChart3('month');
 });
 
-
 // 박스 4 차트
 const chart4 = document.getElementById('chart4').getContext('2d');
 const myChart4 = new Chart(chart4, {
-    type: 'bar',
+    type: 'pie',
     data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple'],
+        labels: ['Olive Green', 'Burnt Sienna', 'Steel Blue', 'Rose Gold', 'Slate Blue'],
         datasets: [{
             label: '# of Votes',
             data: [12, 19, 3, 5, 2],
             backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)'
+                'rgba(128, 128, 0, 0.2)',   // Olive Green
+                'rgba(233, 116, 81, 0.2)',   // Burnt Sienna
+                'rgba(70, 130, 180, 0.2)',   // Steel Blue
+                'rgba(255, 192, 203, 0.2)',  // Rose Gold
+                'rgba(106, 90, 205, 0.2)'    // Slate Blue
             ],
             borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)'
+                'rgba(128, 128, 0, 1)',     // Olive Green
+                'rgba(233, 116, 81, 1)',    // Burnt Sienna
+                'rgba(70, 130, 180, 1)',    // Steel Blue
+                'rgba(255, 192, 203, 1)',   // Rose Gold
+                'rgba(106, 90, 205, 1)'     // Slate Blue
             ],
             borderWidth: 1
         }]
     },
     options: {
-        indexAxis:'y',
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                position: 'bottom',         // 라벨을 오른쪽에 배치
+                labels: {
+                    boxWidth: 12,         // 라벨 박스의 너비
+                    boxHeight: 12,        // 라벨 박스의 높이
+                    padding: 10          // 라벨 간격
+                }
+            }
+        },
         scales: {
             x: {
                 beginAtZero: true
@@ -387,6 +402,7 @@ const myChart4 = new Chart(chart4, {
         }
     }
 });
+
 
 
 // 3박스 관련 함수
