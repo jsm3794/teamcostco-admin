@@ -53,8 +53,12 @@ public class ProductOrderService implements PageMetadataProvider {
 
             List<NaverProductDTO> items = response.getItems();
             int count = response.getTotal();
+            
+            if (count == 0) {
+                return new PaginationResult<>(List.of(), 0, 1, 1, 1, 1);
+            }
 
-            int totalPages = Math.min((int) Math.ceil((double) count / size), 100);
+            int totalPages = (int) Math.min(Math.min(Math.ceil((double) count / size), (1000 / size) + 1), 100);
             int showPageNum = 5;
             int startPage = ((page - 1) / showPageNum) * showPageNum + 1;
             int endPage = Math.min(startPage + showPageNum - 1, totalPages);
