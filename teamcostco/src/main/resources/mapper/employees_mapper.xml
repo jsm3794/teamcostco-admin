@@ -34,10 +34,29 @@
   </sql>
 
   <sql id="getEmp">
-    SELECT emp_id, emp_name, emp_email, phone_number, job_title, hire_date, join_date
+    SELECT emp_name, emp_email, phone_number, job_title, login_id, login_pw, hire_date, join_date
     FROM employees WHERE emp_id = #{emp_id}
   </sql>
   
+   <sql id="updateEmployees">
+        UPDATE employees
+        SET
+            emp_name = #{emp_name},
+            emp_email = #{emp_email},
+            phone_number = #{phone_number},
+            login_id = #{login_id},
+            login_pw = #{login_pw},
+            job_title = #{job_title}, 
+            hire_date = #{hire_date},   
+            join_date = #{join_date}
+        WHERE
+            emp_id = #{emp_id}
+    </sql>
+
+    <update id="updateEmployees" parameterType="emp">
+        <include refid="updateEmployees"></include>
+    </update>
+
   <select id="getEmpList" resultType="emp">
     <include refid="getEmpList"/>
   </select>
@@ -47,7 +66,7 @@
   </select>
 
   <select id="getEmp" resultType="emp" parameterType="Integer">
-    <include refid="getByIdAndPw"/>
+    <include refid="getEmp"/>
   </select>
 
     <select id="getAllJobTitles" resultType="String">

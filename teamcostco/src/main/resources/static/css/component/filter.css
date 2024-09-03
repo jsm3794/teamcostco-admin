@@ -77,6 +77,7 @@
     background-color: var(--filter-background-color);
     width: 100%;
     box-shadow: 3px 3px 5px rgba(0,0,0,0.2);
+    z-index: 2;
 }
 
 .input-group > label {

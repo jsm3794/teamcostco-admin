@@ -11,7 +11,7 @@
 
     <table id="results">
         <thead>
-            <tr>
+            <tr id="columns">
                 <th width="5%">번호</th>
                 <th width="10%">이름</th>
                 <th width="30%">이메일</th>
@@ -23,7 +23,7 @@
             </tr>
         </thead>
         <tbody id="employee-table-body">
-            <tr th:each="emp : ${empList}">
+            <tr th:each="emp : ${empList}" th:onclick="|window.location.href='/emp_detail?emp_id=' + ${emp.emp_id} + ''|">
                 <td th:text="${emp.emp_id}" th:class="emp-id"></td>
                 <td th:text="${emp.emp_name}"></td>
                 <td th:text="${emp.emp_email}"></td>

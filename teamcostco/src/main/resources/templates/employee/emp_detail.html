@@ -1,11 +1,43 @@
 <div class="content-box">
-    <div th:each="emp: ${empDetail}">
-        <div th:text="${emp.emp_id}"></div>
-        <div th:text="${emp.emp_name}"></div>
-        <div th:text="${emp.emp_email}"></div>
-        <div th:text="${emp.phone_number}"></div>
-        <div th:text="${emp.job_title}"></div>
-        <div th:text="${emp.hire_date}"></div>
-        <div th:text="${emp.join_date}"></div>
-    </div>
+    <form th:action="@{/detail/update}" th:object="${emp}" method="post"></form>
+        <div th:each="emp : ${empDetail}" class="employee-details">
+            <div>
+                <label>이름</label>
+                <input type="text" name="emp_name" th:value="${emp.emp_name}" />
+            </div>
+            <div>
+                <label>이메일</label>
+                <input type="email" name="emp_email" th:value="${emp.emp_email}" />
+            </div>
+            <div>
+                <label>연락처</label>
+                <input type="text" name="emp_phone_number" th:value="${emp.phone_number}" />
+            </div>
+            <div>
+                <label>직책</label>
+                <select name="emp.job_title" id="job_title_select">
+                    <option value="developer" th:selected="${emp.job_title == '개발자'}">개발자</option>
+                    <option value="designer" th:selected="${emp.job_title == '디자이너'}">디자이너</option>
+                    <option value="marketer" th:selected="${emp.job_title == '마케터'}">마케터</option>
+                </select>
+            </div>
+            <div>
+                <label>고용일자</label>
+                <input type="date" name="emp.hire_date" id="hire_date" th:value="${#dates.format(emp.hire_date, 'yyyy-MM-dd')}" />
+            </div>
+            <div>
+                <label>가입일자</label>
+                <input type="date" name="emp.join_date" id="join_date" th:value="${#dates.format(emp.join_date, 'yyyy-MM-dd')}" />
+            </div>
+            <div>
+                <label>아이디</label>
+                <input type="text" name="emp.login_id" th:value="${emp.login_id}" />
+            </div>
+            <div>
+                <label>비밀번호</label>
+                <input type="text" name="emp.login_pw" th:value="${emp.login_pw}" />
+            </div>
+        </div>
+        <button type="submit">저장</button>
+    </form>
 </div>

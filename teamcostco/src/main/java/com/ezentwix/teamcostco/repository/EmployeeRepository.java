@@ -27,4 +27,8 @@ public class EmployeeRepository {
     public EmployeeDTO getEmp(Integer emp_id) {
         return sql.selectOne("Employees.getEmp", emp_id);
     }
+
+    public void updateEmployee(EmployeeDTO employeeDTO) {
+        sql.update("Employees.updateEmployees", employeeDTO);
+    }
 }
