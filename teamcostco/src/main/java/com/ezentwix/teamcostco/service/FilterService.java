@@ -12,7 +12,7 @@ public class FilterService {
 
     private enum FilterType {
         EMPLOYEE,
-        ORDER_REQUEST,
+        ORDERREQUEST,
         NOTICE
     }
 
@@ -22,7 +22,7 @@ public class FilterService {
         switch (type) {
             case EMPLOYEE:
                 return createEmployeeFilters();
-            case ORDER_REQUEST:
+            case ORDERREQUEST:
                 return createOrderRequestFilters();
             case NOTICE:
                 return createNoticeFilters();
