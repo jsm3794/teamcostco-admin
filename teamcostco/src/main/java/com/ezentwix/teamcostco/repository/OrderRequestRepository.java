@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.ezentwix.teamcostco.dto.product.OrderRequestDTO;
+import com.ezentwix.teamcostco.dto.product.RequestAndProductDTO;
 
 import lombok.RequiredArgsConstructor;
 
@@ -17,5 +18,9 @@ public class OrderRequestRepository {
 
     public List<OrderRequestDTO> getAll() {
         return sql.selectList("OrderRequest.getAllWithProductName");
+    }
+
+    public List<RequestAndProductDTO> getRequestAndProductInfo() {
+        return sql.selectList("OrderRequest.getRequestAndProductInfo");
     }
 }

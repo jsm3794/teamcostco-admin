@@ -27,4 +27,9 @@
         ORDER BY
             o.request_id DESC
         </select>
+
+    <select id="getRequestAndProductInfo" resultType="requestAndProduct">
+        SELECT request_id, product_name, request_qty  FROM order_request
+        INNER JOIN products USING (product_code)
+    </select>
 </mapper>

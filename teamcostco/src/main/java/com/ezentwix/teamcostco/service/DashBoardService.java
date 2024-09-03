@@ -5,12 +5,16 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.ezentwix.teamcostco.PageMetadataProvider;
+import com.ezentwix.teamcostco.dto.product.RequestAndProductDTO;
+import com.ezentwix.teamcostco.repository.OrderRequestRepository;
 
 import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
 public class DashBoardService implements PageMetadataProvider {
+
+    private final OrderRequestRepository orderRequestreRepository;
 
     @Override
     public String getUri() {
@@ -38,6 +42,10 @@ public class DashBoardService implements PageMetadataProvider {
                 "https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns",
                 "/js/contents/dashboard.js",
                 "https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js");
+    }
+    
+    public List<RequestAndProductDTO> getRequestAndProductInfo() {
+        return orderRequestreRepository.getRequestAndProductInfo();
     }
 
 }

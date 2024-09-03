@@ -9,6 +9,7 @@
         <typeAlias type="com.ezentwix.teamcostco.dto.sales.TotalSalesDTO" alias="totalsales" />
         <typeAlias type="com.ezentwix.teamcostco.dto.sales.SalesQtyPracDTO" alias="salesQtyPrac" />
         <typeAlias type="com.ezentwix.teamcostco.dto.product.OrderRequestDTO" alias="orderrequest" />
+        <typeAlias type="com.ezentwix.teamcostco.dto.product.RequestAndProductDTO" alias="requestAndProduct" />
         <typeAlias type="com.ezentwix.teamcostco.dto.product.ProductDefectiveDTO" alias="productdefective" />
         <typeAlias type="com.ezentwix.teamcostco.dto.notice.NoticeDTO" alias="notice" />
         <typeAlias type="com.ezentwix.teamcostco.dto.notice.WritingDTO" alias="writing" />

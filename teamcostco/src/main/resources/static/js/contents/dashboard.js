@@ -153,12 +153,12 @@ const updateChart2 = () => {
         url: "/weeklyTopProducts",
         method: "GET",
         dataType: 'json',
-        success: function (TopProducts) {
+        success: function (topProducts) {
 
             const chartData = myChart2.data;
 
             // 라벨 이름 -> 팔린 상품명
-            TopProducts.forEach((product, index) => {
+            topProducts.forEach((product, index) => {
                 chartData.labels[index] = product.sold_product_name;
                 //console.log(product.sold_product_name);
             });
@@ -167,7 +167,7 @@ const updateChart2 = () => {
             // console.dir(chartData.datasets[0].data);
 
             if (chartData.datasets.length > 0) {
-                chartData.datasets[0].data = TopProducts.map(product => product.sold_qty);
+                chartData.datasets[0].data = topProducts.map(product => product.sold_qty);
             }
 
             // 차트 업데이트
@@ -403,6 +403,40 @@ const myChart4 = new Chart(chart4, {
         }
     }
 });
+
+const updateChart4 = () => {
+    $.ajax({
+        url: "/requestqty",
+        method: "GET",
+        dataType: 'json',
+        success: function (requestQty) {
+
+            
+
+            // 라벨 이름 -> 팔린 상품명
+            myChart4.data.labels = requestQty.map(request => request.product_name);
+
+            console.dir(myChart4.data.labels);
+            // 팔린 개수 할당
+            // console.dir(chartData.datasets[0].data);
+
+            if (myChart4.data.datasets.length > 0) {
+                myChart4.data.datasets[0].data = requestQty.map(request => request.request_qty);
+            }
+
+            // 차트 업데이트
+            myChart4.update();
+
+        },
+        error: function (error) {
+            console.error('Error fetching requestqty data:', error);
+        }
+    })
+};
+
+updateChart4();
+
+
 
 
 

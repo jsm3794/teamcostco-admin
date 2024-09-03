@@ -7,8 +7,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ezentwix.teamcostco.dto.product.ProductSummaryDTO;
+import com.ezentwix.teamcostco.dto.product.RequestAndProductDTO;
 import com.ezentwix.teamcostco.service.DashBoardService;
 import com.ezentwix.teamcostco.service.ProductService;
+
+import java.util.List;
 
 import lombok.RequiredArgsConstructor;
 
@@ -35,6 +38,12 @@ public class DashBoardController {
     @ResponseBody
     public Integer getTotalProductsByUpdate() {
         return productService.getTotalProductsByUpdateDate();
+    }
+
+    @GetMapping("/requestqty")
+    @ResponseBody
+    public List<RequestAndProductDTO> getRequestAndProductInfo() {
+        return dashBoardService.getRequestAndProductInfo();
     }
     
    
