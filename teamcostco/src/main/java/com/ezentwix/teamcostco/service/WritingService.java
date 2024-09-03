@@ -21,7 +21,7 @@ public class WritingService implements PageMetadataProvider {
         WritingDTO addedWritingDTO = writingRepository.add(writingDTO);
         try {
             // Pub/Sub에 메시지 발행
-            pubSubService.publishMessage("새로운 공지가 등록되었습니다! 제목: " + writingDTO.getTitle());
+            pubSubService.publishMessage(writingDTO. + writingDTO.getTitle());
         } catch (Exception e) {
             e.printStackTrace();
             // 예외 처리 (로그 작성 등)
