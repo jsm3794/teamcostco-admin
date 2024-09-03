@@ -31,7 +31,7 @@ public class EmployeeController {
         employeeService.configureModel(model);
 
         // model.addAttribute("empList", employeeService.getEmpList());
-        PaginationResult<EmployeeDTO> result = employeeService.getPage(page, size);
+        PaginationResult<EmployeeDTO> result = employeeService.getPage(page, size, Map.of("emp_name", "%김%"));
         model.addAttribute("empList", result.getData());
         model.addAttribute("pageDetail", result.getPageDetails());
         return "index";

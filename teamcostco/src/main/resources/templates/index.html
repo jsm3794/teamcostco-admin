@@ -17,7 +17,8 @@
     <th:block th:if="${pageDetail != null}">
         <script th:src="@{/js/component/pagination_nav.js}"></script>
     </th:block>
-    <link rel="preload" href="/fonts/Material_Symbols_Outlined.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="preload" href="/fonts/Material_Symbols_Outlined.woff2" as="font" type="font/woff2"
+        crossorigin="anonymous">
 
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -52,34 +53,8 @@
         </th:block>
     </th:block>
 
-    <div class="notification-container">
-        <div class="notification">
-            <span class="notification-close">&times;</span>
-            <div class="notification-title">전상민</div>
-            <div class="notification-content"></div>
-        </div>
-        <div class="notification">
-            <span class="notification-close">&times;</span>
-            <div class="notification-title">김동우</div>
-            <div class="notification-content"></div>
-        </div>
-        <div class="notification">
-            <span class="notification-close">&times;</span>
-            <div class="notification-title">순대국</div>
-            <div class="notification-content"></div>
-        </div>
-        <div class="notification">
-            <span class="notification-close">&times;</span>
-            <div class="notification-title">파티구함</div>
-            <div class="notification-content"></div>
-        </div>
-        <div class="notification">
-            <span class="notification-close">&times;</span>
-            <div class="notification-title">(근엄)-.-(진지)</div>
-            <div class="notification-content"></div>
-        </div>
-        <!-- 추가 알림 카드들 -->
-    </div>
+    <div class="notification-container"></div>
+
     <script th:src="@{/js/component/notification.js}"></script>
 </body>
 

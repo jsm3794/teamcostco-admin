@@ -17,8 +17,8 @@
     SELECT emp_id, emp_name, emp_email, phone_number, job_title, hire_date, join_date
     FROM employees
     <where>
-        <if test="emp_name != null and emp_name != ''">
-            emp_name LIKE #{emp_name}
+        <if test="query != null and query != ''">
+            emp_name LIKE #{query}
         </if>
         <if test="phone_number != null and phone_number != ''">
             AND phone_number LIKE #{phone_number}
@@ -29,9 +29,26 @@
         <if test="job_title != null and job_title != ''">
             AND job_title LIKE #{job_title}
         </if>
+        <if test="hire_date_start != null">
+            AND hire_date <![CDATA[>]]>= #{hire_date_start}
+        </if>
+        <if test="hire_date_end != null">
+            AND hire_date <![CDATA[<]]>= #{hire_date_end}
+        </if>
+        <if test="join_date_start != null">
+            AND join_date <![CDATA[>]]>= #{join_date_start}
+        </if>
+        <if test="join_date_end != null">
+            AND join_date <![CDATA[<]]>= #{join_date_end}
+        </if>
     </where>
     ORDER BY emp_id ASC
   </sql>
+
+  <sql id="getAllJobTitles">
+    SELECT job_title FROM employees
+  </sql>
+
 
   <sql id="getEmp">
     SELECT emp_id, emp_name, emp_email, phone_number, job_title, hire_date, join_date
@@ -50,7 +67,7 @@
     <include refid="getByIdAndPw"/>
   </select>
 
-    <select id="getAllJobTitles" resultType="String">
-      SELECT job_title FROM employees
-    </select>
+  <select id="getAllJobTitles" resultType="String">
+    <include refid="getAllJobTitles"/>
+  </select>
 </mapper>

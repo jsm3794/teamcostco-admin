@@ -15,6 +15,7 @@ public class WritingRepository {
     
     public WritingDTO add(WritingDTO writingDTO) {
         sql.insert("Writing.add", writingDTO);
+        writingDTO.setNotice_id(sql.selectOne("Writing.getSeq"));
         return writingDTO;
     }
 }
