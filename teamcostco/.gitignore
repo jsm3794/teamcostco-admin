@@ -34,3 +34,6 @@ build/
 
 # Spring Boot 설정 파일 무시
 src/main/resources/application.properties
+
+# Google 알림 API 비공개 키 무시
+src/main/resources/ezen-project-434407-4ef43dc9dd82.json

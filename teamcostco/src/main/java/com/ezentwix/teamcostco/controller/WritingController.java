@@ -3,8 +3,9 @@ package com.ezentwix.teamcostco.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import com.ezentwix.teamcostco.service.WritingService;
 import com.ezentwix.teamcostco.dto.notice.WritingDTO;
@@ -24,15 +25,8 @@ public class WritingController {
     }
 
     @PostMapping("/writing")
-    public String addWriting(@RequestParam String title, 
-                             @RequestParam String content,
-                             @RequestParam Integer emp_id) {
-        WritingDTO writingDTO = new WritingDTO();
-        writingDTO.setTitle(title);
-        writingDTO.setContent(content);
-        writingDTO.setEmp_id(emp_id); 
-
+    public String addWriting(@ModelAttribute WritingDTO writingDTO) {
         writingService.add(writingDTO);
-        return "redirect:/notice"; 
+        return "redirect:/notice";
     }
 }
