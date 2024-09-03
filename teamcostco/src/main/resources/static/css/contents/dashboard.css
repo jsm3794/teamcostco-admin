@@ -73,14 +73,14 @@
     border-radius: 5px;
     background-color: var(--background-color);
     border: var(--border-line);
-    position: relative; /* relative positioning을 사용해 차트 위치 조정 */
-    overflow: hidden; /* 박스 내부에서 차트가 잘리도록 설정 */
+    position: relative;
+    overflow: hidden;
 }
 
 
 .box canvas {
-    width: 88% !important; 
-    height: 88% !important; 
+    width: 100% !important; 
+    height: 100% !important; 
     display: block;
 }
 

@@ -144,6 +144,15 @@ const myChart2 = new Chart(chart2, {
             y: {
                 beginAtZero: true
             }
+        },
+
+        layout: {
+            padding: {
+                left: 10,
+                right: 20,
+                top: 10,
+                bottom: 30
+            }
         }
     }
 });
@@ -232,6 +241,7 @@ const myChart3 = new Chart(chart3, {
         ]
     },
     options: {
+        relatives: true,
         maintainAspectRatio: false,
         plugins: {
             legend: {
@@ -258,6 +268,14 @@ const myChart3 = new Chart(chart3, {
             },
             y: {
                 beginAtZero: true,
+            }
+        },
+        layout: {
+            padding: {
+                left: 10,
+                right: 10,
+                top: 10,
+                bottom: 30
             }
         }
     }
@@ -399,6 +417,14 @@ const myChart4 = new Chart(chart4, {
         scales: {
             x: {
                 beginAtZero: true
+            }
+        },
+        layout: {
+            padding: {
+                left: 10,
+                right: 10,
+                top: 20,
+                bottom: 20
             }
         }
     }
