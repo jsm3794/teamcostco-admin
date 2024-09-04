@@ -13,5 +13,6 @@ public class OrderRequestDTO {
     private Integer received_qty;
     private Integer defective_qty;
     private Integer emp_id;
+    private String emp_name;
     private Date create_date;
 }

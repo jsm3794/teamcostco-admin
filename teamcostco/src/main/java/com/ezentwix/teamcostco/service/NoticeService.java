@@ -22,11 +22,7 @@ public class NoticeService implements PageMetadataProvider {
     private final NoticeRepository noticeRepository;
 
     public PaginationResult<NoticeDTO> getPage(String query, int page, int size, Map<String, Object> params) {
-        return paginationRepository.getPage("Notice.getAll", PageRequest.of(page, size), params, NoticeDTO.class);
-    }
-
-    public List<NoticeDTO> getAll() {
-        return noticeRepository.getAll();
+        return paginationRepository.getPage(query, "Notice.getAll", PageRequest.of(page, size), params, NoticeDTO.class);
     }
 
     @Override

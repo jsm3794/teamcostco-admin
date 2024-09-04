@@ -2,29 +2,36 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="OrderRequest">
-    <select id="getAll" resultType="orderrequest">
-        SELECT
-            request_id, product_code, request_qty,
-            received_qty, defective_qty, emp_id, create_date
-        FROM
-            order_request
-        </select>
 
-    <select id="getAllWithProductName" resultType="orderrequest">
+    <sql id="getAll">
         SELECT
-            o.request_id AS request_id,
-            p.product_code AS product_code,
-            p.product_name AS product_name,
-            o.request_qty AS request_qty,
-            o.received_qty AS received_qty,
-            o.defective_qty AS defective_qty,
-            o.emp_id AS emp_id,
-            o.create_date AS create_date
+            o.request_id, p.product_name, o.product_code, o.request_qty,
+            o.received_qty, o.defective_qty, e.emp_id, e.emp_name, o.create_date
         FROM
             order_request o
-        INNER JOIN products p
-            ON o.product_code = p.product_code
-        ORDER BY
-            o.request_id DESC
-        </select>
+        INNER JOIN products p ON o.product_code = p.product_code
+        INNER JOIN employees e ON o.emp_id = e.emp_id
+        <where>
+            <if test="query != null and query != ''">
+                AND p.product_name LIKE '%' || #{query} || '%'
+            </if>
+            <if test="request_id != null and request_id != ''">
+                AND o.request_id LIKE '%' || #{request_id} || '%'
+            </if>
+            <if test="order_date_start != null and order_date_start != ''">
+                AND o.create_date <![CDATA[>]]>= #{order_date_start}
+            </if>
+            <if test="order_date_end != null and order_date_end != ''">
+                AND o.create_date <![CDATA[<]]>= #{order_date_end}
+            </if>
+            <if test="emp_name != null and emp_name != ''">
+                AND e.emp_name LIKE '%' || #{emp_name} || '%'
+            </if>
+        </where>
+    </sql>
+
+
+    <select id="getAll" resultType="orderrequest">
+        <include refid="getAll"></include>
+    </select>
 </mapper>

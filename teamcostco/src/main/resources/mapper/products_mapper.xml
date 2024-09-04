@@ -12,8 +12,32 @@
             selling_price, brand, min_required_qty, storage_qty,
             display_qty, create_date, update_date, (display_qty + storage_qty) AS total_qty
         FROM products
+        <where>
+            <if test="query != null and query != ''">
+                AND product_name LIKE '%' || #{query} || '%'
+            </if>
+            <if test="product_code != null and product_code != ''">
+                AND product_code LIKE '%' || #{product_code} || '%'
+            </if>
+            <if test="purchase_price_start != null and purchase_price_start != ''">
+                AND purchase_price <![CDATA[>]]>= #{purchase_price_start}
+            </if>
+            <if test="purchase_price_end != null and purchase_price_end != ''">
+                AND purchase_price <![CDATA[<]]>= #{purchase_price_end}
+            </if>
+            <if test="selling_price_start != null and selling_price_start != ''">
+                AND selling_price <![CDATA[>]]>= #{selling_price_start}
+            </if>
+            <if test="selling_price_end != null and selling_price_end != ''">
+                AND selling_price <![CDATA[<]]>= #{selling_price_end}
+            </if>
+            <if test="category_large != null and category_large != ''">
+                AND category_large LIKE '%' ||  #{category_large} || '%'
+            </if>
+        </where>
         ORDER BY product_id DESC
     </sql>
+
 
     <sql id="findById">
         SELECT * FROM products WHERE product_id = #{productId}

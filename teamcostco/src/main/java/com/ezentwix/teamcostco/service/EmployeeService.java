@@ -20,17 +20,11 @@ public class EmployeeService implements PageMetadataProvider {
     private final EmployeeRepository employeeRepository;
     private final PaginationRepository paginationRepository;
 
-    public PaginationResult<EmployeeDTO> getPage(Integer page, Integer limit) {
+    public PaginationResult<EmployeeDTO> getPage(String query, Integer page, Integer limit,
+            Map<String, Object> params) {
         return paginationRepository.getPage(
-                "Employees.getEmpList",
-                PageRequest.of(page, limit),
-                Map.of(),
-                EmployeeDTO.class);
-    }
-
-    public PaginationResult<EmployeeDTO> getPage(Integer page, Integer limit, Map<String, Object> params) {
-        return paginationRepository.getPage(
-                "Employees.getEmpListByFilter",
+                query,
+                "Employees.getAll",
                 PageRequest.of(page, limit),
                 params,
                 EmployeeDTO.class);
@@ -58,10 +52,9 @@ public class EmployeeService implements PageMetadataProvider {
     @Override
     public List<String> getJsFiles() {
         return List.of(
-            "https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js", // Bootstrap JS 추가
-            "/js/contents/employee.js"  // 기존의 JS 파일
+                "https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js", // Bootstrap JS 추가
+                "/js/contents/employee.js" // 기존의 JS 파일
         );
     }
 
-    
 }

@@ -58,7 +58,7 @@ public class PaginationRepository {
      * @param additionalParams 추가 쿼리 파라미터 (ex: 필터 값)
      * @return 페이지데이터를 반환
      */
-    public <T> PaginationResult<T> getPage(String queryId, Pageable pageable, Map<String, Object> additionalParams,
+    public <T> PaginationResult<T> getPage(String query, String queryId, Pageable pageable, Map<String, Object> additionalParams,
             Class<T> dtoClass) {
 
         if (pageable == null || pageable.getPageSize() <= 0) {
@@ -74,6 +74,7 @@ public class PaginationRepository {
         params.put("offset", offset);
         params.put("limit", limit);
         params.put("queryId", queryId);
+        params.put("query", query);
 
         if (additionalParams != null) {
             params.putAll(additionalParams);

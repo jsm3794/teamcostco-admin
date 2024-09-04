@@ -21,10 +21,10 @@ public class EmployeeRepository {
     }
 
     public List<EmployeeDTO> getEmpList() {
-        return sql.selectList("Employees.getEmpList");
+        return sql.selectList("Employees.getAll");
     }
 
     public EmployeeDTO getEmp(Integer emp_id) {
-        return sql.selectOne("Employees.getEmp", emp_id);
+        return sql.selectOne("Employees.getById", emp_id);
     }
 }

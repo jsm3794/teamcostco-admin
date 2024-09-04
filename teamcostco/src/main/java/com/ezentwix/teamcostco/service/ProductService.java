@@ -25,15 +25,16 @@ public class ProductService {
         return productRepository.getAll();
     }
 
-    public PaginationResult<ProductDTO> getPage(Integer page, Integer limit, Map<String, Object> params) {
+    public PaginationResult<ProductDTO> getPage(String query, Integer page, Integer limit, Map<String, Object> params) {
         return paginationRepository.getPage(
+                query,
                 "Products.getAll",
                 PageRequest.of(page, limit),
                 params,
                 ProductDTO.class);
     }
 
-    public ProductSummaryDTO eachProductCount(){
+    public ProductSummaryDTO eachProductCount() {
         ProductSummaryDTO psDTO = new ProductSummaryDTO();
 
         psDTO.setLowProducts(productRepository.getLowProducts());
@@ -43,11 +44,11 @@ public class ProductService {
         return psDTO;
     }
 
-    public ProductDTO getProductById(Integer productId){
+    public ProductDTO getProductById(Integer productId) {
         return productRepository.findById(productId);
     }
 
-    public void updateProduct(ProductDTO productDTO){
+    public void updateProduct(ProductDTO productDTO) {
         productRepository.updateProduct(productDTO);
     }
 }

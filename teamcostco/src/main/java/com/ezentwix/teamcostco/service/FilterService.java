@@ -5,67 +5,65 @@ import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
+import com.ezentwix.teamcostco.dto.filter.EmployeeFilterDTO;
 import com.ezentwix.teamcostco.dto.filter.FilterDTO;
+import com.ezentwix.teamcostco.dto.filter.InventoryFilterDTO;
+import com.ezentwix.teamcostco.dto.filter.OrderRequestFilterDTO;
+
+import lombok.RequiredArgsConstructor;
 
 @Service
+@RequiredArgsConstructor
 public class FilterService {
+    private final CategoryService categoryService;
 
     private enum FilterType {
+        INVENTORY,
         EMPLOYEE,
-        ORDER_REQUEST,
-        NOTICE
+        ORDERREQUEST
     }
 
     public List<FilterDTO> getFilter(String filterType) {
         FilterType type = FilterType.valueOf(filterType.toUpperCase());
 
         switch (type) {
+            case INVENTORY:
+                InventoryFilterDTO inventoryFilterDTO = new InventoryFilterDTO();
+                inventoryFilterDTO.setFilterList(List.of(
+                        new FilterDTO("상품코드", "input", "text", "product_code", "", null),
+                        new FilterDTO("매입가격(최소)", "input", "number", "purchase_price_start", "", null),
+                        new FilterDTO("매입가격(최대)", "input", "number", "purchase_price_end", "", null),
+                        new FilterDTO("판매가격(최소)", "input", "number", "selling_price_start", "", null),
+                        new FilterDTO("판매가격(최대)", "input", "number", "selling_price_end", "", null),
+                        new FilterDTO("대분류", "select", "", "category_large", "", categoryService.getLarge())));
+                return inventoryFilterDTO.getFilterList();
+
             case EMPLOYEE:
-                return createEmployeeFilters();
-            case ORDER_REQUEST:
-                return createOrderRequestFilters();
-            case NOTICE:
-                return createNoticeFilters();
+                EmployeeFilterDTO employeeFilterDTO = new EmployeeFilterDTO();
+                employeeFilterDTO.setFilterList(List.of(
+                        new FilterDTO("이메일", "input", "text", "emp_email", "", null),
+                        new FilterDTO("연락처", "input", "text", "phone_number", "", null),
+                        new FilterDTO("직책", "select", "", "job_title", "", Map.of(
+                                "", "전체",
+                                "관리자", "관리자",
+                                "개발자", "개발자")),
+                        new FilterDTO("고용일자", "input", "date", "hire_date", "", null),
+                        new FilterDTO("가입일자", "input", "date", "join_date", "", null)));
+                return employeeFilterDTO.getFilterList();
+            case ORDERREQUEST:
+                OrderRequestFilterDTO orderRequestFilterDTO = new OrderRequestFilterDTO();
+                orderRequestFilterDTO.setFilterList(List.of(
+                        new FilterDTO("주문번호", "input", "text", "order_number", "", null),
+                        new FilterDTO("주문날짜", "input", "date", "order_date", "", null),
+                        new FilterDTO("상태", "select", "", "status", "", Map.of(
+                                "", "전체",
+                                "TEST1", "TEST1",
+                                "TEST2", "TEST2")),
+                        new FilterDTO("직원이름", "input", "text", "emp_name", "", null)));
+
+                return orderRequestFilterDTO.getFilterList();
             default:
                 return List.of();
         }
-    }
-
-    private List<FilterDTO> createEmployeeFilters() {
-        return List.of(
-            new FilterDTO("이메일", "input", "text", "email", "example@ex.com", null),
-            new FilterDTO("연락처", "input", "text", "phone_number", "example@ex.com", null),
-            new FilterDTO("직책", "input", "select", "job_title", "", Map.of(
-                "1", "관리자",
-                "2", "개발자")),
-            new FilterDTO("고용일", "input", "date", "hire_date", "", null),
-            new FilterDTO("가입일", "input", "date", "join_date", "", null)
-        );
-    }
-
-    private List<FilterDTO> createOrderRequestFilters() {
-        return List.of(
-            new FilterDTO("주문번호", "input", "text", "order_number", "주문 번호 입력", null),
-            new FilterDTO("주문날짜", "input", "date", "order_date", "", null),
-            new FilterDTO("상태", "select", "", "status", "", Map.of(
-                "", "전체",
-                "pending", "대기 중",
-                "shipped", "발송됨",
-                "delivered", "배송 완료")),
-            new FilterDTO("고객 이름", "input", "text", "customer_name", "고객 이름 입력", null)
-        );
-    }
-
-    private List<FilterDTO> createNoticeFilters() {
-        return List.of(
-            new FilterDTO("주문번호", "input", "text", "order_number", "주문 번호 입력", null),
-            new FilterDTO("주문날짜", "input", "date", "order_date", "", null),
-            new FilterDTO("상태", "select", "", "status", "", Map.of(
-                "", "전체",
-                "pending", "대기 중",
-                "shipped", "발송됨",
-                "delivered", "배송 완료")),
-            new FilterDTO("고객 이름", "input", "text", "customer_name", "고객 이름 입력", null)
-        );
     }
 }

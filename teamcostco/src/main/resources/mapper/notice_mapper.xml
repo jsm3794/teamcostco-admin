@@ -5,8 +5,16 @@
   <sql id="getAll">
     SELECT notice_id, title, content, job_title, create_date, update_date
     FROM notice
-    INNER JOIN employees USING (emp_id) ORDER BY notice_id DESC
+    INNER JOIN employees USING (emp_id)
+    <where>
+      <if test="query != null and query != ''">
+        AND (title LIKE '%' || #{query} || '%' 
+        OR content LIKE '%' || #{query} || '%')
+      </if>
+    </where>
+    ORDER BY notice_id DESC
   </sql>
+  
 
   <select id="getAll" resultType="notice">
     <include refid="getAll"></include>
