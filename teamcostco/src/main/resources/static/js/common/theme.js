@@ -20,6 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
             document.documentElement.setAttribute("data-theme", newTheme);
             icon.textContent = getCookie('theme') === 'dark' ? 'light_mode' : 'dark_mode';
             setChartTheme(newTheme);
+            $('#theme-logo')[0].setAttribute('src', '/images/logo.png?t=' + new Date().getTime());
         } else {
             console.error('아이콘 요소를 찾을 수 없습니다.');
         }
