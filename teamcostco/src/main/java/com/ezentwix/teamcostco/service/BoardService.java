@@ -33,4 +33,9 @@ public class BoardService implements PageMetadataProvider{
     public String getPageTitle() {
         return "게시글";        
     }
+
+    @Override
+    public List<String> getJsFiles() {
+        return List.of("/js/contents/board.js");
+    }
 }

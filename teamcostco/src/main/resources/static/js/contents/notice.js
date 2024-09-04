@@ -1,5 +1,6 @@
 const write = document.getElementById("write-btn");
 
-write.addEventListener('click', () => {
-    location.href="/writing"
+write.addEventListener('click', (e) => {
+    e.preventDefault();
+    location.href="/writing";
 });

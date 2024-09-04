@@ -33,6 +33,11 @@ public class BoardFixService implements PageMetadataProvider {
     }
 
     @Override
+    public List<String> getJsFiles() {
+        return List.of("/js/contents/fix.js");
+    }
+
+    @Override
     public String getUri() {
         return "notice/fix";
     }
