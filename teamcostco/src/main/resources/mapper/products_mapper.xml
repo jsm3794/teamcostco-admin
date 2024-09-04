@@ -41,6 +41,11 @@
         )
     </sql>
 
+    <sql id="getDefectedProducts">
+        SELECT SUM(defective_qty) AS defected_products
+        FROM order_request
+    </sql>
+
     <sql id="updateProduct">
         UPDATE products
         SET
@@ -88,6 +93,10 @@
 
     <select id="findById" parameterType="Integer" resultType="product">
        <include refid="findById"/>
+    </select>
+    
+    <select id="getDefectedProducts" resultType="Integer">
+        <include refid="getDefectedProducts"/>
     </select>
 
 </mapper>

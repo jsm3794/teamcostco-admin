@@ -30,6 +30,10 @@ public class ProductRepository {
         return sql.selectOne("Products.getLowProducts");
     }
 
+    public Integer getDefectedProducts() {
+        return sql.selectOne("Products.getDefectedProducts");
+    }
+
     // 날짜별 총수량
     public Integer getTotalProductsByUpdateDate() {
         return sql.selectOne("Products.getTotalProductsByUpdateDate");
