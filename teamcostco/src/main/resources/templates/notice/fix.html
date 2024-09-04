@@ -6,9 +6,9 @@
         <input type="text" id="title" name="title" th:value="${boardfix.title}">
         <textarea id="content" name="content" th:text="${boardfix.content}"></textarea>
         <input type="hidden" name="notice_id" th:value="${boardfix.notice_id}">
-        <input id="alert" type="submit" value="수정하기" class="btn">
+        <input id="alert" type="submit" value="수정" class="btn">
     </form>
-
+    <button id="delete_btn" class="btn" th:data-delete-url="@{'/delete/' + ${boardfix.notice_id}}" type="button">삭제</button>
 </div>
 <script src="https://cdn.tiny.cloud/1/f43n80pak829erjzkenxl0hxm0cr0w1g4rlhrggk8fk92t29/tinymce/7/tinymce.min.js"
     referrerpolicy="origin"></script>

@@ -11,7 +11,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @Service
-public class BoardFixService implements PageMetadataProvider{
+public class BoardFixService implements PageMetadataProvider {
 
     private final BoardFixRepository boardFixRepository;
 
@@ -21,6 +21,10 @@ public class BoardFixService implements PageMetadataProvider{
 
     public void fix(BoardFixDTO boardFixDTO) {
         boardFixRepository.fix(boardFixDTO);
+    }
+
+    public void delete(Integer notice_id) {
+        boardFixRepository.delete(notice_id);
     }
 
     @Override
@@ -37,5 +41,4 @@ public class BoardFixService implements PageMetadataProvider{
     public String getPageTitle() {
         return "게시글 수정";
     }
-    
 }
