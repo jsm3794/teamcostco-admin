@@ -10,7 +10,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @Repository
 public class BoardFixRepository {
-    
+
     private final SqlSessionTemplate sql;
 
     public BoardFixDTO get(Integer notice_id) {
@@ -19,5 +19,9 @@ public class BoardFixRepository {
 
     public void fix(BoardFixDTO boardFixDTO) {
         sql.update("Fix.fix", boardFixDTO);
+    }
+
+    public void delete(Integer notice_id) {
+        sql.delete("Fix.delete", notice_id);
     }
 }

@@ -27,9 +27,9 @@ public class BoardFixController {
 
     @PostMapping("/fix")
     public String fixBoard(@RequestParam String title,
-            @RequestParam String content,
-            @RequestParam Integer notice_id) {
-                
+                           @RequestParam String content,
+                           @RequestParam Integer notice_id) {
+
         BoardFixDTO boardFixDTO = new BoardFixDTO();
         boardFixDTO.setTitle(title);
         boardFixDTO.setContent(content);
@@ -38,4 +38,11 @@ public class BoardFixController {
         boardFixService.fix(boardFixDTO);
         return "redirect:/board?notice_id=" + notice_id;
     }
+
+    @GetMapping("/delete/{notice_id}")
+    public String deleteBoard(@PathVariable Integer notice_id) {
+        boardFixService.delete(notice_id);
+        return "redirect:/notice";
+    }
 }
+
