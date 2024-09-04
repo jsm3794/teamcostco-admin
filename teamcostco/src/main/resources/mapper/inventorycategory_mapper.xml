@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Category">
+
+    <select id="getLarge" resultType="large" >
+        SELECT
+            large_id ,large_name
+        FROM
+            category_large
+    </select>
+
+    <select id="getMedium" parameterType="String" resultType="medium" >
+        SELECT
+            medium_id, medium_name
+        FROM
+            category_medium
+        WHERE
+            large_id = #{large_id}
+    </select>
+
+    <select id="getSmall" parameterType="String" resultType="small" >
+        SELECT
+            small_id, small_name
+        FROM
+            category_small
+        WHERE
+            medium_id = #{medium_id}
+    </select>
+
+    <select id="getDetail" parameterType="String" resultType="detail" >
+        SELECT
+            detail_name
+        FROM
+            category_detail
+        WHERE
+            small_id = #{small_id}
+    </select>
+
+</mapper>

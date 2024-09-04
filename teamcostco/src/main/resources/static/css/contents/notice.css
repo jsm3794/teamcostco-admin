@@ -2,7 +2,12 @@
     width: 100%;
 }
 
+.flex-row-box{
+    justify-content: flex-end;
+}
 #write-btn {
+    margin-right: auto;
+    width:100px;
     padding:5px 0;
     cursor: pointer;
 }

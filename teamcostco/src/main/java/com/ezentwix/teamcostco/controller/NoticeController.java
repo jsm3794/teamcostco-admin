@@ -18,15 +18,16 @@ public class NoticeController {
 
     @GetMapping("/notice")
     public String showNotice(
+            Model model,
             @RequestParam(value = "query", defaultValue = "") String query,
             @RequestParam(value = "page", defaultValue = "1") int page,
-            @RequestParam(value = "size", defaultValue = "10") int size,
-            Model model) {
+            @RequestParam(value = "size", defaultValue = "10") int size) {
         noticeService.configureModel(model);
 
         PaginationResult<NoticeDTO> result = noticeService.getPage(query, page, size, null);
 
-        model.addAttribute("notices", noticeService.getAll());
+        model.addAttribute("items", result.getData());
+        model.addAttribute("count", result.getCount());
         model.addAttribute("pageDetail", result.getPageDetails());
 
         return "index";

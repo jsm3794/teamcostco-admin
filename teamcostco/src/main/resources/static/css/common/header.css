@@ -11,7 +11,6 @@ header {
     align-items: center;
     padding: 10px 10px;
     background-color: var(--background-color);
-    border-bottom: var(--border-line);
 }
 .under-header {
     display: flex;

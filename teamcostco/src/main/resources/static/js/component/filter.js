@@ -30,8 +30,9 @@ function displayFilterList() {
         var filterBlock = $('<div>', { class: 'filter-block' });
 
         // Create a span for the filter title and value
+        console.log(filterDTO);
         var filterText = $('<span>', { class: 'filter-text' })
-            .text(`${filterDTO.filter_title}: ${filterDTO.value}`);
+            .text(`${filterDTO.filter_title}: ${filterDTO.filter_innerText || filterDTO.value}`);
 
         // Create a button for removing the filter
         var removeButton = $('<button>', { class: 'remove-filter' })
@@ -182,12 +183,23 @@ function fetchFilterData(filtertype) {
 
 
 function createFilterDTOFromElement(element) {
+    let filter_innerText;
+     // Check if the element is a 'select' element
+     if (element.prop('tagName').toLowerCase() === 'select') {
+        // Find the selected option and get its text
+        filter_innerText = element.find('option:selected').text();
+    } else {
+        // For other elements, get the inner text directly
+        filter_innerText = element.attr('innerText') || '';
+    }
+
     return {
         id: element.attr('id'),
         name: element.attr('name'),
         value: element.val() || '10',
         filter_title: element.data('title') || '', // Or any other attribute you want to include
-        tag: element.prop('tagName').toLowerCase() // 'input' or 'select'
+        tag: element.prop('tagName').toLowerCase(), // 'input' or 'select'
+        filter_innerText: filter_innerText
     };
 }
 

@@ -5,13 +5,15 @@ import java.util.Map;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ezentwix.teamcostco.dto.employee.EmployeeDTO;
+import com.ezentwix.teamcostco.dto.filter.EmployeeFilterDTO;
 import com.ezentwix.teamcostco.pagination.PaginationResult;
 import com.ezentwix.teamcostco.service.EmployeeDetailService;
 import com.ezentwix.teamcostco.service.EmployeeService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -19,19 +21,24 @@ import lombok.RequiredArgsConstructor;
 @Controller
 @RequiredArgsConstructor
 public class EmployeeController {
-
     private final EmployeeService employeeService;
     private final EmployeeDetailService employeeDetailService;
+    private final ObjectMapper objectMapper;
 
     @GetMapping("/emp_list")
     public String showEmployee(Model model,
+            @RequestParam(defaultValue = "") String query,
             @RequestParam(defaultValue = "1") int page,
-            @RequestParam(defaultValue = "10") int size) {
+            @RequestParam(defaultValue = "10") int size,
+            @ModelAttribute EmployeeFilterDTO empFilterDTO) {
 
         employeeService.configureModel(model);
 
-        // model.addAttribute("empList", employeeService.getEmpList());
-        PaginationResult<EmployeeDTO> result = employeeService.getPage(page, size, Map.of("emp_name", "%김%"));
+        System.out.println(empFilterDTO);
+        ObjectMapper objectMapper = new ObjectMapper();
+        Map<String, Object> map = objectMapper.convertValue(empFilterDTO, Map.class);
+        PaginationResult<EmployeeDTO> result = employeeService.getPage(query, page, size, map);
+        
         model.addAttribute("empList", result.getData());
         model.addAttribute("pageDetail", result.getPageDetails());
         return "index";

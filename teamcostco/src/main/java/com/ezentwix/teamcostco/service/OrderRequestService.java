@@ -7,7 +7,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.ezentwix.teamcostco.PageMetadataProvider;
-import com.ezentwix.teamcostco.dto.employee.EmployeeDTO;
 import com.ezentwix.teamcostco.dto.product.OrderRequestDTO;
 import com.ezentwix.teamcostco.pagination.PaginationRepository;
 import com.ezentwix.teamcostco.pagination.PaginationResult;
@@ -28,8 +27,9 @@ public class OrderRequestService implements PageMetadataProvider {
     public PaginationResult<OrderRequestDTO> getPage(String query, Integer page, Integer size,
             Map<String, Object> params) {
         return paginationRepository.getPage(
+                query,
                 "OrderRequest.getAll",
-               null,
+                PageRequest.of(page, size),
                 params,
                 OrderRequestDTO.class);
     }

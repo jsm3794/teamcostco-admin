@@ -1,10 +1,5 @@
 <div class="content-box">
-    <form action="/productdefective" method="get">
-        <input type="text" name="query" placeholder="검색어를 입력하세요" required>
-        <input type="hidden" name="display" value="10">
-        <input type="hidden" name="start" value="1">
-        <button type="submit">검색</button>
-    </form>
+    <form th:replace="~{/component/search_form::form(action='/productdefective', id='productdefectiveForm')}"></form>
     <table id="results">
         <thead>
             <tr>

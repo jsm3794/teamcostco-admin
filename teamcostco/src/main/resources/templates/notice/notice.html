@@ -1,17 +1,11 @@
 <div class="content-box">
-
     <form action="/notice" method="GET" id="noticeForm">
         <div class="flex-row-box space-between">
             <div th:replace="~{/component/search_input::div(id='noticeForm')}"></div>
-            <div th:replace="~{/component/filter::div(id='noticeForm')}"></div>
-            <div th:replace="~{/component/pagination_nav::nav}"></div>
+            <button id="write-btn">글작성</button>
+          <div th:replace="~{/component/pagination_nav::nav}"></div>
         </div>
-        <div id="active-filters"></div>
-        <input type="hidden" name="display" value="10">
-        <input type="hidden" name="start" value="1">
-    </form>
-
-    <button class="btn" id="write-btn">글 작성</button>
+      </form>
     <table id="results">
         <thead>
             <tr>
@@ -24,13 +18,13 @@
             </tr>
         </thead>
         <tbody>
-            <tr th:each="notice : ${notices}"
-                th:onclick="'window.location.href=\'http://localhost:9999/board?notice_id=' + ${notice.notice_id} + '\''">
-                <td th:text="${notice.notice_id}"></td>
+            <tr th:each="item : ${items}"
+                th:onclick="'window.location.href=\'http://localhost:9999/board?notice_id=' + ${item.notice_id} + '\''">
+                <td th:text="${item.notice_id}"></td>
                 <td th:text="공지"></td>
-                <td th:text="${notice.title}"></td>
-                <td th:text="${notice.job_title}"></td>
-                <td th:text="${#dates.format(notice.update_date, 'yy-MM-dd HH:mm')}"></td>
+                <td th:text="${item.title}"></td>
+                <td th:text="${item.job_title}"></td>
+                <td th:text="${#dates.format(item.update_date, 'yy-MM-dd HH:mm')}"></td>
             </tr>
         </tbody>
     </table>

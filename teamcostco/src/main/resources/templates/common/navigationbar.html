@@ -1,8 +1,10 @@
 <nav class="aside-bar">
     <div class="aside-container">
-        <div id="logo">
-            <img id="theme-logo" th:src="${'/images/logo.png'}" alt="Logo">
-        </div>
+        <a href="/">
+            <div id="logo">
+                <img id="theme-logo" th:src="${'/images/logo.png'}" alt="Logo">
+            </div>
+        </a>
         <ul>
             <li>
                 <div class="nav-item" th:classappend="${rootName == 'dashboard' ? ' active' : ''}"

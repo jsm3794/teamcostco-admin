@@ -1,14 +1,5 @@
 <div class="content-box">
-
-    <form action="/emp_list" method="GET" id="employeeForm">
-        <div class="flex-row-box space-between">
-            <div th:replace="~{/component/search_input::div(id='employeeForm')}"></div>
-            <div th:replace="~{/component/filter::div(id='employeeForm')}"></div>
-            <div th:replace="~{/component/pagination_nav::nav}"></div>
-        </div>
-        <div id="active-filters"></div>
-    </form>
-
+    <form th:replace="~{/component/search_form::form(action='/emp_list', id='employeeForm')}"></form>
     <table id="results">
         <thead>
             <tr>

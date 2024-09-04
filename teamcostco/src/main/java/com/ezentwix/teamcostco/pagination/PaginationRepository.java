@@ -58,60 +58,52 @@ public class PaginationRepository {
      * @param additionalParams 추가 쿼리 파라미터 (ex: 필터 값)
      * @return 페이지데이터를 반환
      */
-    public <T> PaginationResult<T> getPage(String queryId, Pageable pageable, Map<String, Object> additionalParams,
+    public <T> PaginationResult<T> getPage(String query, String queryId, Pageable pageable,
+            Map<String, Object> additionalParams,
             Class<T> dtoClass) {
 
         if (pageable == null || pageable.getPageSize() <= 0) {
             return new PaginationResult<>(List.of(), 0, 1, 1, 1, 1);
         }
 
-        int page = pageable.getPageNumber() - 1;
-        int offset = Math.max(0, pageable.getPageSize() * page);
         int limit = pageable.getPageSize();
-        log.info("offset : {}", offset);
-
+        
         Map<String, Object> params = new HashMap<>();
+        params.put("queryId", queryId);
+        params.put("query", query);
+    
+        int count = sessionTemplate.selectOne("pagination.count", params);
+
+        int totalPages = Math.max((int) Math.ceil((double) count / limit), 1);
+        int currentPage = Math.min(pageable.getPageNumber(), totalPages);
+
+        int showPageNum = 5;
+        int startPageNumber = (currentPage - 1) / showPageNum * showPageNum + 1;
+        int endPageNumber = Math.max(Math.min(startPageNumber + showPageNum - 1, totalPages), 1);
+
+        int offset = Math.max(0, limit * (currentPage - 1));
+
         params.put("offset", offset);
         params.put("limit", limit);
-        params.put("queryId", queryId);
 
         if (additionalParams != null) {
             params.putAll(additionalParams);
         }
 
-        int count = sessionTemplate.selectOne("pagination.count", params);
-
-        int totalPages = Math.max((int) Math.ceil((double) count / limit), 1);
-        int currentPage = pageable.getPageNumber();
-        int showPageNum = 5;
-        int startPageNumber = (page / showPageNum) * showPageNum + 1;
-
-        // 현재 페이지의 마지막 페이지 번호
-        int endPageNumber = Math.max(Math.min(startPageNumber + showPageNum - 1, totalPages), 1);
-        log.info("전체 페이지 수 : {}", totalPages);
-        log.info("***** 현재 페이지의 시작 페이지 번호({}), 마지막({}) *****", startPageNumber, endPageNumber);
+        // Query data only if the current page is within the valid range
         List<Map<String, Object>> rawData;
-        if (page < totalPages && page >= 0) {
+        if (currentPage > 0 && currentPage <= totalPages) {
             rawData = sessionTemplate.selectList("pagination.selectPage", params);
         } else {
             rawData = List.of();
         }
 
-        // 쿼리 결과를 실제 사용할 DTO 객체로 변환
-        // MAP 결과가 DTO 구조와 일치하지 않아 데이터 바인딩 등에 문제가 발생
-
+        // Convert raw data to DTOs
         List<T> data = rawData.stream()
-
-                .map(map -> {
-                    T dto = modelMapper.map(map, dtoClass);
-                    return dto;
-                })
+                .map(map -> modelMapper.map(map, dtoClass))
                 .collect(Collectors.toList());
 
-        PaginationResult<T> result = new PaginationResult<>(data, count, startPageNumber, endPageNumber, currentPage,
-                totalPages);
-
-        return result;
+        return new PaginationResult<>(data, count, startPageNumber, endPageNumber, currentPage, totalPages);
     }
 
 }
