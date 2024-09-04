@@ -37,6 +37,7 @@ public class ProductService {
         ProductSummaryDTO psDTO = new ProductSummaryDTO();
 
         psDTO.setLowProducts(productRepository.getLowProducts());
+        psDTO.setTotalCategories(productRepository.getTotalCategories());
         psDTO.setDefectedProducts(productRepository.getDefectedProducts());
         psDTO.setTotalProductsQty(productRepository.getTotalProductsQty());
 

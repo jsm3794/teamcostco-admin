@@ -406,8 +406,7 @@ const myChart4 = new Chart(chart4, {
         maintainAspectRatio: false,
         plugins: {
             legend: {
-                position: 'bottom',         // 라벨을 오른쪽에 배치
-                labels: {
+                position: 'bottom',        
                     boxWidth: 12,         // 라벨 박스의 너비
                     boxHeight: 12,        // 라벨 박스의 높이
                     padding: 10          // 라벨 간격
@@ -427,8 +426,7 @@ const myChart4 = new Chart(chart4, {
                 bottom: 20
             }
         }
-    }
-});
+    });
 
 const updateChart4 = () => {
     $.ajax({
@@ -473,18 +471,13 @@ function initializeInventory() {
 }
 
 function fetchProductSummary() {
-    fetch('/productsummary')
+    fetch('/dashboard/productsummary')
         .then(response => response.json())
         .then(data => {
             document.getElementById("categoryCount").textContent = data.totalCategories;
-            document.getElementById("totalQtySum").textContent = data.totalProductsQty;
-            document.getElementById("lowStockCount").textContent = data.lowProducts;
         })
         .catch(error => console.error('Error fetching product summary:', error));
 }
-
-// 10분마다 데이터 갱신
-setInterval(fetchProductSummary, 600000);
 
 // 개수 표시 div 클릭시 상세창
 $(".info-box").click((e) => {
@@ -517,4 +510,5 @@ document.addEventListener('DOMContentLoaded', function() {
         const operatingProfit = parseInt(operatingProfitElement.textContent, 10);
         operatingProfitElement.textContent = formatNumber(operatingProfit);
     }
+
 });
