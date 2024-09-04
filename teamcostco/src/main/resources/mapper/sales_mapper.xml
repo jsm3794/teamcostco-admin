@@ -26,4 +26,20 @@
         SELECT sold_product_name, sold_qty, sold_date FROM sales_qty_prac
         WHERE trunc(sysdate, 'month') = trunc(sold_date, 'month')
     </select>
+
+    <!--한달간 총매출-->
+    <select id="getTotalSales" resultType="Integer">
+        SELECT SUM(total_price)
+        FROM sales_prac
+        WHERE TO_CHAR(SYSDATE, 'YYYY') = TO_CHAR(sales_date, 'YYYY')
+        AND TO_CHAR(SYSDATE, 'MM') = TO_CHAR(sales_date, 'MM')
+    </select>
+
+    <!--한달간의 영업이익-->
+    <select id="getOperatingProfit" resultType="Integer">
+        SELECT SUM(total_price) * 0.15 AS estimated_operating_profit
+        FROM sales_prac
+        WHERE TO_CHAR(SYSDATE, 'YYYY') = TO_CHAR(sales_date, 'YYYY')
+        AND TO_CHAR(SYSDATE, 'MM') = TO_CHAR(sales_date, 'MM')
+    </select>
 </mapper>

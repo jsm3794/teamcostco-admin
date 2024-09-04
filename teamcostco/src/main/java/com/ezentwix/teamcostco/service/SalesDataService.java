@@ -49,4 +49,12 @@ public class SalesDataService {
     public List<SalesQtyPracDTO> selectWeeklyTopProducts() {
         return salesDataRepository.selectWeeklyTopProducts();
     }
+
+    public Integer getTotalSales() {
+        return salesDataRepository.getTotalSales();
+    }
+
+    public Integer getOperatingProfit() {
+        return salesDataRepository.getOperatingProfit();
+    }
 }

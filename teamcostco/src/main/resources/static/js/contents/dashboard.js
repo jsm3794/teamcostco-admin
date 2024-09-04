@@ -494,3 +494,27 @@ $(".info-box").click((e) => {
 fetchProductSummary();
 // 10분마다 개수 데이터 갱신 (밀리초 단위)
 setInterval(fetchProductSummary, 600000);
+
+document.addEventListener('DOMContentLoaded', function() {
+    // 숫자 포맷 함수
+    function formatNumber(number) {
+        if (number === null || number === undefined) {
+            return '0';
+        }
+        return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    }
+
+    // HTML 요소에서 숫자를 가져와서 포맷팅
+    const totalSalesElement = document.getElementById('totalSalesValue');
+    const operatingProfitElement = document.getElementById('operatingProfitValue');
+
+    if (totalSalesElement) {
+        const totalSales = parseInt(totalSalesElement.textContent, 10);
+        totalSalesElement.textContent = formatNumber(totalSales);
+    }
+
+    if (operatingProfitElement) {
+        const operatingProfit = parseInt(operatingProfitElement.textContent, 10);
+        operatingProfitElement.textContent = formatNumber(operatingProfit);
+    }
+});

@@ -35,4 +35,11 @@ public class SalesDataRepository {
         return sql.selectList("Sales.selectWeeklyTopProducts");
     }
 
+    public Integer getTotalSales() {
+        return sql.selectOne("Sales.getTotalSales");
+    }
+
+    public Integer getOperatingProfit() {
+        return sql.selectOne("Sales.getOperatingProfit");
+    }
 }
