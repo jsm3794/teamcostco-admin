@@ -110,7 +110,7 @@ const myChart2 = new Chart(chart2, {
     type: 'doughnut',
     data: {
         datasets: [{
-            label: '# of Votes',
+            label: 'qty',
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(54, 162, 235, 0.2)',
@@ -383,7 +383,7 @@ const myChart4 = new Chart(chart4, {
     data: {
         labels: ['Olive Green', 'Burnt Sienna', 'Steel Blue', 'Rose Gold', 'Slate Blue'],
         datasets: [{
-            label: '# of Votes',
+            label: 'qty',
             data: [12, 19, 3, 5, 2],
             backgroundColor: [
                 'rgba(128, 128, 0, 0.2)',   // Olive Green

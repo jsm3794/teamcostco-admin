@@ -84,6 +84,11 @@
     display: block;
 }
 
+#chart4 {
+    width: 90% !important;
+    height: 90% !important;
+}
+
 /* grid item styles */
 .box1 {
     grid-column: 1 / 2;
