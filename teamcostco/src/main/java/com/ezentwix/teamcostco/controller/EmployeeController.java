@@ -29,7 +29,7 @@ public class EmployeeController {
     public String showEmployee(Model model,
             @RequestParam(defaultValue = "") String query,
             @RequestParam(defaultValue = "1") int page,
-            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "15") int size,
             @ModelAttribute EmployeeFilterDTO empFilterDTO) {
 
         employeeService.configureModel(model);

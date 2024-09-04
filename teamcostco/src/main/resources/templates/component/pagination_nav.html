@@ -2,7 +2,7 @@
     <input type="hidden" name="page" th:value="${param.page == null ? 1 : param.page[0]}">
     <div class="list-size-filter">
         <label for="list_size">항목수</label>
-        <input type="number" id="list_size" name="size" th:value="${param.size ?: 10}">
+        <input type="number" id="list_size" name="size" th:value="${param.size ?: 15}">
     </div>
     <div id="page" class="page-state" th:data-page="${pageDetail.currentPage}"
         th:data-totalPages="${pageDetail.totalPages}" th:text="|${pageDetail.currentPage} / ${pageDetail.totalPages}|">

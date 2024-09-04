@@ -31,7 +31,7 @@ public class InventoreyController {
     public String showInventory(
             @RequestParam(value = "query", defaultValue = "") String query,
             @RequestParam(value = "page", defaultValue = "1") Integer page,
-            @RequestParam(value = "size", defaultValue = "10") Integer size,
+            @RequestParam(value = "size", defaultValue = "15") Integer size,
             @ModelAttribute InventoryFilterDTO inventoryFilterDTO,
             Model model) {
 

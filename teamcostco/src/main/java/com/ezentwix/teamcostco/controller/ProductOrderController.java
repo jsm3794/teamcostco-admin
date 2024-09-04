@@ -20,7 +20,7 @@ public class ProductOrderController {
     public String search(
             @RequestParam(name = "query", required = false, defaultValue = "") String query,
             @RequestParam(name = "page", required = false, defaultValue = "1") Integer page,
-            @RequestParam(name = "size", required = false, defaultValue = "10") Integer size,
+            @RequestParam(name = "size", required = false, defaultValue = "15") Integer size,
             Model model) {
 
         // 기존의 configureModel 호출

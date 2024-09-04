@@ -26,7 +26,7 @@ public class OrderRequestController {
     public String showOrderQuest(
             @RequestParam(value = "query", defaultValue = "") String query,
             @RequestParam(value = "page", defaultValue = "1") int page,
-            @RequestParam(value = "size", defaultValue = "10") int size,
+            @RequestParam(value = "size", defaultValue = "15") int size,
             @ModelAttribute OrderRequestFilterDTO orderRequestFilterDTO,
             Model model) {
         orderRequestService.configureModel(model);
