@@ -3,13 +3,14 @@
     <table id="results">
         <thead>
             <tr>
-                <th width="10%">ID</th>
-                <th width="20%">상품명</th>
+                <th width="5%">ID</th>
+                <th width="30%">상품명</th>
+                <th width="10%">판매처</th>
                 <th width="10%">발주수량</th>
                 <th width="10%">입고수량</th>
                 <th width="10%">불량수량</th>
-                <th width="20%">발주직원</th>
-                <th width="20%">요청일자</th>
+                <th width="10%">발주직원</th>
+                <th width="15%">요청일자</th>
                 <th></th>
             </tr>
         </thead>
@@ -17,6 +18,7 @@
             <tr th:each="item : ${items}">
                 <td th:text="${item.request_id}"></td>
                 <td th:text="${item.product_name}"></td>
+                <td th:text="${item.mall_name}"></td>
                 <td th:text="${item.request_qty}"></td>
                 <td th:text="${item.received_qty}"></td>
                 <td th:text="${item.defective_qty}"></td>

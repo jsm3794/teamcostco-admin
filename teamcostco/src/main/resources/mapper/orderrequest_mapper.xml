@@ -1,15 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="OrderRequest">
+
+    <sql id="insertOrderRequest">
+        INSERT INTO order_request (
+            request_id, product_name, product_code, mall_name, request_qty, received_qty, defective_qty, emp_id, create_date
+        ) VALUES (
+            #{request_id}, #{product_name}, #{product_code}, #{mall_name}, #{request_qty}, 0, 0, #{emp_id}, SYSDATE
+        )
+    </sql>
+
+    <sql id="getNextRequestId">
+        SELECT REQUEST_SEQ.NEXTVAL as request_id FROM DUAL
+    </sql>
 
     <sql id="getAll">
         SELECT
-            o.request_id, p.product_name, o.product_code, o.request_qty,
+            o.request_id, o.product_name, o.product_code, o.mall_name, o.request_qty,
             o.received_qty, o.defective_qty, e.emp_id, e.emp_name, o.create_date
         FROM
             order_request o
-        INNER JOIN products p ON o.product_code = p.product_code
         INNER JOIN employees e ON o.emp_id = e.emp_id
         <where>
             <if test="query != null and query != ''">
@@ -28,10 +38,19 @@
                 AND e.emp_name LIKE '%' || #{emp_name} || '%'
             </if>
         </where>
+        ORDER BY
+        o.request_id DESC
     </sql>
 
-
     <select id="getAll" resultType="orderrequest">
-        <include refid="getAll"></include>
+        <include refid="getAll"/>
     </select>
+
+    <insert id="insertOrderRequest" parameterType="orderrequest">
+        <include refid="insertOrderRequest"/>
+     </insert>
+
+     <select id="getNextRequestId" resultType="int">
+        <include refid="getNextRequestId"/>
+     </select>
 </mapper>

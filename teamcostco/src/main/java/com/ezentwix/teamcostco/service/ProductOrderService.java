@@ -1,18 +1,23 @@
 package com.ezentwix.teamcostco.service;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
 
 import com.ezentwix.teamcostco.PageMetadataProvider;
 import com.ezentwix.teamcostco.dto.product.NaverProductDTO;
 import com.ezentwix.teamcostco.dto.product.NaverProductResponseDTO;
+import com.ezentwix.teamcostco.dto.product.OrderRequestDTO;
 import com.ezentwix.teamcostco.pagination.PaginationResult;
+import com.ezentwix.teamcostco.repository.OrderRequestRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -20,6 +25,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ProductOrderService implements PageMetadataProvider {
     private WebClient webClient;
+    private final OrderRequestRepository orderRequestRepository;
 
     @Value("${naver.api.client-id}")
     private String clientId;
@@ -37,7 +43,6 @@ public class ProductOrderService implements PageMetadataProvider {
 
         try {
             if (this.webClient == null) {
-
                 this.webClient = WebClient.builder()
                         .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                         .defaultHeader("X-Naver-Client-Id", clientId)
@@ -53,7 +58,7 @@ public class ProductOrderService implements PageMetadataProvider {
 
             List<NaverProductDTO> items = response.getItems();
             int count = response.getTotal();
-            
+
             if (count == 0) {
                 return new PaginationResult<>(List.of(), 0, 1, 1, 1, 1);
             }
@@ -68,6 +73,11 @@ public class ProductOrderService implements PageMetadataProvider {
         } catch (WebClientResponseException e) {
             return new PaginationResult<>(List.of(), 0, 1, 1, 1, 1);
         }
+    }
+
+    @Transactional
+    public void processOrders(OrderRequestDTO orderRequestDTO) {
+        orderRequestRepository.insertOrderRequest(orderRequestDTO);
     }
 
     @Override

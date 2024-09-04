@@ -18,4 +18,15 @@ public class OrderRequestRepository {
     public List<OrderRequestDTO> getAll() {
         return sql.selectList("OrderRequest.getAllWithProductName");
     }
+
+    public void insertOrderRequest(OrderRequestDTO orderRequest) {
+        int seq = sql.selectOne("OrderRequest.getNextRequestId");
+        orderRequest.setRequest_id(seq);
+        System.out.println(orderRequest);
+        sql.insert("OrderRequest.insertOrderRequest", orderRequest);
+    }
+
+    public int getNextRequestId() {
+        return sql.selectOne("OrderRequest.getNextRequestId");
+    }
 }

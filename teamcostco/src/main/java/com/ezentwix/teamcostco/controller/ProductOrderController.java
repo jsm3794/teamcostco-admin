@@ -3,13 +3,21 @@ package com.ezentwix.teamcostco.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ezentwix.teamcostco.dto.product.NaverProductDTO;
+import com.ezentwix.teamcostco.dto.product.OrderRequestDTO;
 import com.ezentwix.teamcostco.pagination.PaginationResult;
 import com.ezentwix.teamcostco.service.ProductOrderService;
 
 import lombok.RequiredArgsConstructor;
+
+import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor
@@ -23,18 +31,28 @@ public class ProductOrderController {
             @RequestParam(name = "size", required = false, defaultValue = "15") Integer size,
             Model model) {
 
-        // 기존의 configureModel 호출
         productOrderService.configureModel(model);
 
-        // search 메소드 호출
-        PaginationResult<NaverProductDTO> result = null;
-
-        result = productOrderService.getPage(query, page, size);
+        PaginationResult<NaverProductDTO> result = productOrderService.getPage(query, page, size);
 
         model.addAttribute("items", result.getData());
+        model.addAttribute("count", result.getCount());
         model.addAttribute("pageDetail", result.getPageDetails());
 
-        // 결과 뷰 반환
         return "index";
+    }
+
+    @PostMapping("/productorder")
+    @ResponseBody
+    public String order(
+        @ModelAttribute OrderRequestDTO orderRequestDTO) {
+            System.out.println(orderRequestDTO);
+        try {
+            productOrderService.processOrders(orderRequestDTO);
+            return "Order received and processed successfully";
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "Error processing order: " + e.getMessage();
+        }
     }
 }
