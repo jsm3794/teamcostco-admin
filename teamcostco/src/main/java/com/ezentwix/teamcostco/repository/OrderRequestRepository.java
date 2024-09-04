@@ -19,4 +19,11 @@ public class OrderRequestRepository {
         return sql.selectList("OrderRequest.getAllWithProductName");
     }
 
+    public void insertOrderRequest(OrderRequestDTO orderRequest) {
+        sql.insert("OrderRequest.insertOrderRequest", orderRequest);
+    }
+
+    public int getNextRequestId() {
+        return sql.selectOne("OrderRequest.getNextRequestId");
+    }
 }

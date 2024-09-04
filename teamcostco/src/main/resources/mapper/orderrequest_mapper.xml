@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="OrderRequest">
+    <!-- 기존의 getAll 쿼리 -->
     <select id="getAll" resultType="orderrequest">
         SELECT
             request_id, product_code, request_qty,
             received_qty, defective_qty, emp_id, create_date
         FROM
             order_request
-        </select>
+    </select>
 
-    <select id="getAllWithProductName" resultType="orderrequest">
+    <!-- 기존의 getAllWithProductName 쿼리 -->
+    <select id="getAllWithProductName" resultType="com.ezentwix.teamcostco.dto.product.OrderRequestDTO">
         SELECT
             o.request_id AS request_id,
             p.product_code AS product_code,
@@ -26,5 +27,18 @@
             ON o.product_code = p.product_code
         ORDER BY
             o.request_id DESC
-        </select>
+    </select>
+
+    <insert id="insertOrderRequest" parameterType="com.ezentwix.teamcostco.dto.product.OrderRequestDTO">
+        INSERT INTO order_request (
+            request_id, product_code, request_qty, received_qty, defective_qty, emp_id, create_date
+        ) VALUES (
+            #{request_id}, #{product_code}, #{request_qty}, NULL, NULL, NULL, SYSDATE
+        )
+    </insert>
+
+    <select id="getNextRequestId" resultType="int">
+        SELECT REQUEST_SEQ.NEXTVAL FROM DUAL
+    </select>
+    
 </mapper>

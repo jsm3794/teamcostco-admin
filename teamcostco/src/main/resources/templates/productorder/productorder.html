@@ -1,29 +1,49 @@
-<div class="content-box">
-  <div th:replace="~{component/pagination_nav::nav}"></div>
-    <form action="/productorder" method="get">
-        <input type="text" name="query" placeholder="검색어를 입력하세요" required>
-        <input type="hidden" name="display" value="10">
-        <input type="hidden" name="page" th:value="${param.page == null ? 1 : param.page[0]}">
-        <button type="submit">검색</button>
-    </form>
-    <table id="results">
-        <thead>
-          <tr>
-            <th>이미지</th>
-            <th>제목</th>
-            <th>가격</th>
-            <th>판매처</th>
-            <th>링크</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr th:each="item : ${items}">
-            <td><img th:src="${item.image}" alt="Product Image"></td>
-            <td th:utext="${item.title}"></td>
-            <td th:text="${item.lprice}">원</td>
-            <td th:text="${item.mallName}"></td>
-            <td><a th:href="${item.link}" target="_blank">제품 보러가기</a></td>
-          </tr>
-        </tbody>
-      </table>
-</div>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>상품발주</title>
+    <link rel="stylesheet" th:href="@{/css/contents/productorder.css}">
+</head>
+<body>
+    <div class="content-box">
+        <div th:replace="~{component/pagination_nav::nav}"></div>
+        <form action="/productorder" method="get">
+            <input type="text" name="query" placeholder="검색어를 입력하세요" required>
+            <input type="hidden" name="display" value="10">
+            <input type="hidden" name="page" th:value="${param.page == null ? 1 : param.page[0]}">
+            <button type="submit">검색</button>
+        </form>
+        <form id="orderForm" action="/order" method="post">
+            <table id="results">
+                <thead>
+                    <tr>
+                        <th>발주확인</th>
+                        <th>이미지</th>
+                        <th>제목</th>
+                        <th>가격</th>
+                        <th>판매처</th>
+                        <th>링크</th>
+                        <th>발주수량</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="item : ${items}">
+                        <td><input type="checkbox" name="orderCheck" th:value="${item.productId}"></td>
+                        <td><img th:src="${item.image}" alt="Product Image"></td>
+                        <td th:utext="${item.title}"></td>
+                        <td th:text="${item.lprice}">원</td>
+                        <td th:text="${item.mallName}"></td>
+                        <td><a th:href="${item.link}" target="_blank">제품 보러가기</a></td>
+                        <td><input type="number" name="orderQuantity" min="0" value="0"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div style="margin-top: 20px;">
+                <button type="submit" id="orderButton">발주</button>
+            </div>
+        </form>
+    </div>
+    <script th:src="@{/js/productorder.js}"></script>
+</body>
+</html>

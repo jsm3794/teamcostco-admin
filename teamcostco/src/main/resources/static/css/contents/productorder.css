@@ -3,12 +3,16 @@
     min-height: 400px;
 }
 
-
-
 form {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column; /* 필드들을 세로로 배치 */
+    justify-content: flex-start;
+    align-items: stretch;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    display: flex; /* 필드와 버튼을 가로로 배치 */
     margin-bottom: 20px;
 }
 
@@ -41,11 +45,26 @@ form button[type="submit"]:hover {
     background-color: #3e8e41;
 }
 
+form button[type="button"] {
+    width: 100px;
+    height: 40px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 20px; /* 검색 버튼과 간격을 맞추기 위해 추가 */
+}
+
+form button[type="button"]:hover {
+    background-color: #3e8e41;
+}
+
+
 #results {
     border-collapse: collapse;
     width: 100%;
 }
-
 
 #results th {
     border: 1px solid #ddd;
@@ -53,12 +72,11 @@ form button[type="submit"]:hover {
     text-align: center;
 }
 
-#results th:first-child{
-    width:60px;
+#results th:first-child {
+    width: 60px;
 }
 
-#results > tbody > tr > td:first-child{
-
+#results > tbody > tr > td:first-child {
     text-align: center;
 }
 

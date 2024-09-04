@@ -6,8 +6,8 @@ import lombok.Data;
 
 @Data
 public class OrderRequestDTO {
-    private Integer request_id;
-    private Integer product_code;
+    private Integer request_id;          
+    private Long product_code;
     private String product_name;
     private Integer request_qty;
     private Integer received_qty;
