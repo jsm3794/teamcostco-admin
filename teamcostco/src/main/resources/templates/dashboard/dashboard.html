@@ -1,19 +1,66 @@
+<div class="info-boxes">
+    <div class="content-box">
+        <div class="categories">
+            Categories
+        </div>
+        <div class="total-text">
+            Total <span id="categoryCount">0</span>
+        </div>
+    </div>
+    <div class="content-box">
+        <div class="total-product">
+            Total Product
+        </div>
+        <div class="total-text">
+            Total <span id="totalQtySum">0</span>
+        </div>
+    </div>
+    <div class="content-box">
+        <div class="low-stock">
+            Low Stock
+        </div>
+        <div class="total-text">
+            Total <span id="lowStockCount">0</span>
+        </div>
+    </div>
+</div>
 
 <div class="grid-container">
     <div class="box box1">
-        <canvas id="chart1" width="atuo" height="atuo"></canvas>
+        <div class="title">
+            기간별 판매 금액
+        </div>
+        <div class="buttons">
+            <button id="weekBtn">1주</button>
+            <button id="monthBtn">1달</button>
+            <button id="yearBtn">1년</button>
+        </div>
+        <canvas id="chart1"></canvas>
     </div>
 
     <div class="box box2">
-        <canvas id="chart2" width="atuo" height="atuo"></canvas>
+        <div class="title">
+            최다 판매 제품
+        </div>
+        <canvas id="chart2"></canvas>
     </div>
 
     <div class="box box3">
-        <canvas id="chart3" width="atuo" height="atuo"></canvas>
+        <div class="title">
+            판매 대비 재고 비율
+        </div>
+        <div class="buttons">
+            <button id="monthSalesBtn">1달</button>
+            <button id="yearSalesBtn">1년</button>
+            <button id="totalSalesBtn">전체</button>
+        </div>
+        <canvas id="chart3"></canvas>
     </div>
 
     <div class="box box4">
-        <canvas id="chart4" width="atuo" height="atuo"></canvas>
+        <div class="title">
+            최다 발주 제품
+        </div>
+        <canvas id="chart4"></canvas>
     </div>
-    </div>
-</div>  
+</div>
