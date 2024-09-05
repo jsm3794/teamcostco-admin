@@ -45,18 +45,11 @@
             </if>
         </where>
         ORDER BY
-        o.request_id DESC
-    </sql>
+            o.request_id DESC
+        </select>
 
-    <select id="getAll" resultType="orderrequest">
-        <include refid="getAll"/>
+    <select id="getRequestAndProductInfo" resultType="requestAndProduct">
+        SELECT request_id, product_name, request_qty  FROM order_request
+        INNER JOIN products USING (product_code)
     </select>
-
-    <insert id="insertOrderRequest" parameterType="orderrequest">
-        <include refid="insertOrderRequest"/>
-     </insert>
-
-     <select id="getNextRequestId" resultType="int">
-        <include refid="getNextRequestId"/>
-     </select>
 </mapper>

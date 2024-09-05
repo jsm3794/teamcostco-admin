@@ -5,4 +5,5 @@ public class ProductSummaryDTO {
     Integer totalCategories;
     Integer totalProductsQty;
     Integer lowProducts;
+    Integer defectedProducts;
 }
