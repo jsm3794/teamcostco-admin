@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.ezentwix.teamcostco.dto.filter.OrderRequestFilterDTO;
 import com.ezentwix.teamcostco.dto.product.OrderRequestDTO;
 import com.ezentwix.teamcostco.pagination.PaginationResult;
+import com.ezentwix.teamcostco.service.OrderRequestDetailService;
 import com.ezentwix.teamcostco.service.OrderRequestService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -21,6 +22,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class OrderRequestController {
     private final OrderRequestService orderRequestService;
+    private final OrderRequestDetailService orderRequestDetailService;
 
     @GetMapping("/orderrequest")
     public String showOrderQuest(
@@ -43,9 +45,10 @@ public class OrderRequestController {
         return "index";
     }
 
-    @PostMapping("/orderrequest/add")
-    public String getMethodName(@RequestParam String param) {
-        return new String();
+    @GetMapping("/orderrequest/{request_id}/detail")
+    public String getMethodName(Model model) {
+        orderRequestDetailService.configureModel(model);
+        return "index";
     }
 
 }
