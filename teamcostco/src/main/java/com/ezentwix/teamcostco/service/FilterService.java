@@ -53,12 +53,17 @@ public class FilterService {
             case ORDERREQUEST:
                 OrderRequestFilterDTO orderRequestFilterDTO = new OrderRequestFilterDTO();
                 orderRequestFilterDTO.setFilterList(List.of(
+                        new FilterDTO("판매처", "input", "text", "mall_name", "", null),
                         new FilterDTO("주문번호", "input", "text", "order_number", "", null),
                         new FilterDTO("주문날짜", "input", "date", "order_date", "", null),
-                        new FilterDTO("상태", "select", "", "status", "", Map.of(
+                        new FilterDTO("상태", "select", "", "request_status", "", Map.of(
                                 "", "전체",
-                                "TEST1", "TEST1",
-                                "TEST2", "TEST2")),
+                                "pending", "대기중",
+                                "ordered", "주문됨",
+                                "received", "입고중",
+                                "completed", "완료됨",
+                                "rejected", "거부됨",
+                                "cancelled", "취소됨")),
                         new FilterDTO("직원이름", "input", "text", "emp_name", "", null)));
 
                 return orderRequestFilterDTO.getFilterList();
