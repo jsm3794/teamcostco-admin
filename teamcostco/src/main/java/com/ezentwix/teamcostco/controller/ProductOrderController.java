@@ -46,7 +46,9 @@ public class ProductOrderController {
     @ResponseBody
     public String order(
         @ModelAttribute OrderRequestDTO orderRequestDTO) {
-            System.out.println(orderRequestDTO);
+            if(orderRequestDTO.getRequest_status() == null || orderRequestDTO.getRequest_status().isEmpty()){
+                orderRequestDTO.setRequest_status("pending");
+            }
         try {
             productOrderService.processOrders(orderRequestDTO);
             return "Order received and processed successfully";
