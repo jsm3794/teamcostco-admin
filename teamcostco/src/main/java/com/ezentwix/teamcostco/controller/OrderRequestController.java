@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -46,8 +47,13 @@ public class OrderRequestController {
     }
 
     @GetMapping("/orderrequest/{request_id}/detail")
-    public String getMethodName(Model model) {
+    public String getMethodName(
+            @PathVariable("request_id") Long requestId,
+            Model model) {
         orderRequestDetailService.configureModel(model);
+        OrderRequestDTO orderRequestDTO = orderRequestDetailService.getById(requestId);
+        System.out.println(orderRequestDTO);
+        model.addAttribute("item", orderRequestDTO);
         return "index";
     }
 

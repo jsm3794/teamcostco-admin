@@ -29,4 +29,8 @@ public class OrderRequestRepository {
     public int getNextRequestId() {
         return sql.selectOne("OrderRequest.getNextRequestId");
     }
+
+    public OrderRequestDTO getById(Long request_id){
+        return sql.selectOne("OrderRequest.getById", request_id);
+    }
 }

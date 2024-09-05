@@ -4,9 +4,9 @@
 
     <sql id="insertOrderRequest">
         INSERT INTO order_request (
-            request_id, product_name, product_code, mall_name, request_qty, received_qty, defective_qty, emp_id, request_status, create_date
+            request_id, product_name, product_code, purchase_price, mall_name, mall_link, request_qty, received_qty, defective_qty, emp_id, request_status, create_date
         ) VALUES (
-            #{request_id}, #{product_name}, #{product_code}, #{mall_name}, #{request_qty}, 0, 0, #{emp_id}, #{request_status}, SYSDATE
+            #{request_id}, #{product_name}, #{product_code}, #{purchase_price}, #{mall_name}, #{mall_link}, #{request_qty}, 0, 0, #{emp_id}, #{request_status}, SYSDATE
         )
     </sql>
 
@@ -14,9 +14,19 @@
         SELECT REQUEST_SEQ.NEXTVAL as request_id FROM DUAL
     </sql>
 
+    <sql id="getById">
+        SELECT
+            o.request_id, o.product_name, o.product_code, o.purchase_price, o.mall_name, o.mall_link, o.request_qty,
+            o.received_qty, o.defective_qty, e.emp_id, e.emp_name, o.request_status, o.create_date
+        FROM
+            order_request o
+        INNER JOIN employees e ON o.emp_id = e.emp_id
+        WHERE o.request_id = #{request_id}
+    </sql>
+
     <sql id="getAll">
         SELECT
-            o.request_id, o.product_name, o.product_code, o.mall_name, o.request_qty,
+            o.request_id, o.product_name, o.product_code, o.purchase_price, o.mall_name, o.mall_link, o.request_qty,
             o.received_qty, o.defective_qty, e.emp_id, e.emp_name, o.request_status, o.create_date
         FROM
             order_request o
@@ -47,6 +57,10 @@
         ORDER BY
         o.request_id DESC
     </sql>
+
+    <select id="getById" parameterType="Long" resultType="orderrequest">
+        <include refid="getById"/>
+    </select>
 
     <select id="getAll" resultType="orderrequest">
         <include refid="getAll"/>

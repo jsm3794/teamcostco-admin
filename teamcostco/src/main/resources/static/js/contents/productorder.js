@@ -20,11 +20,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
         checkboxes.forEach(function (checkbox) {
             var row = checkbox.closest('tr');
+            var imageSrc = row.querySelector('td:nth-child(2) > img').getAttribute("src");
+            var purchasePrice = row.querySelector('td:nth-child(5)').innerText;
             var quantityInput = row.querySelector('input[name="orderQuantity"]');
             var quantity = quantityInput.value;
             var productCode = row.querySelector('td:nth-child(3)').innerText;
             var title = row.querySelector('td:nth-child(4)').innerText;
             var mallName = row.querySelector('td:nth-child(6)').innerText;
+            var mallLink = row.querySelector('td:nth-child(7) > a').getAttribute("href");
 
             // Sanitize the title by removing newline characters
             title = title.replace(/[\r\n]+/g, ' ').trim();
@@ -35,11 +38,14 @@ document.addEventListener('DOMContentLoaded', function () {
             }
 
             selectedProducts.push({
+                image_url: imageSrc,
                 product_id: checkbox.value,
                 product_name: title,
                 product_code: productCode,
+                purchase_price: purchasePrice,
                 request_qty: quantity,
                 mall_name: mallName,
+                mall_link: mallLink,
                 emp_id: emp_id
             });
         });
@@ -58,24 +64,23 @@ document.addEventListener('DOMContentLoaded', function () {
                 },
                 body: toUrlEncoded(product)
             })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.text();
-            })
-            .then(() => {
-                successCount++;
-            })
-            .catch(() => {
-                failureCount++;
-            });
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.text();
+                })
+                .then(() => {
+                    successCount++;
+                })
+                .catch(() => {
+                    failureCount++;
+                });
         });
-
         // Wait for all fetch requests to complete
         Promise.all(fetchPromises)
             .then(() => {
-                alert(`발주 완료: ${successCount}건, 발주 실패: ${failureCount}건`);
+                alert(`발주 완료: ${successCount}건\n발주 실패: ${failureCount}건`);
             })
             .catch((error) => {
                 console.error('Error:', error);

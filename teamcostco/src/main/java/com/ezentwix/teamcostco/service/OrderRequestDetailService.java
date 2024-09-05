@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.ezentwix.teamcostco.PageMetadataProvider;
+import com.ezentwix.teamcostco.dto.product.OrderRequestDTO;
 import com.ezentwix.teamcostco.repository.OrderRequestRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -13,6 +14,10 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class OrderRequestDetailService implements PageMetadataProvider {
     private final OrderRequestRepository orderRequestRepository;
+
+    public OrderRequestDTO getById(Long orderrequest_id) {
+        return orderRequestRepository.getById(orderrequest_id);
+    }
 
     @Override
     public String getUri() {
@@ -29,5 +34,4 @@ public class OrderRequestDetailService implements PageMetadataProvider {
         return List.of("/css/contents/orderrequest_detail.css");
     }
 
-    
 }

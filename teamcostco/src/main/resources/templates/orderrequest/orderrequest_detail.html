@@ -8,6 +8,50 @@
         </div>
     </div>
     <div class="tab-content-wrap">
+        <div class="top_area">
+            <div id="request_status" th:class="${'status_' + item?.request_status ?: 'unkown'}">
+                <span th:text="${item.request_status == 'pending' ? '대기중' :
+                item.request_status == 'ordered' ? '주문됨' :
+                item.request_status == 'received' ? '입고중' :
+                item.request_status == 'completed' ? '완료됨' :
+                item.request_status == 'rejected' ? '거부됨' :
+                item.request_status == 'cancelled' ? '취소됨' :
+                '알수없음'}"></span>
+            </div>
+            <h4 class="product_name" th:text="${item.product_name}"></h4>
+            <h4 class="emp_name" th:text="${'발주자: ' + (item.emp_name)}"></h4>
+        </div>
+
+        <div class="flex-row-box">
+            <div class="product_detail">
+                <div class="image_box">
+                    <img id="product_thumbnail"
+                        th:src="@{/api/product_thumbnail/{productCode}(productCode=${item.product_code ?: '12345'})}">
+                </div>
+                <div class="description">
+                    <div class="flex-row-box">
+                        <ul>
+                            <li>코드</li>
+                            <li>판매처</li>
+                            <li>가격</li>
+                            <li>링크</li>
+                        </ul>
+                        <ul>
+                            <li th:text="${item.product_code}"></li>
+                            <li th:text="${item.mall_name}"></li>
+                            <li th:text="${item.purchase_price}"></li>
+                            <li>
+                                <a th:href="${item.mall_link}">상품 링크</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="orderrequest_process">
+                <h3>발주수량 정보</h3>
+            </div>
+        </div>
+
 
     </div>
 </div>

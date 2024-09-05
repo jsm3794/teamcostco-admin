@@ -9,7 +9,9 @@ public class OrderRequestDTO {
     private Integer request_id;          
     private Long product_code;
     private String product_name;
+    private String purchase_price;
     private String mall_name;
+    private String mall_link;
     private Integer request_qty;
     private Integer received_qty;
     private Integer defective_qty;
