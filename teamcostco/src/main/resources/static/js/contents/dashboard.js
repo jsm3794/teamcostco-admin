@@ -473,8 +473,19 @@ function fetchTrackSummary() {
         .catch(error => console.error('Error fetching product summary:', error));
 }
 
-fetchTrackSummary();
+function fetchSalesSummary() {
+    fetch('/api/salessummary')
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById("totalSalesValue").textContent = data[0];
+            document.getElementById("operatingProfitValue").textContent = data[1];
+        })
+        .catch(error => comsole.error('Error fetching sales summary', error));
+}
 
+
+fetchTrackSummary();
+fetchSalesSummary();
 
 
 

@@ -1,4 +1,5 @@
 package com.ezentwix.teamcostco.controller;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.http.MediaType;
@@ -15,6 +16,7 @@ import com.ezentwix.teamcostco.service.ProductService;
 import com.ezentwix.teamcostco.service.SalesDataService;
 
 import lombok.RequiredArgsConstructor;
+
 @Controller
 @RequiredArgsConstructor
 public class DashBoardController {
@@ -45,6 +47,17 @@ public class DashBoardController {
     public List<RequestAndProductDTO> getRequestAndProductInfo() {
         return dashBoardService.getRequestAndProductInfo();
     }
+
+    @GetMapping("/api/salessummary")
+    @ResponseBody
+    public List<Integer> getSalesSummary() {
+        List<Integer> salesSummary = new ArrayList<>();
+        salesSummary.add(salesDataService.getTotalSales());
+        salesSummary.add(salesDataService.getOperatingProfit());
+        
+        return salesSummary;
+    }
+    
 
     @GetMapping("/api/track")
     @ResponseBody
