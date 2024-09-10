@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.ezentwix.teamcostco.PageMetadataProvider;
 import com.ezentwix.teamcostco.dto.product.RequestAndProductDTO;
+import com.ezentwix.teamcostco.dto.sales.OrderTrackDTO;
 import com.ezentwix.teamcostco.repository.OrderRequestRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -46,6 +47,10 @@ public class DashBoardService implements PageMetadataProvider {
     
     public List<RequestAndProductDTO> getRequestAndProductInfo() {
         return orderRequestreRepository.getRequestAndProductInfo();
+    }
+
+    public OrderTrackDTO getOrderTrackDTO() {
+        return orderRequestreRepository.getStatusQty();
     }
 
 }

@@ -1,3 +1,42 @@
+<div class="order-track">
+    <div class="content-box">
+        <div class="tracker">
+            <span class="material-symbols-outlined" id="track-icon">package_2</span>
+            To Be Packed
+        </div>
+        <div class="track-text">
+            <span id="pendingCount" th:text="${track.pendingCount}"></span>
+        </div>
+    </div>
+    <div class="content-box">
+        <div class="tracker">
+            <span class="material-symbols-outlined" id="track-icon">package</span>
+            To Be Shipped            
+        </div>
+        <div class="track-text">
+            <span id="packedCount" th:text="${track.packedCount}"></span>
+        </div>
+    </div>
+    <div class="content-box">
+        <div class="tracker">
+            <span class="material-symbols-outlined" id="track-icon">local_shipping</span>
+            To Be Delivered
+        </div>
+        <div class="track-text">
+            <span id="dispatchedCount" th:text="${track.dispatchedCount}"></span>
+        </div>
+    </div>
+    <div class="content-box">
+        <div class="tracker">
+            <span class="material-symbols-outlined" id="track-icon">contract</span>
+            To Be Invoiced
+        </div>
+        <div class="track-text">
+            <span id="invoiceCount" th:text="${track.invoiceCount}"></span>
+        </div>
+    </div>
+</div>
+
 <div class="info-boxes">
     <div class="content-box">
         <div class="categories">

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.ezentwix.teamcostco.dto.product.OrderRequestDTO;
 import com.ezentwix.teamcostco.dto.product.RequestAndProductDTO;
+import com.ezentwix.teamcostco.dto.sales.OrderTrackDTO;
 
 import lombok.RequiredArgsConstructor;
 
@@ -33,5 +34,9 @@ public class OrderRequestRepository {
 
     public int getNextRequestId() {
         return sql.selectOne("OrderRequest.getNextRequestId");
+    }
+
+    public OrderTrackDTO getStatusQty() {
+        return sql.selectOne("OrderRequest.getStatus");
     }
 }

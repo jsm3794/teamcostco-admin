@@ -1,15 +1,18 @@
 package com.ezentwix.teamcostco.controller;
+import java.util.List;
+
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.ezentwix.teamcostco.dto.product.ProductSummaryDTO;
 import com.ezentwix.teamcostco.dto.product.RequestAndProductDTO;
 import com.ezentwix.teamcostco.service.DashBoardService;
 import com.ezentwix.teamcostco.service.ProductService;
 import com.ezentwix.teamcostco.service.SalesDataService;
-import java.util.List;
+
 import lombok.RequiredArgsConstructor;
 @Controller
 @RequiredArgsConstructor
@@ -22,6 +25,7 @@ public class DashBoardController {
         dashBoardService.configureModel(model);
         model.addAttribute("totalSales", salesDataService.getTotalSales());
         model.addAttribute("operatingProfit", salesDataService.getOperatingProfit()); 
+        model.addAttribute("track", dashBoardService.getOrderTrackDTO());
         return "index";
     }
     @GetMapping("/dashboard/productsummary")
