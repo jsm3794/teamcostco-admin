@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ezentwix.teamcostco.dto.product.ProductSummaryDTO;
 import com.ezentwix.teamcostco.dto.product.RequestAndProductDTO;
+import com.ezentwix.teamcostco.dto.sales.OrderTrackDTO;
 import com.ezentwix.teamcostco.service.DashBoardService;
 import com.ezentwix.teamcostco.service.ProductService;
 import com.ezentwix.teamcostco.service.SalesDataService;
@@ -20,14 +21,15 @@ public class DashBoardController {
     private final DashBoardService dashBoardService;
     private final ProductService productService;
     private final SalesDataService salesDataService;
+
     @GetMapping("/dashboard")
     public String showDashboard(Model model) {
         dashBoardService.configureModel(model);
         model.addAttribute("totalSales", salesDataService.getTotalSales());
         model.addAttribute("operatingProfit", salesDataService.getOperatingProfit()); 
-        model.addAttribute("track", dashBoardService.getOrderTrackDTO());
         return "index";
     }
+
     @GetMapping("/dashboard/productsummary")
     @ResponseBody
     public ProductSummaryDTO getDashboardProductSummary() {
@@ -42,5 +44,11 @@ public class DashBoardController {
     @ResponseBody
     public List<RequestAndProductDTO> getRequestAndProductInfo() {
         return dashBoardService.getRequestAndProductInfo();
+    }
+
+    @GetMapping("/api/track")
+    @ResponseBody
+    public OrderTrackDTO getOrderTrack() {
+        return dashBoardService.getOrderTrackDTO();
     }
 }

@@ -461,6 +461,20 @@ const updateChart4 = () => {
 updateChart4();
 
 
+function fetchTrackSummary() {
+    fetch('/api/track')
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById("pendingCount").textContent = data.pendingCount;
+            document.getElementById("packedCount").textContent = data.packedCount;
+            document.getElementById("dispatchedCount").textContent = data.dispatchedCount;
+            document.getElementById("invoiceCount").textContent = data.invoiceCount;
+        })
+        .catch(error => console.error('Error fetching product summary:', error));
+}
+
+fetchTrackSummary();
+
 
 
 
@@ -512,3 +526,4 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
 });
+
