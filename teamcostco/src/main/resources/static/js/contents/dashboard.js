@@ -157,36 +157,32 @@ const myChart2 = new Chart(chart2, {
     }
 });
 
-const updateChart2 = () => {
-    $.ajax({
-        url: "/weeklyTopProducts",
-        method: "GET",
-        dataType: 'json',
-        success: function (topProducts) {
+const updateChart2 = async () => {
+    try {
 
-            const chartData = myChart2.data;
+        const response = await fetch("/weeklyTopProducts");
 
-            // 라벨 이름 -> 팔린 상품명
-            topProducts.forEach((product, index) => {
-                chartData.labels[index] = product.sold_product_name;
-                //console.log(product.sold_product_name);
-            });
-
-            // 팔린 개수 할당
-            // console.dir(chartData.datasets[0].data);
-
-            if (chartData.datasets.length > 0) {
-                chartData.datasets[0].data = topProducts.map(product => product.sold_qty);
-            }
-
-            // 차트 업데이트
-            myChart2.update();
-
-        },
-        error: function (error) {
-            console.error('Error fetching weeklyTopProducts data:', error);
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
         }
-    })
+
+        const topProducts = await response.json();
+        const chartData = myChart2.data;
+
+        topProducts.forEach((product, index) => {
+            chartData.labels[index] = product.sold_product_name;
+        });
+
+        if (chartData.datasets.length > 0) {
+            chartData.datasets[0].data = topProducts.map(product => product.sold_qty);
+        }
+
+        myChart2.update();
+        
+
+    } catch (error) {
+        console.error('Error fetching weeklyTopProducts data:', error);
+    }
 };
 
 updateChart2();
@@ -301,62 +297,50 @@ function aggregateByPeriod(salesData, period) {
     return { labels, totalSales };
 }
 
-function updateChart3(period) {
-    $.ajax({
-        url: '/totalsales',
-        method: 'GET',
-        dataType: 'json',
-        success: function (salesData) {
-            if (salesData.length === 0) {
-                myChart3.data.labels = [];
-                myChart3.data.datasets[0].data = [];
-                myChart3.update();
-                console.log("No data available for the selected period");
-                return;
-            }
+async function updateChart3 (period){
+    try {
 
-            let labels, totalSales;
+        let salesResponse = await fetch('/totalsales');
+        let salesData = await salesResponse.json();
 
-            // 일단위 데이터를 월별 또는 년별로 집계
-            if (period === 'month' || period === 'year') {
-                const aggregated = aggregateByPeriod(salesData, period);
-                labels = aggregated.labels;
-                totalSales = aggregated.totalSales;
-            } else {
-                // 일 단위 데이터를 그대로 사용
-                labels = salesData.map(item => moment(item.sales_date).format('YYYY-MM-DD'));
-                totalSales = salesData.map(item => item.total_sales);
-            }
+        if (salesData.length === 0) {
+            myChart3.data.labels = [];
+            myChart3.data.datasets[0].data = [];
+            myChart3.update();
+            console.log('No data available for the selected period');
+            
+            return;
 
-            // 총 상품 데이터 가져오기
-            $.ajax({
-                url: '/totalproductsbyupdate',
-                method: 'GET',
-                dataType: 'json',
-                success: function (productData) {
-                    // 총 상품 수량이 배열로 들어오지 않은 경우 처리
-                    const totalProducts = Array.isArray(productData) ? productData : Array(labels.length).fill(productData);
-
-                    // 차트 데이터 업데이트
-                    myChart3.data.labels = labels;
-                    myChart3.data.datasets[0].data = totalSales;
-                    myChart3.data.datasets[1].data = totalProducts;
-
-                    // x축 단위 업데이트
-                    myChart3.options.scales.x.time.unit = period === 'month' ? 'month' : period === 'year' ? 'year' : 'day';
-
-                    // 차트 업데이트
-                    myChart3.update();
-                },
-                error: function (error) {
-                    console.error('Error fetching total products data:', error);
-                }
-            });
-        },
-        error: function (error) {
-            console.error('Error fetching sales data:', error);
         }
-    });
+
+        let labels, totalSales;
+
+        if (period === 'month' || period === 'year') {
+            const aggregated = aggregatedByPeriod(salesData, period);
+            lables = aggregated.labels;
+            totalSales = aggregated.totalSales;
+        } else {
+
+            labels = salesData.map(item => moment(item.sales_data).foramt('YYYY-MM-DD'));
+            totalSales = salesData.map(item => item.total_sales);
+        }
+
+        let productResponse = await fetch('/totalproductsbyupdate');
+        let productData = await productResponse.json();
+
+        const totalProducts = Array.isArray(productData) ? productData : Array(labels.length).fill(productData);
+
+        myChart3.data.labels = labels;
+        myChart3.data.datasets[0].data = totalSales;
+        myChart3.data.datasets[1].data = totalProducts;
+
+        myChart3.options.scales.x.time.unit = period === 'month' ? 'month' : period === 'year' ? 'year' : 'day';
+        
+        myChart3.update();
+    } catch (error) {
+        console.error('Error: ', error);
+    }
+
 }
 
 $(document).ready(function () {
@@ -428,34 +412,29 @@ const myChart4 = new Chart(chart4, {
         }
     });
 
-const updateChart4 = () => {
-    $.ajax({
-        url: "/requestqty",
-        method: "GET",
-        dataType: 'json',
-        success: function (requestQty) {
+const updateChart4 = async () => {
+    try {
 
-            
+        const response = await fetch("/requestqty");
 
-            // 라벨 이름 -> 팔린 상품명
-            myChart4.data.labels = requestQty.map(request => request.product_name);
-
-            console.dir(myChart4.data.labels);
-            // 팔린 개수 할당
-            // console.dir(chartData.datasets[0].data);
-
-            if (myChart4.data.datasets.length > 0) {
-                myChart4.data.datasets[0].data = requestQty.map(request => request.request_qty);
-            }
-
-            // 차트 업데이트
-            myChart4.update();
-
-        },
-        error: function (error) {
-            console.error('Error fetching requestqty data:', error);
+        if (!response.ok) {
+            throw new Error('Nerwork response was not ok');
         }
-    })
+
+        const requestQty = await response.json();
+
+        myChart4.data.labels = requestQty.map(request => request.product_name);
+
+        console.dir(myChart4.data.labels);
+
+        if (myChart4.data.datasets.length > 0) {
+            myChart4.data.datasets[0].data = requestQty.map(request => request.request_qty);
+        }
+
+        myChart4.update();
+    } catch (error) {
+        console.error('Error fetching requestqty data: ', error);
+    }
 };
 
 updateChart4();
@@ -486,8 +465,6 @@ function fetchSalesSummary() {
 
 fetchTrackSummary();
 fetchSalesSummary();
-
-
 
 // 3박스 관련 함수
 function initializeInventory() {
