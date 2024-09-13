@@ -36,7 +36,17 @@ public class OrderRequestRepository {
         return sql.selectOne("OrderRequest.getNextRequestId");
     }
 
-    public OrderTrackDTO getStatusQty() {
-        return sql.selectOne("OrderRequest.getStatus");
+    public OrderRequestDTO getById(Integer request_id){
+        return sql.selectOne("OrderRequest.getById", request_id);
+    }
+
+    public void updateReceivedQty(Integer requestId, int receivedQty) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'updateReceivedQty'");
+    }
+
+    public void updateDefectiveQty(Integer requestId, int defectiveQty) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'updateDefectiveQty'");
     }
 }

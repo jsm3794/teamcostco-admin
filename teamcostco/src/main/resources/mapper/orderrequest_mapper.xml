@@ -3,17 +3,28 @@
 <mapper namespace="OrderRequest">
     <sql id="insertOrderRequest">
         INSERT INTO order_request (
-            request_id, product_name, product_code, mall_name, request_qty, received_qty, defective_qty, emp_id, request_status, create_date
+            request_id, product_name, product_code, purchase_price, mall_name, mall_link, request_qty, received_qty, defective_qty, emp_id, request_status, create_date
         ) VALUES (
-            #{request_id}, #{product_name}, #{product_code}, #{mall_name}, #{request_qty}, 0, 0, #{emp_id}, #{request_status}, SYSDATE
+            #{request_id}, #{product_name}, #{product_code}, #{purchase_price}, #{mall_name}, #{mall_link}, #{request_qty}, 0, 0, #{emp_id}, #{request_status}, SYSDATE
         )
     </sql>
     <sql id="getNextRequestId">
         SELECT REQUEST_SEQ.NEXTVAL as request_id FROM DUAL
     </sql>
+
+    <sql id="getById">
+        SELECT
+            o.request_id, o.product_name, o.product_code, o.purchase_price, o.mall_name, o.mall_link, o.request_qty,
+            o.received_qty, o.defective_qty, e.emp_id, e.emp_name, o.request_status, o.create_date
+        FROM
+            order_request o
+        INNER JOIN employees e ON o.emp_id = e.emp_id
+        WHERE o.request_id = #{request_id}
+    </sql>
+
     <sql id="getAll">
         SELECT
-            o.request_id, o.product_name, o.product_code, o.mall_name, o.request_qty,
+            o.request_id, o.product_name, o.product_code, o.purchase_price, o.mall_name, o.mall_link, o.request_qty,
             o.received_qty, o.defective_qty, e.emp_id, e.emp_name, o.request_status, o.create_date
         FROM
             order_request o
@@ -44,15 +55,36 @@
         ORDER BY
         o.request_id DESC
     </sql>
-    <sql id="getStatus">
-    SELECT
-        SUM(CASE WHEN request_status = 'pending' THEN 1 ELSE 0 END) AS PendingCount,
-        SUM(CASE WHEN request_status = 'packed' THEN 1 ELSE 0 END) AS packedCount,
-        SUM(CASE WHEN request_status = 'dispatched' THEN 1 ELSE 0 END) AS DispatchedCount,
-        SUM(CASE WHEN request_status = 'invoice' THEN 1 ELSE 0 END) AS InvoiceCount
-    FROM
-        order_request
+
+    <!--  -->
+        <!-- 발주 정보 가져오기 -->
+    <sql id="selectOrderRequestById">
+        SELECT request_id, product_code, product_name, purchase_price, mall_name, mall_link, 
+               request_qty, received_qty, defective_qty, emp_id, emp_name, request_status, create_date
+        FROM order_request
+        WHERE request_id = #{requestId}
     </sql>
+
+    <!-- 입고 수량 업데이트 -->
+    <sql id="updateReceivedQty">
+        UPDATE order_request
+        SET received_qty = #{receivedQty}
+        WHERE request_id = #{requestId}
+    </sql>
+
+    <!-- 불량 수량 업데이트 -->
+    <sql id="updateDefectiveQty">
+        UPDATE order_request
+        SET defective_qty = #{defectiveQty}
+        WHERE request_id = #{requestId}
+    </sql>
+    <!--  -->
+    
+
+    <select id="getById" parameterType="int" resultType="orderrequest">
+        <include refid="getById"/>
+    </select>
+
     <select id="getAll" resultType="orderrequest">
         <include refid="getAll"/>
     </select>

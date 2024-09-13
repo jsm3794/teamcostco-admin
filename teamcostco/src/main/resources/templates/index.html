@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title th:text="${(pageTitle ?: 'No-Title')}"></title>
+    <link rel="preload" href="/fonts/Material_Symbols_Outlined.woff2" as="font" type="font/woff2"
+        crossorigin="anonymous">
     <link rel="stylesheet" href="/css/common/styles.css">
     <link rel="stylesheet" th:href="@{/css/common/header.css}">
     <link rel="stylesheet" th:href="@{/css/common/navigationbar.css}">
@@ -12,19 +13,14 @@
     <link rel="stylesheet" th:href="@{/css/component/filter.css}">
     <link rel="stylesheet" th:href="@{/css/component/search.css}">
     <link rel="stylesheet" th:href="@{/css/component/notification.css}">
+    <title th:text="${(pageTitle ?: 'No-Title')}"></title>
     <script th:src="@{/js/tinymce/tinymce.js}"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script th:src="@{/js/common/theme.js}"></script>
     <th:block th:if="${pageDetail != null}">
         <script th:src="@{/js/component/pagination_nav.js}"></script>
     </th:block>
-    <link rel="preload" href="/fonts/Material_Symbols_Outlined.woff2" as="font" type="font/woff2"
-        crossorigin="anonymous">
-
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
     <th:block th:if="${cssFiles != null}">
         <th:block th:each="cssFile : ${cssFiles}">
             <link rel="stylesheet" th:href="@{${cssFile}}" />

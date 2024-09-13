@@ -7,6 +7,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,7 +21,7 @@ public class ProductThumbnailApiController {
 
     private final ProductThumbnailService productThumbnailService;
 
-    @GetMapping("/api/upload_product_thumbnail")
+    @PostMapping("/api/upload_product_thumbnail")
     public ResponseEntity<String> uploadThumbnail(
             @RequestParam(value = "url") String thumbnailUrl,
             @RequestParam(value = "product_code") String productCode,
