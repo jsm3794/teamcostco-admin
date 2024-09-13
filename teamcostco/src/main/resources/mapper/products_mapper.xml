@@ -50,7 +50,8 @@
     </sql>
 
     <sql id="getTotalProductsQty">
-        SELECT COUNT(*) AS total_products_qty
+        SELECT 
+            SUM(display_qty + storage_qty) AS total_qty
         FROM products
     </sql>
 
@@ -62,6 +63,11 @@
                 category_small, category_detail
             FROM products
         )
+    </sql>
+
+    <sql id="getDefectedProducts">
+        SELECT SUM(defective_qty) AS defected_products
+        FROM order_request
     </sql>
 
     <sql id="updateProduct">
@@ -78,6 +84,16 @@
         WHERE
             product_id = #{product_id}
     </sql>
+
+    <!--날짜별 모든 상품 총수량-->
+    <select id="getTotalProductsByUpdateDate" resultType="Integer">
+        SELECT
+            SUM(display_qty + storage_qty) AS total_qty
+        FROM
+            products
+        GROUP BY
+            trunc(update_date)
+    </select>
 
     <update id="updateProduct" parameterType="product">
         <include refid="updateProduct"></include>
@@ -101,6 +117,10 @@
 
     <select id="findById" parameterType="Integer" resultType="product">
        <include refid="findById"/>
+    </select>
+    
+    <select id="getDefectedProducts" resultType="Integer">
+        <include refid="getDefectedProducts"/>
     </select>
 
 </mapper>

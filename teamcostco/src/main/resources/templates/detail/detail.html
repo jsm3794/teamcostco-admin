@@ -1,57 +1,172 @@
 <div class="content-box">
-    <form th:action="@{/detail/update}" th:object="${product}" method="post">
-        <input type="hidden" name="product_id" th:value="${product.product_id}" />
-        <table>
-            <tr>
-                <th>Product Name</th>
-                <td><input type="text" th:field="*{product_name}" class="editable" /></td>
-                <th>Product Code</th>
-                <td><input type="number" th:field="*{product_code}" class="readonly" readonly /></td>
-            </tr>
-            <tr>
-                <th>Category Large</th>
-                <td><input type="text" th:field="*{category_large}" class="editable" /></td>
-                <th>Category Medium</th>
-                <td><input type="text" th:field="*{category_medium}" class="editable" /></td>
-            </tr>
-            <tr>
-                <th>Category Small</th>
-                <td><input type="text" th:field="*{category_small}" class="editable" /></td>
-                <th>Category Detail</th>
-                <td><input type="text" th:field="*{category_detail}" class="editable" /></td>
-            </tr>
-            <tr>
-                <th>Purchase Price</th>
-                <td><input type="number" step="1" th:field="*{purchase_price}" class="editable" /></td>
-                <th>Selling Price</th>
-                <td><input type="number" step="1" th:field="*{selling_price}" class="editable" /></td>
-            </tr>
-            <tr>
-                <th>Brand</th>
-                <td><input type="text" th:field="*{brand}" class="editable" /></td>
-                <th>Min Required Qty</th>
-                <td><input type="number" th:field="*{min_required_qty}" class="readonly" readonly /></td>
-            </tr>
-            <tr>
-                <th>Display Qty</th>
-                <td><input type="number" th:field="*{display_qty}" class="readonly" readonly /></td>
-                <th>Storage Qty</th>
-                <td><input type="number" th:field="*{storage_qty}" class="readonly" readonly /></td>
-            </tr>
-            <tr>
-                <th>Create Date</th>
-                <td><span th:text="${#dates.format(product.create_date, 'yyyy-MM-dd')}"
-                        class="date-field readonly"></span>
-                </td>
-                <th>Update Date</th>
-                <td><span th:text="${#dates.format(product.update_date, 'yyyy-MM-dd')}"
-                        class="date-field  readonly"></span>
-                </td>
-            </tr>
-        </table>
-        <div class="btn-area">
-            <button type="submit" class="save-btn">저장하기</button>
-        </div>
-    </form>
+    <div class="tab-container">
 
+        <!-- 탭 이동 버튼 -->
+        <div class="tabs">
+            <button class="tab-button active" data-tab="tab1">제품 상세 정보</button>
+            <button class="tab-button" data-tab="tab2">제품 상세 정보 수정</button>
+        </div>
+
+        <!-- 탭 내용 -->
+        <div class="tab-content">
+
+            <!-- 첫번째 탭-->
+            <div id="tab1" class="tab-pane active">
+                <div class="content">
+
+                    <!-- 왼쪽 내용 -->
+                    <div class="left-column">
+                        <img src="/images/logo-light.png" alt="Product Image" class="product-image">
+                        <div class="product-info">
+                            <div class="info-row">
+                                <span class="info-label">제품 ID</span>
+                                <span class="info-value" th:text="${product.product_id}"></span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">제품 코드</span>
+                                <span class="info-value" th:text="${product.product_code}"></span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">제품명</span>
+                                <span class="info-value" th:text="${product.product_name}"></span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">제품 분류</span>
+                                <span class="info-value">
+                                    <span th:text="${product.category_large}"></span> /
+                                    <span th:text="${product.category_medium}"></span> /
+                                    <span th:text="${product.category_small}"></span> /
+                                    <span th:text="${product.category_detail ?: '세부 정보 없음'}"></span>
+                                </span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">브랜드</span>
+                                <span class="info-value" th:text="${product.brand}"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 오른쪽 내용 -->
+                    <div class="right-column">
+                        <div class="info-row">
+                            <span class="info-label">최소 필요 수량</span>
+                            <span class="info-value" th:text="${product.min_required_qty}"></span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">진열 수량</span>
+                            <span class="info-value" th:text="${product.display_qty}"></span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">재고 수량</span>
+                            <span class="info-value" th:text="${product.storage_qty}"></span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">구매 가격</span>
+                            <span class="info-value" th:text="${product.purchase_price}"></span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">판매 가격</span>
+                            <span class="info-value" th:text="${product.selling_price}"></span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">생성 날짜</span>
+                            <span class="info-value"
+                                th:text="${#dates.format(product.create_date, 'yyyy-MM-dd')}"></span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">수정 날짜</span>
+                            <span class="info-value"
+                                th:text="${#dates.format(product.update_date, 'yyyy-MM-dd')}"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 두번째 탭 -->
+            <div id="tab2" class="tab-pane">
+                <form th:action="@{/detail/update}" th:object="${product}" method="post">
+                    <input type="hidden" name="product_id" th:value="${product.product_id}" />
+                    <div class="content">
+                        
+                        <!-- 왼쪽 내용 -->
+                        <div class="left-column">
+                            <img src="/images/logo-light.png" alt="Product Image" class="product-image" />
+                            <div class="product-info">
+                                <div class="info-row">
+                                    <span class="info-label">제품 ID</span>
+                                    <input type="text" th:field="*{product_id}" class="readonly" readonly />
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">제품 코드</span>
+                                    <input type="text" th:field="*{product_code}" class="readonly" readonly />
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">제품명</span>
+                                    <input type="text" th:field="*{product_name}" class="editable" />
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">제품 분류</span>
+                                    <div class="category-fields">
+                                        <input type="text" th:field="*{category_large}" class="editable"
+                                            placeholder="대분류" />
+                                        <input type="text" th:field="*{category_medium}" class="editable"
+                                            placeholder="중분류" />
+                                        <input type="text" th:field="*{category_small}" class="editable"
+                                            placeholder="소분류" />
+                                        <input type="text" th:field="*{category_detail}" class="editable"
+                                            placeholder="세부 정보" />
+                                    </div>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">브랜드</span>
+                                    <input type="text" th:field="*{brand}" class="editable" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 오른쪽 내용 -->
+                        <div class="right-column">
+                            <div class="info-row">
+                                <span class="info-label">최소 필요 수량</span>
+                                <input type="number" th:field="*{min_required_qty}" class="readonly" readonly />
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">진열 수량</span>
+                                <input type="number" th:field="*{display_qty}" class="readonly" readonly />
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">재고 수량</span>
+                                <input type="number" th:field="*{storage_qty}" class="readonly" readonly />
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">구매 가격</span>
+                                <input type="number" step="1" th:field="*{purchase_price}" class="editable" />
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">판매 가격</span>
+                                <input type="number" step="1" th:field="*{selling_price}" class="editable" />
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">생성 날짜</span>
+                                <span class="info-value-tab2"
+                                    th:text="${#dates.format(product.create_date, 'yyyy-MM-dd')}"></span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">수정 날짜</span>
+                                <span class="info-value-tab2"
+                                    th:text="${#dates.format(product.update_date, 'yyyy-MM-dd')}"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 저장 버튼 -->
+                    <div class="btn-area">
+                        <button type="submit" class="save-btn">저장하기</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+
+    </div>
 </div>

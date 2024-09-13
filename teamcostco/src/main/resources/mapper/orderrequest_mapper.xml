@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="OrderRequest">
-
     <sql id="insertOrderRequest">
         INSERT INTO order_request (
             request_id, product_name, product_code, mall_name, request_qty, received_qty, defective_qty, emp_id, request_status, create_date
@@ -9,11 +8,9 @@
             #{request_id}, #{product_name}, #{product_code}, #{mall_name}, #{request_qty}, 0, 0, #{emp_id}, #{request_status}, SYSDATE
         )
     </sql>
-
     <sql id="getNextRequestId">
         SELECT REQUEST_SEQ.NEXTVAL as request_id FROM DUAL
     </sql>
-
     <sql id="getAll">
         SELECT
             o.request_id, o.product_name, o.product_code, o.mall_name, o.request_qty,
@@ -47,16 +44,25 @@
         ORDER BY
         o.request_id DESC
     </sql>
-
+    <sql id="getStatus">
+    SELECT
+        SUM(CASE WHEN request_status = 'pending' THEN 1 ELSE 0 END) AS PendingCount,
+        SUM(CASE WHEN request_status = 'packed' THEN 1 ELSE 0 END) AS packedCount,
+        SUM(CASE WHEN request_status = 'dispatched' THEN 1 ELSE 0 END) AS DispatchedCount,
+        SUM(CASE WHEN request_status = 'invoice' THEN 1 ELSE 0 END) AS InvoiceCount
+    FROM
+        order_request
+    </sql>
     <select id="getAll" resultType="orderrequest">
         <include refid="getAll"/>
     </select>
-
     <insert id="insertOrderRequest" parameterType="orderrequest">
         <include refid="insertOrderRequest"/>
-     </insert>
-
-     <select id="getNextRequestId" resultType="int">
+    </insert>
+    <select id="getNextRequestId" resultType="int">
         <include refid="getNextRequestId"/>
-     </select>
+    </select>
+    <select id="getStatus" resultType="orderTrack">
+        <include refid="getStatus"/>
+    </select>
 </mapper>

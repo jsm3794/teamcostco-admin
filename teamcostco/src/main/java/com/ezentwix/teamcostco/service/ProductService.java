@@ -39,12 +39,17 @@ public class ProductService {
 
         psDTO.setLowProducts(productRepository.getLowProducts());
         psDTO.setTotalCategories(productRepository.getTotalCategories());
+        psDTO.setDefectedProducts(productRepository.getDefectedProducts());
         psDTO.setTotalProductsQty(productRepository.getTotalProductsQty());
 
         return psDTO;
     }
 
-    public ProductDTO getProductById(Integer productId) {
+    public Integer getTotalProductsByUpdateDate() {
+        return productRepository.getTotalProductsByUpdateDate();
+    }
+
+    public ProductDTO getProductById(Integer productId){
         return productRepository.findById(productId);
     }
 

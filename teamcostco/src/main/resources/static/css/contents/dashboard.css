@@ -1,38 +1,88 @@
-/* info-boxes 컨테이너와 박스 스타일 */
+.order-track {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+.tracker {
+    display: flex;
+    font-weight: bold;
+    font-size: 15px;
+    align-items: center;
+}
+
+#track-icon {
+    font-size: 40px;
+    margin-right: 15px;
+}
+
+.track-text {
+    font-weight: bold;
+    font-size: 30px;
+    text-align: center;
+    margin-right: 15px;
+}
+
+/* 테이블 위 박스 3개 */
 .info-boxes {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     box-sizing: border-box;
 }
 
 .info-box {
-    background-color: #FFFFFF;
-    border: 1px solid #ddd;
+    background-color: transparent !important;
     border-radius: 5px;
-    padding: 10px;
+    padding: 20px;
+    text-align: left;
+    min-height: 100px;
+    font-weight: bold;
+}
+
+/* 각 박스에 대한 색상 설정 */
+.info-boxes {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+.info-box {
+    flex: 1;
+    background-color: transparent !important;
+    border-radius: 5px;
+    padding: 20px;
+    text-align: center;
+    min-height: 100px;
     font-weight: bold;
     text-align: left;
-    font-size: 25px;
-    box-sizing: border-box;
 }
 
 /* 각 박스에 대한 색상 설정 */
 .categories {
     color: #3781F0;
+    font-weight: bold;
+    font-size: 20px;
 }
 
-.total-product {
+.total-sales {
     color: #E5A558;
+    font-weight: bold;
+    font-size: 20px;
 }
 
-.low-stock {
+.operating-profit {
     color: #C95757;
+    font-weight: bold;
+    font-size: 20px;
 }
 
 .total-text {
-    color: #646464;
     font-size: 20px;
     margin-top: 15px;
 }
@@ -40,40 +90,70 @@
 /* grid-container와 박스 스타일 */
 .grid-container {
     display: grid;
-    grid-template-columns: 70% 29%;
+    grid-template-columns: 66.5% 32.9%;
     gap: 10px;
     box-sizing: border-box;
 }
-
-
 
 .box {
     padding: 10px;
     border-radius: 5px;
     background-color: var(--background-color);
     border: var(--border-line);
+    position: relative;
+    overflow: hidden;
 }
 
-/* 레이아웃 지정 */
+
+.box canvas {
+    width: 100% !important; 
+    height: 100% !important; 
+    display: block;
+}
+
+#chart4 {
+    width: 90% !important;
+    height: 90% !important;
+}
+
+/* grid item styles */
 .box1 {
     grid-column: 1 / 2;
     grid-row: 1 / 2;
-    height: 250px;
+    height: 300px;
+    position: relative; /* 새로 추가된 속성 */
 }
 
 .box2 {
     grid-column: 2 / 3;
-    height: 250px;
+    height: 300px;
 }
 
 .box3 {
     grid-column: 1 / 2;
     grid-row: 2 / 5;
-    height: 370px;
+    height: 400px;
+    position: relative; /* 새로 추가된 속성 */
 }
 
 .box4 {
     grid-column: 2 / 3;
     grid-row: 2 / 3;
-    height: 370px;
+    height: 400px;
+}
+
+.title {
+    font-size: 15px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.buttons {
+    position: absolute; /* 새로 추가된 속성 */
+    right: 10px; /* 버튼들을 오른쪽으로 이동 */
+    top: 10px; /* 버튼들을 상단으로 이동 */
+}
+
+.buttons button {
+    margin-left: 5px; /* 버튼들 간의 간격 유지 */
 }

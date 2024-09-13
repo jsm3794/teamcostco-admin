@@ -10,5 +10,3 @@ public class TeamcostcoApplication {
 		SpringApplication.run(TeamcostcoApplication.class, args);
 	}
 }
-
-

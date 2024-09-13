@@ -1,15 +1,13 @@
 package com.ezentwix.teamcostco.websocket;
 
-import java.io.IOException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component; // @Component 추가
-import org.springframework.web.socket.CloseStatus;
+import org.springframework.stereotype.Component;
+import org.springframework.web.socket.CloseStatus; // @Component 추가
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
-import com.ezentwix.teamcostco.service.WebSocketService;
 
-import lombok.RequiredArgsConstructor;
+import com.ezentwix.teamcostco.service.WebSocketService;
 
 @Component // @Component 추가
 public class NotificationHandler extends TextWebSocketHandler {
