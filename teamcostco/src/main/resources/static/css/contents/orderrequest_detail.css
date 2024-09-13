@@ -101,3 +101,97 @@
     padding: 0;
 
 }
+
+.order_info {
+    margin-top: 5px;
+}
+
+.order_info_wrap {
+    display: flex;
+}
+
+.order_info_labels, .order_info_values {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    font-size: 15px;
+    margin-right: 20px;
+}
+
+.order_info_values {
+    margin-right: 0;
+}
+
+.process_action {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px; 
+}
+
+.process_action label, 
+.process_action input, 
+.process_action select, 
+.process_action button {
+    margin-bottom: 10px; 
+}
+
+#process_qty {
+    width: 100%; 
+}
+
+#process_type {
+    width: 100%; 
+}
+
+
+.process_action {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px; /* Adjust as needed */
+}
+
+.process_action label, 
+.process_action input, 
+.process_action select, 
+.process_action button {
+    margin-bottom: 10px; /* Adjust spacing between items as needed */
+}
+
+#process_qty, 
+#process_type {
+    width: 100%; /* Adjust width as needed */
+}
+
+#close_order {
+    margin-top: 20px; /* Add spacing above the button */
+    display: block;
+    width: 100%; /* Adjust width as needed */
+    padding: 10px;
+    background-color: #007bff; /* Change color as needed */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#close_order:hover {
+    background-color: #0056b3; /* Change color on hover */
+}
+
+#process_order {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#process_order:disabled {
+    background-color: #d6d6d6;
+    cursor: not-allowed;
+}
+
+

@@ -18,7 +18,9 @@
         <tbody>
             <tr th:each="item : ${items}">
                 <td th:text="${item.request_id}"></td>
-                <td th:text="${item.product_name}"></td>
+                <td>
+                    <a th:href="'/orderrequest/' + ${item.request_id} + '/detail'" th:text="${item.product_name}"></a>
+                </td>
                 <td th:text="${item.mall_name}"></td>
                 <td th:text="${item.request_qty}"></td>
                 <td th:text="${item.received_qty}"></td>
@@ -40,6 +42,4 @@
             </tr>
         </tbody>
     </table>
-
-
 </div>

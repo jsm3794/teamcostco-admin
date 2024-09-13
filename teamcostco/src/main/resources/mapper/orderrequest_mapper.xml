@@ -58,7 +58,32 @@
         o.request_id DESC
     </sql>
 
-    <select id="getById" parameterType="Long" resultType="orderrequest">
+    <!--  -->
+        <!-- 발주 정보 가져오기 -->
+    <sql id="selectOrderRequestById">
+        SELECT request_id, product_code, product_name, purchase_price, mall_name, mall_link, 
+               request_qty, received_qty, defective_qty, emp_id, emp_name, request_status, create_date
+        FROM order_request
+        WHERE request_id = #{requestId}
+    </sql>
+
+    <!-- 입고 수량 업데이트 -->
+    <sql id="updateReceivedQty">
+        UPDATE order_request
+        SET received_qty = #{receivedQty}
+        WHERE request_id = #{requestId}
+    </sql>
+
+    <!-- 불량 수량 업데이트 -->
+    <sql id="updateDefectiveQty">
+        UPDATE order_request
+        SET defective_qty = #{defectiveQty}
+        WHERE request_id = #{requestId}
+    </sql>
+    <!--  -->
+    
+
+    <select id="getById" parameterType="int" resultType="orderrequest">
         <include refid="getById"/>
     </select>
 

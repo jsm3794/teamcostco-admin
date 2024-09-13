@@ -30,7 +30,17 @@ public class OrderRequestRepository {
         return sql.selectOne("OrderRequest.getNextRequestId");
     }
 
-    public OrderRequestDTO getById(Long request_id){
+    public OrderRequestDTO getById(Integer request_id){
         return sql.selectOne("OrderRequest.getById", request_id);
+    }
+
+    public void updateReceivedQty(Integer requestId, int receivedQty) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'updateReceivedQty'");
+    }
+
+    public void updateDefectiveQty(Integer requestId, int defectiveQty) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'updateDefectiveQty'");
     }
 }
