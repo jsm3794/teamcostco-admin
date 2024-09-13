@@ -1,0 +1,38 @@
+/* styles.css */
+
+/* 전체 폼 그룹을 위한 스타일 */
+.form-group {
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+}
+
+/* 라벨을 위한 스타일 */
+.form-group label {
+    display: inline-block;
+    width: 120px; /* 라벨의 너비를 조절하세요 */
+    font-weight: bold;
+    text-align: right; /* 라벨 텍스트 오른쪽 정렬 */
+    margin-right: 10px; /* 라벨과 입력 필드 간의 간격 */
+}
+
+/* 입력 필드를 위한 스타일 */
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="password"],
+.form-group select,
+.form-group input[type="date"] {
+    width: 200px; /* 입력 필드의 너비를 조절하세요 */
+    padding: 5px; /* 입력 필드 내부 여백 */
+}
+
+/* 버튼을 위한 스타일 */
+.form-group input[type="button"],
+.form-group input[type="submit"] {
+    margin-left: 10px; /* 버튼과 입력 필드 간의 간격 */
+}
+
+/* 폼 제출 버튼을 위한 스타일 */
+.form-group input[type="submit"] {
+    margin-top: 15px; /* 폼 제출 버튼의 상단 간격 */
+}

@@ -9,6 +9,7 @@ import com.ezentwix.teamcostco.dto.filter.EmployeeFilterDTO;
 import com.ezentwix.teamcostco.dto.filter.FilterDTO;
 import com.ezentwix.teamcostco.dto.filter.InventoryFilterDTO;
 import com.ezentwix.teamcostco.dto.filter.OrderRequestFilterDTO;
+import com.ezentwix.teamcostco.dto.filter.ProductDefectiveFilterDTO;
 
 import lombok.RequiredArgsConstructor;
 
@@ -20,7 +21,8 @@ public class FilterService {
     private enum FilterType {
         INVENTORY,
         EMPLOYEE,
-        ORDERREQUEST
+        ORDERREQUEST,
+        PRODUCTDEFECTIVE
     }
 
     public List<FilterDTO> getFilter(String filterType) {
@@ -65,8 +67,18 @@ public class FilterService {
                                 "rejected", "거부됨",
                                 "cancelled", "취소됨")),
                         new FilterDTO("직원이름", "input", "text", "emp_name", "", null)));
-
                 return orderRequestFilterDTO.getFilterList();
+            case PRODUCTDEFECTIVE:
+                ProductDefectiveFilterDTO productDefectiveFilterDTO = new ProductDefectiveFilterDTO();
+                productDefectiveFilterDTO.setFilterList(List.of(
+                        new FilterDTO("불량사유", "select", "", "reason", "", Map.of(
+                                "", "전체",
+                                "Defective component", "제품결함",
+                                "Manufacturing error", "제조불량",
+                                "Quality issue", "품질불량")),
+                        new FilterDTO("불량날짜", "input", "date", "defective_date", "", null)));
+
+                return productDefectiveFilterDTO.getFilterList();
             default:
                 return List.of();
         }

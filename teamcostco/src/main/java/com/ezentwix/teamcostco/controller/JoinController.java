@@ -1,6 +1,9 @@
 package com.ezentwix.teamcostco.controller;
 
-import org.springframework.http.ResponseEntity;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,12 +14,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ezentwix.teamcostco.config.BCryptUtils;
 import com.ezentwix.teamcostco.dto.join.JoinDTO;
-import com.ezentwix.teamcostco.service.JoinService;
 import com.ezentwix.teamcostco.service.EmailService;
+import com.ezentwix.teamcostco.service.JoinService;
+
 import lombok.RequiredArgsConstructor;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.UUID;
 
 @Controller
 @RequiredArgsConstructor

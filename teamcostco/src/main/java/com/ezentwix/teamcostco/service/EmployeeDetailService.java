@@ -1,5 +1,7 @@
 package com.ezentwix.teamcostco.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.ezentwix.teamcostco.PageMetadataProvider;
@@ -18,6 +20,14 @@ public class EmployeeDetailService implements PageMetadataProvider {
         return employeeRepository.getEmp(emp_id);
     }
 
+    public EmployeeDTO getOne(Integer emp_id) {
+        return employeeRepository.getOne(emp_id);
+    }
+
+    public void fix(EmployeeDTO empDTO) {
+        employeeRepository.fix(empDTO);
+    }
+
     @Override
     public String getUri() {
         return "employee/emp_detail";
@@ -26,6 +36,11 @@ public class EmployeeDetailService implements PageMetadataProvider {
     @Override
     public String getPageTitle() {
         return "사원정보";
+    }
+
+    @Override
+    public List<String> getCssFiles() {
+        return List.of("/css/contents/employeeDetail.css");
     }
 
 }

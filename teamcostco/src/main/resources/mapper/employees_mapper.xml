@@ -3,40 +3,41 @@
 
 <mapper namespace="Employees">
 
+  <!-- SQL 조각 정의 -->
   <sql id="getByIdAndPw">
     SELECT * FROM employees WHERE login_id = #{id} AND login_pw = #{pw}
   </sql>
 
   <sql id="getAll">
-      SELECT emp_id, emp_name, emp_email, phone_number, job_title, hire_date, join_date
-      FROM employees
-      <where>
-          <if test="query != null and query != ''">
-              emp_name LIKE '%' || #{query} || '%'
-          </if>
-          <if test="phone_number != null and phone_number != ''">
-              AND phone_number LIKE '%' || #{phone_number} || '%'
-          </if>
-          <if test="emp_email != null and emp_email != ''">
-              AND emp_email LIKE '%' || #{emp_email} || '%'
-          </if>
-          <if test="job_title != null and job_title != ''">
-              AND job_title LIKE '%' || #{job_title} || '%'
-          </if>
-          <if test="hire_date_start != null">
-            AND hire_date <![CDATA[>]]>= #{hire_date_start}
-          </if>
-          <if test="hire_date_end != null">
-              AND hire_date <![CDATA[<]]>= #{hire_date_end}
-          </if>
-          <if test="join_date_start != null">
-              AND join_date <![CDATA[>]]>= #{join_date_start}
-          </if>
-          <if test="join_date_end != null">
-              AND join_date <![CDATA[<]]>= #{join_date_end}
-          </if>
-      </where>
-      ORDER BY emp_id ASC
+    SELECT emp_id, emp_name, emp_email, phone_number, job_title, hire_date, join_date
+    FROM employees
+    <where>
+      <if test="query != null and query != ''">
+        emp_name LIKE '%' || #{query} || '%'
+      </if>
+      <if test="phone_number != null and phone_number != ''">
+        AND phone_number LIKE '%' || #{phone_number} || '%'
+      </if>
+      <if test="emp_email != null and emp_email != ''">
+        AND emp_email LIKE '%' || #{emp_email} || '%'
+      </if>
+      <if test="job_title != null and job_title != ''">
+        AND job_title LIKE '%' || #{job_title} || '%'
+      </if>
+      <if test="hire_date_start != null">
+        AND hire_date <![CDATA[>]]>= #{hire_date_start}
+      </if>
+      <if test="hire_date_end != null">
+        AND hire_date <![CDATA[<]]>= #{hire_date_end}
+      </if>
+      <if test="join_date_start != null">
+        AND join_date <![CDATA[>]]>= #{join_date_start}
+      </if>
+      <if test="join_date_end != null">
+        AND join_date <![CDATA[<]]>= #{join_date_end}
+      </if>
+    </where>
+    ORDER BY emp_id ASC
   </sql>
 
   <sql id="getById">
@@ -61,12 +62,84 @@
     SELECT EMAIL_VERIFIED FROM employees WHERE login_id = #{id}
   </sql>
 
+  <sql id="getOne">
+    SELECT
+      EMP_ID, EMP_NAME, EMP_EMAIL, PHONE_NUMBER, LOGIN_ID, LOGIN_PW, JOB_TITLE,
+      BIRTHDAY, GENDER, ADDRESS, DETAIL_ADDRESS, HIRE_DATE, JOIN_DATE, EMAIL_VERIFICATION_TOKEN, EMAIL_VERIFIED
+    FROM
+      employees
+    WHERE 
+      emp_id = #{id}
+  </sql>
+
+  <!-- Update 문 정의 -->
+  <update id="fix">
+    UPDATE employees
+    <set>
+      <if test="emp_name != null and emp_name != oldEmpName">
+        emp_name = #{emp_name},
+      </if>
+      <if test="emp_email != null and emp_email != oldEmpEmail">
+        emp_email = #{emp_email},
+      </if>
+      <if test="phone_number != null and phone_number != oldPhoneNumber">
+        phone_number = #{phone_number},
+      </if>
+      <if test="login_id != null and login_id != oldLoginId">
+        login_id = #{login_id},
+      </if>
+      <if test="login_pw != null and login_pw != oldLoginPw">
+        login_pw = #{login_pw},
+      </if>
+      <if test="job_title != null and job_title != oldJobTitle">
+        job_title = #{job_title},
+      </if>
+      <if test="birthday != null and birthday != oldBirthday">
+        birthday = #{birthday},
+      </if>
+      <if test="gender != null and gender != oldGender">
+        gender = #{gender},
+      </if>
+      <if test="address != null and address != oldAddress">
+        address = #{address},
+      </if>
+      <if test="detail_address != null and detail_address != oldDetailAddress">
+        detail_address = #{detail_address},
+      </if>
+    </set>
+    WHERE emp_id = #{emp_id}
+  </update>
+
+  <!-- 다른 SQL 문 정의 -->
+  <update id="email">
+    UPDATE employees SET
+        EMAIL_VERIFIED = 'N'
+    WHERE 
+        login_id = #{login_id}
+  </update>
+
+  <update id="updateEmailVerificationToken">
+    UPDATE employees
+    SET EMAIL_VERIFICATION_TOKEN = #{setEmailVerificationToken}
+    WHERE login_id = #{login_id}
+  </update>
+
+  <update id="verifyEmail">
+    UPDATE employees
+    SET email_verified = 'T'
+    WHERE EMAIL_VERIFICATION_TOKEN = #{setEmailVerificationToken}
+  </update>
+
+  <select id="getOne" parameterType="Integer" resultType="emp">
+    <include refid="getOne"/>
+  </select>
+
   <select id="getToken" parameterType="String" resultType="String">
-    <include refid="getToken"></include>
+    <include refid="getToken"/>
   </select>
 
   <select id="getById" parameterType="String" resultType="emp">
-    <include refid="getById"></include>
+    <include refid="getById"/>
   </select>
 
   <select id="getPwById" parameterType="String" resultType="String">

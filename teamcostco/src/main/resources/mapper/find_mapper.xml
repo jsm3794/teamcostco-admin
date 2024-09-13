@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Find">
+
+    <select id="getIdCount" parameterType="find" resultType="int">
+        SELECT
+            count(*)
+        FROM
+            employees
+        WHERE 
+            emp_name = #{emp_name}
+        AND
+            emp_email = #{emp_email}
+    </select>
+
+    <select id="getPwCount" parameterType="find" resultType="int">
+        SELECT
+            count(*)
+        FROM
+            employees
+        WHERE
+            emp_name = #{emp_name}
+        AND
+            login_id = #{login_id}
+        AND
+            emp_email = #{emp_email}
+    </select>
+
+    <select id="getId" parameterType="find" resultType="String">
+        SELECT
+            login_id
+        FROM
+            employees
+        WHERE
+            emp_name = #{emp_name}
+        AND
+            emp_email = #{emp_email}
+    </select>
+
+    <update id="getPw" parameterType="find">
+        UPDATE employees SET
+            login_pw = #{login_pw}
+        WHERE
+            login_id = #{login_id}
+        AND
+            emp_email = #{emp_email}
+    </update>
+
+</mapper>

@@ -34,6 +34,13 @@
                     발주목록
                 </div>
             </li>
+            <li>
+                <div class="nav-item" th:classappend="${rootName == 'productdefective' ? ' active' : ''}"
+                    data-target="#productdefective">
+                    <span class="material-symbols-outlined">deployed_code_alert</span>
+                    불량재고
+                </div>
+            </li>
             <!--
             <li><div type="div" class="nav-item" data-target="#analytics">
                     <span class="material-symbols-outlined">bar_chart</span>

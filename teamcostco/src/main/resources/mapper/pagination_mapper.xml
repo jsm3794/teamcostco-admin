@@ -18,6 +18,9 @@
             <when test="queryId == 'OrderRequest.getAll'">
                 <include refid="OrderRequest.getAll"></include>
             </when>
+            <when test="queryId == 'ProductDefective.getAll'">
+                <include refid="ProductDefective.getAll"></include>
+            </when>
         </choose>
     </sql>
 

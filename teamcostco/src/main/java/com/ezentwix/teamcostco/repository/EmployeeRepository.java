@@ -32,11 +32,31 @@ public class EmployeeRepository {
         return sql.selectList("Employees.getAll");
     }
 
+    public EmployeeDTO getOne(Integer emp_id) {
+        return sql.selectOne("Employees.getOne", emp_id);
+    }
+
     public EmployeeDTO getEmp(Integer emp_id) {
         return sql.selectOne("Employees.getByEmpId", emp_id);
     }
 
+    public void fix (EmployeeDTO empDTO) {
+        sql.update("Employees.fix", empDTO);
+    }
+
     public String getToken(String id) {
         return sql.selectOne("Employees.getToken", id);
+    }
+
+    public void email (String login_id) {
+        sql.selectOne("Employees.email", login_id);
+    }
+
+    public void verifyEmail (String token) {
+        sql.selectOne("Employees.verifyEmail", token);
+    }
+
+    public void updateEmailVerificationToken (EmployeeDTO employeeDTO) {
+        sql.selectOne("Employees.updateEmailVerificationToken", employeeDTO);
     }
 }

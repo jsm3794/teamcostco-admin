@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ProductDefective">
+
+    <sql id="getAll">
+        SELECT
+            DEFECTIVE_ID, PRODUCT_CODE, PRODUCT_NAME,
+            DEFECTIVE_QTY, REASON, DEFECTIVE_DATE
+        FROM
+            product_defective
+        <where>
+            <if test="product_code != null and product_code != ''">
+                AND PRODUCT_CODE LIKE '%' || #{product_code} || '%'
+            </if>
+            <if test="product_name != null and product_name != ''">
+                AND PRODUCT_NAME LIKE '%' || #{product_name} || '%'
+            </if>
+            <if test="defective_qty != null">
+                AND DEFECTIVE_QTY = #{defective_qty}
+            </if>
+            <if test="reason != null and reason != ''">
+                AND REASON LIKE '%' || #{reason} || '%'
+            </if>
+            <if test="defective_date_start != null">
+                AND DEFECTIVE_DATE <![CDATA[>]]>= #{defective_date_start}
+            </if>
+            <if test="defective_date_end != null">
+                AND DEFECTIVE_DATE <![CDATA[<]]>= #{defective_date_end}
+            </if>
+        </where>
+        ORDER BY
+            DEFECTIVE_ID ASC
+    </sql>
+
+    <select id="getAll" resultType="productdefective">
+        <include refid="getAll"></include>
+    </select>
+</mapper>
