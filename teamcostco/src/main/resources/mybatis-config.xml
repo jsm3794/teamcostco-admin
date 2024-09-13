@@ -21,5 +21,6 @@
         <typeAlias type="com.ezentwix.teamcostco.dto.inventory.MediumCategoryDTO" alias="medium" />
         <typeAlias type="com.ezentwix.teamcostco.dto.inventory.SmallCategoryDTO" alias="small" />
         <typeAlias type="com.ezentwix.teamcostco.dto.inventory.DetailCategoryDTO" alias="detail" />
+        <typeAlias type="com.ezentwix.teamcostco.dto.join.JoinDTO" alias="join" />
     </typeAliases>
 </configuration>

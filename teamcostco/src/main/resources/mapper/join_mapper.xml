@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Join">
+
+    <insert id="add" parameterType="join">
+        INSERT INTO employees 
+            (emp_id, emp_name, emp_email, phone_number, login_id, 
+            login_pw, job_title, birthday, gender, 
+            address, detail_address, hire_date, join_date, EMAIL_VERIFICATION_TOKEN) 
+        VALUES 
+            (emp_seq.nextval, #{emp_name}, #{emp_email}, #{phone_number},
+            #{login_id}, #{login_pw}, #{job_title}, #{birthday}, #{gender},
+            #{address}, #{detail_address}, sysdate, sysdate, #{emailVerificationToken})
+    </insert>
+
+    <select id="count_id" resultType="int">
+        SELECT
+            count(*)
+        FROM
+            employees
+        WHERE
+            login_id = #{login_id}
+    </select>
+
+      <!-- 이메일 인증 토큰 업데이트 쿼리 -->
+    <update id="updateEmailVerificationToken" parameterType="String">
+        UPDATE employees
+        SET email_verification_token = #{token}
+        WHERE login_id = #{loginId}
+    </update>
+
+    <!-- 이메일 인증 쿼리 -->
+    <update id="verifyEmail" parameterType="String">
+        UPDATE employees
+        SET email_verified = 'T'
+        WHERE email_verification_token = #{token}
+    </update>
+</mapper>

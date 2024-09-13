@@ -41,12 +41,37 @@
 
   <sql id="getById">
     SELECT emp_id, emp_name, emp_email, phone_number, job_title, hire_date, join_date
+    FROM employees WHERE login_id = #{id}
+  </sql>
+
+  <sql id="getByEmpId">
+    SELECT emp_id, emp_name, emp_email, phone_number, job_title, hire_date, join_date
     FROM employees WHERE emp_id = #{emp_id}
   </sql>
 
   <sql id="getAllJobTitles">
     SELECT job_title FROM employees
   </sql>
+
+  <sql id="getPwById">
+    SELECT login_pw FROM employees WHERE login_id = #{id}
+  </sql>
+
+  <sql id="getToken">
+    SELECT EMAIL_VERIFIED FROM employees WHERE login_id = #{id}
+  </sql>
+
+  <select id="getToken" parameterType="String" resultType="String">
+    <include refid="getToken"></include>
+  </select>
+
+  <select id="getById" parameterType="String" resultType="emp">
+    <include refid="getById"></include>
+  </select>
+
+  <select id="getPwById" parameterType="String" resultType="String">
+    <include refid="getPwById"/>
+  </select>
   
   <select id="getAll" resultType="emp">
     <include refid="getAll"/>
@@ -56,8 +81,8 @@
     <include refid="getByIdAndPw"/>
   </select>
 
-  <select id="getById" resultType="emp" parameterType="Integer">
-    <include refid="getById"/>
+  <select id="getByEmpId" resultType="emp" parameterType="Integer">
+    <include refid="getByEmpId"/>
   </select>
 
   <select id="getAllJobTitles" resultType="String">
