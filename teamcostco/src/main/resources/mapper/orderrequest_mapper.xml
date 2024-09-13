@@ -94,7 +94,5 @@
     <select id="getNextRequestId" resultType="int">
         <include refid="getNextRequestId"/>
     </select>
-    <select id="getStatus" resultType="orderTrack">
-        <include refid="getStatus"/>
-    </select>
+    
 </mapper>

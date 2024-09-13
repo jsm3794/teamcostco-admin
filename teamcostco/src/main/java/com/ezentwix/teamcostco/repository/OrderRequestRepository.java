@@ -49,4 +49,11 @@ public class OrderRequestRepository {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'updateDefectiveQty'");
     }
+
+    public OrderTrackDTO getStatusQty() {
+
+        OrderTrackDTO orderTrackDTO = new OrderTrackDTO();
+        
+        return orderTrackDTO;
+    }
 }
