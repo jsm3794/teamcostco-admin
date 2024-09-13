@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 // 웹소켓 연결 설정
-const socket = new WebSocket("ws://localhost:9999/notifications");
+const socket = new WebSocket("ws://192.168.0.13:9999/notifications");
 
 // 웹소켓 연결 상태 확인
 socket.onopen = function () {

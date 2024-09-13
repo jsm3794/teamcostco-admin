@@ -19,7 +19,7 @@
         </thead>
         <tbody>
             <tr th:each="item : ${items}"
-                th:onclick="'window.location.href=\'http://localhost:9999/board?notice_id=' + ${item.notice_id} + '\''">
+                th:onclick="'window.location.href=\'http://192.168.0.13:9999/board?notice_id=' + ${item.notice_id} + '\''">
                 <td th:text="${item.notice_id}"></td>
                 <td th:text="공지"></td>
                 <td th:text="${item.title}"></td>
