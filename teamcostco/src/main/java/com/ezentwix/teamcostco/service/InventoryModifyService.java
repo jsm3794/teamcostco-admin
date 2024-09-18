@@ -7,25 +7,25 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class DetailService implements PageMetadataProvider {
+public class InventoryModifyService implements PageMetadataProvider {
 
     @Override
     public String getUri() {
-        return "detail/detail"; 
+        return "/inventory/modify"; 
     }
 
     @Override
     public String getPageTitle() {
-        return "상품 상세정보";
+        return "상품정보수정";
     }
 
     @Override
     public List<String> getCssFiles() {
-        return List.of("/css/contents/detail.css");
+        return List.of("/css/contents/inventorymodify.css");
     }
 
     @Override
     public List<String> getJsFiles() {
-        return List.of("/js/contents/detail.js");
+        return List.of("/js/contents/inventorymodify.js");
     }
 }

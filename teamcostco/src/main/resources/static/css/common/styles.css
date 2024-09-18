@@ -235,7 +235,7 @@ table tbody tr:hover {
 }
 
 .flex-column-box {
-    display:flex;
+    display: flex;
     flex-direction: column;
 }
 
@@ -303,6 +303,7 @@ table tbody tr:hover {
     height: 100%;
     padding: 0 20px;
     border-right: var(--border-line);
+    cursor: pointer;
 }
 
 .tab-item:first-child {
@@ -311,6 +312,10 @@ table tbody tr:hover {
 
 .tab-item:last-child {
     border-right: none;
+}
+
+.tab-item:last-child.current {
+    border-right: var(--border-line);
 }
 
 .tab-item.current {
@@ -331,9 +336,9 @@ table tbody tr:hover {
     z-index: 1000;
 }
 
-.tab-content-wrap{
+.tab-content-wrap {
     height: 100%;
     margin-top: 15px;
     overflow-y: auto;
-    padding:10px;
+    padding: 10px;
 }

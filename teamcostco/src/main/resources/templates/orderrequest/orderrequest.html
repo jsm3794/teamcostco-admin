@@ -19,7 +19,7 @@
             <tr th:each="item : ${items}">
                 <td th:text="${item.request_id}"></td>
                 <td>
-                    <a th:href="'/orderrequest/' + ${item.request_id} + '/detail'" th:text="${item.product_name}"></a>
+                    <a th:href="'/orderrequest/detail/' + ${item.request_id}" th:text="${item.product_name}"></a>
                 </td>
                 <td th:text="${item.mall_name}"></td>
                 <td th:text="${item.request_qty}"></td>

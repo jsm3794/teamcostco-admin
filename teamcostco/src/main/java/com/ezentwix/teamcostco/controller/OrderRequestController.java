@@ -50,7 +50,7 @@ public class OrderRequestController {
         return "index";
     }
 
-    @GetMapping("/orderrequest/{request_id}/detail")
+    @GetMapping("/orderrequest/detail/{request_id}")
     public String getMethodName(
             @PathVariable("request_id") Integer requestId,
             Model model) {
@@ -62,7 +62,7 @@ public class OrderRequestController {
     }
 
     // POST 요청 처리 추가
-    @PostMapping("/orderrequest/{request_id}/detail")
+    @PostMapping("/orderrequest/detail/{request_id}")
     public ResponseEntity<Map<String, Object>> processOrder(
             @PathVariable("request_id") Integer requestId,
             @RequestBody Map<String, Object> requestBody) {

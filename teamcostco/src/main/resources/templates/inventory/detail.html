@@ -1,0 +1,99 @@
+<div class="content-box">
+    <div class="tab-container">
+
+        <div class="tab-item current">
+            <span>상세정보</span>
+        </div>
+        <div class="tab-item" th:onclick="'location.href=\'/inventory/modify/' + ${product.product_id} + '\''">
+            <span>재고수정</span>
+        </div>
+        <div class="tab-item">
+            <span>수정내역</span>
+        </div>
+    </div>
+
+    <!-- 탭 내용 -->
+    <div class="tab-content-wrap">
+
+        <div class="content">
+
+            <!-- 왼쪽 내용 -->
+            <div class="left-column">
+                <img th:src="${'/api/product_thumbnail/' + product.product_code}" alt="Product Image"
+                    class="product-image">
+                <div class="product-info">
+                    <div class="info-row">
+                        <span class="info-label">제품 ID</span>
+                        <span class="info-value" th:text="${product.product_id}"></span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">제품 코드</span>
+                        <span class="info-value" th:text="${product.product_code}"></span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">제품명</span>
+                        <span class="info-value" th:text="${product.product_name}"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 오른쪽 내용 -->
+            <div class="right-column">
+                <div class="info-row">
+                    <span class="info-label">제품 분류</span>
+                    <span class="info-value">
+                        <span th:text="${product.category_large}"></span> /
+                        <span th:text="${product.category_medium}"></span> /
+                        <span th:text="${product.category_small}"></span> /
+                        <span th:text="${product.category_detail ?: '세부 정보 없음'}"></span>
+                    </span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">브랜드</span>
+                    <span class="info-value" th:text="${product.brand}"></span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">창고필요수량</span>
+                    <span class="info-value" th:text="${product.min_required_qty}"></span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">창고수량</span>
+                    <span class="info-value" th:text="${product.storage_qty}"></span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">진열수량</span>
+                    <span class="info-value" th:text="${product.display_qty}"></span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">매입가격</span>
+                    <span class="info-value"
+                        th:text="${#numbers.formatInteger(product.purchase_price, 0, 'COMMA') + '원'}"></span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">판매가격</span>
+                    <span class="info-value"
+                        th:text="${#numbers.formatInteger(product.selling_price, 0, 'COMMA') + '원'}"></span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">할인율</span>
+                    <span class="info-value" th:text="${(product.discount * 100) + '%'}"></span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">할인가격</span>
+                    <span class="info-value"
+                        th:text="${#numbers.formatInteger(product.discountedPrice, 0, 'COMMA') + '원'}"></span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">생성날짜</span>
+                    <span class="info-value" th:text="${#dates.format(product.create_date, 'yyyy-MM-dd')}"></span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">수정날짜</span>
+                    <span class="info-value" th:text="${#dates.format(product.update_date, 'yyyy-MM-dd')}"></span>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>

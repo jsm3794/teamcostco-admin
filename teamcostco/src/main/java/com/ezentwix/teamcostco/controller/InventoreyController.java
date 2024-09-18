@@ -1,11 +1,15 @@
 package com.ezentwix.teamcostco.controller;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -13,6 +17,8 @@ import com.ezentwix.teamcostco.dto.filter.InventoryFilterDTO;
 import com.ezentwix.teamcostco.dto.product.ProductDTO;
 import com.ezentwix.teamcostco.dto.product.ProductSummaryDTO;
 import com.ezentwix.teamcostco.pagination.PaginationResult;
+import com.ezentwix.teamcostco.service.InventoryDetailService;
+import com.ezentwix.teamcostco.service.InventoryModifyService;
 import com.ezentwix.teamcostco.service.InventoryService;
 import com.ezentwix.teamcostco.service.ProductService;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -22,12 +28,15 @@ import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequiredArgsConstructor
+@RequestMapping("/inventory")
 public class InventoreyController {
     private final InventoryService inventoryService;
+    private final InventoryDetailService inventoryDetailService;
+    private final InventoryModifyService inventoryModifyService;
     private final ProductService productService;
     private final ObjectMapper objectMapper;
 
-    @GetMapping("/inventory")
+    @GetMapping("")
     public String showInventory(
             @RequestParam(value = "query", defaultValue = "") String query,
             @RequestParam(value = "page", defaultValue = "1") Integer page,
@@ -46,6 +55,39 @@ public class InventoreyController {
         model.addAttribute("count", result.getCount());
         model.addAttribute("pageDetail", result.getPageDetails());
         return "index";
+    }
+
+    
+    @GetMapping("/detail/{productId}")
+    public String showInventoryDetail(@PathVariable Integer productId, Model model) {
+        ProductDTO product = productService.getProductById(productId);
+        inventoryDetailService.configureModel(model);
+        model.addAttribute("product", product);
+        return "index";
+    }
+
+    
+    @GetMapping("/modify/{productId}")
+    public String showInventoryModify(@PathVariable Integer productId, Model model) {
+        ProductDTO product = productService.getProductById(productId);
+        inventoryModifyService.configureModel(model);
+        model.addAttribute("product", product);
+        return "index";
+    }
+
+    @PostMapping("/update")
+    @ResponseBody
+    public Map<String, Object> updateProduct(@ModelAttribute("product") ProductDTO productDTO) {
+        Map<String, Object> response = new HashMap<>();
+        try {
+            productService.updateProduct(productDTO);
+            response.put("status", "success");
+            response.put("message", "정상적으로 수정되었습니다.");
+        } catch (Exception e) {
+            response.put("status", "error");
+            response.put("message", "수정 실패. 다시 시도해 주세요.");
+        }
+        return response;
     }
 
     @GetMapping("/productsummary")

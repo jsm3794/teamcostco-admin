@@ -45,13 +45,7 @@
         <tbody>
             <tr th:each="product,state : ${items}" th:onclick="'redirectToDetailsPage(' + ${product.product_id} + ')'">
                 <td th:text="${state.count}"></td>
-                <td>
-                    <div class="product-name-container">
-                        <img th:src="${'/images/product/' + product.product_code}" class="product-image">
-                        <span th:text="${product.product_name}"></span>
-                    </div>
-                    <span th:text="${product.product_name}"></span>
-                </td>
+                <td th:text="${product.product_name}"></td>
                 <td th:text="${product.category_large}"></td>
                 <td th:text="${product.category_medium}"></td>
                 <td th:text="${product.category_small}"></td>
