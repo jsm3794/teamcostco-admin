@@ -28,7 +28,9 @@
                 <td><input type="checkbox" name="orderCheck" th:value="${item.productId}"></td>
                 <td><img th:src="${item.image}" alt="Product Image"></td>
                 <td th:utext="${item.productId}"></td>
-                <td th:utext="${item.title}"></td>
+                <td>
+                    <p th:utext="${item.title}"></p>
+                </td>
                 <td th:text="${item.lprice}">원</td>
                 <td th:text="${item.mallName}"></td>
                 <td><a th:href="${item.link}" target="_blank">제품 보러가기</a></td>

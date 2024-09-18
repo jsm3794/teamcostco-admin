@@ -23,3 +23,8 @@ table>tbody>tr>td:last-child > input {
     text-decoration: none;
     color: #337ab7;
 }
+
+#results > tbody > tr > td:nth-child(4){
+    justify-content: flex-start;
+    text-align: left;
+}

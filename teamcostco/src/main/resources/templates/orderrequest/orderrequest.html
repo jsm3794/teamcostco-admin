@@ -16,10 +16,10 @@
             </tr>
         </thead>
         <tbody>
-            <tr th:each="item : ${items}">
+            <tr th:each="item : ${items}" th:onclick="|location.href='@{/orderrequest/detail/{id}(id=${item.request_id})}'|">
                 <td th:text="${item.request_id}"></td>
                 <td>
-                    <a th:href="'/orderrequest/detail/' + ${item.request_id}" th:text="${item.product_name}"></a>
+                    <p th:text="${item.product_name}"></p>
                 </td>
                 <td th:text="${item.mall_name}"></td>
                 <td th:text="${item.request_qty}"></td>
