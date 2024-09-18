@@ -41,7 +41,7 @@ public class OrderRequestService implements PageMetadataProvider {
 
     @Override
     public String getPageTitle() {
-        return "발주목록";
+        return "발주관리";
     }
 
     @Override

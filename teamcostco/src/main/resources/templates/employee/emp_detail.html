@@ -1,65 +1,71 @@
 <div class="content-box">
-    <div class="top-nav">
-        <div class="nav-left" th:if="${empDetail}">
-            <a href="" class="nav-button">상세정보</a>
-            <a th:href="@{/emp_fix/{emp_id}(emp_id=${empDetail.emp_id})}" class="nav-button">정보수정</a>
+
+    <div class="tab-container">
+
+        <div class="tab-item current">
+            <span>상세정보</span>
         </div>
-        <a href="/emp_list" class="nav-button">직원관리</a>
-    </div>
-    <div class="employee-info" th:if="${empDetail}">
-        <div class="avatar-large">
-            <img id="profileImage" class="profile-image" src="/images/images.png" alt="Profile Image">
-        </div>
-        <div class="info-details">
-            <h2 th:text="${empDetail.emp_name}"></h2>
-            <p class="email" th:text="${empDetail.emp_email}"></p>
+        <div class="tab-item" th:onclick="|location.href='@{/employee/modify/{id}(id=${empDetail.emp_id})}'|">
+            <span>정보수정</span>
         </div>
     </div>
-    <div class="tab-content">
-        <div class="profile-details" th:if="${empDetail}">
-            <div class="detail-section">
-                <h3>인적사항</h3>
-                <div class="grid">
-                    <div class="grid-item">
-                        <p class="label">생년월일</p>
-                        <p th:text="${empDetail.birthday}"></p>
-                    </div>
-                    <div class="grid-item">
-                        <p class="label">전화번호</p>
-                        <p th:text="${empDetail.phone_number}"></p>
-                    </div>
-                    <div class="grid-item">
-                        <p class="label">나이</p>
-                        <p th:text="0"></p>
-                    </div>
-                    <div class="grid-item">
-                        <p class="label">성별</p>
-                        <p th:text="${empDetail.gender}"></p>
-                    </div>
-                    <div class="grid-item">
-                        <p class="label">주소</p>
-                        <p th:text="${empDetail.address}"></p>
-                    </div>
-                    <div class="grid-item">
-                        <p class="label">상세주소</p>
-                        <p th:text="${empDetail.detail_address}"></p>
+
+    <div class="tab-content-wrap">
+        <div class="employee-info" th:if="${empDetail}">
+            <div class="avatar-large">
+                <img id="profileImage" class="profile-image" src="/images/images.png" alt="Profile Image">
+            </div>
+            <div class="info-details">
+                <h2 th:text="${empDetail.emp_name}"></h2>
+                <p class="email" th:text="${empDetail.emp_email}"></p>
+            </div>
+        </div>
+        <div class="tab-content">
+            <div class="profile-details" th:if="${empDetail}">
+                <div class="detail-section">
+                    <h3>인적사항</h3>
+                    <div class="grid">
+                        <div class="grid-item">
+                            <p class="label">생년월일</p>
+                            <p th:text="${empDetail.birthday}"></p>
+                        </div>
+                        <div class="grid-item">
+                            <p class="label">전화번호</p>
+                            <p th:text="${empDetail.phone_number}"></p>
+                        </div>
+                        <div class="grid-item">
+                            <p class="label">나이</p>
+                            <p th:text="0"></p>
+                        </div>
+                        <div class="grid-item">
+                            <p class="label">성별</p>
+                            <p th:text="${empDetail.gender}"></p>
+                        </div>
+                        <div class="grid-item">
+                            <p class="label">주소</p>
+                            <p th:text="${empDetail.address}"></p>
+                        </div>
+                        <div class="grid-item">
+                            <p class="label">상세주소</p>
+                            <p th:text="${empDetail.detail_address}"></p>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="detail-section">
-                <h3>업무관련</h3>
-                <div class="grid">
-                    <div class="grid-item">
-                        <p class="label">직책</p>
-                        <p th:text="${empDetail.job_title}"></p>
-                    </div>
-                    <div class="grid-item">
-                        <p class="label">고용일자</p>
-                        <p th:text="${#dates.format(empDetail.hire_date, 'yy/MM/dd')}"></p>
-                    </div>
-                    <div class="grid-item">
-                        <p class="label">가입날짜</p>
-                        <p th:text="${#dates.format(empDetail.join_date, 'yy/MM/dd')}"></p>
+                <div class="detail-section">
+                    <h3>업무관련</h3>
+                    <div class="grid">
+                        <div class="grid-item">
+                            <p class="label">직책</p>
+                            <p th:text="${empDetail.job_title}"></p>
+                        </div>
+                        <div class="grid-item">
+                            <p class="label">고용일자</p>
+                            <p th:text="${#dates.format(empDetail.hire_date, 'yy/MM/dd')}"></p>
+                        </div>
+                        <div class="grid-item">
+                            <p class="label">가입날짜</p>
+                            <p th:text="${#dates.format(empDetail.join_date, 'yy/MM/dd')}"></p>
+                        </div>
                     </div>
                 </div>
             </div>

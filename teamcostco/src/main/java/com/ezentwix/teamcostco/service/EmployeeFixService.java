@@ -56,12 +56,12 @@ public class EmployeeFixService implements PageMetadataProvider {
 
     @Override
     public String getUri() {
-        return "employee/emp_fix";
+        return "/employee/emp_fix";
     }
 
     @Override
     public String getPageTitle() {
-        return "정보수정";
+        return "직원관리";
     }
     
     public void sendVerificationEmailIfNeeded(EmployeeDTO empDTO) {

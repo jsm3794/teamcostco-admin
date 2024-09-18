@@ -30,12 +30,12 @@ public class EmployeeDetailService implements PageMetadataProvider {
 
     @Override
     public String getUri() {
-        return "employee/emp_detail";
+        return "/employee/emp_detail";
     }
 
     @Override
     public String getPageTitle() {
-        return "사원정보";
+        return "직원관리";
     }
 
     @Override

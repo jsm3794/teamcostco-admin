@@ -16,7 +16,7 @@ public class InventoryDetailService implements PageMetadataProvider {
 
     @Override
     public String getPageTitle() {
-        return "상품상세정보";
+        return "재고관리";
     }
 
     @Override

@@ -16,7 +16,7 @@ public class InventoryModifyService implements PageMetadataProvider {
 
     @Override
     public String getPageTitle() {
-        return "상품정보수정";
+        return "재고관리";
     }
 
     @Override

@@ -19,7 +19,7 @@ public class InventoryService implements PageMetadataProvider {
 
     @Override
     public String getPageTitle() {
-        return "인벤토리";
+        return "재고관리";
     }
 
     // 아래 두 메서드(getCssFiles, getJsFiles)는
