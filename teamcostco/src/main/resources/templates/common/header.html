@@ -6,26 +6,8 @@
             </nav>
         </div>
         <div class="header-right">
-            <div class="shop-dropdown">
-                <button class="dropdown-btn">Bravaa shop ▼</button>
-                <div class="dropdown-content">
-                    <a href="#">Shop 1</a>
-                    <a href="#">Shop 2</a>
-                    <a href="#">Shop 3</a>
-                </div>
-            </div>
-            <div class="notification-icon" id="notification-icon">
-                <span class="material-symbols-outlined">
-                    notifications
-                </span>
-                <div class="notifications">
-                    <p>알림 1</p>
-                    <p>알림 2</p>
-                    <p>알림 3</p>
-                </div>
-            </div>
             <div class="profile">
-                <span id="user_name" th:text="${session.emp?.emp_name ?: 'NULL'}"></span>
+                <span id="user_name" th:text="${session.emp?.emp_name ?: 'undefined'}"></span>
                 <a th:href="${'/emp_detail?emp_id=' + session.emp?.emp_id}">
                     <img src="/images/profile-default.svg" alt="user_profile" class="profile-pic">
                 </a>

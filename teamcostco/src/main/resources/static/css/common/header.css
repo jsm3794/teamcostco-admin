@@ -33,6 +33,12 @@ header {
     align-items: center;
 }
 
+.profile > a {
+    display:flex;
+    flex-direction: row;
+    align-self: center;
+}
+
 .shop-dropdown {
     position: relative;
     margin-right: 20px;
