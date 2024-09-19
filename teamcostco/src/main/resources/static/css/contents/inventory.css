@@ -99,3 +99,7 @@ input[type="date"] {
     justify-content: flex-start;
     text-align: left;
 }
+
+td {
+    cursor: pointer;
+}

@@ -28,7 +28,6 @@
     padding: 20px;
 }
 
-
 /* 제품 이미지 스타일 */
 .product-image {
     width: 100%;
@@ -38,8 +37,6 @@
     margin-bottom: 20px;
     border: 1px solid lightgray;
 }
-
-/* 오른쪽 열 스타일 */
 
 /* 정보 행 스타일 */
 .info-row {
@@ -55,11 +52,6 @@
     display: inline-block;
     min-width: 150px;
     margin-right: 10px;
-}
-
-/* 정보 값 스타일 */
-.info-value {
-    flex: 1;
 }
 
 /* 버튼 기본 스타일 */
@@ -87,7 +79,6 @@ form {
     padding: 8px;
     font-size: 16px;
     width: 200px;
-    /* 입력 필드 너비 설정 */
 }
 
 /* 읽기 전용 입력 필드 스타일 */
@@ -99,15 +90,13 @@ form {
 /* 저장 버튼 스타일 */
 .save-btn {
     background-color: var(--background-sub-color);
-    /* background-color: #dddddd;  */
-    color: rgb(0, 0, 0);
     border: none;
     padding: 10px 20px;
     cursor: pointer;
     font-size: 16px;
     min-width: 150px;
-    margin-top: 20px;
-    margin-left: 67%;
+    margin-top: -5px;
+    margin-left: 77%;
 }
 
 /* 저장 버튼 호버 스타일 */
@@ -138,4 +127,41 @@ form {
     width: 200px;
     box-sizing: border-box;
     color: #5a5d5f;
+}
+
+/* 개수 입력 창 스타일*/
+#move-qty, #reverse-move-qty {
+    width: 180px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+/* 이동 버튼 스타일 */
+.move-btn {
+    background-color: var(--background-sub-color);
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    width: 180px;
+}
+
+/* 이동 버튼 호버 스타일 */
+.move-btn:hover {
+    background-color: #b8b8b8;
+}
+
+.popup-alert {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--background-sub-color);
+    border: 1px solid #ccc;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.popup-alert button {
+    margin-top: 10px;
 }

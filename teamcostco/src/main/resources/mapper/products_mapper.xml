@@ -80,7 +80,9 @@
             category_detail = #{category_detail},
             purchase_price = #{purchase_price}, 
             selling_price = #{selling_price},   
-            brand = #{brand}
+            brand = #{brand},
+            storage_qty = #{storage_qty}, 
+            display_qty = #{display_qty}
         WHERE
             product_id = #{product_id}
     </sql>

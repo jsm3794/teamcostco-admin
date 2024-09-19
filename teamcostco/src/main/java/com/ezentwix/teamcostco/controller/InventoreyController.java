@@ -57,7 +57,6 @@ public class InventoreyController {
         return "index";
     }
 
-    
     @GetMapping("/detail/{productId}")
     public String showInventoryDetail(@PathVariable Integer productId, Model model) {
         ProductDTO product = productService.getProductById(productId);
@@ -66,7 +65,6 @@ public class InventoreyController {
         return "index";
     }
 
-    
     @GetMapping("/modify/{productId}")
     public String showInventoryModify(@PathVariable Integer productId, Model model) {
         ProductDTO product = productService.getProductById(productId);
@@ -75,12 +73,20 @@ public class InventoreyController {
         return "index";
     }
 
+    @GetMapping("/productsummary")
+    @ResponseBody
+    public ProductSummaryDTO getMethodName() {
+        return productService.eachProductCount();
+    }
+
     @PostMapping("/update")
     @ResponseBody
     public Map<String, Object> updateProduct(@ModelAttribute("product") ProductDTO productDTO) {
         Map<String, Object> response = new HashMap<>();
         try {
-            productService.updateProduct(productDTO);
+            // 진열수량과 재고수량도 업데이트되도록 수정
+            productService.updateProduct(productDTO); // productDTO에 수정된 display_qty와 storage_qty 포함
+
             response.put("status", "success");
             response.put("message", "정상적으로 수정되었습니다.");
         } catch (Exception e) {
@@ -88,12 +94,6 @@ public class InventoreyController {
             response.put("message", "수정 실패. 다시 시도해 주세요.");
         }
         return response;
-    }
-
-    @GetMapping("/productsummary")
-    @ResponseBody
-    public ProductSummaryDTO getMethodName() {
-        return productService.eachProductCount();
     }
 
 }
