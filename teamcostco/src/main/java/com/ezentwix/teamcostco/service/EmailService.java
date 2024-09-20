@@ -75,7 +75,7 @@ public class EmailService {
     }
 
     public void sendnewToken(String toEmail, String token) {
-        String verificationUrl = "http://192.168.0.13:9999/employee/newtoken?token=" + token;
+        String verificationUrl = "http://192.168.0.13:9999/verify?token=" + token;
         String htmlContent = "<p>안녕하세요!</p>" +
                              "<p>아래 링크를 클릭하여 팀코스트코 이메일 인증을 완료해 주세요:</p>" +
                              "<a href=\"" + verificationUrl + "\">이메일 인증하기</a>" +

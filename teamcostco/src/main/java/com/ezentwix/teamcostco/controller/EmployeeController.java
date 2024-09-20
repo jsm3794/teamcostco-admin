@@ -131,13 +131,20 @@ public class EmployeeController {
     }
 
     @GetMapping("/newtoken")
-    public String verifyEmail(@RequestParam("token") String token, Model model) {
+    @ResponseBody
+    public ResponseEntity<Map<String, Object>> verifyEmail(
+        @RequestParam("token") String token) {
+
+        Map<String, Object> response = new HashMap();
 
         if (employeeFixService.verifyEmail(token)) {
-            model.addAttribute("message", "이메일 인증이 완료되었습니다.");
+            response.put("success", true);
+            response.put("message", "이메일 인증이 완료되었습니다!");
         } else {
-            model.addAttribute("message", "인증 실패. 유효하지 않은 토큰입니다.");
+            response.put("success", false);
+            response.put("message", "인증 실패. 유효하지 않은 토큰입니다.");
         }
-        return "login";
+        
+        return ResponseEntity.ok(response);
     }
 }
