@@ -2,8 +2,6 @@ package com.ezentwix.teamcostco.dto.employee;
 
 import java.time.LocalDate;
 
-import com.google.type.Date;
-
 import lombok.Data;
 
 @Data
@@ -29,8 +27,8 @@ public class EmployeeDTO {
     private String oldAddress;
     private String detail_address;
     private String oldDetailAddress;
-    private Date hire_date;
-    private Date join_date;
+    private LocalDate hire_date;
+    private LocalDate join_date;
     private String setEmailVerificationToken;
     private String emailVerified;
 }

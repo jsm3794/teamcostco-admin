@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TeamCostco - 로그인</title>
-    <link rel="stylesheet" href="/css/contents/login.css">
+    <link rel="stylesheet" th:href="@{/css/contents/login.css}" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/bda07bd4d6.js" crossorigin="anonymous"></script>
@@ -29,11 +29,17 @@
                         <span class="btn-text">로그인</span>
                         <i class="fas fa-chevron-right btn-icon"></i>
                     </button>
+
+                    <!-- 회원가입 버튼 -->
+                    <button type="button" class="auth-btn" onclick="window.location.href='http://192.168.0.13:9999/join'">회원가입</button>
+
+                    <!-- ID 찾기와 PW 찾기를 한 줄에 배치 -->
+                    <div class="btn-group">
+                        <button type="button" class="half-btn" onclick="window.location.href='http://192.168.0.13:9999/findid'">ID 찾기</button>
+                        <button type="button" class="half-btn" onclick="window.location.href='http://192.168.0.13:9999/findpw'">PW 찾기</button>
+                    </div>
                 </form>
         </div>
-        <button th:onclick="'window.location.href=\'http://192.168.0.13:9999/join\''">회원가입</button>
-        <button th:onclick="'window.location.href=\'http://192.168.0.13:9999/findid\''">ID 찾기</button>
-        <button th:onclick="'window.location.href=\'http://192.168.0.13:9999/findpw\''">PW 찾기</button>
     </div>
     <script src="/js/contents/login.js"></script>
 </body>

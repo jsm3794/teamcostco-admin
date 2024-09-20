@@ -39,11 +39,12 @@
 
             <label for="gender">성별:</label>
             <select name="gender" id="gender" required>
-                <option value="" disabled selected>성별</option>
-                <option value="male">남성</option>
-                <option value="female">여성</option>
-                <option value="other">기타</option>
+                <option value="" disabled th:selected="${getOne.gender == null}">성별</option>
+                <option value="male" th:selected="${getOne.gender == 'male'}">남성</option>
+                <option value="female" th:selected="${getOne.gender == 'female'}">여성</option>
+                <option value="other" th:selected="${getOne.gender == 'other'}">기타</option>
             </select> <br><br>
+
 
             <label for="birthday">생년월일:</label>
             <input type="date" name="birthday" id="birthday" th:value="${getOne.birthday}"> <br><br>

@@ -1,104 +1,131 @@
-<base href="/">
-<h1>회원가입</h1>
-<form action="/join" method="post">
 
-    <input type="text" name="emp_name" placeholder="이름" required> <br><br>
+    <h1>회원가입</h1>
+    <form id="joinForm">
+        <input type="text" name="emp_name" placeholder="이름" required> <br><br>
 
-    <input type="email" name="emp_email" placeholder="이메일" required> <br><br>
+        <input type="email" name="emp_email" placeholder="이메일" required> <br><br>
 
-    <input type="text" name="phone_number" id="cellPhone" placeholder="연락처" maxlength="13" required> <br><br>
+        <input type="text" name="phone_number" id="cellPhone" placeholder="연락처" maxlength="13" required> <br><br>
 
-    <input type="text" name="login_id" placeholder="ID" required>
-    <input type="button" name="duplication_btn" value="중복확인"> <br><br>
+        <input type="text" name="login_id" placeholder="ID" required>
+        <input type="button" name="duplication_btn" value="중복확인"> <br><br>
 
-    <input type="password" name="login_pw" placeholder="비밀번호" required> <br><br>
+        <input type="password" name="login_pw" placeholder="비밀번호" required> <br><br>
 
-    <input type="password" name="login_Pw_Check" placeholder="비밀번호 확인" required> <br><br>
+        <input type="password" name="login_Pw_Check" placeholder="비밀번호 확인" required> <br><br>
 
-    <input type="text" name="job_title" placeholder="직책"> <br><br>
+        <input type="text" name="job_title" placeholder="직책"> <br><br>
 
-    <select name="gender" required>
-        <option value="" disabled selected>성별</option>
-        <option value="male">남성</option>
-        <option value="female">여성</option>
-        <option value="other">기타</option>
-    </select> <br><br>
+        <select name="gender" required>
+            <option value="" disabled selected>성별</option>
+            <option value="male">남성</option>
+            <option value="female">여성</option>
+            <option value="other">기타</option>
+        </select> <br><br>
 
-    생년월일 <input type="date" name="birthday" placeholder="생년월일" required> <br><br>
+        생년월일 <input type="date" name="birthday" placeholder="생년월일" required> <br><br>
 
-    <input type="text" name="address" id="sample4_roadAddress" placeholder="도로명주소" required> <br><br>
-    <input type="text" name="detail_address" id="sample4_detailAddress" placeholder="상세주소" required> <br><br>
+        <input type="text" name="address" id="sample4_roadAddress" placeholder="도로명주소" required> <br><br>
+        <input type="text" name="detail_address" id="sample4_detailAddress" placeholder="상세주소" required> <br><br>
 
+        <input type="text" name="post_number" id="sample4_postcode" placeholder="우편번호" required> <br><br>
 
-    <input type="text" name="post_number" id="sample4_postcode" placeholder="우편번호" required> <br><br>
+        <input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br><br>
 
-    <input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br><br>
+        <input id="join_btn" type="submit" value="회원가입">
+    </form>
 
-    <input id="join_btn" type="submit" value="회원가입">
-</form>
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script th:inline="javascript">
+    <!-- Daum 우편번호 검색 API -->
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
-    const message = /*[[${message}]]*/ null;
-    console.log("Message:", message); // 디버깅을 위한 콘솔 로그
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // 아이디 중복확인 버튼 이벤트 리스너
+            document.querySelector('input[name="duplication_btn"]').addEventListener('click', function () {
+                const loginId = document.querySelector('input[name="login_id"]').value;
 
-    if (message && message.trim() !== "") {
-        alert(message);
-    }
+                if (!loginId) {
+                    alert("아이디를 입력하세요.");
+                    return;
+                }
 
-    document.addEventListener("DOMContentLoaded", function () {
-        document.querySelector('input[name="duplication_btn"]').addEventListener('click', function () {
-            const loginId = document.querySelector('input[name="login_id"]').value;
+                fetch(`/check-id?id=${encodeURIComponent(loginId)}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.available) {
+                            alert("사용 가능한 ID입니다.");
+                        } else {
+                            alert("이미 사용중인 ID입니다.");
+                        }
+                    })
+                    .catch(error => console.error('Error:', error));
+            });
 
-            if (!loginId) {
-                alert("아이디를 입력하세요.");
-                return;
-            }
+            // 회원가입 폼 제출 이벤트 리스너
+            document.getElementById('joinForm').addEventListener('submit', function (event) {
+                event.preventDefault(); // 기본 폼 제출 방지
 
-            fetch(`/check-id?id=${loginId}`)
-                .then(response => response.json())
-                .then(data => {
-                    if (data.available) {
-                        alert("사용 가능한 ID입니다.")
-                    } else {
-                        alert("이미 사용중인 ID입니다.");
-                    }
+                const form = this;
+                const formData = new FormData(form);
+
+                fetch('/join', {
+                    method: 'POST',
+                    body: formData
                 })
-                .catch(error => console.error('Error:', error));
+                    .then(response => {
+                        if (!response.ok) {
+                            return response.json().then(data => {
+                                throw new Error(data.message || 'Unknown error');
+                            });
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        alert(data.message);
+                        if (data.success) {
+                            window.location.href = '/login';
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert(error.message || 'An error occurred. Please try again.');
+                    });
+            });
         });
-    });
 
-    function sample4_execDaumPostcode() {
-        new daum.Postcode({
-            oncomplete: function (data) {
-                var roadAddr = data.roadAddress;
-                var extraRoadAddr = '';
+        // Daum 우편번호 검색 함수
+        function sample4_execDaumPostcode() {
+            new daum.Postcode({
+                oncomplete: function (data) {
+                    var roadAddr = data.roadAddress;
+                    var extraRoadAddr = '';
 
-                if (data.bname !== '' && /[동|로|가]$/g.test(data.bname)) {
-                    extraRoadAddr += data.bname;
+                    if (data.bname !== '' && /[동|로|가]$/g.test(data.bname)) {
+                        extraRoadAddr += data.bname;
+                    }
+                    if (data.buildingName !== '' && data.apartment === 'Y') {
+                        extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                    }
+                    if (extraRoadAddr !== '') {
+                        extraRoadAddr = ' (' + extraRoadAddr + ')';
+                    }
+
+                    document.getElementById('sample4_postcode').value = data.zonecode;
+                    document.getElementById("sample4_roadAddress").value = roadAddr;
+                    document.getElementById("sample4_detailAddress").value = ''; // 상세주소는 수동 입력
                 }
-                if (data.buildingName !== '' && data.apartment === 'Y') {
-                    extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
-                }
-                if (extraRoadAddr !== '') {
-                    extraRoadAddr = ' (' + extraRoadAddr + ')';
-                }
+            }).open();
+        }
 
-                document.getElementById('sample4_postcode').value = data.zonecode;
-                document.getElementById("sample4_roadAddress").value = roadAddr;
-                document.getElementById("sample4_detailAddress").value = ''; // 상세주소는 수동 입력
-            }
-        }).open();
-    }
+        // 전화번호 형식 자동 변환 함수
+        function formatPhoneNumber(value) {
+            return value
+                .replace(/\D/g, '')
+                .replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`);
+        }
 
-    function formatPhoneNumber(value) {
-    return value
-        .replace(/\D/g, '') 
-        .replace(/(\d{3})(\d{3,4})(\d{4})/, '$1-$2-$3')
-        .replace(/(\d{3})(\d{4})/, '$1-$2');
-}
-
-document.getElementById('cellPhone').addEventListener('input', function () {
-    this.value = formatPhoneNumber(this.value);
-});
-</script>
+        // 전화번호 입력 시 자동 형식 변환 이벤트 리스너
+        document.getElementById('cellPhone').addEventListener('input', function () {
+            this.value = formatPhoneNumber(this.value);
+        });
+    </script>

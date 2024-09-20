@@ -20,8 +20,8 @@
                 <td th:text="${emp.emp_email}"></td>
                 <td th:text="${emp.phone_number}"></td>
                 <td th:text="${emp.job_title}"></td>
-                <td th:text="${#dates.format(emp.hire_date, 'yy/MM/dd')}"></td>
-                <td th:text="${#dates.format(emp.join_date, 'yy/MM/dd')}"></td>
+                <td th:text="${#temporals.format(emp.hire_date, 'yy/MM/dd')}"></td>
+                <td th:text="${#temporals.format(emp.join_date, 'yy/MM/dd')}"></td>
             </tr>
         </tbody>
     </table>

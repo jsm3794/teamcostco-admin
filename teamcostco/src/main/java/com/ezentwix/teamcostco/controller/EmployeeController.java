@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.List;
 
 import com.ezentwix.teamcostco.config.BCryptUtils;
 import com.ezentwix.teamcostco.dto.employee.EmployeeDTO;
@@ -50,7 +51,10 @@ public class EmployeeController {
         Map<String, Object> map = objectMapper.convertValue(empFilterDTO, Map.class);
         PaginationResult<EmployeeDTO> result = employeeService.getPage(query, page, size, map);
 
-        model.addAttribute("empList", result.getData());
+        List<EmployeeDTO> empList = employeeService.getEmpList();
+
+
+        model.addAttribute("empList", empList);
         model.addAttribute("pageDetail", result.getPageDetails());
         return "index";
     }
@@ -62,8 +66,15 @@ public class EmployeeController {
         if (emp_id == null) {
             emp_id = 0;
         }
+
+        EmployeeDTO empDTO = employeeDetailService.getOne(emp_id);
+
+        int age = employeeDetailService.calculateAge(empDTO.getBirthday());
+
+        model.addAttribute("age", age);
+        
         employeeDetailService.configureModel(model);
-        model.addAttribute("empDetail", employeeDetailService.getOne(emp_id));
+        model.addAttribute("empDetail", empDTO);
         return "index";
     }
 
@@ -90,6 +101,7 @@ public class EmployeeController {
 
             // 새로운 이메일 인증 토큰을 데이터베이스에 저장합니다.
             employeeFixService.updateEmailVerificationToken(existingEmployee.getLogin_id(), newToken);
+            employeeFixService.email(existingEmployee.getLogin_id());
 
             // 새로운 토큰으로 이메일 전송
             emailService.sendnewToken(empDTO.getEmp_email(), newToken);
