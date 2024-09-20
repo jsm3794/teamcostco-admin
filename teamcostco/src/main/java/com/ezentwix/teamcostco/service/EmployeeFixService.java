@@ -63,6 +63,11 @@ public class EmployeeFixService implements PageMetadataProvider {
     public String getPageTitle() {
         return "직원관리";
     }
+
+    @Override
+    public List<String> getCssFiles() {
+        return List.of("/css/contents/employeefix.css");
+    }
     
 }
 

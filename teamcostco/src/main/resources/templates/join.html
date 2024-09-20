@@ -1,39 +1,101 @@
+<!DOCTYPE html>
+<html lang="ko">
 
-    <h1>회원가입</h1>
-    <form id="joinForm">
-        <input type="text" name="emp_name" placeholder="이름" required> <br><br>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원가입</title>
+    <link rel="stylesheet" th:href="@{/css/contents/join.css}" />
+</head>
 
-        <input type="email" name="emp_email" placeholder="이메일" required> <br><br>
+<body>
+    <div class="auth-card">
+        <h3>회원가입</h3>
+        <br>
+        <form id="joinForm">
+            <div class="input-group">
+                <label for="emp_name">이름</label>
+                <input type="text" name="emp_name" id="emp_name" class="input-field" placeholder="이름" required>
+            </div>
 
-        <input type="text" name="phone_number" id="cellPhone" placeholder="연락처" maxlength="13" required> <br><br>
+            <div class="input-group">
+                <label for="emp_email">이메일</label>
+                <input type="email" name="emp_email" id="emp_email" class="input-field" placeholder="이메일" required>
+            </div>
 
-        <input type="text" name="login_id" placeholder="ID" required>
-        <input type="button" name="duplication_btn" value="중복확인"> <br><br>
+            <div class="input-group">
+                <label for="cellPhone">연락처</label>
+                <input type="text" name="phone_number" id="cellPhone" class="input-field" placeholder="연락처"
+                    maxlength="13" required>
+            </div>
 
-        <input type="password" name="login_pw" placeholder="비밀번호" required> <br><br>
+            <div class="input-group">
+                <label for="login_id">ID</label>
+                <div class="flex-group">
+                    <input type="text" name="login_id" id="login_id" class="input-field" placeholder="ID" required>
+                    <button type="button" name="duplication_btn" class="btn btn-small">중복확인</button>
+                </div>
+            </div>
 
-        <input type="password" name="login_Pw_Check" placeholder="비밀번호 확인" required> <br><br>
+            <div class="input-group">
+                <label for="login_pw">비밀번호</label>
+                <input type="password" name="login_pw" id="login_pw" class="input-field" placeholder="비밀번호" required>
+            </div>
 
-        <input type="text" name="job_title" placeholder="직책"> <br><br>
+            <div class="input-group">
+                <label for="login_Pw_Check">비밀번호 확인</label>
+                <input type="password" name="login_Pw_Check" id="login_Pw_Check" class="input-field"
+                    placeholder="비밀번호 확인" required>
+            </div>
 
-        <select name="gender" required>
-            <option value="" disabled selected>성별</option>
-            <option value="male">남성</option>
-            <option value="female">여성</option>
-            <option value="other">기타</option>
-        </select> <br><br>
+            <div class="input-group">
+                <label for="job_title">직책</label>
+                <input type="text" name="job_title" id="job_title" class="input-field" placeholder="직책">
+            </div>
 
-        생년월일 <input type="date" name="birthday" placeholder="생년월일" required> <br><br>
+            <div class="input-group">
+                <label for="gender">성별</label>
+                <select name="gender" id="gender" class="input-field" required>
+                    <option value="" disabled selected>성별 선택</option>
+                    <option value="male">남성</option>
+                    <option value="female">여성</option>
+                    <option value="other">기타</option>
+                </select>
+            </div>
 
-        <input type="text" name="address" id="sample4_roadAddress" placeholder="도로명주소" required> <br><br>
-        <input type="text" name="detail_address" id="sample4_detailAddress" placeholder="상세주소" required> <br><br>
+            <div class="input-group">
+                <label for="birthday">생년월일</label>
+                <input type="date" name="birthday" id="birthday" class="input-field" required>
+            </div>
 
-        <input type="text" name="post_number" id="sample4_postcode" placeholder="우편번호" required> <br><br>
+            <div class="input-group">
+                <label for="sample4_postcode">우편번호</label>
+                <div class="flex-group">
+                    <input type="text" name="post_number" id="sample4_postcode" class="input-field" placeholder="우편번호"
+                        required>
+                    <button type="button" onclick="sample4_execDaumPostcode()" class="btn btn-small">우편번호 찾기</button>
+                </div>
+            </div>
 
-        <input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br><br>
+            <div class="input-group">
+                <label for="sample4_roadAddress">도로명주소</label>
+                <input type="text" name="address" id="sample4_roadAddress" class="input-field" placeholder="도로명주소"
+                    required>
+            </div>
 
-        <input id="join_btn" type="submit" value="회원가입">
-    </form>
+            <div class="input-group">
+                <label for="sample4_detailAddress">상세주소</label>
+                <input type="text" name="detail_address" id="sample4_detailAddress" class="input-field"
+                    placeholder="상세주소" required>
+            </div>
+
+            <button type="submit" id="join_btn" class="btn submit-btn">회원가입</button>
+        </form>
+
+        <!-- 로딩 스피너 -->
+        <div id="spinner" class="spinner"></div>
+    </div>
+
 
     <!-- Daum 우편번호 검색 API -->
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -41,7 +103,7 @@
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             // 아이디 중복확인 버튼 이벤트 리스너
-            document.querySelector('input[name="duplication_btn"]').addEventListener('click', function () {
+            document.querySelector('button[name="duplication_btn"]').addEventListener('click', function () {
                 const loginId = document.querySelector('input[name="login_id"]').value;
 
                 if (!loginId) {
@@ -61,23 +123,22 @@
                     .catch(error => console.error('Error:', error));
             });
 
-            // 회원가입 폼 제출 이벤트 리스너
+            // 스피너 로직 및 폼 제출
             document.getElementById('joinForm').addEventListener('submit', function (event) {
-                event.preventDefault(); // 기본 폼 제출 방지
+                event.preventDefault();  // 기본 폼 제출 방지
 
-                const form = this;
-                const formData = new FormData(form);
+                const spinner = document.getElementById('spinner');
+                const formData = new FormData(this);
+
+                // 스피너 표시
+                spinner.style.display = 'block';
 
                 fetch('/join', {
                     method: 'POST',
                     body: formData
                 })
                     .then(response => {
-                        if (!response.ok) {
-                            return response.json().then(data => {
-                                throw new Error(data.message || 'Unknown error');
-                            });
-                        }
+                        spinner.style.display = 'none'; // 스피너 숨기기
                         return response.json();
                     })
                     .then(data => {
@@ -87,9 +148,22 @@
                         }
                     })
                     .catch(error => {
+                        spinner.style.display = 'none'; // 스피너 숨기기
                         console.error('Error:', error);
-                        alert(error.message || 'An error occurred. Please try again.');
+                        alert('오류가 발생했습니다. 다시 시도해주세요.');
                     });
+            });
+
+            // 전화번호 형식 자동 변환 함수
+            function formatPhoneNumber(value) {
+                return value
+                    .replace(/\D/g, '')  // 숫자가 아닌 문자는 제거
+                    .replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`);  // 전화번호 형식 맞추기
+            }
+
+            // 전화번호 입력 시 자동 형식 변환 이벤트 리스너
+            document.getElementById('cellPhone').addEventListener('input', function () {
+                this.value = formatPhoneNumber(this.value);
             });
         });
 
@@ -117,15 +191,7 @@
             }).open();
         }
 
-        // 전화번호 형식 자동 변환 함수
-        function formatPhoneNumber(value) {
-            return value
-                .replace(/\D/g, '')
-                .replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`);
-        }
-
-        // 전화번호 입력 시 자동 형식 변환 이벤트 리스너
-        document.getElementById('cellPhone').addEventListener('input', function () {
-            this.value = formatPhoneNumber(this.value);
-        });
     </script>
+</body>
+
+</html>

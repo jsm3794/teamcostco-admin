@@ -56,7 +56,7 @@ public class findController {
             response.put("message", "아이디가 이메일로 전송되었습니다.");
         } else {
             response.put("success", false);
-            response.put("message", "인증에 실패했습니다. 다시 시도해 주세요.");
+            response.put("message", "인증에 실패했습니다.");
         }
 
         return ResponseEntity.ok(response);
@@ -88,7 +88,7 @@ public class findController {
             response.put("message", "임시 비밀번호가 이메일로 전송되었습니다.");
         } else {
             response.put("success", false);
-            response.put("message", "비밀번호 찾기에 실패했습니다. 다시 시도해 주세요.");
+            response.put("message", "인증에 실패했습니다.");
         }
 
         return ResponseEntity.ok(response);

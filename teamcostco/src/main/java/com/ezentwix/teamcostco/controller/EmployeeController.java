@@ -1,8 +1,11 @@
 package com.ezentwix.teamcostco.controller;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,8 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ezentwix.teamcostco.config.BCryptUtils;
 import com.ezentwix.teamcostco.dto.employee.EmployeeDTO;
@@ -46,13 +48,11 @@ public class EmployeeController {
 
         employeeService.configureModel(model);
 
-        System.out.println(empFilterDTO);
         ObjectMapper objectMapper = new ObjectMapper();
         Map<String, Object> map = objectMapper.convertValue(empFilterDTO, Map.class);
         PaginationResult<EmployeeDTO> result = employeeService.getPage(query, page, size, map);
 
         List<EmployeeDTO> empList = employeeService.getEmpList();
-
 
         model.addAttribute("empList", empList);
         model.addAttribute("pageDetail", result.getPageDetails());
@@ -72,7 +72,7 @@ public class EmployeeController {
         int age = employeeDetailService.calculateAge(empDTO.getBirthday());
 
         model.addAttribute("age", age);
-        
+
         employeeDetailService.configureModel(model);
         model.addAttribute("empDetail", empDTO);
         return "index";
@@ -88,31 +88,46 @@ public class EmployeeController {
     }
 
     @PostMapping("/modify")
-    public String empFix(@ModelAttribute EmployeeDTO empDTO, @RequestParam Integer emp_id) {
-        // 기존 직원 정보를 가져옵니다.
+    @ResponseBody
+    public ResponseEntity<Map<String, Object>> empFix(
+            @ModelAttribute EmployeeDTO empDTO,
+            @RequestParam Integer emp_id,
+            Model model) {
+
+        Map<String, Object> response = new HashMap<>();
+
+        // 기존 직원 정보를 가져옴
         EmployeeDTO existingEmployee = employeeFixService.getOne(emp_id);
 
-        // 이메일이 변경되었는지 확인합니다.
+        // 비밀번호 해시화 및 정보 업데이트
+        empDTO.setEmp_id(emp_id);
+        empDTO.setLogin_pw(BCryptUtils.hashPassword(empDTO.getLogin_pw()));
+        employeeFixService.fix(empDTO);
+
+        // 이메일이 변경되었는지 확인
         boolean emailChanged = !existingEmployee.getEmp_email().equals(empDTO.getEmp_email());
 
         if (emailChanged) {
             // 새로운 토큰 생성
             String newToken = UUID.randomUUID().toString();
 
-            // 새로운 이메일 인증 토큰을 데이터베이스에 저장합니다.
+            // 이메일 인증 토큰 업데이트
             employeeFixService.updateEmailVerificationToken(existingEmployee.getLogin_id(), newToken);
-            employeeFixService.email(existingEmployee.getLogin_id());
+            employeeFixService.email(empDTO.getLogin_id());
 
-            // 새로운 토큰으로 이메일 전송
+            // 이메일 전송
             emailService.sendnewToken(empDTO.getEmp_email(), newToken);
+
+            response.put("success", true);
+            response.put("message", "이메일이 변경되어 재인증이 필요합니다.");
+
+        } else {
+            response.put("success", false);
+            response.put("message", "회원정보가 변경되었습니다.");
         }
 
-        // 직원 정보 업데이트
-        empDTO.setEmp_id(emp_id);
-        empDTO.setLogin_pw(BCryptUtils.hashPassword(empDTO.getLogin_pw())); // 비밀번호 해시화
-        employeeFixService.fix(empDTO); // 데이터베이스에 업데이트
+        return ResponseEntity.ok(response);
 
-        return "redirect:/employee/detail/" + emp_id; // 직원 상세 페이지로 리다이렉트
     }
 
     @GetMapping("/newtoken")

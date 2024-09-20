@@ -29,6 +29,7 @@ h3 {
     align-items: center;
     height: 100vh;
 }
+
 .auth-card {
     display: flex;
     flex-direction: column;
@@ -71,6 +72,37 @@ label {
     border-bottom-color: #9c9c9c;
 }
 
+/* ID와 중복확인 버튼을 같은 줄에 배치하기 위한 flex 설정 */
+.flex-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px; /* 여백을 추가 */
+}
+
+.input-wrapper {
+    flex-grow: 1; /* 입력 필드가 가용할 수 있는 최대 공간을 차지 */
+}
+
+.small-btn {
+    background: #fff;
+    font-size: 12px;
+    padding: 10px 12px;
+    border-radius: 5px;
+    border: 1px solid #D4D3E8;
+    font-weight: 700;
+    color: #333;
+    box-shadow: 0px 2px 2px #969696;
+    cursor: pointer;
+    transition: .2s;
+    white-space: nowrap; /* 버튼 텍스트가 줄바꿈되지 않도록 설정 */
+    flex-shrink: 0; /* 버튼 크기가 줄어들지 않도록 설정 */
+}
+
+.small-btn:hover {
+    border-color: #929292;
+}
+
 .submit-btn {
     background: #fff;
     font-size: 14px;
@@ -93,6 +125,7 @@ label {
     border-color: #929292;
 }
 
+/* 로딩 스피너 */
 .spinner {
     display: none;
     position: fixed;
