@@ -8,7 +8,7 @@ import lombok.Data;
 public class ProductDefectiveDTO {
 
     private Integer defective_id;
-    private Integer product_code;
+    private Long product_code;
     private String product_name;
     private Integer defective_qty;
     private String reason;

@@ -195,4 +195,8 @@
     cursor: not-allowed;
 }
 
-
+#defectiveArea {
+    width: 200px; 
+    height: 24px; 
+    resize: none; 
+}

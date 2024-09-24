@@ -1,6 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="OrderRequest">
+    
+    <select id="exist" parameterType="Long" resultType="int">
+        select count(*) from products where product_code = #{product_code}
+    </select>
+
+    <insert id="newProduct" parameterType="orderrequest">
+        INSERT INTO products VALUES
+            (product_test_seq.nextval, #{product_name}, #{product_code}, '기타', '기타', '기타', '기타',
+            #{purchase_price}, ${selling_price}, #{mall_name}, 0, 0, #{received_qty}, sysdate, sysdate, 0)
+    </insert>
+
+    <update id="updateQTY" parameterType="orderrequest">
+        UPDATE products SET
+            storage_qty = storage_qty + #{received_qty}
+        WHERE
+            product_code = #{product_code}
+    </update>
+
+    <update id="complete" parameterType="orderrequest">
+        UPDATE order_request SET
+            request_status = 'completed',
+            received_qty = #{received_qty},
+            defective_qty = #{defective_qty}
+        WHERE 
+            product_code = #{product_code}
+    </update>
+
+    <insert id="defectiveProduct" parameterType="orderrequest">
+        INSERT INTO product_defective VALUES
+            (defective_seq.nextval, #{product_code}, #{product_name}, #{defective_qty}, #{defective_reason}, sysdate)
+
+    </insert>
+
+    <update id=""></update>
+
+
     <sql id="insertOrderRequest">
         INSERT INTO order_request (
             request_id, product_name, product_code, purchase_price, mall_name, mall_link, request_qty, received_qty, defective_qty, emp_id, request_status, create_date

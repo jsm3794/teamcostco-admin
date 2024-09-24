@@ -40,20 +40,38 @@ public class OrderRequestRepository {
         return sql.selectOne("OrderRequest.getById", request_id);
     }
 
-    public void updateReceivedQty(Integer requestId, int receivedQty) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'updateReceivedQty'");
-    }
-
-    public void updateDefectiveQty(Integer requestId, int defectiveQty) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'updateDefectiveQty'");
-    }
-
     public OrderTrackDTO getStatusQty() {
 
         OrderTrackDTO orderTrackDTO = new OrderTrackDTO();
         
         return orderTrackDTO;
     }
+
+    public boolean exist(Long product_code) {
+
+        int check = sql.selectOne("OrderRequest.exist", product_code);
+
+        if (check == 0) {
+            return false;
+        }
+
+        return true;
+    }
+
+    public void newProduct(OrderRequestDTO dto) {
+        sql.selectOne("OrderRequest.newProduct", dto);
+    }
+
+    public void updateQTY(OrderRequestDTO dto) {
+        sql.update("OrderRequest.updateQTY", dto);
+    }
+
+    public void complete(OrderRequestDTO dto) {
+        sql.update("OrderRequest.complete", dto);
+    }
+
+    public void defectiveProduct(OrderRequestDTO dto) {
+        sql.insert("OrderRequest.defectiveProduct", dto);
+    }
+
 }

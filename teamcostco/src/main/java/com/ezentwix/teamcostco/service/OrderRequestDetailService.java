@@ -3,7 +3,6 @@ package com.ezentwix.teamcostco.service;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.ezentwix.teamcostco.PageMetadataProvider;
 import com.ezentwix.teamcostco.dto.product.OrderRequestDTO;
@@ -21,25 +20,25 @@ public class OrderRequestDetailService implements PageMetadataProvider {
         return orderRequestRepository.getById(requestId);
     }
 
-@Transactional
-public void processReceivedQty(Integer requestId, int receivedQty) {
-    try {
-        orderRequestRepository.updateReceivedQty(requestId, receivedQty);
-    } catch (Exception e) {
-        e.printStackTrace();
-        throw new RuntimeException("Error updating received quantity");
+    public boolean exist(Long product_code) {
+        return orderRequestRepository.exist(product_code);
     }
-}
 
-@Transactional
-public void processDefectiveQty(Integer requestId, int defectiveQty) {
-    try {
-        orderRequestRepository.updateDefectiveQty(requestId, defectiveQty);
-    } catch (Exception e) {
-        e.printStackTrace();
-        throw new RuntimeException("Error updating defective quantity");
+    public void newProduct(OrderRequestDTO dto) {
+        orderRequestRepository.newProduct(dto);
     }
-}
+
+    public void updateQTY(OrderRequestDTO dto) {
+        orderRequestRepository.updateQTY(dto);
+    }
+
+    public void complete(OrderRequestDTO dto) {
+        orderRequestRepository.complete(dto);
+    }
+
+    public void defectiveProduct(OrderRequestDTO dto) {
+        orderRequestRepository.defectiveProduct(dto);
+    }   
 
 
 
