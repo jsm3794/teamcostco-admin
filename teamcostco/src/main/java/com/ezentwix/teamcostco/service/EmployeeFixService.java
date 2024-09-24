@@ -45,13 +45,13 @@ public class EmployeeFixService implements PageMetadataProvider {
     public void email(String login_id) {
         employeeRepository.email(login_id);
     }
-
-    public void verifyEmail(String token) {
-        employeeRepository.verifyEmail(token);
+    
+    public void updateEmailVerificationToken(String login_id, String token) {
+        employeeRepository.updateEmailVerificationToken(login_id, token);
     }
-
-    public void updateEmailVerificationToken(EmployeeDTO empDTO) {
-        employeeRepository.updateEmailVerificationToken(empDTO);
+    
+    public boolean verifyEmail(String token) {
+        return employeeRepository.verifyEmail(token);
     }
 
     @Override
@@ -63,17 +63,11 @@ public class EmployeeFixService implements PageMetadataProvider {
     public String getPageTitle() {
         return "직원관리";
     }
-    
-    public void sendVerificationEmailIfNeeded(EmployeeDTO empDTO) {
-        EmployeeDTO existingEmployee = employeeRepository.getOne(empDTO.getEmp_id());
-        
-        // 이메일이 변경되었는지 확인
-        if (empDTO.getEmp_email() != null && !empDTO.getEmp_email().equals(existingEmployee.getEmp_email())) {
-            String token = UUID.randomUUID().toString();
-            empDTO.setSetEmailVerificationToken(token);
-            emailService.sendnewToken(empDTO.getEmp_email(), token);
-            updateEmailVerificationToken(empDTO);
-        }
+
+    @Override
+    public List<String> getCssFiles() {
+        return List.of("/css/contents/employeefix.css");
     }
+    
 }
 

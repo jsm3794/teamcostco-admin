@@ -35,7 +35,7 @@
                         </div>
                         <div class="grid-item">
                             <p class="label">나이</p>
-                            <p th:text="0"></p>
+                            <p th:text="${age} + '세'"></p>
                         </div>
                         <div class="grid-item">
                             <p class="label">성별</p>
@@ -60,12 +60,13 @@
                         </div>
                         <div class="grid-item">
                             <p class="label">고용일자</p>
-                            <p th:text="${#dates.format(empDetail.hire_date, 'yy/MM/dd')}"></p>
+                            <p th:text="${empDetail.hire_date != null ? #temporals.format(empDetail.hire_date, 'yy/MM/dd') : '정보 없음'}"></p>
                         </div>
                         <div class="grid-item">
                             <p class="label">가입날짜</p>
-                            <p th:text="${#dates.format(empDetail.join_date, 'yy/MM/dd')}"></p>
+                            <p th:text="${empDetail.join_date != null ? #temporals.format(empDetail.join_date, 'yy/MM/dd') : '정보 없음'}"></p>
                         </div>
+                        
                     </div>
                 </div>
             </div>

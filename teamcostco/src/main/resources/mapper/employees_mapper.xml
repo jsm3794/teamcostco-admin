@@ -118,13 +118,13 @@
         login_id = #{login_id}
   </update>
 
-  <update id="updateEmailVerificationToken">
+  <update id="updateEmailVerificationToken" parameterType="String">
     UPDATE employees
     SET EMAIL_VERIFICATION_TOKEN = #{setEmailVerificationToken}
     WHERE login_id = #{login_id}
   </update>
 
-  <update id="verifyEmail">
+  <update id="verifyEmail" parameterType="String">
     UPDATE employees
     SET email_verified = 'T'
     WHERE EMAIL_VERIFICATION_TOKEN = #{setEmailVerificationToken}

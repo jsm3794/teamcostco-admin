@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,17 +33,20 @@ public class JoinController {
     }
 
     @PostMapping("/join")
-    public String successJoin(@ModelAttribute JoinDTO joinDTO, Model model) {
-        joinService.configureModel(model);
+    @ResponseBody
+    public ResponseEntity<Map<String, Object>> successJoin(@ModelAttribute JoinDTO joinDTO) {
+        Map<String, Object> response = new HashMap<>();
 
         if (!joinDTO.getLogin_pw().equals(joinDTO.getLogin_Pw_Check())) {
-            model.addAttribute("message", "비밀번호가 틀립니다.");
-            return "join";
+            response.put("success", false);
+            response.put("message", "비밀번호가 틀립니다.");
+            return ResponseEntity.badRequest().body(response);
         }
 
         if (!joinService.countId(joinDTO.getLogin_id())) {
-            model.addAttribute("message", "중복된 아이디입니다.");
-            return "join";
+            response.put("success", false);
+            response.put("message", "중복된 아이디입니다.");
+            return ResponseEntity.badRequest().body(response);
         }
 
         String token = UUID.randomUUID().toString(); // 인증 토큰 생성
@@ -52,9 +56,10 @@ public class JoinController {
         joinService.add(joinDTO);
         emailService.sendVerificationEmail(joinDTO.getEmp_email(), token);
 
-        model.addAttribute("message", "회원가입이 성공적으로 완료되었습니다. 이메일을 확인하여 인증을 완료하세요.");
+        response.put("success", true);
+        response.put("message", "회원가입이 성공적으로 완료되었습니다. 이메일을 확인하여 인증을 완료하세요.");
 
-        return "login";
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping("/verify")

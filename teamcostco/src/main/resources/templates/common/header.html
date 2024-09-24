@@ -8,7 +8,7 @@
         <div class="header-right">
             <div class="profile">
                 <span id="user_name" th:text="${session.emp?.emp_name ?: 'undefined'}"></span>
-                <a th:href="${'/emp_detail?emp_id=' + session.emp?.emp_id}">
+                <a th:href="${'/employee/detail/' + session.emp?.emp_id}">
                     <img src="/images/profile-default.svg" alt="user_profile" class="profile-pic">
                 </a>
             </div>

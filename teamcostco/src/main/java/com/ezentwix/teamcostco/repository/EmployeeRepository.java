@@ -51,12 +51,15 @@ public class EmployeeRepository {
     public void email (String login_id) {
         sql.selectOne("Employees.email", login_id);
     }
-
-    public void verifyEmail (String token) {
-        sql.selectOne("Employees.verifyEmail", token);
+    
+    public void updateEmailVerificationToken(String login_Id, String token) {
+        sql.update("Join.updateEmailVerificationToken", Map.of("loginId", login_Id, "token", token));
     }
 
-    public void updateEmailVerificationToken (EmployeeDTO employeeDTO) {
-        sql.selectOne("Employees.updateEmailVerificationToken", employeeDTO);
+    public boolean verifyEmail (String token) {
+        int updatedRows = sql.update("Employees.verifyEmail", token);
+
+        return updatedRows > 0 ;
     }
+
 }

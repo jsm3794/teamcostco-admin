@@ -1,6 +1,5 @@
 <div class="content-box">
     <div class="tab-container">
-
         <div class="tab-item" th:onclick="|location.href='@{/employee/detail/{id}(id=${getOne.emp_id})}'|">
             <span>상세정보</span>
         </div>
@@ -23,8 +22,7 @@
             <input type="email" name="emp_email" id="emp_email" th:value="${getOne.emp_email}"> <br><br>
 
             <label for="cellPhone">전화번호:</label>
-            <input type="text" name="phone_number" id="cellPhone" th:value="${getOne.phone_number}" maxlength="13"
-                required>
+            <input type="text" name="phone_number" id="cellPhone" th:value="${getOne.phone_number}" maxlength="13" required>
             <br><br>
 
             <label for="login_id">로그인 ID:</label>
@@ -39,10 +37,10 @@
 
             <label for="gender">성별:</label>
             <select name="gender" id="gender" required>
-                <option value="" disabled selected>성별</option>
-                <option value="male">남성</option>
-                <option value="female">여성</option>
-                <option value="other">기타</option>
+                <option value="" disabled th:selected="${getOne.gender == null}">성별</option>
+                <option value="male" th:selected="${getOne.gender == 'male'}">남성</option>
+                <option value="female" th:selected="${getOne.gender == 'female'}">여성</option>
+                <option value="other" th:selected="${getOne.gender == 'other'}">기타</option>
             </select> <br><br>
 
             <label for="birthday">생년월일:</label>
@@ -52,8 +50,7 @@
             <input type="text" name="address" id="sample4_roadAddress" th:value="${getOne.address}"> <br><br>
 
             <label for="sample4_detailAddress">상세 주소:</label>
-            <input type="text" name="detail_address" id="sample4_detailAddress" th:value="${getOne.detail_address}">
-            <br><br>
+            <input type="text" name="detail_address" id="sample4_detailAddress" th:value="${getOne.detail_address}"> <br><br>
 
             <label for="sample4_postcode">우편번호:</label>
             <input type="text" name="post_number" id="sample4_postcode" th:value="우편번호" required> <br><br>
@@ -63,13 +60,19 @@
             <input type="submit" value="수정">
         </form>
     </div>
+
+    <!-- 로딩 스피너 -->
+    <div id="spinner" class="spinner"></div>
 </div>
 
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script th:inline="javascript">
-
     document.addEventListener("DOMContentLoaded", function () {
-        document.querySelector('input[name="duplication_btn"]').addEventListener('click', function () {
+        const spinner = document.getElementById('spinner');
+        
+        // 중복 확인 버튼 이벤트
+        const checkDuplicationButton = document.querySelector('input[name="duplication_btn"]');
+        checkDuplicationButton.addEventListener('click', function () {
             const loginId = document.querySelector('input[name="login_id"]').value;
 
             if (!loginId) {
@@ -77,24 +80,54 @@
                 return;
             }
 
-            fetch(`/check-id?id=${loginId}`)
+            fetch(`/check-id?id=${encodeURIComponent(loginId)}`)
                 .then(response => response.json())
                 .then(data => {
                     if (data.available) {
-                        alert("사용 가능한 ID입니다.")
+                        alert("사용 가능한 ID입니다.");
                     } else {
                         alert("이미 사용중인 ID입니다.");
                     }
                 })
                 .catch(error => console.error('Error:', error));
         });
+
+        // 폼 비동기 제출 처리
+        const form = document.querySelector('form');
+        form.addEventListener('submit', function (event) {
+            event.preventDefault(); // 기본 폼 제출 막기
+            spinner.style.display = 'block'; // 스피너 표시
+
+            const formData = new FormData(form); // 폼 데이터를 FormData로 변환
+
+            fetch(form.action, {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                spinner.style.display = 'none'; // 스피너 숨기기
+                if (data.success) {
+                    alert(data.message); // 성공 메시지  
+                        window.location.href= '/login';
+                } else {
+                    alert(data.message);
+                    window.location.href = `/employee/detail/${document.querySelector('input[name="emp_id"]').value}`;
+                }
+            })
+            .catch(error => {
+                spinner.style.display = 'none'; // 스피너 숨기기
+                console.error('Error:', error);
+                alert('오류가 발생했습니다. 다시 시도해주세요.');
+            });
+        });
     });
 
     function sample4_execDaumPostcode() {
         new daum.Postcode({
             oncomplete: function (data) {
-                var roadAddr = data.roadAddress;
-                var extraRoadAddr = '';
+                let roadAddr = data.roadAddress;
+                let extraRoadAddr = '';
 
                 if (data.bname !== '' && /[동|로|가]$/g.test(data.bname)) {
                     extraRoadAddr += data.bname;
@@ -115,9 +148,8 @@
 
     function formatPhoneNumber(value) {
         return value
-            .replace(/\D/g, '')
-            .replace(/(\d{3})(\d{3,4})(\d{4})/, '$1-$2-$3')
-            .replace(/(\d{3})(\d{4})/, '$1-$2');
+            .replace(/\D/g, '')                    
+            .replace(/(\d{3})(\d{3,4})(\d{4})/, '$1-$2-$3'); 
     }
 
     document.getElementById('cellPhone').addEventListener('input', function () {
