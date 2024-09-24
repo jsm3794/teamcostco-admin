@@ -60,6 +60,6 @@ public void processDefectiveQty(Integer requestId, int defectiveQty) {
 
     @Override
     public List<String> getJsFiles() {
-        return List.of("/js/contents/InventoryManagement.js");
+        return List.of("/js/contents/ordereaquest_detail.js");
     }
 }

@@ -1,0 +1,174 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway:400,700');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Malgun Gothic', sans-serif;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-y: auto; /* 마우스 휠 스크롤 가능하게 설정 */
+}
+
+body {
+    background: linear-gradient(90deg, #fff, #e3e4ff);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* 요소가 상단에 맞춰서 시작 */
+    padding: 20px;
+}
+
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: 100vh; /* 화면이 짧을 때도 컨텐츠가 중앙에 배치되도록 설정 */
+}
+
+.auth-card {
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    width: 360px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    padding: 50px;
+}
+
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 30px 0;
+}
+
+.input-group {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    color: #333;
+    font-weight: 700;
+}
+
+.input-field {
+    border: none;
+    border-bottom: 2px solid #D1D1D4;
+    background: none;
+    padding: 10px;
+    padding-left: 10px; /* placeholder를 왼쪽 정렬로 맞추기 */
+    width: 100%;
+    transition: .2s;
+    font-size: 16px;
+}
+
+.input-field::placeholder {
+    text-align: left; /* placeholder 텍스트를 왼쪽에 맞추기 */
+}
+
+/* 회원가입 버튼 크기 및 색상 통일 */
+.submit-btn {
+    background-color: #fff;
+    color: #333;
+    font-size: 16px;
+    padding: 16px 20px; /* 버튼 크기를 키움 */
+    border-radius: 10px;
+    border: 1px solid #D4D3E8;
+    font-weight: 700;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    width: 100%; /* 버튼이 카드 너비에 맞도록 설정 */
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.submit-btn:hover {
+    border-color: #929292; /* hover 시 테두리만 색상 변경 */
+}
+
+.auth-btn {
+    background: #fff;
+    border: 1px solid #D4D3E8;
+    color: #333;
+    font-size: 14px;
+    font-weight: 700;
+    padding: 12px 20px;
+    border-radius: 10px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.auth-btn:hover {
+    border-color: #929292;
+}
+
+/* Smaller button for duplication check */
+.btn-small {
+    background: #fff;
+    font-size: 12px;
+    padding: 10px 12px;
+    border-radius: 5px;
+    border: 1px solid #D4D3E8;
+    font-weight: 700;
+    color: #333;
+    cursor: pointer;
+    white-space: nowrap;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
+}
+
+.btn-small:hover {
+    border-color: #929292;
+}
+
+/* Flex group to align input field and button in a single line */
+.flex-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.flex-group .input-field {
+    flex: 1;
+}
+
+/* Input focus and hover */
+.input-field:focus,
+.input-field:hover {
+    outline: none;
+    border-bottom-color: #9c9c9c;
+}
+
+.spinner {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 8px solid #f3f3f3;
+    border-top: 8px solid #3498db;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 1s linear infinite;
+    z-index: 9999;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}

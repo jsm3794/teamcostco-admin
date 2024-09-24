@@ -2,6 +2,8 @@ package com.ezentwix.teamcostco.service;
 
 import java.util.List;
 
+import java.time.LocalDate;
+import java.time.Period;
 import org.springframework.stereotype.Service;
 
 import com.ezentwix.teamcostco.PageMetadataProvider;
@@ -27,6 +29,16 @@ public class EmployeeDetailService implements PageMetadataProvider {
     public void fix(EmployeeDTO empDTO) {
         employeeRepository.fix(empDTO);
     }
+
+    public int calculateAge(LocalDate birthday) {
+        if (birthday != null) {
+            int age = Period.between(birthday, LocalDate.now()).getYears();
+            return age;
+        } else {
+            return 0;
+        }
+    }
+    
 
     @Override
     public String getUri() {

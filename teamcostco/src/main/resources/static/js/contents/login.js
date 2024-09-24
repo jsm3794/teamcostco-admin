@@ -45,4 +45,29 @@ $(document).ready(function() {
             }
         });
     });
+
+    // 페이지 로드 시 URL에서 토큰을 가져와 인증 요청
+    const urlParams = new URLSearchParams(window.location.search);
+    const token = urlParams.get('token');
+
+    if (token) {
+        $.ajax({
+            url: '/employee/newtoken',
+            type: 'GET',
+            data: { token: token },
+            dataType: 'json',
+            success: function(response) {
+                if (response.success) {
+                    alert(response.message); // 인증 성공 메시지
+                    window.location.href = '/login'; // 로그인 페이지로 리다이렉트
+                } else {
+                    alert(response.message); // 인증 실패 메시지
+                }
+            },
+            error: function(xhr, status, error) {
+                var errorResponse = JSON.parse(xhr.responseText);
+                alert('[오류] ' + errorResponse.message || xhr.responseText);
+            }
+        });
+    }
 });

@@ -1,6 +1,7 @@
 package com.ezentwix.teamcostco.repository;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
@@ -40,20 +41,23 @@ public class OrderRequestRepository {
         return sql.selectOne("OrderRequest.getById", request_id);
     }
 
+    // 발주 상태 업데이트 메서드 추가
+    public void updateStatus(Integer requestId, String status) {
+        sql.update("OrderRequest.updateStatus", Map.of("requestId", requestId, "status", status));
+    }
+
     public void updateReceivedQty(Integer requestId, int receivedQty) {
-        // TODO Auto-generated method stub
+        // 수령 수량 업데이트 로직 추가 가능
         throw new UnsupportedOperationException("Unimplemented method 'updateReceivedQty'");
     }
 
     public void updateDefectiveQty(Integer requestId, int defectiveQty) {
-        // TODO Auto-generated method stub
+        // 불량 수량 업데이트 로직 추가 가능
         throw new UnsupportedOperationException("Unimplemented method 'updateDefectiveQty'");
     }
 
     public OrderTrackDTO getStatusQty() {
-
         OrderTrackDTO orderTrackDTO = new OrderTrackDTO();
-        
         return orderTrackDTO;
     }
 }

@@ -1,9 +1,9 @@
     <div class="content-box">
         <div class="tab-container">
-            <div class="tab-item current">
+            <div class="tab-item" th:onclick="'location.href=\'/orderrequest/detail/' + ${item.request_id} + '\''">
                 <span>발주정보</span>
             </div>
-            <div class="tab-item" th:onclick="'location.href=\'/orderrequest/process/' + ${item.request_id} + '\''">
+            <div class="tab-item current">
                 <span>발주처리</span>
             </div>
             <div class="tab-item">
@@ -69,23 +69,27 @@
                         </div>
                     </div>
                     
+                    <!-- 발주 처리 입력 -->
                     <div class="process_action">
-                        <select name="process" id="process">
-                            <option value="pending">대기중</option>
-                            <option value="ordered">주문됨</option>
-                            <option value="received">입고중</option>
-                            <option value="completed">완료됨</option>
-                            <option value="rejected">거부됨</option>
-                            <option value="cancelled">취소됨</option>
-                        </select>
+                        <label for="process_qty">처리수량</label>
+                        <input type="number" id="process_qty" placeholder="처리수량 입력 (음수는 차감)">
                         
-                        <button id="process_order" type="button">상태변경</button>
+                        <label for="process_type">처리유형</label>
+                        <select id="process_type">
+                            <option value="입고">입고</option>
+                            <option value="불량">불량</option>
+                        </select>
+                    
+                        <!-- 발주 처리 버튼 -->
+                        <button id="process_order" type="button">발주처리하기</button>
                     </div>
                     
+                    <!-- 발주 마감 버튼 추가 -->
+                    <button id="close_order" type="button">발주마감</button>
+                    
+                    <!-- 숨겨진 request_id 필드 -->
                     <input type="hidden" id="request_id" th:value="${item.request_id}">
                 </div>
             </div>
         </div>
     </div>
-
-    <script src="/js/statusUpdate.js"></script>
