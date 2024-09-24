@@ -22,7 +22,6 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     document.getElementById('process_order').addEventListener('click', () => {
-        const processQty = parseInt(document.getElementById('process_qty').value, 10);
         const processType = document.getElementById('process_type').value;
 
         if (processType === '입고') {
