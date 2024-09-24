@@ -14,6 +14,7 @@ import com.ezentwix.teamcostco.dto.filter.OrderRequestFilterDTO;
 import com.ezentwix.teamcostco.dto.product.OrderRequestDTO;
 import com.ezentwix.teamcostco.pagination.PaginationResult;
 import com.ezentwix.teamcostco.service.OrderRequestDetailService;
+import com.ezentwix.teamcostco.service.OrderRequestProcessService;
 import com.ezentwix.teamcostco.service.OrderRequestService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -24,6 +25,7 @@ import lombok.RequiredArgsConstructor;
 public class OrderRequestController {
     private final OrderRequestService orderRequestService;
     private final OrderRequestDetailService orderRequestDetailService;
+    private final OrderRequestProcessService orderRequestProcessService;
 
     @GetMapping("/orderrequest")
     public String showOrderQuest(
@@ -47,7 +49,7 @@ public class OrderRequestController {
     }
 
     @GetMapping("/orderrequest/detail/{request_id}")
-    public String getMethodName(
+    public String showOrderRequestDetail(
             @PathVariable("request_id") Integer requestId,
             Model model) {
         orderRequestDetailService.configureModel(model);

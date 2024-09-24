@@ -1,6 +1,7 @@
 package com.ezentwix.teamcostco.repository;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
@@ -41,9 +42,7 @@ public class OrderRequestRepository {
     }
 
     public OrderTrackDTO getStatusQty() {
-
         OrderTrackDTO orderTrackDTO = new OrderTrackDTO();
-        
         return orderTrackDTO;
     }
 

@@ -115,6 +115,13 @@
         WHERE request_id = #{requestId}
     </sql>
     <!--  -->
+
+    <!-- 발주 상태 업데이트 -->
+    <sql id="updateStatus">
+        UPDATE order_request
+        SET request_status = #{status}
+        WHERE request_id = #{requestId}
+    </sql>
     
 
     <select id="getById" parameterType="int" resultType="orderrequest">

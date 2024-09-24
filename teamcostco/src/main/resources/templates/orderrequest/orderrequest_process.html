@@ -1,0 +1,95 @@
+    <div class="content-box">
+        <div class="tab-container">
+            <div class="tab-item" th:onclick="'location.href=\'/orderrequest/detail/' + ${item.request_id} + '\''">
+                <span>발주정보</span>
+            </div>
+            <div class="tab-item current">
+                <span>발주처리</span>
+            </div>
+            <div class="tab-item">
+                <span>처리내역</span>
+            </div>
+        </div>
+        <div class="tab-content-wrap">
+            <div class="top_area">
+                <div id="request_status" th:class="${'status_' + item?.request_status ?: 'unknown'}">
+                    <span th:text="${item.request_status == 'pending' ? '대기중' :
+                    item.request_status == 'ordered' ? '주문됨' :
+                    item.request_status == 'received' ? '입고중' :
+                    item.request_status == 'completed' ? '완료됨' :
+                    item.request_status == 'rejected' ? '거부됨' :
+                    item.request_status == 'cancelled' ? '취소됨' :
+                    '알 수 없음'}"></span>
+                </div>
+                <h4 class="product_name" th:text="${item.product_name}"></h4>
+                <h4 class="emp_name" th:text="${'발주자: ' + (item.emp_name)}"></h4>
+            </div>
+
+            <div class="flex-row-box">
+                <div class="product_detail">
+                    <div class="image_box">
+                        <img id="product_thumbnail"
+                             th:src="@{/api/product_thumbnail/{productCode}(productCode=${item.product_code ?: '12345'})}">
+                    </div>
+                    <div class="description">
+                        <div class="flex-row-box">
+                            <ul>
+                                <li>코드</li>
+                                <li>판매처</li>
+                                <li>가격</li>
+                                <li>링크</li>
+                            </ul>
+                            <ul>
+                                <li th:text="${item.product_code}"></li>
+                                <li th:text="${item.mall_name}"></li>
+                                <li th:text="${item.purchase_price}"></li>
+                                <li>
+                                    <a th:href="${item.mall_link}">상품 링크</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="orderrequest_process">
+                    <h3>발주수량 정보</h3>
+                    <div class="order_info">
+                        <div class="order_info_wrap">
+                            <ul class="order_info_labels">
+                                <li>발주수량</li>
+                                <li>입고수량</li>
+                                <li>불량수량</li>
+                                <li>남은수량</li>
+                            </ul>
+                            <ul class="order_info_values">
+                                <li th:text="${item.request_qty}"></li>
+                                <li th:text="${item.received_qty}"></li>
+                                <li th:text="${item.defective_qty}"></li>
+                                <li th:text="${item.request_qty - item.received_qty - item.defective_qty}"></li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- 발주 처리 입력 -->
+                    <div class="process_action">
+                        <label for="process_qty">처리수량</label>
+                        <input type="number" id="process_qty" placeholder="처리수량 입력 (음수는 차감)">
+                        
+                        <label for="process_type">처리유형</label>
+                        <select id="process_type">
+                            <option value="입고">입고</option>
+                            <option value="불량">불량</option>
+                        </select>
+                    
+                        <!-- 발주 처리 버튼 -->
+                        <button id="process_order" type="button">발주처리하기</button>
+                    </div>
+                    
+                    <!-- 발주 마감 버튼 추가 -->
+                    <button id="close_order" type="button">발주마감</button>
+                    
+                    <!-- 숨겨진 request_id 필드 -->
+                    <input type="hidden" id="request_id" th:value="${item.request_id}">
+                </div>
+            </div>
+        </div>
+    </div>
