@@ -21,6 +21,12 @@
             <when test="queryId == 'ProductDefective.getAll'">
                 <include refid="ProductDefective.getAll"></include>
             </when>
+            <when test="queryId == 'Sales.getAll'">
+                <include refid="Sales.getAll"></include>
+            </when>
+            <when test="queryId == 'Shipping.getAll'">
+                <include refid="Shipping.getAll"></include>
+            </when>
         </choose>
     </sql>
 

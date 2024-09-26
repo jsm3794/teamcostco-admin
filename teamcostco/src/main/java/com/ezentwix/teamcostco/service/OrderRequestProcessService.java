@@ -21,37 +21,7 @@ public class OrderRequestProcessService implements PageMetadataProvider {
         return orderRequestRepository.getById(requestId);
     }
 
-    @Transactional
-    public void processReceivedQty(Integer requestId, int receivedQty) {
-        try {
-            orderRequestRepository.updateReceivedQty(requestId, receivedQty);
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new RuntimeException("Error updating received quantity");
-        }
-    }
-
-    @Transactional
-    public void processDefectiveQty(Integer requestId, int defectiveQty) {
-        try {
-            orderRequestRepository.updateDefectiveQty(requestId, defectiveQty);
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new RuntimeException("Error updating defective quantity");
-        }
-    }
-
-    // 상태 업데이트 메서드 추가
-    @Transactional
-    public boolean updateOrderStatus(OrderRequestDTO orderRequestDTO) {
-        try {
-            orderRequestRepository.updateStatus(orderRequestDTO.getRequest_id(), orderRequestDTO.getRequest_status());
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
+   
 
     @Override
     public String getUri() {

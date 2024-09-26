@@ -1,0 +1,40 @@
+<div class="content-box">
+    <form th:replace="~{/component/search_form::form(action='/sales', id='salesForm')}"></form>
+    <table id="results">
+        <thead>
+            <tr>
+                <th width="5%">번호</th>
+                <th width="40%">상품명</th>
+                <th width="10%">판매수량</th>
+                <th width="15%">총가격</th>
+                <th width="10%">고객번호</th>
+                <th width="20%">판매날짜</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="item : ${items}" th:onclick="|location.href='@{/sales/detail/{id}(id=${item.sales_item_id})}'|">
+                <td th:text="${item.sales_item_id}"></td>
+                <td th:text="${item.product_name}"></td>
+                <td th:text="${item.qty} + ' EA'"></td>
+                <td th:text="${item.total_price}" th:attr="data-price=${item.total_price}"></td>
+                <td th:text="${item.customer_id}"></td>
+                <td th:text="${#dates.format(item.sale_date, 'yy-MM-dd HH:mm')}"></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<script>
+    function formatPrice(price) {
+        return new Intl.NumberFormat().format(price) + ' ₩';
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const priceCells = document.querySelectorAll('#results td[data-price]');
+        priceCells.forEach(cell => {
+            const price = cell.getAttribute('data-price');
+            cell.innerText = formatPrice(price);
+        });
+    });
+</script>

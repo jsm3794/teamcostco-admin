@@ -41,6 +41,20 @@
                     불량재고
                 </div>
             </li>
+            <li>
+                <div class="nav-item" th:classappend="${rootName == 'shipping' ? ' active' : ''}"
+                    data-target="#shipping">
+                    <span class="material-symbols-outlined">local_shipping</span>
+                    배송현황
+                </div>
+            </li>
+            <li>
+                <div class="nav-item" th:classappend="${rootName == 'sales' ? ' active' : ''}"
+                    data-target="#sales">
+                    <span class="material-symbols-outlined">paid</span>
+                    판매내역
+                </div>
+            </li>
             <!--
             <li><div type="div" class="nav-item" data-target="#analytics">
                     <span class="material-symbols-outlined">bar_chart</span>

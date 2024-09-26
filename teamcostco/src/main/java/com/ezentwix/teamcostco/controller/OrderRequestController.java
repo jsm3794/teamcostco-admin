@@ -86,16 +86,14 @@ public class OrderRequestController {
 
         if (check) {
             orderRequestDetailService.updateQTY(dto);
-            orderRequestDetailService.complete(dto);
-            if (defective_qty > 0) {
-                orderRequestDetailService.defectiveProduct(dto);
-            }
         } else {
             orderRequestDetailService.newProduct(dto);
-            orderRequestDetailService.complete(dto);
-            if (defective_qty > 0) {
-                orderRequestDetailService.defectiveProduct(dto);
-            }
+        }
+
+        orderRequestDetailService.complete(dto);
+
+        if (defective_qty > 0) {
+            orderRequestDetailService.defectiveProduct(dto);
         }
 
         return "redirect:/orderrequest";
