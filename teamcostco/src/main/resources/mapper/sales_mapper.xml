@@ -4,7 +4,7 @@
     
     <sql id="getAll">
         SELECT
-            sales_item_id, product_name, customer_id,
+            sales_item_id, product_name, social_id,
             qty, total_price, sale_date
         FROM
             sales_items
@@ -25,7 +25,7 @@
 
     <insert id="insertSales">
         INSERT INTO sales VALUES
-            (sales_seq.nextval, #{customer_id}, sysdate, sysdate)
+            (sales_seq.nextval, #{social_id}, sysdate, sysdate)
     </insert>
 
     <insert id="insertSalesItems">
@@ -41,7 +41,7 @@
         INNER JOIN
             customer
         USING
-            (customer_id)
+            (social_id)
     </select>
 
     <select id="salesByDate" resultType="sales">

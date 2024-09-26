@@ -79,7 +79,8 @@
             category_small = #{category_small},
             category_detail = #{category_detail},
             purchase_price = #{purchase_price}, 
-            selling_price = #{selling_price},   
+            selling_price = #{selling_price},
+            discount = #{discount},
             brand = #{brand}
         WHERE
             product_id = #{product_id}
