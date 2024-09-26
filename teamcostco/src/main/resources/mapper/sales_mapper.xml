@@ -45,70 +45,51 @@
     </select>
 
     <select id="salesByDate" resultType="sales">
-        SELECT 
-            si.sales_item_id, 
-            p.product_name, 
-            s.customer_id, 
-            SUM(si.qty) AS qty, 
-            SUM(si.total_price) AS total_price, 
-            TRUNC(s.sale_date) AS sale_date
+        SELECT TRUNC(s.sale_date) AS salesDate, SUM(si.TOTAL_PRICE) AS totalPrice
         FROM sales s
-        INNER JOIN sales_items si ON s.sales_id = si.sales_id
-        INNER JOIN products p ON si.product_code = p.product_code
-        WHERE s.sale_date BETWEEN TO_TIMESTAMP(#{startDate}, 'YYYY-MM-DD HH24:MI:SS') 
-                            AND TO_TIMESTAMP(#{endDate}, 'YYYY-MM-DD HH24:MI:SS')
-        GROUP BY 
-            si.sales_item_id, 
-            p.product_name, 
-            s.customer_id, 
-            TRUNC(s.sale_date)
-        ORDER BY 
-            TRUNC(s.sale_date)
+        JOIN sales_items si ON s.SALES_ID = si.SALES_ID
+        WHERE s.SALE_DATE BETWEEN TO_DATE(#{startDate}, 'YYYY-MM-DD') AND TO_DATE(#{endDate}, 'YYYY-MM-DD')
+        GROUP BY TRUNC(s.sale_date)
+        ORDER BY TRUNC(s.sale_date)
     </select>
 
     <select id="totalSalesByPeriod" resultType="sales">
         SELECT
-            TRUNC(s.sale_date) AS sale_date,
-            SUM(s.total_amount) AS total_sales
+            TRUNC(s.sale_date) AS sales_date,
+            SUM(si.QTY) AS total_sales
         FROM
             sales s
+        JOIN sales_items si ON s.SALES_ID = si.SALES_ID
         GROUP BY
             TRUNC(s.sale_date)
         ORDER BY
             TRUNC(s.sale_date)
     </select>
 
-    <!-- 일주일 동안 많이 팔린 상품 임시 -->
     <select id="selectWeeklyTopProducts" resultType="sales">
-        SELECT 
-            p.product_name, 
-            SUM(si.qty) AS qty, 
-            TRUNC(s.sale_date) AS sale_date
-        FROM sales_items si
-        INNER JOIN sales s ON si.sales_id = s.sales_id
-        INNER JOIN products p ON si.product_code = p.product_code
-        WHERE TRUNC(s.sale_date, 'month') = TRUNC(SYSDATE, 'month')
-        GROUP BY p.product_name, TRUNC(s.sale_date)
-        ORDER BY qty DESC
+        SELECT si.PRODUCT_CODE, SUM(si.QTY) AS sold_qty, TRUNC(s.sale_date) AS sold_date
+        FROM sales s
+        JOIN sales_items si ON s.SALES_ID = si.SALES_ID
+        WHERE TRUNC(s.sale_date, 'MM') = TRUNC(SYSDATE, 'MM')
+        GROUP BY si.PRODUCT_CODE, TRUNC(s.sale_date)
+        ORDER BY sold_qty DESC
     </select>
 
-    <!-- 한달간 총매출 -->
     <select id="getTotalSales" resultType="Integer">
-        SELECT SUM(total_amount)
-        FROM sales
-        WHERE TO_CHAR(SYSDATE, 'YYYY') = TO_CHAR(sale_date, 'YYYY')
-        AND TO_CHAR(SYSDATE, 'MM') = TO_CHAR(sale_date, 'MM')
+        SELECT SUM(si.TOTAL_PRICE)
+        FROM sales s
+        JOIN sales_items si ON s.SALES_ID = si.SALES_ID
+        WHERE TO_CHAR(s.SALE_DATE, 'YYYY') = TO_CHAR(SYSDATE, 'YYYY')
+        AND TO_CHAR(s.SALE_DATE, 'MM') = TO_CHAR(SYSDATE, 'MM')
     </select>
 
-    <!-- 한달간의 영업이익 -->
     <select id="getOperatingProfit" resultType="Integer">
-        SELECT SUM(total_amount) * 0.15 AS estimated_operating_profit
-        FROM sales
-        WHERE TO_CHAR(SYSDATE, 'YYYY') = TO_CHAR(sale_date, 'YYYY')
-        AND TO_CHAR(SYSDATE, 'MM') = TO_CHAR(sale_date, 'MM')
+        SELECT SUM(si.TOTAL_PRICE) * 0.15 AS estimated_operating_profit
+        FROM sales s
+        JOIN sales_items si ON s.SALES_ID = si.SALES_ID
+        WHERE TO_CHAR(s.SALE_DATE, 'YYYY') = TO_CHAR(SYSDATE, 'YYYY')
+        AND TO_CHAR(s.SALE_DATE, 'MM') = TO_CHAR(SYSDATE, 'MM')
     </select>
-
-
     
     <select id="getAll" resultType="sales">
         <include refid="getAll" />    

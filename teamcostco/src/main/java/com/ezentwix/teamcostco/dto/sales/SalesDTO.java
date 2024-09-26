@@ -13,4 +13,6 @@ public class SalesDTO {
     private Integer total_price;
     private Date sale_date;
     private Integer sales_id;
+    private String payments_type;
+    private String sales_status;
 }
