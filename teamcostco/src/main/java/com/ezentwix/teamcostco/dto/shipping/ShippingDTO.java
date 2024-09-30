@@ -8,7 +8,7 @@ import lombok.Data;
 public class ShippingDTO {
     
     private Integer address_id;
-    private Integer customer_id;
+    private String social_id;
     private Integer sales_id;
     private String recipient_name;
     private String road_address;
@@ -24,3 +24,4 @@ public class ShippingDTO {
     private Date created_at;
     private Date updated_at;
 }
+

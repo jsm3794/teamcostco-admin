@@ -7,7 +7,7 @@
                 <th width="6%">구매자</th>
                 <th width="45%">주소</th>
                 <th width="8%">전화번호</th>
-                <th width="8%">고객번호</th>
+                <th width="8%">소셜ID</th>
                 <th width="8%">배송상태</th>
                 <th width="20%">판매날짜</th>
                 <th></th>
@@ -17,9 +17,13 @@
             <tr th:each="item : ${items}">
                 <td th:text="${item.address_id}"></td>
                 <td th:text="${item.recipient_name}"></td>
-                <td th:text="${item.road_address} +' ' + ${item.lot_number_address} + ' ' + ${item.detail_address}"></td>
+                <td>
+                    <span th:text="${item.road_address}"></span>
+                    <span th:if="${item.lot_number_address != null}" th:text="' ' + ${item.lot_number_address}"></span>
+                    <span th:if="${item.detail_address != null}" th:text="' ' + ${item.detail_address}"></span>
+                </td>
                 <td th:text="${item.recipient_phone_number}"></td>
-                <td th:text="${item.customer_id}"></td>
+                <td th:text="${item.social_id}"></td>
                 <td th:text="${item.shipping_status}"></td>
                 <td th:text="${#dates.format(item.updated_at, 'yy-MM-dd HH:mm')}"></td>
             </tr>

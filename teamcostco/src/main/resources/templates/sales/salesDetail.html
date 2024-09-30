@@ -1,3 +1,91 @@
-<tr th:each="item : ${items}">
-    <td th:text="${item.sales_id}"></td>
-</tr>
+<div class="tab-content-wrap" th:each="item : ${items}">
+
+    <div class="content">
+
+        <!-- 왼쪽 내용 -->
+        <div class="left-column">
+            <img th:src="${item.thubnails_url}" alt="Product Image" class="product-image">
+            <div class="product-info">
+                <div class="info-row">
+                    <span class="info-label">판매번호</span>
+                    <span class="info-value" th:text="${item.sales_item_id}"></span>
+                </div>
+
+                <div class="info-row">
+                    <span class="info-label">제품명</span>
+                    <span class="info-value" th:text="${item.product_name}"></span>
+                </div>
+
+                <div class="info-row">
+                    <span class="info-label">제품가격</span>
+                    <span class="info-value" th:text="${#numbers.formatInteger(item.unit_price, 0, 'COMMA') + ' ￦'}"></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 오른쪽 내용 -->
+        <div class="right-column" th:each="item2 : ${items2}">
+            <h2 id="h2">고객 정보</h4>
+            <div class="info-row">
+                <span class="info-label">닉네임</span>
+                <span class="info-value" th:text="${item2.nickname}"></span
+            </div>
+            <div class="info-row">
+                <span class="info-label">이메일</span>
+                <span class="info-value" th:text="${item2.email}"></span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">생일</span>
+                <span class="info-value"
+                    th:text="${item2.date_of_birth != null ? #dates.format(item2.date_of_birth, 'yy/MM/dd') : '정보 없음'}"></span>
+            </div>
+            <!-- 추가할 내용있으면 customerDTO 참고해서 추가하면 됩니다 dto에 다 담겨 있어용 -->
+            <div class="info-row">
+                <span class="info-label">수량</span>
+                <span class="info-value" th:text="${item.qty} + ' EA'"></span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">주문가격</span>
+                <span class="info-value" th:text="${#numbers.formatInteger(item.total_price, 0, 'COMMA') + ' ￦'}"></span>
+            </div>
+            <div class="info-row">
+            <span class="info-label">배송비</span>
+            <span class="info-value" th:text="${#numbers.formatInteger(item.delivery_fee, 0, 'COMMA') + ' ￦'}"></span>
+        </div>
+        <div class="info-row">
+            <span class="info-label">배송현황</span>
+            <span class="info-value">
+                <span th:if="${item.sales_status == 'ordered'}">결제완료</span>
+                <span th:if="${item.sales_status == 'products_prepare'}">상품준비중</span> <!-- ordered 제외하고는 임의로 추가한것 -->
+                <span th:if="${item.sales_status == 'delivery_start'}">배송시작</span>
+                <span th:if="${item.sales_status == 'delivery_completed'}">배송완료</span>
+                <span
+                    th:if="${item.sales_status != 'ordered' && item.sales_status != 'products_prepare' && item.sales_status != 'delivery_start' && item.sales_status != 'delivery_completed'}"
+                    th:text="${item.sales_status}"></span>
+            </span>
+        </div>
+        <div class="info-row">
+            <span class="info-label">결제방식</span>
+            <span class="info-value">
+                <span th:if="${item.payments_type == 'bank_transfer'}">계좌이체</span>
+                <span th:if="${item.payments_type == 'card'}">카드</span>
+                <!-- 결제방식 추가되면 하단에 더 추가하면 됨 ex) ${item.payment_type} == 'kakao_pay' 카카오페이 -->
+                <span th:if="${item.payments_type != 'bank_transfer' && item.payments_type != 'card'}"
+                    th:text="${item.payments_type}"></span>
+            </span>
+        </div>
+        <div class="info-row">
+            <span class="info-label">결제일자</span>
+            <span class="info-value"
+                th:text="${item.sale_date != null ? #dates.format(item.sale_date, 'yyyy/MM/dd') : '정보 없음'}"></span>
+        </div>
+        <div class="info-row">
+            <span class="info-label">최종가격</span>
+            <span class="info-value" th:text="${#numbers.formatInteger(item.final_price, 0, 'COMMA') + ' ￦'}"></span>
+        </div>
+        
+
+
+    </div>
+</div>
+</div>

@@ -6,6 +6,7 @@
         <typeAlias type="com.ezentwix.teamcostco.dto.category.CategoryDTO" alias="category" />
         <typeAlias type="com.ezentwix.teamcostco.dto.employee.EmployeeDTO" alias="emp" />
         <typeAlias type="com.ezentwix.teamcostco.dto.sales.SalesDTO" alias="sales" />
+        <typeAlias type="com.ezentwix.teamcostco.dto.customer.CustomerDTO" alias="customer" />
         <typeAlias type="com.ezentwix.teamcostco.dto.shipping.ShippingDTO" alias="shipping" />
         <typeAlias type="com.ezentwix.teamcostco.dto.sales.OrderTrackDTO" alias="orderTrack" />
         <typeAlias type="com.ezentwix.teamcostco.dto.product.OrderRequestDTO" alias="orderrequest" />

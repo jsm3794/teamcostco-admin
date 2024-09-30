@@ -14,13 +14,36 @@
             products USING(product_code)
     </sql>
 
-    <select id="get" resultType="sales">
-        SELECT 
+    <select id="getURL" resultType="String">
+        SELECT
+            thumbnail_url
+        FROM
+            PRODUCT_THUMBNAILS
+        WHERE
+            product_code = #{product_code}
+    </select>
+
+    <select id="getcustomerinfo" resultType="customer">
+        SELECT
             *
         FROM
-            sales
+            customer
         WHERE
-            sales_id = #{sales_id}
+            social_id = #{social_id}
+    </select>
+
+    <select id="get" resultType="sales">
+        SELECT 
+            product_code, sales_item_id, product_name, qty, unit_price, total_price,
+            payments_type, sales_status, social_id, sale_date, delivery_fee
+        FROM
+            sales_items 
+        INNER JOIN
+            sales USING(sales_id)
+        INNER JOIN
+            products USING(product_code)
+        WHERE
+        sales_item_id = #{sales_item_id}
     </select>
 
     <insert id="insertSales">
