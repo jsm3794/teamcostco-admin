@@ -9,10 +9,11 @@ import lombok.Data;
 @Data
 public class ProductThumbnailDTO {
     private Integer thumbnailId;
-    private Integer productCode;
+    private Long productCode;
     private String thumbnailUrl;
     private LocalDateTime createDate;
     private LocalDateTime updateDate;
     
     private MultipartFile productImageFile; // 파일 업로드용
 }
+ 

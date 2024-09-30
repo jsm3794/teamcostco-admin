@@ -8,4 +8,12 @@
         VALUES(thumbnails_seq.nextval, #{productCode}, #{thumbnailUrl}, #{createDate}, #{updateDate})
     </insert>
 
+    <update id="updateProductThumbnail" parameterType="Integer">
+        UPDATE product_thumbnails SET updateDate = sysdate WHERE thumbnails_id = #{thumbnails_id}
+    </update>
+
+    <delete id="deleteProductThumbnail" parameterType="Integer">
+        DELETE FROM product_thumbnails WHERE thumbnail_id = #{thumbnail_id}
+    </delete>
+
 </mapper>

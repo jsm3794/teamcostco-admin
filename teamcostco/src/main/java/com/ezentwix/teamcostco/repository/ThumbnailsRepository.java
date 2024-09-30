@@ -16,3 +16,4 @@ public class ThumbnailsRepository {
         sql.insert("Thumbnails.insertProductThumbnail", productThumbnailDTO);
     }
 }
+ 

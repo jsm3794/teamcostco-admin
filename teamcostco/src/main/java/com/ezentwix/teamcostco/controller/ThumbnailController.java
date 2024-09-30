@@ -28,7 +28,7 @@ public class ThumbnailController {
 
     @PostMapping("/upload")
     public ResponseEntity<String> uploadThumbnail(@RequestParam("productImageFile") MultipartFile file,
-                                                   @RequestParam("productCode") Integer productCode) {
+                                                   @RequestParam("productCode") Long productCode) {
         try {
             ProductThumbnailDTO dto = new ProductThumbnailDTO();
             dto.setProductImageFile(file);
@@ -43,3 +43,4 @@ public class ThumbnailController {
         }
     }
 }
+ 
