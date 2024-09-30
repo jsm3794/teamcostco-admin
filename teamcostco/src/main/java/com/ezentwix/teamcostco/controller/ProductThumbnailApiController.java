@@ -19,38 +19,38 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ProductThumbnailApiController {
 
-    private final ProductThumbnailService productThumbnailService;
+    // private final ProductThumbnailService productThumbnailService;
 
-    @PostMapping("/api/upload_product_thumbnail")
-    public ResponseEntity<String> uploadThumbnail(
-            @RequestParam(value = "url") String thumbnailUrl,
-            @RequestParam(value = "product_code") String productCode,
-            @RequestParam(value = "overwrite", defaultValue = "false") boolean overwrite) {
+    // @PostMapping("/api/upload_product_thumbnail")
+    // public ResponseEntity<String> uploadThumbnail(
+    //         @RequestParam(value = "url") String thumbnailUrl,
+    //         @RequestParam(value = "product_code") String productCode,
+    //         @RequestParam(value = "overwrite", defaultValue = "false") boolean overwrite) {
 
-        boolean success = productThumbnailService.uploadThumbnail(thumbnailUrl, productCode, overwrite);
+    //     boolean success = productThumbnailService.uploadThumbnail(thumbnailUrl, productCode, overwrite);
 
-        if (success) {
-            return ResponseEntity.ok("Thumbnail uploaded successfully!");
-        } else {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("Failed to upload thumbnail.");
-        }
-    }
+    //     if (success) {
+    //         return ResponseEntity.ok("Thumbnail uploaded successfully!");
+    //     } else {
+    //         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+    //                 .body("Failed to upload thumbnail.");
+    //     }
+    // }
 
-    @GetMapping("/api/product_thumbnail/{productCode}")
-    public ResponseEntity<Resource> getThumbnail(
-            @PathVariable("productCode") String productCode) {
+    // @GetMapping("/api/product_thumbnail/{productCode}")
+    // public ResponseEntity<Resource> getThumbnail(
+    //         @PathVariable("productCode") String productCode) {
 
-        Resource resource = productThumbnailService.getThumbnail(productCode);
+    //     Resource resource = productThumbnailService.getThumbnail(productCode);
 
-        if (resource != null) {
-            return ResponseEntity.ok()
-                    .contentType(MediaType.IMAGE_JPEG)
-                    .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"" + resource.getFilename() + "\"")
-                    .body(resource);
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body(null);
-        }
-    }
+    //     if (resource != null) {
+    //         return ResponseEntity.ok()
+    //                 .contentType(MediaType.IMAGE_JPEG)
+    //                 .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"" + resource.getFilename() + "\"")
+    //                 .body(resource);
+    //     } else {
+    //         return ResponseEntity.status(HttpStatus.NOT_FOUND)
+    //                 .body(null);
+    //     }
+    // }
 }

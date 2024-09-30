@@ -15,5 +15,9 @@ public class ThumbnailsRepository {
     public void insertProductThumbnails(ProductThumbnailDTO productThumbnailDTO) {
         sql.insert("Thumbnails.insertProductThumbnail", productThumbnailDTO);
     }
+
+    public ProductThumbnailDTO selectProductThumbnails(Long product_code){
+        return sql.selectOne("Thumbnails.selectProductThumbnail", product_code);
+    }
 }
  

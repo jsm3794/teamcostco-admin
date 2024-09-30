@@ -14,6 +14,7 @@ import com.ezentwix.teamcostco.dto.product.OrderRequestDTO;
 import com.ezentwix.teamcostco.pagination.PaginationResult;
 import com.ezentwix.teamcostco.service.ProductOrderService;
 import com.ezentwix.teamcostco.service.ProductThumbnailService;
+import com.ezentwix.teamcostco.service.ThumbnailService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -25,6 +26,7 @@ import java.util.Map;
 public class ProductOrderController {
     private final ProductOrderService productOrderService;
     private final ProductThumbnailService productThumbnailService;
+    private final ThumbnailService thumbnailService;
 
     @GetMapping("/productorder")
     public String search(
@@ -54,7 +56,7 @@ public class ProductOrderController {
             }
         try {
             productOrderService.processOrders(orderRequestDTO);
-            productThumbnailService.uploadThumbnail(image_url, orderRequestDTO.getProduct_code().toString(), false);
+            thumbnailService.uploadFromUrl(image_url, orderRequestDTO.getProduct_code());
             return "Order received and processed successfully";
         } catch (Exception e) {
             e.printStackTrace();

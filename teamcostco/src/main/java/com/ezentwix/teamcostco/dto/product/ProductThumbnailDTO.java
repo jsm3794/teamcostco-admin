@@ -8,12 +8,11 @@ import lombok.Data;
 
 @Data
 public class ProductThumbnailDTO {
-    private Integer thumbnailId;
-    private Long productCode;
-    private String thumbnailUrl;
-    private LocalDateTime createDate;
-    private LocalDateTime updateDate;
+    private Long thumbnail_id;
+    private Long product_code;
+    private String thumbnail_url;
+    private LocalDateTime create_date;
+    private LocalDateTime update_date;
     
-    private MultipartFile productImageFile; // 파일 업로드용
+    private MultipartFile product_image_file; // 파일 업로드용
 }
- 
