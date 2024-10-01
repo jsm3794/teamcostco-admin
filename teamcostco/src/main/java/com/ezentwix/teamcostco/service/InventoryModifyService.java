@@ -11,7 +11,7 @@ public class InventoryModifyService implements PageMetadataProvider {
 
     @Override
     public String getUri() {
-        return "/inventory/modify"; 
+        return "inventory/modify"; 
     }
 
     @Override

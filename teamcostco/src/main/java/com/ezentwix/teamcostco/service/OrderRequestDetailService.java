@@ -44,7 +44,7 @@ public class OrderRequestDetailService implements PageMetadataProvider {
 
     @Override
     public String getUri() {
-        return "/orderrequest/orderrequest_detail";
+        return "orderrequest/orderrequest_detail";
     }
 
     @Override

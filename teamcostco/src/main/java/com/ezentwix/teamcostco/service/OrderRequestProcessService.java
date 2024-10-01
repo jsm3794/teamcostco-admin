@@ -25,7 +25,7 @@ public class OrderRequestProcessService implements PageMetadataProvider {
 
     @Override
     public String getUri() {
-        return "/orderrequest/orderrequest_process";
+        return "orderrequest/orderrequest_process";
     }
 
     @Override

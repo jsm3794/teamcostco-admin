@@ -56,7 +56,7 @@ public class EmployeeFixService implements PageMetadataProvider {
 
     @Override
     public String getUri() {
-        return "/employee/emp_fix";
+        return "employee/emp_fix";
     }
 
     @Override

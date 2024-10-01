@@ -2,9 +2,9 @@
     <form action="/productorder" method="GET" id="productorderForm">
         <input type="hidden" id="emp_id" th:value="${session.emp?.emp_id ?: 'NULL'}">
         <div class="flex-row-box space-between">
-            <div th:replace="~{/component/search_input::div(id='productorderForm')}"></div>
+            <div th:replace="~{component/search_input::div(id='productorderForm')}"></div>
             <button type="submit" id="order_btn">발주요청</button>
-            <div th:replace="~{/component/pagination_nav::nav}"></div>
+            <div th:replace="~{component/pagination_nav::nav}"></div>
         </div>
         <div id="active-filters" th:style="${param.size() > 3} ? 'height: 40px;' : ''"></div>
     </form>

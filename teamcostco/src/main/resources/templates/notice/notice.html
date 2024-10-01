@@ -1,9 +1,9 @@
 <div class="content-box">
     <form action="/notice" method="GET" id="noticeForm">
         <div class="flex-row-box space-between">
-            <div th:replace="~{/component/search_input::div(id='noticeForm')}"></div>
+            <div th:replace="~{component/search_input::div(id='noticeForm')}"></div>
             <button id="write-btn">글작성</button>
-          <div th:replace="~{/component/pagination_nav::nav}"></div>
+          <div th:replace="~{component/pagination_nav::nav}"></div>
         </div>
       </form>
     <table id="results">

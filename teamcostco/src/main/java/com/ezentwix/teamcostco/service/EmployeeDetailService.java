@@ -42,7 +42,7 @@ public class EmployeeDetailService implements PageMetadataProvider {
 
     @Override
     public String getUri() {
-        return "/employee/emp_detail";
+        return "employee/emp_detail";
     }
 
     @Override
