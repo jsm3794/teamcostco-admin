@@ -13,9 +13,11 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 });
 
+const protocol = window.location.protocol === 'https:' ? 'wss' : 'ws';
+const host = window.location.host; // 현재 페이지의 호스트(도메인 + 포트)
+const path = '/notifications'; // WebSocket 경로
 
-// 웹소켓 연결 설정
-const socket = new WebSocket("ws://192.168.0.13:9999/notifications");
+const socket = new WebSocket(`${protocol}://${host}${path}`);
 
 // 웹소켓 연결 상태 확인
 socket.onopen = function () {
