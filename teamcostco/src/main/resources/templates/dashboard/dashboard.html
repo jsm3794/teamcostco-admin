@@ -1,7 +1,7 @@
 <div class="order-track">
     <div class="content-box">
         <div class="tracker">
-            <span class="material-symbols-outlined" id="track-icon">package_2</span>
+            <span class="material-symbols-outlined">package_2</span>
             To Be Packed
         </div>
         <div class="track-text">
@@ -10,7 +10,7 @@
     </div>
     <div class="content-box">
         <div class="tracker">
-            <span class="material-symbols-outlined" id="track-icon">package</span>
+            <span class="material-symbols-outlined">package</span>
             To Be Shipped            
         </div>
         <div class="track-text">
@@ -19,7 +19,7 @@
     </div>
     <div class="content-box">
         <div class="tracker">
-            <span class="material-symbols-outlined" id="track-icon">local_shipping</span>
+            <span class="material-symbols-outlined">local_shipping</span>
             To Be Delivered
         </div>
         <div class="track-text">
@@ -28,7 +28,7 @@
     </div>
     <div class="content-box">
         <div class="tracker">
-            <span class="material-symbols-outlined" id="track-icon">contract</span>
+            <span class="material-symbols-outlined">contract</span>
             To Be Invoiced
         </div>
         <div class="track-text">
@@ -39,57 +39,39 @@
 
 <div class="info-boxes">
     <div class="content-box">
-        <div class="categories">
-            Categories
-        </div>
-        <div class="total-text">
-            Total <span id="categoryCount" th:text="${categories}"></span>
-        </div>
+        <div class="categories">Categories</div>
+        <div class="total-text">Total <span id="categoryCount"></span></div>
     </div>
     <div class="content-box">
-        <div class="total-sales">
-            Total Sales
-        </div>
-        <div class="total-text">
-            ₩ <span id="totalSalesValue"></span>
-        </div>
+        <div class="total-sales">Total Sales</div>
+        <div class="total-text">₩ <span id="totalSalesValue"></span></div>
     </div>
     <div class="content-box">
-        <div class="operating-profit">
-            Operating Profit
-        </div>
-        <div class="total-text">
-            ₩ <span id="operatingProfitValue"></span>
-        </div>
+        <div class="operating-profit">Operating Profit</div>
+        <div class="total-text">₩ <span id="operatingProfitValue"></span></div>
     </div>
 </div>
 
 <div class="grid-container">
     <div class="box box1">
-        <div class="title">
-            기간별 판매 금액
-        </div>
+        <div class="title">기간별 판매 금액</div>
         <div class="buttons">
             <button id="weekBtn">1주</button>
-            <button id="monthBtn">1달</button>
+            <button id="monthBtn">1개월</button>
             <button id="yearBtn">1년</button>
         </div>
         <canvas id="chart1"></canvas>
     </div>
 
     <div class="box box2">
-        <div class="title">
-            최다 판매 제품
-        </div>
+        <div class="title">최다 판매 제품</div>
         <canvas id="chart2"></canvas>
     </div>
 
     <div class="box box3">
-        <div class="title">
-            판매 대비 재고 비율
-        </div>
+        <div class="title">판매 대비 재고 비율</div>
         <div class="buttons">
-            <button id="monthSalesBtn">1달</button>
+            <button id="monthSalesBtn">1개월</button>
             <button id="yearSalesBtn">1년</button>
             <button id="totalSalesBtn">전체</button>
         </div>
@@ -97,9 +79,7 @@
     </div>
 
     <div class="box box4">
-        <div class="title">
-            최다 발주 제품
-        </div>
+        <div class="title">최다 발주 제품</div>
         <canvas id="chart4"></canvas>
     </div>
 </div>

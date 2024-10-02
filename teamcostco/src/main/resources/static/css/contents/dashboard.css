@@ -111,6 +111,11 @@
     display: block;
 }
 
+#chart2 {
+    width: 90% !important;
+    height: 90% !important;
+}
+
 #chart4 {
     width: 90% !important;
     height: 90% !important;
